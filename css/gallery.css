@@ -26,12 +26,13 @@
    =========================== */
 .gal-nav-wrap {
   position: sticky;
-  top: 64px;
+  top: 72px;
   z-index: 50;
-  background-color: rgba(11, 17, 33, 0.9);
+  background-color: rgba(11, 17, 33, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   margin-bottom: 1rem;
+  overflow: visible;
 }
 
 .gal-nav {
@@ -70,7 +71,7 @@
    =========================== */
 .gal-section {
   padding: 4rem 0;
-  scroll-margin-top: 130px;
+  scroll-margin-top: 140px;
 }
 
 .gal-section + .gal-section {

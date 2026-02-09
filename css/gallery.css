@@ -26,7 +26,7 @@
    =========================== */
 .gal-nav-wrap {
   position: sticky;
-  top: 72px;
+  top: 80px;
   z-index: 50;
   background-color: rgba(11, 17, 33, 0.95);
   backdrop-filter: blur(12px);
@@ -71,7 +71,7 @@
    =========================== */
 .gal-section {
   padding: 4rem 0;
-  scroll-margin-top: 140px;
+  scroll-margin-top: 150px;
 }
 
 .gal-section + .gal-section {

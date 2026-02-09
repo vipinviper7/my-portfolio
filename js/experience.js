@@ -1,19 +1,26 @@
-// Timeline progress line that fills as you scroll
-const progressBar = document.querySelector('.timeline-progress');
+// Position the timeline line exactly from first dot to last dot
+const timelineLine = document.querySelector('.timeline-line');
+const dots = document.querySelectorAll('.exp-dot');
 const timelineSection = document.querySelector('.timeline-section');
 
-function updateProgress() {
-  const rect = timelineSection.getBoundingClientRect();
-  const sectionTop = rect.top + window.scrollY;
-  const sectionHeight = rect.height;
-  const scrolled = window.scrollY - sectionTop + window.innerHeight * 0.5;
-  const progress = Math.min(Math.max(scrolled / sectionHeight, 0), 1);
-  progressBar.style.height = (progress * 100) + '%';
+function positionLine() {
+  if (dots.length < 2) return;
+  const first = dots[0];
+  const last = dots[dots.length - 1];
+  const sectionRect = timelineSection.getBoundingClientRect();
+  const firstRect = first.getBoundingClientRect();
+  const lastRect = last.getBoundingClientRect();
+
+  const top = firstRect.top - sectionRect.top + firstRect.height / 2;
+  const bottom = lastRect.top - sectionRect.top + lastRect.height / 2;
+
+  timelineLine.style.top = top + 'px';
+  timelineLine.style.height = (bottom - top) + 'px';
+  timelineLine.style.bottom = 'auto';
 }
 
-// Reveal timeline items on scroll
-const timelineItems = document.querySelectorAll('.timeline-item');
-const yearMarkers = document.querySelectorAll('.timeline-year');
+// Reveal stops on scroll
+const stops = document.querySelectorAll('.exp-stop');
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -24,30 +31,39 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.2 });
 
-timelineItems.forEach(item => observer.observe(item));
+stops.forEach(stop => observer.observe(stop));
 
-// Year markers fade in
-const yearObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-      yearObserver.unobserve(entry.target);
+// Accordion dropdowns
+const accordions = document.querySelectorAll('.exp-accordion');
+
+accordions.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const panel = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+
+    // Close all other panels
+    accordions.forEach(other => {
+      other.classList.remove('open');
+      other.nextElementSibling.classList.remove('open');
+    });
+
+    // Toggle current
+    if (!isOpen) {
+      btn.classList.add('open');
+      panel.classList.add('open');
     }
-  });
-}, { threshold: 0.5 });
 
-yearMarkers.forEach(marker => {
-  marker.style.opacity = '0';
-  marker.style.transform = 'translateY(20px)';
-  marker.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  yearObserver.observe(marker);
+    // Reposition line after accordion animation
+    setTimeout(positionLine, 450);
+  });
 });
 
-// Update progress on scroll
-window.addEventListener('scroll', updateProgress, { passive: true });
-window.addEventListener('resize', updateProgress);
-updateProgress();
+// Position line on load and resize
+window.addEventListener('load', positionLine);
+window.addEventListener('resize', positionLine);
+// Reposition after reveal animations settle
+setTimeout(positionLine, 800);
+setTimeout(positionLine, 1500);
 
 // Mobile nav toggle
 const navToggle = document.querySelector('.nav-toggle');

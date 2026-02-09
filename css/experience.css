@@ -47,179 +47,213 @@
    Timeline Section
    =========================== */
 .timeline-section {
+  --line-left: 24px;
+  --dot-size: 9px;
+  --content-offset: calc(var(--line-left) + 28px);
   position: relative;
-  padding: 2rem 0 6rem;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 2rem 6rem var(--content-offset);
 }
 
-.timeline-section .container {
-  position: relative;
-}
-
-/* Vertical track */
-.timeline-track {
+/* Simple vertical line — positioned by JS to span first dot to last dot */
+.timeline-line {
   position: absolute;
-  left: 50%;
+  left: calc(var(--line-left) + var(--dot-size) / 2);
+  width: 1px;
+  background-color: var(--color-border);
   top: 0;
   bottom: 0;
-  width: 2px;
-  background-color: var(--color-border);
-  transform: translateX(-50%);
-  z-index: 1;
+  pointer-events: none;
 }
 
-.timeline-progress {
-  width: 100%;
-  height: 0%;
-  background: linear-gradient(180deg, var(--color-accent), #a855f7);
-  border-radius: 2px;
-  transition: height 0.05s linear;
-}
-
-/* Year markers */
-.timeline-year {
+/* ===========================
+   Each Stop
+   =========================== */
+.exp-stop {
   position: relative;
-  text-align: center;
-  margin: 4rem 0 2rem;
-  z-index: 5;
-}
-
-.year-label {
-  display: inline-block;
-  padding: 0.4rem 1.5rem;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 50px;
-  color: var(--color-accent);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-
-/* Timeline items */
-.timeline-item {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 3rem;
-  z-index: 5;
+  margin-bottom: 2.5rem;
   opacity: 0;
+  transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.timeline-item[data-side="left"] {
-  flex-direction: row-reverse;
-  transform: translateX(60px);
+.exp-stop:last-of-type {
+  margin-bottom: 0;
 }
 
-.timeline-item[data-side="right"] {
-  transform: translateX(-60px);
-}
-
-.timeline-item.visible {
+.exp-stop.visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
-/* Dot on the line */
-.timeline-dot {
+/* Simple small dot — centered on the line */
+.exp-dot {
   position: absolute;
-  left: 50%;
-  top: 1.5rem;
-  width: 14px;
-  height: 14px;
-  background-color: var(--color-bg);
-  border: 3px solid var(--color-accent);
+  left: calc(-1 * (var(--content-offset) - var(--line-left)));
+  top: 1.65rem;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background-color: var(--color-border);
   border-radius: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 5;
+  transition: background-color 0.4s ease;
 }
 
-.timeline-item.visible .timeline-dot {
-  transform: translateX(-50%) scale(1.2);
-  box-shadow: 0 0 20px rgba(91, 155, 245, 0.4);
-}
-
-.timeline-dot--active {
+.exp-stop.visible .exp-dot {
   background-color: var(--color-accent);
-  box-shadow: 0 0 20px rgba(91, 155, 245, 0.5);
 }
 
-/* Card */
-.timeline-card {
-  width: calc(50% - 3rem);
+.exp-dot--active {
+  background-color: var(--color-accent);
+}
+
+/* Year label */
+.exp-year {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+/* ===========================
+   Company Card
+   =========================== */
+.exp-company-card {
   background-color: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
-.timeline-item[data-side="right"] .timeline-card {
-  margin-left: calc(50% + 3rem);
+.exp-company-card:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
-.timeline-item[data-side="left"] .timeline-card {
-  margin-right: calc(50% + 3rem);
+.exp-company-card--current {
+  border-color: rgba(91, 155, 245, 0.3);
 }
 
-.timeline-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-}
-
-.timeline-card-accent {
-  height: 4px;
+/* Accordion button */
+.exp-accordion {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+  font-family: var(--font-body);
 }
 
-.timeline-card-body {
-  padding: 1.5rem;
+.exp-accordion:hover {
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
-.timeline-duration {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+.exp-accordion-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
 }
 
-.timeline-role {
-  font-size: 1.15rem;
+/* Company logo */
+.exp-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background-color: var(--color-bg-elevated);
+}
+
+.exp-company {
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--color-white);
-  margin-bottom: 0.25rem;
 }
 
-.timeline-company {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--color-accent);
-  margin-bottom: 0.25rem;
-}
-
-.timeline-collab {
-  font-size: 0.8rem;
+.exp-collab {
+  font-size: 0.75rem;
   color: var(--color-text-muted);
   font-weight: 400;
 }
 
-.timeline-location {
+.exp-current-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Chevron */
+.exp-chevron {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  transition: transform 0.3s ease;
+}
+
+.exp-accordion.open .exp-chevron {
+  transform: rotate(180deg);
+}
+
+/* ===========================
+   Expandable Panel
+   =========================== */
+.exp-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.exp-panel.open {
+  max-height: 400px;
+}
+
+.exp-role {
+  padding: 0 1.5rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.25rem;
+}
+
+.exp-role-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-white);
+  margin-bottom: 0.25rem;
+}
+
+.exp-role-type {
+  display: block;
   font-size: 0.8rem;
   color: var(--color-text-muted);
   margin-bottom: 0.75rem;
 }
 
-.timeline-tags {
+.exp-role-desc {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.exp-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
 }
 
-.timeline-tag {
+.exp-tag {
   font-size: 0.7rem;
   font-weight: 600;
   padding: 0.2rem 0.6rem;
@@ -228,20 +262,87 @@
   border-radius: 4px;
 }
 
-.timeline-current {
-  display: inline-block;
-  margin-top: 0.75rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.2rem 0.75rem;
-  background-color: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
-  border-radius: 50px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+/* ===========================
+   Education
+   =========================== */
+.education {
+  padding: 5rem 0;
+  border-top: 1px solid var(--color-border);
 }
 
-/* CTA */
+.education-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.edu-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.edu-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.edu-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background-color: var(--color-bg-elevated);
+}
+
+.edu-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.15rem;
+}
+
+.edu-detail {
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.edu-date {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.edu-desc {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* ===========================
+   CTA
+   =========================== */
 .exp-cta {
   text-align: center;
   padding: 4rem 0;
@@ -258,35 +359,29 @@
    Responsive
    =========================== */
 @media (max-width: 768px) {
-  .timeline-track {
-    left: 1.5rem;
+  .timeline-section {
+    --line-left: 16px;
+    --content-offset: calc(var(--line-left) + 24px);
   }
 
-  .timeline-year {
-    text-align: left;
-    padding-left: 3rem;
+  .exp-company {
+    font-size: 1rem;
   }
 
-  .timeline-item {
-    flex-direction: row !important;
+  .exp-logo {
+    width: 28px;
+    height: 28px;
   }
 
-  .timeline-item[data-side="left"],
-  .timeline-item[data-side="right"] {
-    transform: translateX(-40px);
+  .exp-accordion {
+    padding: 1rem 1.25rem;
   }
 
-  .timeline-item.visible {
-    transform: translateX(0);
+  .exp-role {
+    padding: 0 1.25rem 1.25rem;
   }
 
-  .timeline-dot {
-    left: 1.5rem;
-  }
-
-  .timeline-card {
-    width: calc(100% - 4rem) !important;
-    margin-left: 3.5rem !important;
-    margin-right: 0 !important;
+  .education-grid {
+    grid-template-columns: 1fr;
   }
 }

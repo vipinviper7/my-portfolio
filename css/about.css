@@ -1,0 +1,243 @@
+/* ===========================
+   About Hero
+   =========================== */
+.about-hero {
+  padding: 8rem 0 4rem;
+}
+
+.about-hero-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.about-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid var(--color-border);
+  background: linear-gradient(135deg, var(--color-bg-card), var(--color-bg-elevated));
+}
+
+.about-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+.about-lead {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.about-lead strong {
+  color: var(--color-accent);
+}
+
+.about-text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+/* ===========================
+   Sections
+   =========================== */
+.about-section {
+  padding: 4rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.about-section--alt {
+  background-color: var(--color-bg-card);
+}
+
+.about-section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* ===========================
+   Strengths Grid
+   =========================== */
+.about-grid--strengths {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-card {
+  padding: 1.75rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-section--alt .about-card {
+  background-color: var(--color-bg-elevated);
+}
+
+.about-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.about-card-icon {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.7;
+}
+
+.about-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.4rem;
+}
+
+.about-card-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ===========================
+   Tools
+   =========================== */
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tool-chip {
+  padding: 0.6rem 1.5rem;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.tool-chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ===========================
+   Hobbies
+   =========================== */
+.about-grid--hobbies {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hobby-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 2.5rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.hobby-card:hover {
+  transform: translateY(-3px);
+}
+
+.hobby-emoji {
+  font-size: 2rem;
+}
+
+.hobby-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+/* ===========================
+   Contact
+   =========================== */
+.about-contact {
+  padding: 4rem 0;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.about-contact-text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.about-contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.about-social {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 6rem 0 3rem;
+  }
+
+  .about-hero-layout {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .about-grid--strengths {
+    grid-template-columns: 1fr;
+  }
+
+  .hobby-card {
+    padding: 1.5rem 2rem;
+  }
+}

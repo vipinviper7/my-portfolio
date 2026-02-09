@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vipin - UX & Design Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">Vipin</a>
+    <div class="nav-pill">
+      <a href="#works" class="nav-link active">Works</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#" class="nav-link">Resume</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-avatar">
+          <img src="assets/images/profile.jpg" alt="Vipin" onerror="this.style.display='none'">
+        </div>
+        <h1 class="hero-heading">Hey, I'm <span class="hero-name">Vipin</span></h1>
+        <p class="hero-bio">I love to solve problems using UX & Design.</p>
+        <p class="hero-bio">I like football, games & music.</p>
+      </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works" class="works">
+      <div class="container">
+        <div class="works-layout">
+
+          <!-- Left: Title + Filters -->
+          <div class="works-sidebar">
+            <h2 class="works-title">Works</h2>
+            <ul class="works-filters">
+              <li>
+                <button class="filter-btn active" data-filter="case-studies">
+                  <span class="filter-dot"></span>
+                  Case Studies
+                  <span class="filter-arrow">&rarr;</span>
+                </button>
+              </li>
+              <li>
+                <button class="filter-btn" data-filter="visual-design">
+                  <span class="filter-dot"></span>
+                  Visual Design
+                  <span class="filter-arrow">&rarr;</span>
+                </button>
+              </li>
+              <li>
+                <button class="filter-btn" data-filter="vibe-coded">
+                  <span class="filter-dot"></span>
+                  Vibe Coded
+                  <span class="filter-arrow">&rarr;</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right: Project Cards -->
+          <div class="works-content">
+
+            <!-- Case Studies -->
+            <div class="works-panel active" id="case-studies">
+
+              <a href="case-study-1.html" class="project-card">
+                <div class="project-thumb project-thumb--green">
+                  <img src="assets/images/project-recent-updates.png" alt="Recent Updates Feature" onerror="this.parentElement.classList.add('no-img')">
+                </div>
+                <div class="project-tags">
+                  <span class="tag tag--blue">feature</span>
+                  <span class="tag tag--blue">web</span>
+                </div>
+                <h3 class="project-title">Recent Updates Feature - Zoho Sprints</h3>
+                <p class="project-desc">Designing a centralized in-product updates system for Zoho Sprints</p>
+                <span class="project-read">5 MIN READ</span>
+              </a>
+
+              <a href="case-study-2.html" class="project-card">
+                <div class="project-thumb project-thumb--blue">
+                  <img src="assets/images/project-settings.png" alt="Settings Page Redesign" onerror="this.parentElement.classList.add('no-img')">
+                </div>
+                <div class="project-tags">
+                  <span class="tag tag--blue">redesign</span>
+                  <span class="tag tag--blue">web</span>
+                </div>
+                <h3 class="project-title">Settings page redesign - Zoho Sprints</h3>
+                <p class="project-desc">Improving clarity and scalability in a core configuration experience</p>
+                <span class="project-read">5 MIN READ</span>
+              </a>
+
+              <a href="#" class="project-card">
+                <div class="project-thumb project-thumb--grey">
+                  <img src="assets/images/project-caterers.png" alt="Caterers App" onerror="this.parentElement.classList.add('no-img')">
+                </div>
+                <div class="project-tags">
+                  <span class="tag tag--blue">feature</span>
+                </div>
+                <h3 class="project-title">An app to find the best caterers around</h3>
+                <p class="project-desc">this is a sample subheading that describes the above shortly</p>
+                <span class="project-read">5 MIN READ</span>
+              </a>
+
+            </div>
+
+            <!-- Visual Design -->
+            <div class="works-panel" id="visual-design">
+
+              <div class="vd-card">
+                <div class="vd-card-left">
+                  <h3 class="vd-card-title">Illustrations</h3>
+                  <p class="vd-card-desc">this showcases a set of illustrations I did during my work at Zoho</p>
+                </div>
+                <div class="vd-card-right">
+                  <img src="assets/images/vd-illustrations.png" alt="Illustrations" onerror="this.parentElement.classList.add('no-img')">
+                </div>
+              </div>
+
+              <div class="vd-card">
+                <div class="vd-card-left">
+                  <h3 class="vd-card-title">Marketing Posts</h3>
+                  <p class="vd-card-desc">this showcases a set of illustrations I did during my work at Zoho</p>
+                </div>
+                <div class="vd-card-right">
+                  <img src="assets/images/vd-marketing.png" alt="Marketing Posts" onerror="this.parentElement.classList.add('no-img')">
+                </div>
+              </div>
+
+              <div class="vd-card">
+                <div class="vd-card-left">
+                  <h3 class="vd-card-title">Icons</h3>
+                  <p class="vd-card-desc">this showcases a set of illustrations I did during my work at Zoho</p>
+                </div>
+                <div class="vd-card-right">
+                  <img src="assets/images/vd-icons.png" alt="Icons" onerror="this.parentElement.classList.add('no-img')">
+                </div>
+              </div>
+
+              <div class="vd-card">
+                <div class="vd-card-left">
+                  <h3 class="vd-card-title">Art</h3>
+                  <p class="vd-card-desc">this showcases a set of illustrations I did during my work at Zoho</p>
+                </div>
+                <div class="vd-card-right">
+                  <img src="assets/images/vd-art.png" alt="Art" onerror="this.parentElement.classList.add('no-img')">
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Vibe Coded -->
+            <div class="works-panel" id="vibe-coded">
+              <div class="empty-state">
+                <p>Coming soon...</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="contact-layout">
+          <div class="contact-left">
+            <h2 class="contact-heading">Lets solve problems,<br>with design <span class="heart">&#10084;&#65039;</span></h2>
+            <div class="contact-buttons">
+              <a href="tel:+917904302820" class="contact-btn">+91 7904302820</a>
+              <a href="mailto:vipvipernezer7@gmail.com" class="contact-btn">vipvipernezer7@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-right">
+            <a href="https://linkedin.com/" class="social-pill" target="_blank" rel="noopener noreferrer">Linkedin</a>
+            <a href="https://behance.net/" class="social-pill" target="_blank" rel="noopener noreferrer">Behance</a>
+            <a href="https://dribbble.com/" class="social-pill" target="_blank" rel="noopener noreferrer">Dribbble</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 &mdash; Built by Vipin, caffeine, and poor color choices.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

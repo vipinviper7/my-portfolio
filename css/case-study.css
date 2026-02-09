@@ -1,0 +1,156 @@
+/* ===========================
+   Case Study Layout
+   =========================== */
+.cs {
+  padding: 3rem 0 4rem;
+}
+
+.cs-back {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.cs-back:hover {
+  color: var(--color-white);
+  background-color: var(--color-border);
+}
+
+/* Header */
+.cs-header {
+  margin-bottom: 2.5rem;
+}
+
+.cs-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.cs-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.cs-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cs-meta-row {
+  font-size: 0.85rem;
+}
+
+.cs-meta-label {
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.cs-meta-value {
+  color: var(--color-text-muted);
+}
+
+/* Body Text */
+.cs-body {
+  max-width: 720px;
+  margin-bottom: 2rem;
+}
+
+.cs-body p {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.cs-body strong {
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+.cs-body ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.cs-body li {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.75;
+  margin-bottom: 0.25rem;
+}
+
+.cs-body li strong {
+  color: var(--color-white);
+}
+
+/* Sections */
+.cs-section {
+  margin-bottom: 3rem;
+}
+
+.cs-section-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.25rem;
+}
+
+/* Image Blocks */
+.cs-image-block {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.cs-image-block img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cs-image-block--mint {
+  background-color: #d8f5e0;
+}
+
+.cs-image-block--blue {
+  background-color: #c4ddf9;
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+@media (max-width: 768px) {
+  .cs {
+    padding: 2rem 0 3rem;
+  }
+
+  .cs-title {
+    font-size: 1.35rem;
+  }
+
+  .cs-image-block {
+    padding: 1rem;
+    min-height: 150px;
+  }
+}

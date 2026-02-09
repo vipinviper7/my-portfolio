@@ -1,0 +1,302 @@
+/* ===========================
+   Gallery Hero
+   =========================== */
+.gal-hero {
+  padding: 8rem 0 3rem;
+  text-align: center;
+}
+
+.gal-hero-title {
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
+}
+
+.gal-hero-sub {
+  max-width: 550px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ===========================
+   Sticky Section Nav
+   =========================== */
+.gal-nav-wrap {
+  position: sticky;
+  top: 64px;
+  z-index: 50;
+  background-color: rgba(11, 17, 33, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 1rem;
+}
+
+.gal-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gal-nav-link {
+  padding: 0.55rem 1.1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  min-height: 44px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.gal-nav-link:hover {
+  color: var(--color-white);
+}
+
+.gal-nav-link.active {
+  background-color: var(--color-bg-elevated);
+  color: var(--color-white);
+}
+
+/* ===========================
+   Gallery Sections
+   =========================== */
+.gal-section {
+  padding: 4rem 0;
+}
+
+.gal-section + .gal-section {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Section Header */
+.gal-section-header {
+  margin-bottom: 3rem;
+  max-width: 500px;
+}
+
+.gal-section-num {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.gal-section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+}
+
+.gal-section-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ===========================
+   Gallery Grid
+   =========================== */
+.gal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.gal-grid--masonry {
+  grid-auto-rows: 220px;
+}
+
+.gal-grid--icons {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+/* Gallery Items */
+.gal-item {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-bg-card);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gal-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+.gal-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gal-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Masonry sizing */
+.gal-item--tall {
+  grid-row: span 2;
+}
+
+.gal-item--wide {
+  grid-column: span 2;
+}
+
+/* Icon items */
+.gal-item--icon {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: var(--color-bg-elevated);
+}
+
+.gal-item--icon img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+/* ===========================
+   Scroll Reveal
+   =========================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Staggered delays */
+.gal-grid .reveal:nth-child(1) { transition-delay: 0s; }
+.gal-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+.gal-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+.gal-grid .reveal:nth-child(4) { transition-delay: 0.24s; }
+.gal-grid .reveal:nth-child(5) { transition-delay: 0.32s; }
+.gal-grid .reveal:nth-child(6) { transition-delay: 0.4s; }
+.gal-grid .reveal:nth-child(7) { transition-delay: 0.48s; }
+.gal-grid .reveal:nth-child(8) { transition-delay: 0.56s; }
+
+/* ===========================
+   Lightbox
+   =========================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  cursor: zoom-out;
+}
+
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  object-fit: contain;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.lightbox.open img {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+@media (max-width: 768px) {
+  .gal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gal-grid--icons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gal-grid--masonry {
+    grid-auto-rows: 160px;
+  }
+
+  .gal-item--wide {
+    grid-column: span 1;
+  }
+
+  .gal-nav {
+    gap: 0.15rem;
+  }
+
+  .gal-nav-link {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gal-grid--icons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gal-grid--masonry {
+    grid-auto-rows: auto;
+  }
+
+  .gal-item--tall {
+    grid-row: span 1;
+  }
+}

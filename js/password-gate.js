@@ -16,11 +16,11 @@
   var params = new URLSearchParams(window.location.search);
   var urlKey = params.get('key');
   if (urlKey && simpleHash(urlKey) === HASH) {
-    sessionStorage.setItem(STORAGE_KEY, '1');
+    localStorage.setItem(STORAGE_KEY, '1');
   }
 
   // Already unlocked this session
-  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+  if (localStorage.getItem(STORAGE_KEY) === '1') {
     var gate = document.querySelector('.pw-gate');
     if (gate) gate.remove();
     return;
@@ -37,7 +37,7 @@
     e.preventDefault();
     var val = input.value.trim();
     if (simpleHash(val) === HASH) {
-      sessionStorage.setItem(STORAGE_KEY, '1');
+      localStorage.setItem(STORAGE_KEY, '1');
       document.querySelector('.pw-gate').classList.add('unlocked');
       setTimeout(function () {
         document.querySelector('.pw-gate').remove();

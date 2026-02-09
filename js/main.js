@@ -6,6 +6,7 @@ if (navToggle && navPill) {
   navToggle.addEventListener('click', () => {
     navToggle.classList.toggle('active');
     navPill.classList.toggle('open');
+    document.body.classList.toggle('nav-open');
   });
 
   // Close mobile nav when a link is clicked
@@ -13,6 +14,7 @@ if (navToggle && navPill) {
     link.addEventListener('click', () => {
       navToggle.classList.remove('active');
       navPill.classList.remove('open');
+      document.body.classList.remove('nav-open');
     });
   });
 }

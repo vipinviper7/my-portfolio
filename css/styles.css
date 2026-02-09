@@ -340,6 +340,13 @@ ul {
   margin-bottom: 0.5rem;
 }
 
+.lock-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+  opacity: 0.5;
+}
+
 .project-read {
   font-size: 0.7rem;
   font-weight: 700;

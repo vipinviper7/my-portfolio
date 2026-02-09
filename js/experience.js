@@ -16,7 +16,7 @@ function positionLine() {
 
   timelineLine.style.top = top + 'px';
   timelineLine.style.height = (bottom - top) + 'px';
-  timelineLine.style.bottom = 'auto';
+  timelineLine.style.opacity = '1';
 }
 
 // Reveal stops on scroll

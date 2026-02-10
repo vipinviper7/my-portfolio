@@ -136,6 +136,8 @@
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+  font-size: 18px;
+  line-height: 1;
 }
 
 .tool-chip {

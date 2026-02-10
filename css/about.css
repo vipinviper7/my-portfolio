@@ -132,12 +132,11 @@
   margin: 0 auto;
 }
 
-.tool-icon {
+img.tool-icon {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  font-size: 18px;
-  line-height: 1;
+  display: inline-block;
 }
 
 .tool-chip {

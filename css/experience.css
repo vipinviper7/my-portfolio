@@ -386,4 +386,47 @@
   .education-grid {
     grid-template-columns: 1fr;
   }
+
+  .exp-accordion {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exp-hero {
+    min-height: 50vh;
+    padding-top: 4rem;
+  }
+
+  .exp-hero-sub {
+    font-size: 0.95rem;
+  }
+
+  .timeline-section {
+    --line-left: 12px;
+    --content-offset: calc(var(--line-left) + 20px);
+    padding-left: var(--content-offset);
+    padding-right: 0.5rem;
+  }
+
+  .exp-accordion {
+    padding: 0.85rem 1rem;
+  }
+
+  .exp-accordion-left {
+    gap: 0.5rem;
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+  }
+
+  .exp-role {
+    padding: 0 1rem 1rem;
+  }
+
+  .edu-card {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }

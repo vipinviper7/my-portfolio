@@ -240,8 +240,8 @@
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: none;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
@@ -284,11 +284,16 @@
 
   .gal-nav-link {
     font-size: 0.75rem;
-    padding: 0.35rem 0.75rem;
+    padding: 0.55rem 0.9rem;
+    min-height: 44px;
   }
 }
 
 @media (max-width: 480px) {
+  .gal-hero {
+    padding: 6rem 0 2rem;
+  }
+
   .gal-grid {
     grid-template-columns: 1fr;
   }
@@ -303,5 +308,35 @@
 
   .gal-item--tall {
     grid-row: span 1;
+  }
+
+  .gal-nav-wrap {
+    top: 56px;
+  }
+
+  .gal-nav {
+    padding: 0.75rem 0.5rem;
+    gap: 0.1rem;
+  }
+
+  .gal-nav-link {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.65rem;
+  }
+
+  .gal-section {
+    scroll-margin-top: 120px;
+  }
+
+  .gal-section-title {
+    font-size: 1.5rem;
+  }
+
+  .lightbox-close {
+    top: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
   }
 }

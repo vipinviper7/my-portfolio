@@ -6,8 +6,11 @@
 }
 
 .cs-back {
-  display: inline-block;
-  padding: 0.5rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.25rem;
+  min-height: 44px;
   background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: 50px;
@@ -152,5 +155,33 @@
   .cs-image-block {
     padding: 1rem;
     min-height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs {
+    padding: 5rem 0 2rem;
+  }
+
+  .cs-title {
+    font-size: 1.15rem;
+  }
+
+  .cs-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .cs-image-block {
+    padding: 0.75rem;
+    min-height: 120px;
+    border-radius: 8px;
+  }
+
+  .cs-body p {
+    font-size: 0.85rem;
+  }
+
+  .cs-body li {
+    font-size: 0.82rem;
   }
 }

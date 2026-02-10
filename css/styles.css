@@ -197,72 +197,68 @@ body.nav-open {
   align-items: center;
 }
 
-.memoji-wrap {
-  width: 160px;
-  height: 160px;
-  margin-bottom: 1.5rem;
-  perspective: 400px;
-  cursor: default;
+.orbit-wrap {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 2rem;
+  perspective: 800px;
   position: relative;
 }
 
-.memoji-inner {
+.orbit-ring {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-  background: linear-gradient(145deg, #1a2540, #0e1729);
-  border: 2px solid rgba(91, 155, 245, 0.2);
-  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
-  will-change: transform, box-shadow;
+  position: relative;
   transform-style: preserve-3d;
-  position: relative;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: orbit-spin 12s linear infinite;
+  transition: transform 0.2s ease-out;
 }
 
-.memoji-inner::after {
-  content: '';
+.orbit-icon {
   position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at var(--hl-x, 30%) var(--hl-y, 25%), rgba(255, 255, 255, 0.15), transparent 55%);
-  pointer-events: none;
-  transition: background 0.12s ease-out;
-}
-
-.memoji-shadow {
-  position: absolute;
-  bottom: -12px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
-  height: 16px;
-  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.35), transparent 70%);
-  border-radius: 50%;
-  filter: blur(6px);
-  transition: transform 0.12s ease-out, width 0.12s ease-out, opacity 0.12s ease-out;
-  pointer-events: none;
-}
-
-.memoji-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  user-select: none;
-}
-
-.memoji-emoji {
-  font-size: 5rem;
-  line-height: 1;
+  width: 42px;
+  height: 42px;
+  margin: -21px 0 0 -21px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  color: var(--color-accent);
+  padding: 9px;
+  transform-style: preserve-3d;
+  transform:
+    rotateY(calc(var(--i) * 60deg))
+    translateZ(80px)
+    rotateY(calc(var(--i) * -60deg));
+  animation: orbit-counter 12s linear infinite;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.orbit-icon:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.orbit-icon svg {
   width: 100%;
   height: 100%;
-  user-select: none;
-  pointer-events: none;
-  transform: translateZ(20px);
+  display: block;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotateX(-15deg) rotateY(0deg); }
+  to { transform: rotateX(-15deg) rotateY(360deg); }
+}
+
+@keyframes orbit-counter {
+  from { }
+  to { }
 }
 
 .hero-heading {

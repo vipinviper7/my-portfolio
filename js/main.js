@@ -19,17 +19,16 @@ if (navToggle && navPill) {
   });
 }
 
-// Memoji 3D cursor tracking
-const memojiWrap = document.getElementById('memoji-wrap');
+// Orbit cursor interaction
+const orbitWrap = document.getElementById('orbit-wrap');
 
-if (memojiWrap) {
-  const inner = memojiWrap.querySelector('.memoji-inner');
-  const shadow = memojiWrap.querySelector('.memoji-shadow');
-  const maxTilt = 25;
-  const maxDist = 500;
+if (orbitWrap) {
+  const ring = orbitWrap.querySelector('.orbit-ring');
+  const maxTilt = 30;
+  const maxDist = 400;
 
   document.addEventListener('mousemove', (e) => {
-    const rect = memojiWrap.getBoundingClientRect();
+    const rect = orbitWrap.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
 
@@ -39,38 +38,20 @@ if (memojiWrap) {
     const dist = Math.sqrt(dx * dx + dy * dy);
     const factor = Math.min(dist / maxDist, 1);
 
-    const rotateY = (dx / maxDist) * maxTilt * factor;
-    const rotateX = -(dy / maxDist) * maxTilt * factor;
-    const translateX = (dx / maxDist) * 8 * factor;
-    const translateY = (dy / maxDist) * 8 * factor;
+    const tiltX = -15 + (-(dy / maxDist) * maxTilt * factor);
+    const tiltY = (dx / maxDist) * maxTilt * factor;
 
-    // 3D tilt
-    inner.style.transform =
-      'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translate(' + translateX + 'px, ' + translateY + 'px)';
+    ring.style.animationTimingFunction = 'linear';
+    ring.style.transform = 'rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
 
-    // Dynamic shadow shifts opposite to tilt
-    const shadowX = -translateX * 0.8;
-    const shadowBlur = 32 + factor * 16;
-    shadow.style.transform = 'translateX(calc(-50% + ' + shadowX + 'px))';
-    shadow.style.opacity = 0.8 + factor * 0.2;
-
-    // Dynamic box-shadow for depth
-    var sX = -rotateY * 0.5;
-    var sY = rotateX * 0.5 + 8;
-    inner.style.boxShadow = sX + 'px ' + sY + 'px ' + shadowBlur + 'px rgba(0,0,0,0.45)';
-
-    // Move highlight based on cursor
-    var hlX = 30 + (dx / maxDist) * 20;
-    var hlY = 25 + (dy / maxDist) * 20;
-    inner.style.setProperty('--hl-x', hlX + '%');
-    inner.style.setProperty('--hl-y', hlY + '%');
+    // Speed up when cursor is close
+    var speed = dist < 200 ? (6 + (1 - dist / 200) * 6) : 12;
+    ring.style.animationDuration = speed + 's';
   });
 
   document.addEventListener('mouseleave', () => {
-    inner.style.transform = 'rotateX(0deg) rotateY(0deg) translate(0px, 0px)';
-    inner.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)';
-    shadow.style.transform = 'translateX(-50%)';
-    shadow.style.opacity = '0.8';
+    ring.style.transform = '';
+    ring.style.animationDuration = '12s';
   });
 }
 

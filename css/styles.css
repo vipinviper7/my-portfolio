@@ -640,10 +640,18 @@ body.nav-open {
   }
 
   .works-sidebar {
+    position: sticky;
+    top: 60px;
+    z-index: 40;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
+    background-color: rgba(11, 17, 33, 0.92);
+    backdrop-filter: blur(12px);
+    margin: 0 -2rem;
+    padding: 0.75rem 2rem;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .works-title {
@@ -705,6 +713,11 @@ body.nav-open {
 
   .works-title {
     font-size: 1.5rem;
+  }
+
+  .works-sidebar {
+    margin: 0 -1rem;
+    padding: 0.75rem 1rem;
   }
 
   .project-thumb {

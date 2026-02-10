@@ -534,22 +534,58 @@ body.nav-open {
 }
 
 .contact-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.7rem 1.5rem;
   min-height: 44px;
-  border: 1px solid var(--color-accent-dim);
+  border: none;
   border-radius: 50px;
   color: var(--color-accent);
   font-size: 0.9rem;
   font-weight: 500;
-  transition: background-color var(--transition), color var(--transition);
+  background: var(--color-bg);
+  z-index: 0;
+  transition: color var(--transition);
+}
+
+.contact-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  padding: 1.5px;
+  background: linear-gradient(
+    270deg,
+    #5b9bf5,
+    #a78bfa,
+    #f472b6,
+    #5b9bf5
+  );
+  background-size: 300% 300%;
+  animation: gradient-rotate 4s ease infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
 }
 
 .contact-btn:hover {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-white);
+}
+
+.contact-btn:hover::before {
+  padding: 2px;
+  animation-duration: 2s;
+}
+
+@keyframes gradient-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .contact-right {

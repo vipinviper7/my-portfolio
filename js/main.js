@@ -19,12 +19,14 @@ if (navToggle && navPill) {
   });
 }
 
-// Memoji cursor tracking
+// Memoji 3D cursor tracking
 const memojiWrap = document.getElementById('memoji-wrap');
 
 if (memojiWrap) {
   const inner = memojiWrap.querySelector('.memoji-inner');
-  const maxTilt = 20;
+  const shadow = memojiWrap.querySelector('.memoji-shadow');
+  const maxTilt = 25;
+  const maxDist = 500;
 
   document.addEventListener('mousemove', (e) => {
     const rect = memojiWrap.getBoundingClientRect();
@@ -35,20 +37,40 @@ if (memojiWrap) {
     const dy = e.clientY - cy;
 
     const dist = Math.sqrt(dx * dx + dy * dy);
-    const maxDist = 500;
     const factor = Math.min(dist / maxDist, 1);
 
     const rotateY = (dx / maxDist) * maxTilt * factor;
     const rotateX = -(dy / maxDist) * maxTilt * factor;
-    const translateX = (dx / maxDist) * 6 * factor;
-    const translateY = (dy / maxDist) * 6 * factor;
+    const translateX = (dx / maxDist) * 8 * factor;
+    const translateY = (dy / maxDist) * 8 * factor;
 
+    // 3D tilt
     inner.style.transform =
       'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translate(' + translateX + 'px, ' + translateY + 'px)';
+
+    // Dynamic shadow shifts opposite to tilt
+    const shadowX = -translateX * 0.8;
+    const shadowBlur = 32 + factor * 16;
+    shadow.style.transform = 'translateX(calc(-50% + ' + shadowX + 'px))';
+    shadow.style.opacity = 0.8 + factor * 0.2;
+
+    // Dynamic box-shadow for depth
+    var sX = -rotateY * 0.5;
+    var sY = rotateX * 0.5 + 8;
+    inner.style.boxShadow = sX + 'px ' + sY + 'px ' + shadowBlur + 'px rgba(0,0,0,0.45)';
+
+    // Move highlight based on cursor
+    var hlX = 30 + (dx / maxDist) * 20;
+    var hlY = 25 + (dy / maxDist) * 20;
+    inner.style.setProperty('--hl-x', hlX + '%');
+    inner.style.setProperty('--hl-y', hlY + '%');
   });
 
   document.addEventListener('mouseleave', () => {
     inner.style.transform = 'rotateX(0deg) rotateY(0deg) translate(0px, 0px)';
+    inner.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)';
+    shadow.style.transform = 'translateX(-50%)';
+    shadow.style.opacity = '0.8';
   });
 }
 

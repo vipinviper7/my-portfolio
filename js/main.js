@@ -19,42 +19,6 @@ if (navToggle && navPill) {
   });
 }
 
-// Orbit cursor interaction
-const orbitWrap = document.getElementById('orbit-wrap');
-
-if (orbitWrap) {
-  const ring = orbitWrap.querySelector('.orbit-ring');
-  const maxTilt = 30;
-  const maxDist = 400;
-
-  document.addEventListener('mousemove', (e) => {
-    const rect = orbitWrap.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-
-    const dx = e.clientX - cx;
-    const dy = e.clientY - cy;
-
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    const factor = Math.min(dist / maxDist, 1);
-
-    const tiltX = -15 + (-(dy / maxDist) * maxTilt * factor);
-    const tiltY = (dx / maxDist) * maxTilt * factor;
-
-    ring.style.animationTimingFunction = 'linear';
-    ring.style.transform = 'rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
-
-    // Speed up when cursor is close
-    var speed = dist < 200 ? (6 + (1 - dist / 200) * 6) : 12;
-    ring.style.animationDuration = speed + 's';
-  });
-
-  document.addEventListener('mouseleave', () => {
-    ring.style.transform = '';
-    ring.style.animationDuration = '12s';
-  });
-}
-
 // Works section tab filtering
 const filterBtns = document.querySelectorAll('.filter-btn');
 const panels = document.querySelectorAll('.works-panel');

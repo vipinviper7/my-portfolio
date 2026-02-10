@@ -355,7 +355,7 @@ body.nav-open {
 
 .project-thumb {
   width: 100%;
-  aspect-ratio: 5 / 3;
+  height: 240px;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 0.75rem;
@@ -670,7 +670,7 @@ body.nav-open {
   }
 
   .project-thumb {
-    aspect-ratio: 5 / 3;
+    height: 180px;
   }
 
   .vd-card {
@@ -723,7 +723,7 @@ body.nav-open {
   }
 
   .project-thumb {
-    aspect-ratio: 5 / 3;
+    height: 150px;
   }
 
   .contact-heading {

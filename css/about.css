@@ -132,7 +132,16 @@
   margin: 0 auto;
 }
 
+.tool-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.6rem 1.5rem;
   background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border);

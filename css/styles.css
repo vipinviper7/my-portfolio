@@ -563,8 +563,8 @@ body.nav-open {
     #f472b6,
     #5b9bf5
   );
-  background-size: 300% 300%;
-  animation: gradient-rotate 4s ease infinite;
+  background-size: 400% 400%;
+  animation: gradient-rotate 12s linear infinite;
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -579,7 +579,7 @@ body.nav-open {
 
 .contact-btn:hover::before {
   padding: 2px;
-  animation-duration: 2s;
+  animation-duration: 6s;
 }
 
 @keyframes gradient-rotate {

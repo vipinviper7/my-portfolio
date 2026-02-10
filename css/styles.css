@@ -360,6 +360,10 @@ body.nav-open {
   background: linear-gradient(135deg, #8e9aaf, #b0bec5);
 }
 
+.project-thumb--cream {
+  background: linear-gradient(135deg, #f7f2eb, #ede5d8);
+}
+
 .project-tags {
   display: flex;
   gap: 0.5rem;

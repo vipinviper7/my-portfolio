@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaterEase - Vipin</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/case-study.css">
+  <style>
+    .cs-image-block--coral {
+      background-color: #fff3f0;
+    }
+    .cs-image-block--coral .cs-img-placeholder {
+      font-size: 0.85rem;
+      color: #c85540;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .cs-cta {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background-color: var(--color-accent);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .cs-cta:hover {
+      background-color: var(--color-accent-dim);
+      transform: translateY(-1px);
+    }
+    .cs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .cs-table th {
+      text-align: left;
+      color: var(--color-white);
+      font-weight: 700;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .cs-table td {
+      color: var(--color-text);
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+      line-height: 1.6;
+    }
+    .cs-persona {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .cs-persona-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 0.15rem;
+    }
+    .cs-persona-role {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .cs-persona-quote {
+      font-style: italic;
+      color: var(--color-accent);
+      font-size: 0.88rem;
+      margin-top: 0.75rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--color-accent);
+    }
+    .cs-figma-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background-color: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      color: var(--color-white);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    .cs-figma-link:hover {
+      background-color: var(--color-border);
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main" class="cs">
+
+    <div class="container">
+
+      <a href="index.html" class="cs-back">&larr; Back</a>
+
+      <header class="cs-header">
+        <h1 class="cs-title">CaterEase</h1>
+        <p class="cs-subtitle">Discover trusted caterers, book with confidence, track every detail</p>
+
+        <div class="cs-meta">
+          <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: CaterEase (Catering Discovery & Booking App)</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: UX Researcher, Designer & Developer</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Program</span><span class="cs-meta-value">: ABNUX Design Program</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Research complete, App shipped</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Tools used</span><span class="cs-meta-value">: Figma, Claude Code, React Native (Expo), Supabase, NativeWind</span></div>
+        </div>
+      </header>
+
+      <!-- Hero Image -->
+      <div class="cs-image-block cs-image-block--coral">
+        <img src="assets/images/ce-hero.png" alt="CaterEase App Overview">
+      </div>
+
+      <div class="cs-body">
+        <p>CaterEase is a mobile app for discovering catering providers and booking catering services, designed for urban Indian families and professionals in Tier-1 cities. This project went from <strong>end-to-end UX research</strong> (stakeholder interviews, user interviews, personas, journey maps) through to a <strong>fully functional React Native app</strong> with 26 screens, 12 demo caterers, and 114 menu items.</p>
+      </div>
+
+      <!-- The Problem -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">The Problem</h2>
+        <div class="cs-body">
+          <p>Booking a caterer in India is a fragmented, anxiety-filled experience. Users rely on <strong>word-of-mouth, phone calls, and WhatsApp</strong> to find, compare, and book caterers. The process has no transparency, no accountability, and no digital infrastructure.</p>
+          <ul>
+            <li><strong>Hidden charges</strong> &mdash; delivery, setup, and staff costs are revealed after booking</li>
+            <li><strong>No written agreements</strong> &mdash; caterers change menu items without notice</li>
+            <li><strong>Zero visibility</strong> &mdash; no way to track preparation or delivery on event day</li>
+            <li><strong>No accountability</strong> &mdash; bad experiences go unreported with no verified review system</li>
+            <li><strong>Portion confusion</strong> &mdash; users don't know how much food to order for their guest count</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Research -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Research</h2>
+        <div class="cs-body">
+          <p>The research began with a <strong>stakeholder interview</strong> (20 questions) with a catering aggregator product owner, then moved to <strong>8 semi-structured user interviews</strong> across different economic segments in Chennai, covering events from birthdays and weddings to corporate lunches and poojas.</p>
+
+          <p><strong>Key research findings:</strong></p>
+          <ul>
+            <li>Most users call 3&ndash;5 caterers before deciding &mdash; there's no way to compare side-by-side</li>
+            <li>Price per plate varies wildly with no transparency &mdash; same caterer gives different prices to different customers</li>
+            <li>Trust is the #1 factor &mdash; users want FSSAI verification, real photos, and verified reviews</li>
+            <li>Communication is fragmented across phone calls and WhatsApp with no single source of truth</li>
+            <li>Budget-conscious users prioritize price, corporate users need reliability and invoicing, quality-seekers want customization and accountability</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Personas -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Personas</h2>
+        <div class="cs-body">
+          <p>Three personas emerged from the research, each representing a distinct segment of catering customers:</p>
+        </div>
+
+        <div class="cs-persona">
+          <div class="cs-persona-name">Arun &mdash; Budget-Conscious Parent</div>
+          <div class="cs-persona-role">Age 38 &middot; Govt. employee &middot; &#8377;5&ndash;7 LPA &middot; Birthdays, family functions, poojas</div>
+          <div class="cs-body" style="margin-bottom:0">
+            <ul>
+              <li>Wants affordable catering within &#8377;120&ndash;200 per plate with no surprise charges</li>
+              <li>Calls 4&ndash;5 caterers and negotiates heavily, decides based on word-of-mouth and price</li>
+              <li>Frustrated by hidden delivery/setup charges and no written proof of agreed menu</li>
+            </ul>
+          </div>
+          <div class="cs-persona-quote">"I just want to know the full cost upfront. Every time there's some extra charge I didn't expect."</div>
+        </div>
+
+        <div class="cs-persona">
+          <div class="cs-persona-name">Priya &mdash; Corporate Event Admin</div>
+          <div class="cs-persona-role">Age 30 &middot; IT Admin Manager &middot; &#8377;8&ndash;12 LPA &middot; Corporate lunches, team events, client meetings</div>
+          <div class="cs-body" style="margin-bottom:0">
+            <ul>
+              <li>Needs to book quickly with minimal back-and-forth and get proper GST invoices</li>
+              <li>Searches online, wants to compare 3+ options side-by-side with quick turnaround</li>
+              <li>Food arrived 30 minutes late to a client meeting &mdash; no tracking was available</li>
+            </ul>
+          </div>
+          <div class="cs-persona-quote">"I need something I can book in 10 minutes and trust that it'll show up on time."</div>
+        </div>
+
+        <div class="cs-persona">
+          <div class="cs-persona-name">Abishek &mdash; Quality-Seeking Professional</div>
+          <div class="cs-persona-role">Age 34 &middot; Software Engineer &middot; &#8377;15&ndash;20 LPA &middot; Weddings, anniversaries, housewarming</div>
+          <div class="cs-body" style="margin-bottom:0">
+            <ul>
+              <li>Researches extensively, reads every review, willing to pay premium for quality and transparency</li>
+              <li>Can't find reliable pure vegetarian caterers with detailed menus and real photos</li>
+              <li>Paid &#8377;40,000 advance but received mediocre quality with no recourse or accountability</li>
+            </ul>
+          </div>
+          <div class="cs-persona-quote">"I paid premium but got average food. There should be a way to hold caterers accountable."</div>
+        </div>
+      </section>
+
+      <!-- Root Cause Analysis -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Root Cause Analysis</h2>
+        <div class="cs-body">
+          <p>Using the <strong>5 Whys framework</strong> on each persona's top pain point, six root causes were identified:</p>
+        </div>
+        <table class="cs-table">
+          <thead>
+            <tr>
+              <th>Root Cause</th>
+              <th>Personas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>No digital agreement system &mdash; everything is verbal</td><td>All three</td></tr>
+            <tr><td>No integrated feedback loop &mdash; bad experiences go unreported</td><td>Abishek, Arun</td></tr>
+            <tr><td>No real-time order/delivery tracking</td><td>Priya, Arun</td></tr>
+            <tr><td>No locked order summary &mdash; menu items can change after booking</td><td>Arun, Abishek</td></tr>
+            <tr><td>No transparent cost breakdown &mdash; hidden charges for delivery, setup, staff</td><td>Arun, Priya</td></tr>
+            <tr><td>No integrated payment tracking &mdash; unclear advance/balance schedule</td><td>Arun, Priya</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Journey Maps -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">User Journey</h2>
+        <div class="cs-body">
+          <p>The user journey spans 5 stages &mdash; <strong>Pre-Search, Search & Compare, Booking & Payment, Event Day, and Post-Event</strong>. Each stage was mapped across all three personas to identify design opportunities:</p>
+          <ul>
+            <li><strong>Pre-Search:</strong> No centralized source &rarr; Smart recommendations + cuisine/dietary filters</li>
+            <li><strong>Search & Compare:</strong> No standard pricing &rarr; Standardized caterer cards with rating, price, verified badge</li>
+            <li><strong>Booking & Payment:</strong> Hidden charges, no agreement &rarr; Full cost breakdown + digital contract with locked menu</li>
+            <li><strong>Event Day:</strong> No visibility &rarr; 7-stage order tracking timeline with push notifications</li>
+            <li><strong>Post-Event:</strong> No feedback channel &rarr; Verified review system with category ratings</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Design Decisions -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Research &rarr; Design Decisions</h2>
+        <div class="cs-body">
+          <p>Every screen in the app maps directly to a research finding:</p>
+        </div>
+        <table class="cs-table">
+          <thead>
+            <tr>
+              <th>Research Finding</th>
+              <th>Design Solution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>No transparent pricing</td><td>Full cost breakdown: food + staff + setup + delivery + 5% GST</td></tr>
+            <tr><td>No digital agreement</td><td>Locked menu with "Digital Agreement" badge on summary</td></tr>
+            <tr><td>No real-time tracking</td><td>7-stage order timeline from confirmed to event day</td></tr>
+            <tr><td>No feedback loop</td><td>Post-event review with 4 category ratings (taste, service, value, cleanliness)</td></tr>
+            <tr><td>Portion confusion</td><td>Portion planner tool: per-head recommendation &times; guest count</td></tr>
+            <tr><td>Hidden charges</td><td>Payment schedule showing 30% advance + 70% balance clearly</td></tr>
+            <tr><td>Can't compare caterers</td><td>Standardized cards with rating, price range, cuisine tags, verified badge</td></tr>
+            <tr><td>No dietary filters</td><td>Veg/non-veg indicators, "Pure Veg" badge, cuisine-level filters</td></tr>
+            <tr><td>Fragmented communication</td><td>In-app messaging with quick replies</td></tr>
+            <tr><td>No referral mechanism</td><td>"Give &#8377;500, Get &#8377;500" referral program</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Home & Discovery -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Home & Discovery</h2>
+        <div class="cs-image-block cs-image-block--coral">
+          <img src="assets/images/ce-home.png" alt="CaterEase Home Screen">
+        </div>
+        <div class="cs-body">
+          <p>The home screen provides multiple entry points: <strong>quick filter chips</strong> (Pure Veg, Wedding, Under &#8377;500, Top Rated), a <strong>featured caterers carousel</strong>, cuisine category grid, and a full search with filters for cuisine, event type, budget range, rating, dietary preferences, and guest count.</p>
+          <p>Each caterer card shows the key decision-making info at a glance: <strong>cover photo, name, verified badge, rating, cuisine tags, and price range</strong> &mdash; directly addressing the "can't compare" pain point.</p>
+        </div>
+      </section>
+
+      <!-- Booking Flow -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Booking Flow</h2>
+        <div class="cs-image-block cs-image-block--coral">
+          <img src="assets/images/ce-booking.png" alt="CaterEase Booking Flow">
+        </div>
+        <div class="cs-body">
+          <p>The booking flow is a 4-step pipeline designed for <strong>maximum transparency</strong>:</p>
+          <ul>
+            <li><strong>Step 1 &mdash; Event Details:</strong> Event type selector (6 types), date/time pickers, guest count stepper with caterer min/max, venue address</li>
+            <li><strong>Step 2 &mdash; Menu Selection:</strong> Category tabs, per-item selection with veg/non-veg indicators, running price-per-plate counter, link to Portion Planner</li>
+            <li><strong>Step 3 &mdash; Order Summary:</strong> Locked menu, complete price breakdown (food + staff + setup + delivery + GST), payment schedule (30% advance / 70% balance), digital agreement checkbox</li>
+            <li><strong>Step 4 &mdash; Confirmation:</strong> Booking ID, summary, and action buttons</li>
+          </ul>
+          <p>The order summary directly solves Arun's #1 frustration: <strong>no more hidden charges.</strong></p>
+        </div>
+      </section>
+
+      <!-- Tracking -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Order Tracking</h2>
+        <div class="cs-image-block cs-image-block--coral">
+          <img src="assets/images/ce-tracking.png" alt="CaterEase Order Tracking">
+        </div>
+        <div class="cs-body">
+          <p>A <strong>7-stage vertical timeline</strong> tracks every booking from confirmation to completion:</p>
+          <ul>
+            <li>Booking Confirmed &rarr; Menu Locked &rarr; Advance Paid &rarr; In Preparation &rarr; Event Day &rarr; Service Complete &rarr; Review Submitted</li>
+          </ul>
+          <p>This directly addresses Priya's pain point &mdash; <strong>"food arrived 30 minutes late with no tracking."</strong> Each stage shows a timestamp and status, with direct access to message the caterer or view the locked menu.</p>
+        </div>
+      </section>
+
+      <!-- Additional Features -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Key Features</h2>
+        <div class="cs-body">
+          <ul>
+            <li><strong>In-app messaging</strong> &mdash; Direct chat with caterers, quick reply chips, simulated auto-responses</li>
+            <li><strong>Verified reviews</strong> &mdash; Post-event ratings across 4 categories (taste, service, value, cleanliness) tied to actual bookings &mdash; addressing Abishek's accountability concern</li>
+            <li><strong>Portion Planner</strong> &mdash; Course-wise quantity recommendations based on guest count</li>
+            <li><strong>Saved Addresses</strong> &mdash; CRUD with labels, default selection for quick rebooking</li>
+            <li><strong>Referral Program</strong> &mdash; "Give &#8377;500, Get &#8377;500" with shareable referral codes</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- AARRR -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">AARRR Metrics</h2>
+        <div class="cs-body">
+          <ul>
+            <li><strong>Acquisition:</strong> SEO-optimized listings, sharable caterer profiles, referral invite links</li>
+            <li><strong>Activation:</strong> Frictionless phone OTP onboarding, instant search with smart filters</li>
+            <li><strong>Retention:</strong> Booking history with one-tap rebooking, saved favorites, portion planner tool</li>
+            <li><strong>Revenue:</strong> 10&ndash;15% commission per booking, premium caterer listings, transparent in-app payments</li>
+            <li><strong>Referral:</strong> Post-event share prompts, "Give &#8377;500, Get &#8377;500" program, referral tracking dashboard</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Technical Implementation -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Technical Implementation</h2>
+        <div class="cs-body">
+          <p>The research and design were brought to life as a <strong>fully functional React Native app</strong>, vibecoded with Claude Code:</p>
+          <ul>
+            <li><strong>React Native (Expo SDK 54)</strong> with expo-router for file-based navigation</li>
+            <li><strong>NativeWind v4</strong> (Tailwind CSS) for the warm coral (#E86A50) design system</li>
+            <li><strong>Zustand</strong> for state management + <strong>TanStack Query</strong> for server state</li>
+            <li><strong>Supabase</strong> backend (Postgres + Auth + Realtime + Storage) with full schema &mdash; 12 tables, RLS policies, triggers</li>
+            <li><strong>Plus Jakarta Sans</strong> typography across 4 weights</li>
+            <li><strong>57 source files</strong> across 26 screens, 11 UI components, 6 hooks, 3 stores</li>
+            <li><strong>Demo mode</strong> with 12 caterers, 114 menu items, and 18 reviews &mdash; fully functional without a backend</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Try It + Figma -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Try It</h2>
+        <div class="cs-body">
+          <p>Experience CaterEase in your browser or explore the Figma design file.</p>
+          <p style="margin-top: 0.75rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="https://vipinviper7.github.io/caterease" target="_blank" rel="noopener noreferrer" class="cs-cta">Open CaterEase &rarr;</a>
+            <a href="https://www.figma.com/make/LAgLryz8WaM8r4WQzlkGxP/Catering-Booking-App-Design" target="_blank" rel="noopener noreferrer" class="cs-figma-link">View Figma File &nearr;</a>
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 &mdash; Built by Vipin, caffeine, and poor color choices.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

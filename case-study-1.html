@@ -43,14 +43,14 @@
       <a href="index.html" class="cs-back">&larr; Back</a>
 
       <header class="cs-header">
-        <h1 class="cs-title">Recent Updates</h1>
+        <h1 class="cs-title">Recent Updates — Zoho Sprints</h1>
         <p class="cs-subtitle">Designing a centralized in-product updates system for Zoho Sprints</p>
 
         <div class="cs-meta">
           <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: Zoho Sprints</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Visual Designer</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">: ~2 weeks</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Tools used</span><span class="cs-meta-value">: Figma, Illustrator</span></div>
         </div>
       </header>
 
@@ -59,108 +59,82 @@
         <img src="assets/images/cs1-hero.png" alt="Recent Updates feature overview" onerror="this.style.display='none'">
       </div>
 
-      <div class="cs-body">
-        <p>Zoho Sprints needed <strong>a way to communicate frequent updates</strong>, ranging from product changes and announcements to promotions and subscription reminders directly within the product.</p>
-        <p>I worked on designing the <strong>Recent Updates feature</strong>, an in-product system that helps users stay informed without interrupting their core workflow.</p>
-      </div>
-
-      <!-- Problem -->
+      <!-- The Brief -->
       <section class="cs-section">
-        <h2 class="cs-section-title">Problem</h2>
+        <h2 class="cs-section-title">The Brief</h2>
+        <div class="cs-body">
+          <p>Zoho Sprints had no way to talk to its users from inside the product. Product updates, subscription reminders, community posts, promotions — none of it reached users in-app.</p>
+          <p>My manager handed me a requirements doc and a clear ask: <strong>design an updates system that handles all of this without overwhelming people.</strong></p>
+        </div>
+      </section>
+
+      <!-- What Made It Tricky -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">What Made It Tricky</h2>
         <div class="cs-image-block cs-image-block--mint">
           <img src="assets/images/cs1-problem.png" alt="Problem analysis" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>The product needed to surface a wide variety of updates, but there was <strong>no clear structure for how these updates should be presented.</strong></p>
-          <p><strong>Key challenges identified:</strong></p>
-          <ul>
-            <li>Updates varied in type, priority, and intent</li>
-            <li>Some updates required user action, while others were purely informational</li>
-            <li>High update frequency risked users ignoring or overlooking important information</li>
-          </ul>
-          <p>The challenge was to design a system that could scale with frequent updates while remaining clear and non-intrusive.</p>
+          <p>The challenge wasn't "design a notification panel." It was fitting very different types of content into one space.</p>
+          <p>Product announcements users need to know about. Subscription reminders that require action. Community updates that are nice-to-have. Promotions most people ignore. <strong>All competing for the same screen space, all arriving at different frequencies.</strong></p>
+          <p>Show too much, users ignore everything. Show too little, they miss what matters.</p>
         </div>
       </section>
 
-      <!-- Design Approach -->
+      <!-- How the Design Evolved -->
       <section class="cs-section">
-        <h2 class="cs-section-title">Design Approach</h2>
-        <div class="cs-body">
-          <p>Given the detailed requirement document and evolving inputs, <strong>I followed an iterative design approach</strong> rather than a strict linear UX process.</p>
-          <p>The focus was on:</p>
-          <ul>
-            <li>Structuring information clearly</li>
-            <li>Establishing visual hierarchy</li>
-            <li>Iterating quickly to arrive at a practical, scalable solution</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Understanding the Requirements -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">Understanding the Requirements</h2>
-        <div class="cs-body">
-          <p>I started by reviewing the requirements to understand:</p>
-          <ul>
-            <li>The different categories of updates (product, subscription, community, promotions)</li>
-            <li>The frequency of each update type</li>
-            <li>Whether the update was informational or action-driven</li>
-          </ul>
-          <p>This helped me identify <strong>the core problem as organization and prioritization</strong>, rather than just visual design.</p>
-        </div>
-      </section>
-
-      <!-- Iterative Exploration -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">Iterative Exploration</h2>
+        <h2 class="cs-section-title">How the Design Evolved</h2>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-iterations-1.png" alt="Iterations 1 and 2" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-iterations-1.png" alt="Early iterations" onerror="this.style.display='none'">
         </div>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-iterations-2.png" alt="Iterations 3 and 4" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-iterations-2.png" alt="Later iterations" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>I explored nearly 10 design iterations, testing different ways to:</p>
-          <ul>
-            <li><strong>Organize and group</strong> updates</li>
-            <li>Make frequent updates <strong>easy to scan</strong></li>
-            <li><strong>Balance visibility</strong> without disrupting the user's workflow</li>
-          </ul>
-          <p>Each iteration helped clarify what worked and what didn't, and designs were refined based on ongoing feedback from my manager.</p>
-          <p>I've highlighted a few key iterations that show how the design evolved.</p>
+          <p>~10 iterations over two weeks. Here's how my thinking shifted:</p>
+          <p><strong>Early on</strong> — I jumped into designing structured cards with clear hierarchy. Looked polished, but feedback was it's overdesigned. Too heavy for what this needed to be.</p>
+          <p><strong>The key shift</strong> — My manager pushed toward simplicity, and it was the right call. These needed to behave like notifications — scannable, lightweight — but carry more information than a typical notification. That tension drove the rest of the process.</p>
+          <p><strong>Where I drifted</strong> — A few iterations went off-script from Sprints' existing design language. Looked good in isolation, felt wrong in the product. Pulling back to align with what existed actually made decisions easier.</p>
+          <p><strong>What landed</strong> — Notification-style items with clear titles and enough room for context underneath. Simple enough to scan, detailed enough to be useful.</p>
         </div>
       </section>
 
-      <!-- Final Solution -->
+      <!-- Final Design -->
       <section class="cs-section">
-        <h2 class="cs-section-title">Final Solution</h2>
+        <h2 class="cs-section-title">Final Design</h2>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-final.png" alt="Final solution" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-final.png" alt="Final design" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>In the final design:</p>
+          <p>A single update feed inside the product. One place for everything.</p>
           <ul>
-            <li>A centralized update feed within the product</li>
-            <li>Clear distinction between different types of updates</li>
-            <li>Scannable summaries with progressive disclosure</li>
-            <li>Contextual call-to-actions for updates that required user input</li>
+            <li>One stream, no tabs. Everything sorted by time.</li>
+            <li>Visual distinction by update type — users can tell at a glance what needs attention.</li>
+            <li>Scannable by default, expandable for detail.</li>
+            <li>Action-driven updates (like subscription reminders) visually separated from passive ones.</li>
           </ul>
         </div>
       </section>
 
-      <!-- Impact -->
+      <!-- After Shipping -->
       <section class="cs-section">
-        <h2 class="cs-section-title">Impact</h2>
+        <h2 class="cs-section-title">After Shipping</h2>
         <div class="cs-image-block cs-image-block--mint">
           <img src="assets/images/cs1-impact.png" alt="Live UI" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <ul>
-            <li>The icons lacked uniformity in the final design, hence new icon illustrations that match the product's design standards were created during production</li>
-            <li>The final design was selected and shipped to production</li>
-            <li>Enabled the team to communicate updates consistently within the product</li>
-            <li>Created a single, structured source of information for users</li>
-          </ul>
+          <p>The core design shipped intact. The icons were redrawn during development to better match Sprints' existing icon style — flagged during review.</p>
+          <p>Before this feature, there was no in-product communication channel. Now there is.</p>
+        </div>
+      </section>
+
+      <!-- What I Took Away -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">What I Took Away</h2>
+        <div class="cs-body">
+          <p><strong>Simpler was harder.</strong> My instinct was to design something rich. Simplifying felt like a step backward — but it made the design better.</p>
+          <p><strong>Stay inside the design language.</strong> The iterations where I went off-script looked interesting but felt disconnected. The best version felt like it had always been there.</p>
+          <p><strong>Fast iteration beats perfect first drafts.</strong> Ten iterations in two weeks. None of them were precious. That helped.</p>
         </div>
       </section>
 

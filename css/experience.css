@@ -172,7 +172,8 @@
   border-radius: 6px;
   object-fit: contain;
   flex-shrink: 0;
-  background-color: var(--color-bg-elevated);
+  background-color: #fff;
+  padding: 3px;
 }
 
 .exp-company {
@@ -309,7 +310,8 @@
   border-radius: 8px;
   object-fit: contain;
   flex-shrink: 0;
-  background-color: var(--color-bg-elevated);
+  background-color: #fff;
+  padding: 4px;
 }
 
 .edu-name {

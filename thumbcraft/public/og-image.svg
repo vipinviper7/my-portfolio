@@ -1,0 +1,12 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4c6ef5"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="260" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="72" font-weight="bold">ThumbCraft</text>
+  <text x="600" y="340" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="system-ui,sans-serif" font-size="28">Free Thumbnail Maker for Creators</text>
+  <text x="600" y="420" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="20">YouTube Thumbnails · OG Images · Social Graphics</text>
+</svg>

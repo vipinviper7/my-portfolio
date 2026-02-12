@@ -125,6 +125,20 @@
   gap: 1rem;
 }
 
+/* Compact grid for Visual Explorations — tighter, uniform, supplementary feel */
+.gal-grid--compact {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.gal-grid--compact .gal-item {
+  aspect-ratio: 1;
+}
+
+.gal-grid--compact .gal-item:hover {
+  transform: translateY(-3px) scale(1.01);
+}
+
 /* Gallery Items */
 .gal-item {
   border-radius: 12px;
@@ -200,6 +214,10 @@
 .gal-grid .reveal:nth-child(6) { transition-delay: 0.4s; }
 .gal-grid .reveal:nth-child(7) { transition-delay: 0.48s; }
 .gal-grid .reveal:nth-child(8) { transition-delay: 0.56s; }
+.gal-grid .reveal:nth-child(9) { transition-delay: 0.64s; }
+.gal-grid .reveal:nth-child(10) { transition-delay: 0.72s; }
+.gal-grid .reveal:nth-child(11) { transition-delay: 0.8s; }
+.gal-grid .reveal:nth-child(12) { transition-delay: 0.88s; }
 
 /* ===========================
    Lightbox
@@ -270,6 +288,10 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .gal-grid--compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .gal-grid--masonry {
     grid-auto-rows: 160px;
   }
@@ -299,6 +321,10 @@
   }
 
   .gal-grid--icons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gal-grid--compact {
     grid-template-columns: repeat(2, 1fr);
   }
 

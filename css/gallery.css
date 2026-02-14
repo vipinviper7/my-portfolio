@@ -184,6 +184,17 @@
   object-position: top center;
 }
 
+/* Illustration items — light card background */
+.gal-item--illus {
+  background-color: #f5f5f7;
+  padding: 1.5rem;
+}
+
+.gal-item--illus img {
+  object-fit: contain;
+  border-radius: 8px;
+}
+
 /* Gallery Items */
 .gal-item {
   border-radius: 12px;

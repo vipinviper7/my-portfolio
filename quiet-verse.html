@@ -4,38 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiet Verse - Vipin</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/case-study.css">
-  <style>
-    /* Quiet Verse — warm cream image blocks */
-    .cs-image-block--cream {
-      background-color: #f5f0e8;
-    }
-    .cs-image-block--cream .cs-img-placeholder {
-      font-size: 0.85rem;
-      color: #8a7e6b;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-    /* CTA button */
-    .cs-cta {
-      display: inline-block;
-      padding: 0.85rem 2rem;
-      background-color: var(--color-accent);
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border-radius: 8px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .cs-cta:hover {
-      background-color: var(--color-accent-dim);
-      transform: translateY(-1px);
-    }
-  </style>
+  <link rel="stylesheet" href="css/quiet-verse.css">
 </head>
 <body>
 
@@ -49,108 +24,141 @@
 
       <header class="cs-header">
         <h1 class="cs-title">Quiet Verse</h1>
-        <p class="cs-subtitle">A calm, offline Bible app &mdash; vibecoded with Claude</p>
+        <p class="cs-subtitle">I wanted a Bible app that felt like opening a book, not opening an app store. So I built one.</p>
 
         <div class="cs-meta">
-          <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: Quiet Verse (Bible App)</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Designer & Vibecoder</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Tools used</span><span class="cs-meta-value">: Claude Code, React, Capacitor, Tailwind CSS</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Built with</span><span class="cs-meta-value">: Claude Code, React, Tailwind CSS, Capacitor</span></div>
         </div>
       </header>
 
-      <!-- Hero Image -->
+      <!-- Hero -->
       <div class="cs-image-block cs-image-block--cream">
-        <img src="assets/images/qv-hero.png" alt="Quiet Verse home screen" onerror="this.style.display='none'">
+        <img src="assets/images/qv-hero.png" alt="Quiet Verse — light mode and dark mode side by side" onerror="this.style.display='none'">
       </div>
 
-      <div class="cs-body">
-        <p>A peaceful scripture reading app designed for calm, focused Bible study. Built entirely through AI-assisted "vibecoding" &mdash; conversational prompts with Claude Code that generated a <strong>production-ready React app</strong> wrapped as a native mobile app with Capacitor.</p>
+      <div class="cs-cta-row">
+        <a href="https://vipinviper7.github.io/10k-project" target="_blank" rel="noopener noreferrer" class="cs-cta cs-cta--cream">Open Quiet Verse &rarr;</a>
       </div>
 
-      <!-- The Challenge -->
+      <!-- Why This Exists -->
       <section class="cs-section">
-        <h2 class="cs-section-title">The Challenge</h2>
+        <h2 class="cs-section-title cs-section-title--cream">Why This Exists</h2>
         <div class="cs-body">
-          <p>Most Bible apps are cluttered with ads, social features, and notifications &mdash; <strong>the opposite of what scripture reading should feel like.</strong></p>
-          <p>The goal was to create a <strong>distraction-free, offline-first Bible experience</strong> that feels like holding a beautifully typeset book.</p>
+          <p>I read scripture most mornings. It's a quiet part of my day &mdash; just me, coffee, and a verse to sit with.</p>
+          <p>But every Bible app I tried kept pulling me out of that moment. Notifications. Social features. &ldquo;Share this verse!&rdquo; prompts. Daily streak badges. Ads between chapters.</p>
+          <p>It felt like these apps were designed for engagement metrics, not for someone trying to reflect. I wanted something that got out of the way &mdash; something that felt like holding a beautifully typeset book.</p>
         </div>
       </section>
 
-      <!-- Design Decisions -->
+      <!-- The Problem with Bible Apps -->
       <section class="cs-section">
-        <h2 class="cs-section-title">Design Decisions</h2>
+        <h2 class="cs-section-title cs-section-title--cream">The Problem with Bible Apps</h2>
         <div class="cs-image-block cs-image-block--cream">
-          <img src="assets/images/qv-reader.png" alt="Quiet Verse reader dark mode" onerror="this.style.display='none'">
+          <img src="assets/images/qv-before-after.png" alt="Cluttered Bible apps vs. Quiet Verse's clean interface" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
           <ul>
-            <li><strong>Cream & Gold palette</strong> &mdash; warm, paper-like tones that feel timeless rather than digital</li>
-            <li><strong>Dual typography</strong> &mdash; Inter (clean sans-serif) for UI, Cormorant Garamond (elegant serif) for scripture text</li>
-            <li><strong>Minimal chrome</strong> &mdash; no tabs, no sidebars, just the text and subtle navigation</li>
-            <li><strong>Dark mode</strong> &mdash; deep navy with warm accents for nighttime reading</li>
-            <li><strong>44px touch targets</strong> &mdash; Apple HIG compliant, comfortable one-handed use</li>
+            <li><strong>Cluttered interfaces</strong> &mdash; tabs, sidebars, banners, and pop-ups competing for attention</li>
+            <li><strong>Social pressure</strong> &mdash; streaks, sharing prompts, and community features that distract from reading</li>
+            <li><strong>Internet dependency</strong> &mdash; many apps need a connection to load scripture, which defeats the purpose of morning quiet time</li>
           </ul>
+          <p>The goal was simple: <strong>distraction-free, offline-first, beautiful.</strong></p>
         </div>
       </section>
 
-      <!-- Key Features -->
+      <!-- Design Philosophy -->
       <section class="cs-section">
-        <h2 class="cs-section-title">Key Features</h2>
+        <h2 class="cs-section-title cs-section-title--cream">Design Philosophy</h2>
         <div class="cs-image-block cs-image-block--cream">
-          <img src="assets/images/qv-bookmarks.png" alt="Quiet Verse bookmarks screen" onerror="this.style.display='none'">
+          <img src="assets/images/qv-reader.png" alt="Quiet Verse reader — scripture text in elegant serif typography" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p>Every decision was guided by one question: <strong>does this help or distract from reading?</strong></p>
+        </div>
+        <div class="cs-philosophy">
+          <div class="cs-philosophy-item">
+            <div class="cs-philosophy-decision">Cream & Gold palette</div>
+            <div class="cs-philosophy-why">Scripture should feel like a physical book &mdash; warm, paper-like tones that feel timeless rather than digital.</div>
+          </div>
+          <div class="cs-philosophy-item">
+            <div class="cs-philosophy-decision">Dual typography</div>
+            <div class="cs-philosophy-why">Inter for clean UI navigation, Cormorant Garamond for scripture text. The words of the Bible deserve an elegant serif.</div>
+          </div>
+          <div class="cs-philosophy-item">
+            <div class="cs-philosophy-decision">Minimal chrome</div>
+            <div class="cs-philosophy-why">No tabs, no sidebars. Just the text and subtle navigation. If you're reading Psalms, you should see Psalms &mdash; not a toolbar.</div>
+          </div>
+          <div class="cs-philosophy-item">
+            <div class="cs-philosophy-decision">Dark mode</div>
+            <div class="cs-philosophy-why">Deep navy with warm gold accents for nighttime reading. Not harsh black-and-white &mdash; something gentle on the eyes.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- The App -->
+      <section class="cs-section">
+        <h2 class="cs-section-title cs-section-title--cream">The App</h2>
+        <div class="cs-image-block cs-image-block--cream">
+          <img src="assets/images/qv-screens.png" alt="Quiet Verse screens — home, reader, bookmarks, dark mode" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
           <ul>
-            <li>Complete KJV Bible (66 books, 31,102 verses) &mdash; all offline</li>
+            <li>Complete KJV Bible &mdash; 66 books, 31,102 verses, all offline</li>
+            <li>Daily verse on the home screen with save, shuffle, and jump-to-chapter</li>
             <li>Verse bookmarking with haptic feedback</li>
             <li>Adjustable font size for readability</li>
             <li>Reflection timer with breathing cues</li>
-            <li>Smooth dark/light mode transitions</li>
-            <li>Lazy-loaded books (initial load under 114 KB)</li>
+            <li>Smooth light/dark mode toggle</li>
+          </ul>
+        </div>
+        <div class="cs-image-block cs-image-block--cream">
+          <img src="assets/images/qv-bookmarks.png" alt="Quiet Verse bookmarks — saved verses for quick access" onerror="this.style.display='none'">
+        </div>
+      </section>
+
+      <!-- Built in 3 Hours -->
+      <section class="cs-section">
+        <h2 class="cs-section-title cs-section-title--cream">Built in 3 Hours</h2>
+        <div class="cs-highlight">
+          <div class="cs-highlight-number">~3 hrs</div>
+          <div class="cs-highlight-label">From idea to working iOS app</div>
+        </div>
+        <div class="cs-body">
+          <p>This app was built entirely through conversation with Claude Code &mdash; <strong>no manual coding.</strong></p>
+          <p>I described the vision and aesthetic in plain English. Claude generated the React components, styling, and data architecture. I iterated on feel and interactions through conversational feedback. Then I wrapped it as a native app with Capacitor in the same session.</p>
+          <p>The entire process &mdash; from &ldquo;I want a calm Bible app&rdquo; to a working iOS app with all 66 books loaded &mdash; took about three hours.</p>
+        </div>
+        <div class="cs-body">
+          <p>Under the hood:</p>
+          <ul>
+            <li>React 19 with Tailwind CSS for theming</li>
+            <li>Capacitor for native iOS/Android shell</li>
+            <li>Complete offline operation &mdash; self-hosted fonts, localStorage for bookmarks</li>
+            <li>Lazy loading &mdash; each Bible book loads only when opened (114 KB initial load)</li>
           </ul>
         </div>
       </section>
 
-      <!-- The Vibecoding Process -->
+      <!-- What I Learned -->
       <section class="cs-section">
-        <h2 class="cs-section-title">The Vibecoding Process</h2>
+        <h2 class="cs-section-title cs-section-title--cream">What I Learned</h2>
         <div class="cs-body">
-          <p>This app was built entirely through conversation with Claude Code &mdash; <strong>no manual coding.</strong> The process:</p>
-          <ul>
-            <li>Described the vision and aesthetic in natural language</li>
-            <li>Claude generated the React components, styling, and data architecture</li>
-            <li>Iterated on feel and interactions through conversational feedback</li>
-            <li>Wrapped as a native app with Capacitor in a single session</li>
-            <li>Added all 66 books of the Bible from public domain KJV data</li>
-          </ul>
-          <p><strong>Total time from idea to working iOS app: ~3 hours</strong></p>
-        </div>
-      </section>
-
-      <!-- Technical Architecture -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">Technical Architecture</h2>
-        <div class="cs-body">
-          <ul>
-            <li>React 19 with HashRouter for native file:// protocol support</li>
-            <li>Tailwind CSS with custom CSS variables for theming</li>
-            <li>localStorage for offline data persistence (bookmarks, preferences)</li>
-            <li>Capacitor for iOS/Android native shell</li>
-            <li>Self-hosted fonts for complete offline operation</li>
-            <li>Lazy loading &mdash; each Bible book loads only when opened</li>
-          </ul>
+          <p><strong>Constraints make better products.</strong> By deciding early that this app would have no social features, no accounts, and no internet requirement, every design decision became simpler. The constraint wasn't limiting &mdash; it was freeing.</p>
+          <p><strong>Vibecoding is a real design tool.</strong> Describing what I wanted in natural language and iterating through conversation gave me a working product in hours, not weeks. It changed how I think about prototyping.</p>
+          <p><strong>Sometimes the best feature is what you leave out.</strong> Every Bible app I tried had more features than Quiet Verse. That's the point.</p>
         </div>
       </section>
 
       <!-- Try It -->
       <section class="cs-section">
-        <h2 class="cs-section-title">Try It</h2>
+        <h2 class="cs-section-title cs-section-title--cream">Try It</h2>
         <div class="cs-body">
           <p>Experience Quiet Verse in your browser &mdash; no install required.</p>
-          <p style="margin-top: 0.5rem;">
-            <a href="https://vipinviper7.github.io/10k-project" target="_blank" rel="noopener noreferrer" class="cs-cta">Open Quiet Verse &rarr;</a>
-          </p>
+        </div>
+        <div class="cs-cta-row">
+          <a href="https://vipinviper7.github.io/10k-project" target="_blank" rel="noopener noreferrer" class="cs-cta cs-cta--cream">Open Quiet Verse &rarr;</a>
         </div>
       </section>
 

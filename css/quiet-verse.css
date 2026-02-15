@@ -1,0 +1,110 @@
+/* ===========================
+   Quiet Verse Case Study — Project-Specific Styles
+   =========================== */
+
+/* Cream image block background */
+.cs-image-block--cream {
+  background-color: #f5f0e8;
+}
+
+.cs-screen-image--cream {
+  background-color: #f5f0e8;
+}
+
+/* Gold-themed section titles */
+.cs-section-title--cream {
+  color: #c4a265;
+}
+
+/* Gold accent for annotation dots */
+.cs--cream .cs-annotation::before {
+  background-color: #c4a265;
+}
+
+/* Gold CTA button */
+.cs-cta--cream {
+  background-color: #c4a265;
+}
+
+.cs-cta--cream:hover {
+  background-color: #a8873f;
+}
+
+/* Gold stats */
+.cs-stat--cream .cs-stat-number {
+  color: #c4a265;
+}
+
+/* ===========================
+   Design Philosophy Items
+   =========================== */
+.cs-philosophy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.cs-philosophy-item {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid #c4a265;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.cs-philosophy-decision {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.35rem;
+}
+
+.cs-philosophy-why {
+  font-size: 0.88rem;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+/* ===========================
+   Highlight Stat Block
+   =========================== */
+.cs-highlight {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(135deg, #1a1f36, #0f1424);
+  border: 1px solid rgba(196, 162, 101, 0.3);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.cs-highlight-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #c4a265;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.cs-highlight-label {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+@media (max-width: 480px) {
+  .cs-highlight {
+    padding: 2rem 1.5rem;
+  }
+
+  .cs-highlight-number {
+    font-size: 2.25rem;
+  }
+
+  .cs-philosophy-item {
+    padding: 1rem;
+  }
+}

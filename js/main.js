@@ -1,3 +1,11 @@
+// Unlock protected cards if user has authenticated + accepted NDA
+if (localStorage.getItem('cs_access') === '1' && localStorage.getItem('cs_nda') === '1') {
+  document.querySelectorAll('[data-protected]').forEach(function (card) {
+    var thumb = card.querySelector('.project-thumb--locked');
+    if (thumb) thumb.classList.remove('project-thumb--locked');
+  });
+}
+
 // Mobile navigation toggle
 const navToggle = document.querySelector('.nav-toggle');
 const navPill = document.querySelector('.nav-pill');

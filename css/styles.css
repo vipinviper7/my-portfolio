@@ -412,6 +412,21 @@ body.nav-open {
   color: var(--color-tag-text);
 }
 
+.tag--green {
+  background-color: #1a3c2a;
+  color: #4ade80;
+}
+
+.tag--purple {
+  background-color: #2d1b4e;
+  color: #c084fc;
+}
+
+.tag--coral {
+  background-color: #3c1f1f;
+  color: #f87171;
+}
+
 .project-title {
   font-size: 1.15rem;
   font-weight: 600;

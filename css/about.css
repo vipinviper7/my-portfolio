@@ -235,7 +235,8 @@ img.tool-icon {
   border-top-color: var(--color-border);
 }
 
-.hobby-card:hover .hobby-tooltip {
+.hobby-card:hover .hobby-tooltip,
+.hobby-card.tooltip-visible .hobby-tooltip {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
   pointer-events: auto;
@@ -347,6 +348,12 @@ img.tool-icon {
 
   .hobby-card {
     padding: 1.25rem 1.5rem;
+  }
+
+  .hobby-tooltip {
+    white-space: normal;
+    max-width: 160px;
+    text-align: center;
   }
 
   .about-contact-links {

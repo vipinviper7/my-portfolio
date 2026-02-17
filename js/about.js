@@ -31,3 +31,35 @@ if (navToggle && navPill) {
     navOverlay.addEventListener('click', closeNav);
   }
 }
+
+// Hobby tooltip tap-to-reveal on touch devices
+const hobbyCards = document.querySelectorAll('.hobby-card');
+
+hobbyCards.forEach(card => {
+  card.addEventListener('click', (e) => {
+    const tooltip = card.querySelector('.hobby-tooltip');
+    if (!tooltip) return;
+
+    // Don't interfere with link cards on desktop
+    if (card.tagName === 'A' && !('ontouchstart' in window)) return;
+
+    // On touch devices, prevent link navigation on first tap (show tooltip first)
+    if (card.tagName === 'A' && !card.classList.contains('tooltip-visible')) {
+      e.preventDefault();
+    }
+
+    // Close other open tooltips
+    hobbyCards.forEach(other => {
+      if (other !== card) other.classList.remove('tooltip-visible');
+    });
+
+    card.classList.toggle('tooltip-visible');
+  });
+});
+
+// Close tooltips when tapping outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.hobby-card')) {
+    hobbyCards.forEach(card => card.classList.remove('tooltip-visible'));
+  }
+});

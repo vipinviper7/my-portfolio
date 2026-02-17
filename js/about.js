@@ -37,6 +37,13 @@ const hobbyCards = document.querySelectorAll('.hobby-card');
 
 hobbyCards.forEach(card => {
   card.addEventListener('click', (e) => {
+    // Gaming card launches Breakout game
+    if (card.id === 'gaming-card' && typeof window.launchBreakout === 'function') {
+      e.preventDefault();
+      window.launchBreakout();
+      return;
+    }
+
     const tooltip = card.querySelector('.hobby-tooltip');
     if (!tooltip) return;
 

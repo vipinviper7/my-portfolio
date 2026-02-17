@@ -171,6 +171,7 @@ img.tool-icon {
 }
 
 .hobby-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,11 +180,17 @@ img.tool-icon {
   background-color: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+}
+
+.hobby-card--link {
+  cursor: pointer;
 }
 
 .hobby-card:hover {
   transform: translateY(-3px);
+  border-color: var(--color-accent-dim);
 }
 
 .hobby-icon {
@@ -196,6 +203,42 @@ img.tool-icon {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-white);
+}
+
+/* Hobby Tooltip */
+.hobby-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  padding: 0.5rem 0.85rem;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.hobby-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--color-border);
+}
+
+.hobby-card:hover .hobby-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
 }
 
 /* ===========================
@@ -253,6 +296,12 @@ img.tool-icon {
 
   .hobby-card {
     padding: 1.5rem 2rem;
+  }
+
+  .hobby-tooltip {
+    white-space: normal;
+    max-width: 180px;
+    text-align: center;
   }
 }
 

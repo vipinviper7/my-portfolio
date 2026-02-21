@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Vipin</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/resume.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Vipin</a>
+    <div class="nav-pill">
+      <a href="index.html#works" class="nav-link">Works</a>
+      <a href="experience.html" class="nav-link">Experience</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="resume.html" class="nav-link active">Resume</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-overlay"></div>
+  </nav>
+
+  <main id="main">
+
+    <section class="resume-section">
+      <div class="container">
+        <div class="resume-wrapper">
+          <h1 class="resume-heading">Resume</h1>
+
+          <div class="resume-preview" id="resume-preview">
+            <iframe src="assets/docs/vipin's_resume.pdf" title="Vipin's Resume"></iframe>
+            <div class="resume-fallback">
+              <p>PDF preview isn't supported in this browser.</p>
+              <p><a href="assets/docs/vipin's_resume.pdf" download>Download the resume</a> to view it.</p>
+            </div>
+          </div>
+
+          <a href="assets/docs/vipin's_resume.pdf" class="resume-download-btn" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Resume
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 &mdash; Built by Vipin, caffeine, and poor color choices.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

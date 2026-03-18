@@ -78,16 +78,16 @@
       <!-- Outcome Metrics -->
       <div class="cs-outcomes">
         <div class="cs-outcome">
-          <div class="cs-outcome__number">0 &rarr; 1</div>
-          <div class="cs-outcome__label">In-product communication channel created</div>
-        </div>
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">~10</div>
-          <div class="cs-outcome__label">Design iterations in 2 weeks</div>
-        </div>
-        <div class="cs-outcome">
           <div class="cs-outcome__number">4</div>
           <div class="cs-outcome__label">Content types unified into one feed</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">2 weeks</div>
+          <div class="cs-outcome__label">Design to handoff</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">Shipped</div>
+          <div class="cs-outcome__label">Live in production</div>
         </div>
       </div>
 
@@ -95,9 +95,9 @@
       <div class="cs-takeaways">
         <h2 class="cs-takeaways-title">Key Takeaways</h2>
         <ul class="cs-takeaways-list">
-          <li>Designed a single update feed that handles product announcements, subscription reminders, community updates, and promotions</li>
-          <li>Iterated through ~10 versions in two weeks — simplicity won over richness</li>
-          <li>Shipped intact to production with minor icon adjustments during development</li>
+          <li>One feed for announcements, subscription reminders, community updates, and promotions</li>
+          <li>Pushed back on a flat list — got approval to visually separate action-required items from passive ones</li>
+          <li>Shipped intact, only change was icon redrawing during eng review</li>
         </ul>
       </div>
 
@@ -110,9 +110,8 @@
       <section class="cs-section">
         <h2 class="cs-section-title">The Problem</h2>
         <div class="cs-body">
-          <p>Zoho Sprints had no way to talk to its users from inside the product. Product updates went out via email — most users never saw them. Subscription reminders, community posts, promotions — none of it reached users in-app.</p>
-          <p><strong>50K users were missing updates that mattered, and we had no channel to reach them.</strong></p>
-          <p>I took on the challenge of designing a unified in-product updates system. I started by working with the PM to map out every content type, its urgency, and its frequency. The engineering team flagged what was feasible within Sprints' existing notification infrastructure — which shaped how I structured the feed from day one.</p>
+          <p>Sprints had no way to reach users inside the product. Updates went out via email — most people never saw them. Subscription reminders, community posts, promotions — nothing reached users in-app.</p>
+          <p>I worked with the PM to map out what needed to go in the feed and what didn't. The engineering team flagged what was feasible within the existing notification infrastructure, which shaped the structure early on.</p>
         </div>
       </section>
 
@@ -123,8 +122,7 @@
           <img src="assets/images/cs1-problem.png" alt="Problem analysis" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>The challenge wasn't "design a notification panel." It was fitting very different types of content into one space.</p>
-          <p>Product announcements users need to know about. Subscription reminders that require action. Community updates that are nice-to-have. Promotions most people ignore. <strong>All competing for the same screen space, all arriving at different frequencies.</strong></p>
+          <p>The hard part wasn't building a notification panel. It was fitting very different types of content into one space — announcements, subscription reminders, community updates, and promotions. Each has a different urgency and frequency.</p>
           <p>Show too much, users ignore everything. Show too little, they miss what matters.</p>
         </div>
       </section>
@@ -132,14 +130,8 @@
       <!-- Early Exploration -->
       <section class="cs-section">
         <h2 class="cs-section-title">Early Exploration</h2>
-        <!-- ASSET NEEDED: Photos of paper sketches or whiteboard explorations showing initial layout ideas -->
-        <div class="cs-asset-needed">
-          <span class="cs-asset-needed__icon">&#9998;</span>
-          <span class="cs-asset-needed__label">Asset Needed</span>
-          <span class="cs-asset-needed__desc">Paper sketches or whiteboard photos showing initial layout explorations before jumping into Figma</span>
-        </div>
         <div class="cs-body">
-          <p>Before opening Figma, I mapped out content types on paper — product announcements, subscription reminders, community updates, and promotions. Each had different urgency levels, frequencies, and actions. I needed to understand the information architecture before touching pixels.</p>
+          <p>Before jumping into Figma, I listed out the content types on paper to understand urgency, frequency, and what actions each type needed. Wanted to get the structure right before touching pixels.</p>
         </div>
       </section>
 
@@ -153,11 +145,10 @@
           <img src="assets/images/cs1-iterations-2.png" alt="Later iterations — simplified notification-style items" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>~10 iterations over two weeks. Here's how my thinking shifted:</p>
-          <p><strong>Early on</strong> — I designed structured cards with rich visual hierarchy. They looked polished, but they were overdesigned. Too heavy for something users would see multiple times a day.</p>
-          <p><strong>Where I pushed back</strong> — The initial requirement was to show all update types in a single undifferentiated list. I argued that subscription reminders (which need user action) should be visually separated from passive updates (product news). A user missing a renewal notice is a business problem, not just a UX problem. I made a case with mockups showing both approaches, and the PM agreed to differentiate them.</p>
-          <p><strong>Where I was wrong</strong> — I spent two iterations building a custom card system that looked great in isolation but broke Sprints' existing design language. My manager pulled me back, and he was right. The best version of this feature should feel like it had always been part of the product — not like a new app living inside the old one.</p>
-          <p><strong>What landed</strong> — Notification-style items with clear titles and context. Simple enough to scan, detailed enough to be useful. Action-driven updates with CTAs, passive ones without.</p>
+          <p><strong>Early versions</strong> — Structured cards with heavy visual hierarchy. Looked polished but too heavy for something users see multiple times a day.</p>
+          <p><strong>Where I pushed back</strong> — The brief said all updates go in one flat list. I argued that subscription reminders (which need action) should look different from passive updates. A user missing a renewal notice is a business problem. I showed both approaches in mockups, and the PM agreed.</p>
+          <p><strong>Where I was wrong</strong> — I spent two iterations on a custom card system that broke Sprints' design language. My manager pulled me back, and he was right. It should feel like it always existed in the product.</p>
+          <p><strong>What landed</strong> — Notification-style items. Simple to scan, action-driven updates get CTAs, passive ones don't.</p>
         </div>
       </section>
 
@@ -168,12 +159,7 @@
           <img src="assets/images/cs1-final.png" alt="Final design — unified update feed" loading="lazy" onerror="this.style.display='none'">
         </div>
 
-        <!-- ASSET NEEDED: Annotated screenshot of the final design with callouts pointing to specific design decisions -->
-        <div class="cs-asset-needed">
-          <span class="cs-asset-needed__icon">&#128269;</span>
-          <span class="cs-asset-needed__label">Asset Needed</span>
-          <span class="cs-asset-needed__desc">Annotated close-up of the final UI — callouts for: content type indicators, action buttons on subscription reminders, time grouping, expand/collapse behavior</span>
-        </div>
+
 
         <div class="cs-body">
           <p>A single update feed inside the product. One place for everything.</p>
@@ -185,58 +171,29 @@
           </ul>
         </div>
 
-        <!-- ASSET NEEDED: Side-by-side showing empty state and populated state -->
-        <div class="cs-asset-needed">
-          <span class="cs-asset-needed__icon">&#128247;</span>
-          <span class="cs-asset-needed__label">Asset Needed</span>
-          <span class="cs-asset-needed__desc">Side-by-side: empty state (no updates yet) vs. populated feed with mixed content types</span>
-        </div>
       </section>
 
       <!-- After Shipping -->
       <section class="cs-section">
         <h2 class="cs-section-title">After Shipping</h2>
 
-        <!-- ASSET NEEDED: Before/after or screenshot of the live feature in production -->
-        <div class="cs-compare">
-          <div class="cs-compare__side">
-            <span class="cs-compare__label cs-compare__label--before">Before &mdash; No channel</span>
-            <div class="cs-compare__img">
-              <!-- ASSET NEEDED: Screenshot of Sprints without the updates feature — showing there was no in-app communication -->
-              <div class="cs-asset-needed" style="margin:0;min-height:120px;border:none;">
-                <span class="cs-asset-needed__label">Asset Needed</span>
-                <span class="cs-asset-needed__desc">Sprints UI before the feature — no updates panel</span>
-              </div>
-            </div>
-          </div>
-          <div class="cs-compare__side">
-            <span class="cs-compare__label cs-compare__label--after">After &mdash; Unified feed</span>
-            <div class="cs-compare__img">
-              <img src="assets/images/cs1-impact.png" alt="Live UI with Recent Updates feature" loading="lazy" onerror="this.style.display='none'">
-            </div>
-          </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs1-impact.png" alt="Live UI with Recent Updates feature" loading="lazy" onerror="this.style.display='none'">
         </div>
 
         <div class="cs-body">
-          <p>The core design shipped intact. The only change during development was redrawing the icons to better match Sprints' existing icon style — flagged during the engineering review, which I participated in.</p>
-          <p>Before this feature, there was zero in-product communication. Product updates went out via email — most users never saw them. Now there's a persistent, scannable feed that the marketing and product teams actively use to reach users.</p>
+          <p>Design shipped intact. Only change was redrawing icons to match Sprints' existing style — caught during eng review. The marketing and product teams now actively use the feed to reach users.</p>
         </div>
 
-        <!-- ASSET NEEDED: Screenshot of the feature live in production, with real data -->
-        <div class="cs-asset-needed">
-          <span class="cs-asset-needed__icon">&#128248;</span>
-          <span class="cs-asset-needed__label">Asset Needed</span>
-          <span class="cs-asset-needed__desc">Live production screenshot of the Recent Updates panel with real content (product announcement + subscription reminder visible)</span>
-        </div>
       </section>
 
       <!-- What I Took Away -->
       <section class="cs-section">
         <h2 class="cs-section-title">What I Took Away</h2>
         <div class="cs-body">
-          <p><strong>Fight for the right distinctions.</strong> Pushing for visual separation between action-required and passive updates wasn't just a design choice — it was a product decision that protected the business. Not every design battle is worth fighting, but this one was.</p>
-          <p><strong>Know when to follow the system.</strong> My off-brand iterations taught me that consistency isn't a constraint — it's a feature. Users don't want novelty in a utility panel. They want familiarity.</p>
-          <p><strong>Speed kills preciousness.</strong> Ten iterations in two weeks. None of them were sacred. That's the only way to find the right answer — make a lot of wrong ones first.</p>
+          <p><strong>Pick the right battles.</strong> Separating action-required from passive updates was worth fighting for. Not every design disagreement is — but this one affected the business.</p>
+          <p><strong>Follow the system.</strong> My custom card designs looked good alone but felt foreign in the product. Consistency matters more than novelty in utility screens.</p>
+          <p><strong>Move fast, don't get attached.</strong> Several iterations, two weeks. Most of them were wrong. That's fine — that's how you find the right one.</p>
         </div>
       </section>
 

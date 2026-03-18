@@ -77,16 +77,16 @@
       <!-- Outcome Metrics -->
       <div class="cs-outcomes">
         <div class="cs-outcome">
-          <div class="cs-outcome__number">100%</div>
-          <div class="cs-outcome__label">Visual consistency with Sprints 2.0 design language</div>
-        </div>
-        <div class="cs-outcome">
           <div class="cs-outcome__number">5</div>
-          <div class="cs-outcome__label">Distinct sections created from flat layout</div>
+          <div class="cs-outcome__label">Sections grouped from a flat layout</div>
         </div>
         <div class="cs-outcome">
-          <div class="cs-outcome__number">0</div>
-          <div class="cs-outcome__label">Functionality changes — pure visual redesign</div>
+          <div class="cs-outcome__number">2 weeks</div>
+          <div class="cs-outcome__label">Design to handoff</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">Shipped</div>
+          <div class="cs-outcome__label">With the Sprints 2.0 launch</div>
         </div>
       </div>
 
@@ -109,8 +109,7 @@
       <section class="cs-section">
         <h2 class="cs-section-title">The Problem</h2>
         <div class="cs-body">
-          <p>Sprints 2.0 was getting a full visual overhaul, and most screens were being redesigned. The settings page was on the list — but it was treated as low priority since it "already worked."</p>
-          <p>I pushed for it to be included in the launch. Settings is one of the most frequently visited screens in the product, and <strong>the old version had zero visual hierarchy — every setting had the same weight, forcing users to read every label just to find what they needed.</strong></p>
+          <p>Sprints 2.0 was getting a full visual overhaul, but the settings page was marked low priority — "it works fine." I pushed for it to be included. It's one of the most visited screens, and every setting had the same visual weight. Users had to read every label to find anything.</p>
         </div>
       </section>
 
@@ -121,17 +120,11 @@
           <img src="assets/images/cs2-existing.png" alt="Old UI of Settings screen — flat layout with no visual hierarchy" loading="lazy" onerror="this.style.display='none'">
         </div>
 
-        <!-- ASSET NEEDED: Annotated screenshot of the OLD settings page with callouts marking the problems -->
-        <div class="cs-asset-needed">
-          <span class="cs-asset-needed__icon">&#128269;</span>
-          <span class="cs-asset-needed__label">Asset Needed</span>
-          <span class="cs-asset-needed__desc">Annotated version of the old settings UI with callouts: "No visual grouping", "Profile buried at same weight", "No section headers", "All toggle styles identical"</span>
-        </div>
+
 
         <div class="cs-body">
-          <p>The old settings page didn't look like a settings page. It was functional — everything worked — but the presentation didn't match the importance of what was there.</p>
-          <p>The profile section was one of the most-used parts, but it wasn't treated that way visually. There was no clear grouping, no real hierarchy. <strong>Everything sat at the same visual weight, so nothing stood out.</strong> You had to read every label to find what you needed.</p>
-          <p>I reviewed settings pages across Zoho's other products (Projects, CRM, Mail) to understand how they handled hierarchy — and noticed that the best ones all shared one pattern: <strong>the most-used section always had the most visual weight.</strong></p>
+          <p>Everything worked, but the layout was flat. Profile (the most-used section) looked the same as everything else. No grouping, no hierarchy — you had to read every label.</p>
+          <p>I looked at settings pages in Zoho's other products (Projects, CRM, Mail). The best ones gave the most-used section the most visual weight. Ours didn't.</p>
         </div>
       </section>
 
@@ -139,7 +132,7 @@
       <section class="cs-section">
         <h2 class="cs-section-title">Constraints</h2>
         <div class="cs-body">
-          <p>This was a visual redesign, not a re-architecture. All existing settings and behaviors stayed the same. The layout needed to align with the rest of the 2.0 update — so it had to feel like it belonged in the new version, not like a leftover from the old one.</p>
+          <p>Pure visual redesign — no settings moved, no behavior changed. Had to match the 2.0 design language and ship in 2 weeks.</p>
         </div>
         <div class="cs-insights">
           <div class="cs-insight">
@@ -167,10 +160,7 @@
           <img src="assets/images/cs2-iterations-2.png" alt="Later iterations" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>I worked through several iterations, refining with feedback from my manager along the way.</p>
-          <p><strong>The first thing I tackled</strong> was the profile section — giving it the visual weight it deserved. It was the most important area on the page but was being treated the same as everything else.</p>
-          <p><strong>From there</strong>, it was about grouping and hierarchy. Related settings needed to sit together. Sections needed clear separation. The page needed to be scannable — you should be able to find what you're looking for without reading everything.</p>
-          <p><strong>Consistency</strong> was the other thread throughout. The redesign had to match patterns used elsewhere in the 2.0 update. Anything that felt out of place got pulled back in line.</p>
+          <p>Started with the profile section — gave it proper visual weight since it's where users go most. Then grouped related settings under clear headers so the page is scannable. Kept everything consistent with the 2.0 patterns used elsewhere in the product.</p>
         </div>
       </section>
 
@@ -181,12 +171,7 @@
           <img src="assets/images/cs2-final.png" alt="Final redesigned settings screen" loading="lazy" onerror="this.style.display='none'">
         </div>
 
-        <!-- ASSET NEEDED: Annotated final design with design decisions called out -->
-        <div class="cs-asset-needed">
-          <span class="cs-asset-needed__icon">&#128269;</span>
-          <span class="cs-asset-needed__label">Asset Needed</span>
-          <span class="cs-asset-needed__desc">Annotated final design with callouts: "Profile card elevated", "Section headers with dividers", "Grouped related settings", "Consistent spacing system"</span>
-        </div>
+
 
         <div class="cs-body">
           <ul>
@@ -223,17 +208,11 @@
           <img src="assets/images/cs2-impact.png" alt="Settings screen live in production" loading="lazy" onerror="this.style.display='none'">
         </div>
 
-        <!-- ASSET NEEDED: Screenshot of the live settings page in production with real user data -->
-        <div class="cs-asset-needed">
-          <span class="cs-asset-needed__icon">&#128248;</span>
-          <span class="cs-asset-needed__label">Asset Needed</span>
-          <span class="cs-asset-needed__desc">Live production screenshot of the settings page in Zoho Sprints 2.0, showing real profile data and settings</span>
-        </div>
+
 
         <div class="cs-body">
-          <p>The redesigned settings screen shipped with the 2.0 launch. It brought a frequently-used screen up to the same standard as the rest of the product.</p>
-          <p>The engineering team implemented it in under a week — because the structure was clear and the specs aligned with existing components. No custom components needed, which was a deliberate choice.</p>
-          <p>Post-launch, the settings page became the template for settings screens in other Zoho Sprints modules — the pattern I established is now reused across the product.</p>
+          <p>Shipped with the 2.0 launch. Engineering implemented it in under a week because the specs used existing components — no custom work needed.</p>
+          <p>The layout later became the template for settings screens in other Sprints modules.</p>
         </div>
       </section>
 
@@ -241,9 +220,9 @@
       <section class="cs-section">
         <h2 class="cs-section-title">What I Took Away</h2>
         <div class="cs-body">
-          <p><strong>Advocate for the unglamorous work.</strong> Settings pages don't win design awards. But they're where users go when something matters — changing their profile, managing their team, updating permissions. I pushed for this screen to be included in the 2.0 launch rather than deferred. Boring screens deserve the same craft as flashy ones.</p>
-          <p><strong>Hierarchy is the whole game.</strong> The old page had the same content as the new one. The difference was just how it was organized and weighted. Same information, completely different experience. That's the power of visual design done right.</p>
-          <p><strong>Design for the team, not just the user.</strong> The structure I created wasn't just scannable for users — it was easy for engineers to implement and easy for future designers to extend. That's design thinking beyond the screen.</p>
+          <p><strong>Push for the boring screens.</strong> Settings doesn't get attention, but it's where users go when something matters. I advocated for including it in the launch instead of deferring it.</p>
+          <p><strong>Same content, different hierarchy.</strong> Nothing was added or removed. The redesign just organized what was already there. That made the entire difference.</p>
+          <p><strong>Think about who builds it next.</strong> Used existing components so engineers could ship fast, and future designers could extend the pattern without starting over.</p>
         </div>
       </section>
 

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Tour — Zoho Sprints | Vipin</title>
+  <meta name="description" content="Case study: Designing a guided product tour for Zoho Sprints to help users navigate a feature-dense interface. Shipped to 50K+ users.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/case-study.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Vipin</a>
+    <div class="nav-center">
+      <div class="nav-pill">
+        <a href="index.html#works" class="nav-link active">Works</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="index.html#contact" class="nav-link nav-cta-mobile" style="display:none;">Let's Talk</a>
+      </div>
+      <a href="index.html#contact" class="nav-cta">Let's Talk</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-overlay"></div>
+  </nav>
+
+  <main id="main" class="cs">
+
+    <div class="container">
+
+      <a href="index.html" class="cs-back">&larr; Back</a>
+
+      <header class="cs-header">
+        <h1 class="cs-title">Product Tour &mdash; Zoho Sprints</h1>
+        <p class="cs-subtitle">Designing a guided walkthrough to help users navigate a feature-dense project management tool</p>
+
+        <div class="cs-meta">
+          <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: Zoho Sprints</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Product Designer</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">: ~2 weeks</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
+        </div>
+      </header>
+
+      <!-- Team -->
+      <div class="cs-team">
+        <span class="cs-team-member">Vipin <span class="cs-team-member__role">&mdash; Product Designer</span></span>
+        <span class="cs-team-member">Manager <span class="cs-team-member__role">&mdash; Design Lead</span></span>
+        <span class="cs-team-member">2 Engineers <span class="cs-team-member__role">&mdash; Frontend</span></span>
+        <span class="cs-team-member">PM <span class="cs-team-member__role">&mdash; Product</span></span>
+      </div>
+
+      <!-- Impact Banner -->
+      <div class="cs-impact-banner">
+        <span class="cs-impact-label">Impact</span>
+        <div class="cs-impact-stats">
+          <span>50K+ users</span>
+          <span class="cs-impact-dot">&middot;</span>
+          <span>3 options explored</span>
+          <span class="cs-impact-dot">&middot;</span>
+          <span>5 iterations</span>
+          <span class="cs-impact-dot">&middot;</span>
+          <span>Shipped</span>
+        </div>
+      </div>
+
+      <!-- Outcome Metrics -->
+      <div class="cs-outcomes">
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">3</div>
+          <div class="cs-outcome__label">Design directions explored</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">5</div>
+          <div class="cs-outcome__label">Iterations on the chosen direction</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">4</div>
+          <div class="cs-outcome__label">Tour steps covering key actions</div>
+        </div>
+      </div>
+
+      <!-- Key Takeaways -->
+      <div class="cs-takeaways">
+        <h2 class="cs-takeaways-title">Key Takeaways</h2>
+        <ul class="cs-takeaways-list">
+          <li>Explored three fundamentally different approaches before landing on a split-panel card that balances context with non-intrusiveness</li>
+          <li>The winning design pairs explanatory text with a screenshot preview &mdash; giving users both the "what" and the "where"</li>
+          <li>Five iterations refined the navigation pattern from text buttons to icon-based arrows with dot pagination</li>
+        </ul>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="cs-image-block cs-image-block--mint">
+        <img src="assets/images/cs3-final.png" alt="Final product tour design — split panel with text and screenshot" loading="lazy" onerror="this.style.display='none'">
+      </div>
+
+      <!-- The Problem -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">The Problem</h2>
+        <div class="cs-body">
+          <p>Zoho Sprints is a feature-dense project management tool. New users land on the Backlog page and see work items, sprint panels, filters, creation buttons, and action menus &mdash; all at once. <strong>There was no guided way to learn what each section does.</strong></p>
+          <p>Support tickets and user feedback consistently pointed to navigation confusion. Users didn't know where to start, what the "Create" button did in context, or how to filter their view. The product needed a way to orient users without pulling them out of the interface.</p>
+        </div>
+      </section>
+
+      <!-- Option 1 -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Option 1 &mdash; Full-Screen Overlay</h2>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt1-1.png" alt="Option 1 — Step 1: Work Items with spotlight and large overlay text" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt1-2.png" alt="Option 1 — Step 2: Create button highlighted with overlay" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p>Large bold text overlaid directly on the interface with a circular spotlight highlighting the target element. Carousel navigation with dots, Skip, and Next/Prev buttons.</p>
+          <p><strong>Pros:</strong> High visual impact. Impossible to miss. Clear spotlight draws the eye exactly where it needs to go.</p>
+          <p><strong>Cons:</strong> Extremely intrusive &mdash; covers the entire page. Users can't interact with the product during the tour. The overlay text competes with the actual UI underneath, making it hard to connect the explanation to the element being explained.</p>
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt1-3.png" alt="Option 1 — Step 3: Filter highlighted" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt1-4.png" alt="Option 1 — Step 4: Other Actions highlighted" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </section>
+
+      <!-- Option 2 -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Option 2 &mdash; Tooltip Popover</h2>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt2-1.png" alt="Option 2 — Step 1: Tooltip card anchored near backlog with screenshot preview" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt2-2.png" alt="Option 2 — Step 2: Tooltip near Create button" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p>A smaller card anchored near the highlighted UI element. Each step shows a wireframe screenshot preview, title, description, and a step counter (e.g. "1 of 4"). Previous/Next navigation buttons.</p>
+          <p><strong>Pros:</strong> Less intrusive than the full overlay. Users can still see most of the interface. The screenshot preview gives context.</p>
+          <p><strong>Cons:</strong> The card floats without a strong visual connection to the element it's explaining. The wireframe preview is small and abstract. With 4 steps, the card needs to jump to different positions on screen &mdash; which can feel disorienting.</p>
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt2-3.png" alt="Option 2 — Step 3: Filter tooltip" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt2-4.png" alt="Option 2 — Step 4: Other Actions tooltip" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </section>
+
+      <!-- Option 3 -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Option 3 &mdash; Split-Panel Card (Chosen)</h2>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt3-1.png" alt="Option 3 — Split card with bullet points on left and screenshot on right" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt3-2.png" alt="Option 3 — Create step with split panel" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p>A two-column card: bullet-point explanation on the left, screenshot preview on the right. Anchored near the relevant UI element with a clear pointer. Includes a "Go to help" link for users who want to learn more, plus Skip Tour and navigation controls.</p>
+          <p><strong>Why this won:</strong></p>
+          <ul>
+            <li><strong>Best balance of context and space.</strong> The split layout gives room for both a text explanation and a visual reference without overwhelming the screen.</li>
+            <li><strong>Text + visual pairing.</strong> Users see what the feature does (bullet points) and where it lives (screenshot) simultaneously. No guessing.</li>
+            <li><strong>Non-intrusive but present.</strong> The card doesn't cover the whole page, but it's prominent enough that users won't accidentally dismiss it.</li>
+            <li><strong>"Go to help" escape hatch.</strong> Power users who want deeper documentation can jump straight to help docs without finishing the tour.</li>
+          </ul>
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt3-3.png" alt="Option 3 — Search/Filter step" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-opt3-4.png" alt="Option 3 — Other Actions step" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </section>
+
+      <!-- Iterations -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Refining Option 3 &mdash; 5 Iterations</h2>
+        <div class="cs-body">
+          <p>Once we committed to the split-panel direction, I iterated on layout, navigation, and typography to find the right balance.</p>
+        </div>
+
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-iter-1.png" alt="Iteration 1 — Base layout with Previous/Next text buttons and step counter" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p><strong>Iteration 1</strong> &mdash; Base split layout with Previous/Next text buttons and a step counter ("1 of 2"). Functional but the text buttons felt heavy, and the counter didn't scale well visually.</p>
+        </div>
+
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-iter-2.png" alt="Iteration 2 — Added Skip Tour and refined typography" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p><strong>Iteration 2</strong> &mdash; Added "Skip Tour" as a clear exit option. Refined typography and spacing within the card. The navigation still used text buttons, which felt cluttered alongside Skip.</p>
+        </div>
+
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-iter-3.png" alt="Iteration 3 — Replaced text buttons with arrow icons and added dot pagination" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p><strong>Iteration 3</strong> &mdash; Replaced text buttons with arrow icons. Added dot pagination to show progress. This reduced visual noise and made the navigation feel lighter.</p>
+        </div>
+
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-iter-4.png" alt="Iteration 4 — Minor spacing and type refinements" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p><strong>Iteration 4</strong> &mdash; Spacing and type refinements. Tightened the card padding, adjusted line heights, and balanced the two columns so text and screenshot feel equally weighted.</p>
+        </div>
+
+        <div class="cs-image-block cs-image-block--mint">
+          <img src="assets/images/cs3-final.png" alt="Iteration 5 (Selected) — Final polished version with clean layout, dot nav, arrows, and help link" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cs-body">
+          <p><strong>Iteration 5 (Selected)</strong> &mdash; Final polish. Clean card with bullet points, screenshot preview, "Go to help" link, dot pagination, and arrow navigation. This version shipped to production.</p>
+        </div>
+      </section>
+
+      <!-- The 4-Step Tour -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">The 4-Step Tour</h2>
+        <div class="cs-body">
+          <p>The tour covers the four most critical actions a new user needs to understand on the Backlog page:</p>
+          <ol>
+            <li><strong>Work Items</strong> &mdash; Every work item you create is stored in your backlog. Prioritize them and move them to your sprint.</li>
+            <li><strong>Create</strong> &mdash; Start creating your requirements into workable items. Create a sprint and start working on the items.</li>
+            <li><strong>Search &amp; Filter</strong> &mdash; Filter now and quickly narrow down your search results.</li>
+            <li><strong>Other Actions</strong> &mdash; Toggle to view the sprint or backlog or both.</li>
+          </ol>
+          <p>Each step highlights the relevant UI element, explains what it does, and shows a screenshot preview. Users can skip at any time or follow the "Go to help" link for deeper documentation.</p>
+        </div>
+      </section>
+
+      <!-- What I Took Away -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">What I Took Away</h2>
+        <div class="cs-body">
+          <p><strong>Explore wide, then go deep.</strong> Three options gave me and the team a real choice &mdash; not just "this or a slightly different this." Option 1 was too aggressive, Option 2 too detached, Option 3 hit the sweet spot. Without exploring the extremes, we wouldn't have had confidence in the middle ground.</p>
+          <p><strong>Navigation patterns matter more than you think.</strong> The biggest gains in the iteration phase came from rethinking the nav controls &mdash; swapping text buttons for icons, adding dot pagination, and introducing Skip Tour. Small changes, but they transformed how the tour felt to use.</p>
+          <p><strong>Show, don't just tell.</strong> The screenshot preview in the split panel was the key insight. Text-only explanations force users to mentally map words to UI. Pairing text with a visual reference eliminates that cognitive load entirely.</p>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 &mdash; Designed & built by Vipin.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

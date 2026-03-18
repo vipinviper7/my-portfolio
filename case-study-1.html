@@ -3,42 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recent Updates - Vipin</title>
+  <title>Recent Updates — Zoho Sprints | Vipin</title>
+  <meta name="description" content="Case study: Designing a centralized in-product updates system for Zoho Sprints. Shipped to 50K+ users.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/case-study.css">
-  <link rel="stylesheet" href="css/password-gate.css">
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Password Gate -->
-  <div class="pw-gate">
-    <div class="pw-box">
-      <svg class="pw-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-      </svg>
-      <h2 class="pw-title">Protected Case Study</h2>
-      <p class="pw-desc">This case study contains work from my workplace. Enter the password to view.</p>
-      <label class="pw-nda">
-        <input type="checkbox" class="pw-nda-check">
-        <span class="pw-nda-text">I acknowledge this work is shared under NDA. I will not copy, screenshot, distribute, or share any content from this case study.</span>
-      </label>
-      <form class="pw-form">
-        <div class="pw-input-wrap">
-          <input type="password" class="pw-input" placeholder="Enter password" autocomplete="current-password" autofocus>
-          <button type="submit" class="pw-submit">Unlock</button>
-        </div>
-        <p class="pw-error" aria-live="polite"></p>
-      </form>
-      <a href="index.html" class="pw-back">&larr; Back to portfolio</a>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Vipin</a>
+    <div class="nav-center">
+      <div class="nav-pill">
+        <a href="index.html#works" class="nav-link active">Works</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="index.html#contact" class="nav-link nav-cta-mobile" style="display:none;">Let's Talk</a>
+      </div>
+      <a href="index.html#contact" class="nav-cta">Let's Talk</a>
     </div>
-  </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-overlay"></div>
+  </nav>
 
   <main id="main" class="cs">
 
@@ -52,23 +49,70 @@
 
         <div class="cs-meta">
           <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: Zoho Sprints</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Visual Designer</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Product Designer</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">: ~2 weeks</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
         </div>
       </header>
 
-      <!-- Hero Image -->
-      <div class="cs-image-block cs-image-block--mint">
-        <img src="assets/images/cs1-hero.png" alt="Recent Updates feature overview" onerror="this.style.display='none'">
+      <!-- Team -->
+      <div class="cs-team">
+        <span class="cs-team-member">Vipin <span class="cs-team-member__role">&mdash; Product Designer</span></span>
+        <span class="cs-team-member">Manager <span class="cs-team-member__role">&mdash; Design Lead</span></span>
+        <span class="cs-team-member">2 Engineers <span class="cs-team-member__role">&mdash; Frontend</span></span>
+        <span class="cs-team-member">PM <span class="cs-team-member__role">&mdash; Product</span></span>
       </div>
 
-      <!-- The Brief -->
+      <!-- Impact Banner -->
+      <div class="cs-impact-banner">
+        <span class="cs-impact-label">Impact</span>
+        <div class="cs-impact-stats">
+          <span>50K+ users</span>
+          <span class="cs-impact-dot">&middot;</span>
+          <span>2 sprints</span>
+          <span class="cs-impact-dot">&middot;</span>
+          <span>Shipped</span>
+        </div>
+      </div>
+
+      <!-- Outcome Metrics -->
+      <div class="cs-outcomes">
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">0 &rarr; 1</div>
+          <div class="cs-outcome__label">In-product communication channel created</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">~10</div>
+          <div class="cs-outcome__label">Design iterations in 2 weeks</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">4</div>
+          <div class="cs-outcome__label">Content types unified into one feed</div>
+        </div>
+      </div>
+
+      <!-- Key Takeaways -->
+      <div class="cs-takeaways">
+        <h2 class="cs-takeaways-title">Key Takeaways</h2>
+        <ul class="cs-takeaways-list">
+          <li>Designed a single update feed that handles product announcements, subscription reminders, community updates, and promotions</li>
+          <li>Iterated through ~10 versions in two weeks — simplicity won over richness</li>
+          <li>Shipped intact to production with minor icon adjustments during development</li>
+        </ul>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="cs-image-block cs-image-block--mint">
+        <img src="assets/images/cs1-hero.png" alt="Recent Updates feature overview" loading="lazy" onerror="this.style.display='none'">
+      </div>
+
+      <!-- The Problem -->
       <section class="cs-section">
-        <h2 class="cs-section-title">The Brief</h2>
+        <h2 class="cs-section-title">The Problem</h2>
         <div class="cs-body">
-          <p>Zoho Sprints had no way to talk to its users from inside the product. Product updates, subscription reminders, community posts, promotions — none of it reached users in-app.</p>
-          <p>My manager handed me a requirements doc and a clear ask: <strong>design an updates system that handles all of this without overwhelming people.</strong></p>
+          <p>Zoho Sprints had no way to talk to its users from inside the product. Product updates went out via email — most users never saw them. Subscription reminders, community posts, promotions — none of it reached users in-app.</p>
+          <p><strong>50K users were missing updates that mattered, and we had no channel to reach them.</strong></p>
+          <p>I took on the challenge of designing a unified in-product updates system. I started by working with the PM to map out every content type, its urgency, and its frequency. The engineering team flagged what was feasible within Sprints' existing notification infrastructure — which shaped how I structured the feed from day one.</p>
         </div>
       </section>
 
@@ -76,7 +120,7 @@
       <section class="cs-section">
         <h2 class="cs-section-title">What Made It Tricky</h2>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-problem.png" alt="Problem analysis" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-problem.png" alt="Problem analysis" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
           <p>The challenge wasn't "design a notification panel." It was fitting very different types of content into one space.</p>
@@ -85,21 +129,35 @@
         </div>
       </section>
 
+      <!-- Early Exploration -->
+      <section class="cs-section">
+        <h2 class="cs-section-title">Early Exploration</h2>
+        <!-- ASSET NEEDED: Photos of paper sketches or whiteboard explorations showing initial layout ideas -->
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#9998;</span>
+          <span class="cs-asset-needed__label">Asset Needed</span>
+          <span class="cs-asset-needed__desc">Paper sketches or whiteboard photos showing initial layout explorations before jumping into Figma</span>
+        </div>
+        <div class="cs-body">
+          <p>Before opening Figma, I mapped out content types on paper — product announcements, subscription reminders, community updates, and promotions. Each had different urgency levels, frequencies, and actions. I needed to understand the information architecture before touching pixels.</p>
+        </div>
+      </section>
+
       <!-- How the Design Evolved -->
       <section class="cs-section">
         <h2 class="cs-section-title">How the Design Evolved</h2>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-iterations-1.png" alt="Early iterations" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-iterations-1.png" alt="Early iterations — structured cards with heavy visual hierarchy" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-iterations-2.png" alt="Later iterations" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-iterations-2.png" alt="Later iterations — simplified notification-style items" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
           <p>~10 iterations over two weeks. Here's how my thinking shifted:</p>
-          <p><strong>Early on</strong> — I jumped into designing structured cards with clear hierarchy. Looked polished, but feedback was it's overdesigned. Too heavy for what this needed to be.</p>
-          <p><strong>The key shift</strong> — My manager pushed toward simplicity, and it was the right call. These needed to behave like notifications — scannable, lightweight — but carry more information than a typical notification. That tension drove the rest of the process.</p>
-          <p><strong>Where I drifted</strong> — A few iterations went off-script from Sprints' existing design language. Looked good in isolation, felt wrong in the product. Pulling back to align with what existed actually made decisions easier.</p>
-          <p><strong>What landed</strong> — Notification-style items with clear titles and enough room for context underneath. Simple enough to scan, detailed enough to be useful.</p>
+          <p><strong>Early on</strong> — I designed structured cards with rich visual hierarchy. They looked polished, but they were overdesigned. Too heavy for something users would see multiple times a day.</p>
+          <p><strong>Where I pushed back</strong> — The initial requirement was to show all update types in a single undifferentiated list. I argued that subscription reminders (which need user action) should be visually separated from passive updates (product news). A user missing a renewal notice is a business problem, not just a UX problem. I made a case with mockups showing both approaches, and the PM agreed to differentiate them.</p>
+          <p><strong>Where I was wrong</strong> — I spent two iterations building a custom card system that looked great in isolation but broke Sprints' existing design language. My manager pulled me back, and he was right. The best version of this feature should feel like it had always been part of the product — not like a new app living inside the old one.</p>
+          <p><strong>What landed</strong> — Notification-style items with clear titles and context. Simple enough to scan, detailed enough to be useful. Action-driven updates with CTAs, passive ones without.</p>
         </div>
       </section>
 
@@ -107,28 +165,68 @@
       <section class="cs-section">
         <h2 class="cs-section-title">Final Design</h2>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-final.png" alt="Final design" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-final.png" alt="Final design — unified update feed" loading="lazy" onerror="this.style.display='none'">
         </div>
+
+        <!-- ASSET NEEDED: Annotated screenshot of the final design with callouts pointing to specific design decisions -->
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#128269;</span>
+          <span class="cs-asset-needed__label">Asset Needed</span>
+          <span class="cs-asset-needed__desc">Annotated close-up of the final UI — callouts for: content type indicators, action buttons on subscription reminders, time grouping, expand/collapse behavior</span>
+        </div>
+
         <div class="cs-body">
           <p>A single update feed inside the product. One place for everything.</p>
           <ul>
-            <li>One stream, no tabs. Everything sorted by time.</li>
-            <li>Visual distinction by update type — users can tell at a glance what needs attention.</li>
-            <li>Scannable by default, expandable for detail.</li>
-            <li>Action-driven updates (like subscription reminders) visually separated from passive ones.</li>
+            <li><strong>One stream, no tabs.</strong> Everything sorted by time. We debated tabs-by-type early on, but the PM and I agreed it would fragment attention — users should see everything in one scan.</li>
+            <li><strong>Visual distinction by update type</strong> — colour-coded indicators let users tell at a glance what needs attention vs. what's informational.</li>
+            <li><strong>Scannable by default, expandable for detail.</strong> Most updates show title + one-liner. Tap to expand for full context.</li>
+            <li><strong>Action-driven updates</strong> (subscription reminders) visually separated from passive ones — because the engineering team needed a clear hook for CTA buttons.</li>
           </ul>
+        </div>
+
+        <!-- ASSET NEEDED: Side-by-side showing empty state and populated state -->
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#128247;</span>
+          <span class="cs-asset-needed__label">Asset Needed</span>
+          <span class="cs-asset-needed__desc">Side-by-side: empty state (no updates yet) vs. populated feed with mixed content types</span>
         </div>
       </section>
 
       <!-- After Shipping -->
       <section class="cs-section">
         <h2 class="cs-section-title">After Shipping</h2>
-        <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-impact.png" alt="Live UI" onerror="this.style.display='none'">
+
+        <!-- ASSET NEEDED: Before/after or screenshot of the live feature in production -->
+        <div class="cs-compare">
+          <div class="cs-compare__side">
+            <span class="cs-compare__label cs-compare__label--before">Before &mdash; No channel</span>
+            <div class="cs-compare__img">
+              <!-- ASSET NEEDED: Screenshot of Sprints without the updates feature — showing there was no in-app communication -->
+              <div class="cs-asset-needed" style="margin:0;min-height:120px;border:none;">
+                <span class="cs-asset-needed__label">Asset Needed</span>
+                <span class="cs-asset-needed__desc">Sprints UI before the feature — no updates panel</span>
+              </div>
+            </div>
+          </div>
+          <div class="cs-compare__side">
+            <span class="cs-compare__label cs-compare__label--after">After &mdash; Unified feed</span>
+            <div class="cs-compare__img">
+              <img src="assets/images/cs1-impact.png" alt="Live UI with Recent Updates feature" loading="lazy" onerror="this.style.display='none'">
+            </div>
+          </div>
         </div>
+
         <div class="cs-body">
-          <p>The core design shipped intact. The icons were redrawn during development to better match Sprints' existing icon style — flagged during review.</p>
-          <p>Before this feature, there was no in-product communication channel. Now there is.</p>
+          <p>The core design shipped intact. The only change during development was redrawing the icons to better match Sprints' existing icon style — flagged during the engineering review, which I participated in.</p>
+          <p>Before this feature, there was zero in-product communication. Product updates went out via email — most users never saw them. Now there's a persistent, scannable feed that the marketing and product teams actively use to reach users.</p>
+        </div>
+
+        <!-- ASSET NEEDED: Screenshot of the feature live in production, with real data -->
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#128248;</span>
+          <span class="cs-asset-needed__label">Asset Needed</span>
+          <span class="cs-asset-needed__desc">Live production screenshot of the Recent Updates panel with real content (product announcement + subscription reminder visible)</span>
         </div>
       </section>
 
@@ -136,9 +234,9 @@
       <section class="cs-section">
         <h2 class="cs-section-title">What I Took Away</h2>
         <div class="cs-body">
-          <p><strong>Simpler was harder.</strong> My instinct was to design something rich. Simplifying felt like a step backward — but it made the design better.</p>
-          <p><strong>Stay inside the design language.</strong> The iterations where I went off-script looked interesting but felt disconnected. The best version felt like it had always been there.</p>
-          <p><strong>Fast iteration beats perfect first drafts.</strong> Ten iterations in two weeks. None of them were precious. That helped.</p>
+          <p><strong>Fight for the right distinctions.</strong> Pushing for visual separation between action-required and passive updates wasn't just a design choice — it was a product decision that protected the business. Not every design battle is worth fighting, but this one was.</p>
+          <p><strong>Know when to follow the system.</strong> My off-brand iterations taught me that consistency isn't a constraint — it's a feature. Users don't want novelty in a utility panel. They want familiarity.</p>
+          <p><strong>Speed kills preciousness.</strong> Ten iterations in two weeks. None of them were sacred. That's the only way to find the right answer — make a lot of wrong ones first.</p>
         </div>
       </section>
 
@@ -149,10 +247,10 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 &mdash; Built by Vipin, caffeine, and poor color choices.</p>
+      <p>&copy; 2026 &mdash; Designed & built by Vipin.</p>
     </div>
   </footer>
 
-  <script src="js/password-gate.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

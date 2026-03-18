@@ -95,3 +95,15 @@ if (navToggle && navPill) {
     navOverlay.addEventListener('click', closeNav);
   }
 }
+
+// Nav scroll border effect
+const nav = document.querySelector('.nav');
+if (nav) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, { passive: true });
+}

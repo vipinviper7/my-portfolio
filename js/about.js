@@ -70,3 +70,15 @@ document.addEventListener('click', (e) => {
     hobbyCards.forEach(card => card.classList.remove('tooltip-visible'));
   }
 });
+
+// Nav scroll border effect
+const nav = document.querySelector('.nav');
+if (nav) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, { passive: true });
+}

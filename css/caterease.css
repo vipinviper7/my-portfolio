@@ -105,7 +105,7 @@
 }
 
 .cs-table tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: var(--color-accordion-hover);
 }
 
 /* ===========================

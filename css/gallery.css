@@ -7,10 +7,12 @@
 }
 
 .gal-hero-title {
+  font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 3.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-white);
   margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
 }
 
 .gal-hero-sub {
@@ -28,7 +30,7 @@
   position: sticky;
   top: 80px;
   z-index: 50;
-  background-color: rgba(11, 17, 33, 0.95);
+  background-color: var(--color-nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   margin-bottom: 1rem;
@@ -62,7 +64,7 @@
 }
 
 .gal-nav-link.active {
-  background-color: var(--color-bg-elevated);
+  background-color: var(--color-nav-link-active);
   color: var(--color-white);
 }
 
@@ -95,10 +97,12 @@
 }
 
 .gal-section-title {
+  font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-white);
   margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 .gal-section-desc {
@@ -186,7 +190,7 @@
 
 /* Illustration items — light card background */
 .gal-item--illus {
-  background-color: #f5f5f7;
+  background-color: #f5f0e8;
   padding: 1.5rem;
 }
 
@@ -207,7 +211,7 @@
 
 .gal-item:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 16px 48px var(--color-card-shadow);
   z-index: 2;
 }
 
@@ -270,7 +274,7 @@
 
 .icon-wall-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 32px var(--color-card-shadow);
   border-color: var(--color-border);
 }
 

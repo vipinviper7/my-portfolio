@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiet Verse - Vipin</title>
+  <title>Quiet Verse — Vipin</title>
+  <meta name="description" content="Quiet Verse — a distraction-free, offline-first Bible companion. Designed and built in ~3 hours with Claude Code.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/case-study.css">
   <link rel="stylesheet" href="css/quiet-verse.css">
@@ -15,6 +16,27 @@
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Vipin</a>
+    <div class="nav-center">
+      <div class="nav-pill">
+        <a href="index.html#works" class="nav-link active">Works</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="index.html#contact" class="nav-link nav-cta-mobile" style="display:none;">Let's Talk</a>
+      </div>
+      <a href="index.html#contact" class="nav-cta">Let's Talk</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-overlay"></div>
+  </nav>
 
   <main id="main" class="cs">
 
@@ -27,7 +49,7 @@
         <p class="cs-subtitle">I wanted a Bible app that felt like opening a book, not opening an app store. So I built one.</p>
 
         <div class="cs-meta">
-          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Designer & Vibecoder</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Designer &amp; Developer</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Built with</span><span class="cs-meta-value">: Claude Code, React, Tailwind CSS, Capacitor</span></div>
         </div>
@@ -35,6 +57,32 @@
 
       <div class="cs-cta-row">
         <a href="https://vipinviper7.github.io/10k-project" target="_blank" rel="noopener noreferrer" class="cs-cta cs-cta--cream">Open Quiet Verse &rarr;</a>
+      </div>
+
+      <!-- Hero Screenshots -->
+      <!-- ASSET NEEDED: 3 key screens showing light mode, dark mode, and reading view -->
+      <div class="cs-screens">
+        <div class="cs-screen-card">
+          <div class="cs-asset-needed" style="margin:0;min-height:320px;border:none;border-radius:0;">
+            <span class="cs-asset-needed__label">Screenshot</span>
+            <span class="cs-asset-needed__desc">Home screen (light mode) with daily verse, cream &amp; gold palette</span>
+          </div>
+          <div class="cs-screen-card__caption">Home &mdash; Daily Verse</div>
+        </div>
+        <div class="cs-screen-card">
+          <div class="cs-asset-needed" style="margin:0;min-height:320px;border:none;border-radius:0;">
+            <span class="cs-asset-needed__label">Screenshot</span>
+            <span class="cs-asset-needed__desc">Chapter reading view with Cormorant Garamond typography, minimal chrome</span>
+          </div>
+          <div class="cs-screen-card__caption">Reading View</div>
+        </div>
+        <div class="cs-screen-card">
+          <div class="cs-asset-needed" style="margin:0;min-height:320px;border:none;border-radius:0;">
+            <span class="cs-asset-needed__label">Screenshot</span>
+            <span class="cs-asset-needed__desc">Dark mode — deep navy with warm gold accents</span>
+          </div>
+          <div class="cs-screen-card__caption">Dark Mode</div>
+        </div>
       </div>
 
       <!-- Why This Exists -->
@@ -99,6 +147,46 @@
             <li>Smooth light/dark mode toggle</li>
           </ul>
         </div>
+
+        <!-- Feature Screenshots -->
+        <div class="cs-screens cs-screens--four-col">
+          <div class="cs-screen-card">
+            <div class="cs-asset-needed" style="margin:0;min-height:240px;border:none;border-radius:0;">
+              <span class="cs-asset-needed__label">Screenshot</span>
+              <span class="cs-asset-needed__desc">Book selection grid — 66 books</span>
+            </div>
+            <div class="cs-screen-card__caption">Book Selection</div>
+          </div>
+          <div class="cs-screen-card">
+            <div class="cs-asset-needed" style="margin:0;min-height:240px;border:none;border-radius:0;">
+              <span class="cs-asset-needed__label">Screenshot</span>
+              <span class="cs-asset-needed__desc">Bookmarked verses list</span>
+            </div>
+            <div class="cs-screen-card__caption">Bookmarks</div>
+          </div>
+          <div class="cs-screen-card">
+            <div class="cs-asset-needed" style="margin:0;min-height:240px;border:none;border-radius:0;">
+              <span class="cs-asset-needed__label">Screenshot</span>
+              <span class="cs-asset-needed__desc">Reflection timer with breathing animation</span>
+            </div>
+            <div class="cs-screen-card__caption">Reflection Timer</div>
+          </div>
+          <div class="cs-screen-card">
+            <div class="cs-asset-needed" style="margin:0;min-height:240px;border:none;border-radius:0;">
+              <span class="cs-asset-needed__label">Screenshot</span>
+              <span class="cs-asset-needed__desc">Font size adjustment in reading view</span>
+            </div>
+            <div class="cs-screen-card__caption">Font Settings</div>
+          </div>
+        </div>
+
+        <!-- ASSET NEEDED: Competitor comparison -->
+        <h3 class="cs-screen-title">Why Not Existing Apps?</h3>
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#9878;</span>
+          <span class="cs-asset-needed__label">Asset Needed &mdash; Comparison</span>
+          <span class="cs-asset-needed__desc">Side-by-side screenshots: YouVersion / Bible Gateway (cluttered, social features, ads) vs. Quiet Verse (clean, distraction-free). Show the contrast visually.</span>
+        </div>
       </section>
 
       <!-- Built in 3 Hours -->
@@ -129,8 +217,19 @@
         <h2 class="cs-section-title cs-section-title--cream">What I Learned</h2>
         <div class="cs-body">
           <p><strong>Constraints make better products.</strong> By deciding early that this app would have no social features, no accounts, and no internet requirement, every design decision became simpler. The constraint wasn't limiting &mdash; it was freeing.</p>
-          <p><strong>Vibecoding is a real design tool.</strong> Describing what I wanted in natural language and iterating through conversation gave me a working product in hours, not weeks. It changed how I think about prototyping.</p>
+          <p><strong>AI-assisted building is a real design tool.</strong> Describing what I wanted in natural language and iterating through conversation gave me a working product in hours, not weeks. It changed how I think about prototyping.</p>
           <p><strong>Less worked.</strong> Every Bible app I tried had more features than Quiet Verse. None of them were better for actually reading.</p>
+        </div>
+      </section>
+
+      <!-- Demo Video -->
+      <section class="cs-section">
+        <h2 class="cs-section-title cs-section-title--cream">See It In Action</h2>
+        <!-- ASSET NEEDED: Short demo video -->
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#127909;</span>
+          <span class="cs-asset-needed__label">Asset Needed &mdash; Demo Video</span>
+          <span class="cs-asset-needed__desc">20-30 second screen recording: daily verse &rarr; browse books &rarr; read a chapter &rarr; bookmark a verse &rarr; toggle dark mode &rarr; reflection timer. Show the calm, distraction-free experience.</span>
         </div>
       </section>
 
@@ -152,9 +251,10 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 &mdash; Built by Vipin, caffeine, and poor color choices.</p>
+      <p>&copy; 2026 &mdash; Designed & built by Vipin.</p>
     </div>
   </footer>
 
+  <script src="js/main.js"></script>
 </body>
 </html>

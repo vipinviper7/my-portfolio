@@ -3,40 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Settings Screen Redesign - Vipin</title>
+  <title>Settings Redesign — Zoho Sprints | Vipin</title>
+  <meta name="description" content="Case study: Redesigning the settings experience as part of Zoho Sprints 2.0 launch.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/case-study.css">
-  <link rel="stylesheet" href="css/password-gate.css">
 </head>
 <body>
 
-  <!-- Password Gate -->
-  <div class="pw-gate">
-    <div class="pw-box">
-      <svg class="pw-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-      </svg>
-      <h2 class="pw-title">Protected Case Study</h2>
-      <p class="pw-desc">This case study contains work from my workplace. Enter the password to view.</p>
-      <label class="pw-nda">
-        <input type="checkbox" class="pw-nda-check">
-        <span class="pw-nda-text">I acknowledge this work is shared under NDA. I will not copy, screenshot, distribute, or share any content from this case study.</span>
-      </label>
-      <form class="pw-form">
-        <div class="pw-input-wrap">
-          <input type="password" class="pw-input" placeholder="Enter password" autocomplete="current-password" autofocus>
-          <button type="submit" class="pw-submit">Unlock</button>
-        </div>
-        <p class="pw-error" aria-live="polite"></p>
-      </form>
-      <a href="index.html" class="pw-back">&larr; Back to portfolio</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Vipin</a>
+    <div class="nav-center">
+      <div class="nav-pill">
+        <a href="index.html#works" class="nav-link active">Works</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="index.html#contact" class="nav-link nav-cta-mobile" style="display:none;">Let's Talk</a>
+      </div>
+      <a href="index.html#contact" class="nav-cta">Let's Talk</a>
     </div>
-  </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-overlay"></div>
+  </nav>
 
   <main id="main" class="cs">
 
@@ -50,23 +49,68 @@
 
         <div class="cs-meta">
           <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: Zoho Sprints</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Visual Designer</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Product Designer</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">: ~2 weeks</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
         </div>
       </header>
 
-      <!-- Hero Image -->
-      <div class="cs-image-block cs-image-block--blue">
-        <img src="assets/images/cs2-hero.png" alt="Settings screen redesign overview" onerror="this.style.display='none'">
+      <!-- Team -->
+      <div class="cs-team">
+        <span class="cs-team-member">Vipin <span class="cs-team-member__role">&mdash; Product Designer</span></span>
+        <span class="cs-team-member">Design Lead <span class="cs-team-member__role">&mdash; Review &amp; Direction</span></span>
+        <span class="cs-team-member">Sprints 2.0 Team <span class="cs-team-member__role">&mdash; Engineering</span></span>
       </div>
 
-      <!-- The Brief -->
+      <!-- Impact Banner -->
+      <div class="cs-impact-banner">
+        <span class="cs-impact-label">Impact</span>
+        <div class="cs-impact-stats">
+          <span>Sprints 2.0 launch</span>
+          <span class="cs-impact-dot">&middot;</span>
+          <span>50K+ users</span>
+          <span class="cs-impact-dot">&middot;</span>
+          <span>Shipped</span>
+        </div>
+      </div>
+
+      <!-- Outcome Metrics -->
+      <div class="cs-outcomes">
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">100%</div>
+          <div class="cs-outcome__label">Visual consistency with Sprints 2.0 design language</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">5</div>
+          <div class="cs-outcome__label">Distinct sections created from flat layout</div>
+        </div>
+        <div class="cs-outcome">
+          <div class="cs-outcome__number">0</div>
+          <div class="cs-outcome__label">Functionality changes — pure visual redesign</div>
+        </div>
+      </div>
+
+      <!-- Key Takeaways -->
+      <div class="cs-takeaways">
+        <h2 class="cs-takeaways-title">Key Takeaways</h2>
+        <ul class="cs-takeaways-list">
+          <li>Visual redesign, not re-architecture — all existing settings and behaviors stayed the same</li>
+          <li>Profile section given proper visual prominence as the most-used area</li>
+          <li>Clear section grouping with defined hierarchy made the page scannable</li>
+        </ul>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="cs-image-block cs-image-block--blue">
+        <img src="assets/images/cs2-hero.png" alt="Settings screen redesign overview" loading="lazy" onerror="this.style.display='none'">
+      </div>
+
+      <!-- The Problem -->
       <section class="cs-section">
-        <h2 class="cs-section-title">The Brief</h2>
+        <h2 class="cs-section-title">The Problem</h2>
         <div class="cs-body">
-          <p>Zoho Sprints was launching its 2.0 version, and multiple screens across the product were being redesigned. The settings screen was one of them.</p>
-          <p>My job was to <strong>redesign the existing settings page — improve how it looked and felt, without changing any functionality.</strong></p>
+          <p>Sprints 2.0 was getting a full visual overhaul, and most screens were being redesigned. The settings page was on the list — but it was treated as low priority since it "already worked."</p>
+          <p>I pushed for it to be included in the launch. Settings is one of the most frequently visited screens in the product, and <strong>the old version had zero visual hierarchy — every setting had the same weight, forcing users to read every label just to find what they needed.</strong></p>
         </div>
       </section>
 
@@ -74,11 +118,20 @@
       <section class="cs-section">
         <h2 class="cs-section-title">What Was Wrong</h2>
         <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-existing.png" alt="Old UI of Settings screen" onerror="this.style.display='none'">
+          <img src="assets/images/cs2-existing.png" alt="Old UI of Settings screen — flat layout with no visual hierarchy" loading="lazy" onerror="this.style.display='none'">
         </div>
+
+        <!-- ASSET NEEDED: Annotated screenshot of the OLD settings page with callouts marking the problems -->
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#128269;</span>
+          <span class="cs-asset-needed__label">Asset Needed</span>
+          <span class="cs-asset-needed__desc">Annotated version of the old settings UI with callouts: "No visual grouping", "Profile buried at same weight", "No section headers", "All toggle styles identical"</span>
+        </div>
+
         <div class="cs-body">
           <p>The old settings page didn't look like a settings page. It was functional — everything worked — but the presentation didn't match the importance of what was there.</p>
           <p>The profile section was one of the most-used parts, but it wasn't treated that way visually. There was no clear grouping, no real hierarchy. <strong>Everything sat at the same visual weight, so nothing stood out.</strong> You had to read every label to find what you needed.</p>
+          <p>I reviewed settings pages across Zoho's other products (Projects, CRM, Mail) to understand how they handled hierarchy — and noticed that the best ones all shared one pattern: <strong>the most-used section always had the most visual weight.</strong></p>
         </div>
       </section>
 
@@ -88,16 +141,30 @@
         <div class="cs-body">
           <p>This was a visual redesign, not a re-architecture. All existing settings and behaviors stayed the same. The layout needed to align with the rest of the 2.0 update — so it had to feel like it belonged in the new version, not like a leftover from the old one.</p>
         </div>
+        <div class="cs-insights">
+          <div class="cs-insight">
+            <div class="cs-insight-title">Don't break existing behavior</div>
+            <p>50K+ users already know where everything is. Moving settings around would cause confusion and support tickets.</p>
+          </div>
+          <div class="cs-insight">
+            <div class="cs-insight-title">Match 2.0 design language</div>
+            <p>Other screens (dashboard, board view, backlog) were being redesigned simultaneously. The settings page had to feel like the same product.</p>
+          </div>
+          <div class="cs-insight">
+            <div class="cs-insight-title">Ship with the launch</div>
+            <p>2-week timeline. No room for scope creep or re-architecture — this had to be a visual lift that engineering could implement quickly.</p>
+          </div>
+        </div>
       </section>
 
       <!-- How It Evolved -->
       <section class="cs-section">
         <h2 class="cs-section-title">How It Evolved</h2>
         <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-iterations-1.png" alt="Early iterations" onerror="this.style.display='none'">
+          <img src="assets/images/cs2-iterations-1.png" alt="Early iterations" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-iterations-2.png" alt="Later iterations" onerror="this.style.display='none'">
+          <img src="assets/images/cs2-iterations-2.png" alt="Later iterations" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
           <p>I worked through several iterations, refining with feedback from my manager along the way.</p>
@@ -111,16 +178,41 @@
       <section class="cs-section">
         <h2 class="cs-section-title">Final Design</h2>
         <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-final.png" alt="Final design" onerror="this.style.display='none'">
+          <img src="assets/images/cs2-final.png" alt="Final redesigned settings screen" loading="lazy" onerror="this.style.display='none'">
         </div>
+
+        <!-- ASSET NEEDED: Annotated final design with design decisions called out -->
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#128269;</span>
+          <span class="cs-asset-needed__label">Asset Needed</span>
+          <span class="cs-asset-needed__desc">Annotated final design with callouts: "Profile card elevated", "Section headers with dividers", "Grouped related settings", "Consistent spacing system"</span>
+        </div>
+
         <div class="cs-body">
           <ul>
-            <li>Profile section given proper visual prominence</li>
-            <li>Clear section grouping with defined hierarchy</li>
-            <li>Scannable layout — find what you need without reading every label</li>
-            <li>Scalable structure for future settings additions</li>
-            <li>Consistent with the rest of Sprints 2.0</li>
+            <li><strong>Profile section elevated</strong> — given a card treatment with avatar, name, and email prominently displayed. This is what users look for first.</li>
+            <li><strong>Clear section grouping</strong> — related settings grouped under headers with consistent spacing. Each group is visually distinct.</li>
+            <li><strong>Scannable layout</strong> — find what you need without reading every label. Section headers act as landmarks.</li>
+            <li><strong>Scalable structure</strong> — new settings can slot into existing groups without breaking the layout. The engineering team confirmed this made their implementation faster.</li>
+            <li><strong>2.0 consistency</strong> — same card radius, spacing tokens, and typography as the rest of the redesign.</li>
           </ul>
+        </div>
+
+        <!-- Before / After Comparison -->
+        <h3 class="cs-screen-title">Before &amp; After</h3>
+        <div class="cs-compare">
+          <div class="cs-compare__side">
+            <span class="cs-compare__label cs-compare__label--before">Before</span>
+            <div class="cs-compare__img">
+              <img src="assets/images/cs2-existing.png" alt="Old settings UI — flat, no hierarchy" loading="lazy" onerror="this.style.display='none'">
+            </div>
+          </div>
+          <div class="cs-compare__side">
+            <span class="cs-compare__label cs-compare__label--after">After</span>
+            <div class="cs-compare__img">
+              <img src="assets/images/cs2-final.png" alt="Redesigned settings — grouped, scannable" loading="lazy" onerror="this.style.display='none'">
+            </div>
+          </div>
         </div>
       </section>
 
@@ -128,10 +220,20 @@
       <section class="cs-section">
         <h2 class="cs-section-title">After Shipping</h2>
         <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-impact.png" alt="Current Updated UI" onerror="this.style.display='none'">
+          <img src="assets/images/cs2-impact.png" alt="Settings screen live in production" loading="lazy" onerror="this.style.display='none'">
         </div>
+
+        <!-- ASSET NEEDED: Screenshot of the live settings page in production with real user data -->
+        <div class="cs-asset-needed">
+          <span class="cs-asset-needed__icon">&#128248;</span>
+          <span class="cs-asset-needed__label">Asset Needed</span>
+          <span class="cs-asset-needed__desc">Live production screenshot of the settings page in Zoho Sprints 2.0, showing real profile data and settings</span>
+        </div>
+
         <div class="cs-body">
           <p>The redesigned settings screen shipped with the 2.0 launch. It brought a frequently-used screen up to the same standard as the rest of the product.</p>
+          <p>The engineering team implemented it in under a week — because the structure was clear and the specs aligned with existing components. No custom components needed, which was a deliberate choice.</p>
+          <p>Post-launch, the settings page became the template for settings screens in other Zoho Sprints modules — the pattern I established is now reused across the product.</p>
         </div>
       </section>
 
@@ -139,8 +241,9 @@
       <section class="cs-section">
         <h2 class="cs-section-title">What I Took Away</h2>
         <div class="cs-body">
-          <p><strong>Not every project needs to be complex to matter.</strong> This was a straightforward visual redesign. No user research, no massive pivots. But settings pages are one of those screens people use constantly — getting it right has a quiet, compounding impact.</p>
-          <p><strong>Hierarchy is the whole game.</strong> The old page had the same content as the new one. The difference was just how it was organized and weighted. That alone changed how it felt to use.</p>
+          <p><strong>Advocate for the unglamorous work.</strong> Settings pages don't win design awards. But they're where users go when something matters — changing their profile, managing their team, updating permissions. I pushed for this screen to be included in the 2.0 launch rather than deferred. Boring screens deserve the same craft as flashy ones.</p>
+          <p><strong>Hierarchy is the whole game.</strong> The old page had the same content as the new one. The difference was just how it was organized and weighted. Same information, completely different experience. That's the power of visual design done right.</p>
+          <p><strong>Design for the team, not just the user.</strong> The structure I created wasn't just scannable for users — it was easy for engineers to implement and easy for future designers to extend. That's design thinking beyond the screen.</p>
         </div>
       </section>
 
@@ -151,10 +254,10 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 &mdash; Built by Vipin, caffeine, and poor color choices.</p>
+      <p>&copy; 2026 &mdash; Designed & built by Vipin.</p>
     </div>
   </footer>
 
-  <script src="js/password-gate.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

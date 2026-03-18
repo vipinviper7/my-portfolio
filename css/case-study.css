@@ -2,7 +2,7 @@
    Case Study Layout
    =========================== */
 .cs {
-  padding: 3rem 0 4rem;
+  padding: 8rem 0 4rem;
 }
 
 .cs-back {
@@ -11,7 +11,7 @@
   justify-content: center;
   padding: 0.6rem 1.25rem;
   min-height: 44px;
-  background-color: var(--color-bg-elevated);
+  background-color: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 50px;
   color: var(--color-text-muted);
@@ -23,21 +23,21 @@
 
 .cs-back:hover {
   color: var(--color-white);
-  background-color: var(--color-border);
+  background-color: var(--color-bg-elevated);
 }
 
 /* Header */
 .cs-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .cs-title {
-  font-size: 1.75rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
   color: var(--color-white);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
   margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 .cs-subtitle {
@@ -65,6 +65,74 @@
 
 .cs-meta-value {
   color: var(--color-text-muted);
+}
+
+/* ===========================
+   Impact Banner
+   =========================== */
+.cs-impact-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 1.75rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.cs-impact-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+}
+
+.cs-impact-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.cs-impact-dot {
+  color: var(--color-text-muted);
+}
+
+/* ===========================
+   Key Takeaways
+   =========================== */
+.cs-takeaways {
+  padding: 1.5rem 1.75rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  margin-bottom: 2.5rem;
+}
+
+.cs-takeaways-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.cs-takeaways-list {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.cs-takeaways-list li {
+  font-size: 0.88rem;
+  color: var(--color-text);
+  line-height: 1.65;
+  margin-bottom: 0.35rem;
 }
 
 /* Body Text */
@@ -113,7 +181,7 @@
 
 .cs-section-title {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-accent);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -137,7 +205,7 @@
 .cs-image-block img {
   max-width: 100%;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px var(--color-card-shadow);
 }
 
 .cs-image-block--mint {
@@ -159,7 +227,7 @@
 }
 
 .cs-insight {
-  background: var(--color-bg-elevated);
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 1.25rem;
@@ -194,7 +262,7 @@
 
 .cs-stat-number {
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-accent);
   line-height: 1;
   margin-bottom: 0.25rem;
@@ -246,7 +314,7 @@
 .cs-screen-image img {
   max-width: 100%;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px var(--color-card-shadow);
 }
 
 .cs-screen-annotations {
@@ -313,7 +381,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.85rem 1.5rem;
-  background-color: var(--color-bg-elevated);
+  background-color: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   color: var(--color-white);
@@ -323,7 +391,382 @@
 }
 
 .cs-figma-link:hover {
-  background-color: var(--color-border);
+  background-color: var(--color-bg-elevated);
+}
+
+/* Quiet Verse cream/gold variants */
+.cs-section-title--cream {
+  color: #c4a265;
+}
+
+.cs-cta--cream {
+  background-color: #c4a265;
+  color: #091019;
+}
+
+.cs-cta--cream:hover {
+  background-color: #a8894f;
+}
+
+/* ===========================
+   Persona Cards
+   =========================== */
+.cs-persona {
+  margin-bottom: 1.5rem;
+}
+
+.cs-persona-content {
+  padding: 1.5rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.cs-persona-quote {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.cs-persona-name {
+  font-weight: 700;
+  color: var(--color-white);
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+}
+
+.cs-persona-role {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.cs-persona-desc {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* ===========================
+   Design Philosophy
+   =========================== */
+.cs-philosophy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.cs-philosophy-item {
+  padding: 1.25rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.cs-philosophy-decision {
+  font-weight: 700;
+  color: var(--color-white);
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.cs-philosophy-why {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Highlight stat */
+.cs-highlight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.cs-highlight-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.cs-highlight-label {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+/* Research to product table */
+.cs-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.cs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.cs-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-bg-card);
+  color: var(--color-white);
+  font-weight: 700;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cs-table td {
+  padding: 0.75rem 1rem;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.5;
+}
+
+.cs-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===========================
+   Image Placeholder (asset needed)
+   =========================== */
+.cs-asset-needed {
+  border-radius: 12px;
+  border: 2px dashed var(--color-border-strong);
+  background-color: var(--color-bg-card);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  min-height: 200px;
+}
+
+.cs-asset-needed__icon {
+  font-size: 1.5rem;
+  opacity: 0.4;
+  margin-bottom: 0.25rem;
+}
+
+.cs-asset-needed__label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+}
+
+.cs-asset-needed__desc {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* ===========================
+   Outcome Metrics Row
+   =========================== */
+.cs-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.cs-outcome {
+  padding: 1.25rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.cs-outcome__number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #4ade80;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.cs-outcome__label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+/* ===========================
+   Team & Collaboration
+   =========================== */
+.cs-team {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.cs-team-member {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  color: var(--color-text);
+}
+
+.cs-team-member__role {
+  color: var(--color-text-muted);
+}
+
+/* ===========================
+   Before / After Comparison
+   =========================== */
+.cs-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cs-compare__side {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.cs-compare__label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.6rem 1rem;
+  text-align: center;
+}
+
+.cs-compare__label--before {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.cs-compare__label--after {
+  background-color: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+}
+
+.cs-compare__img {
+  padding: 1rem;
+  background-color: var(--color-bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-compare__img img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+/* ===========================
+   Screenshot Gallery (for app screens)
+   =========================== */
+.cs-screens {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.cs-screens--two-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cs-screens--four-col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.cs-screen-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+}
+
+.cs-screen-card img {
+  width: 100%;
+  display: block;
+}
+
+.cs-screen-card__caption {
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ===========================
+   Video Embed Placeholder
+   =========================== */
+.cs-video {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+}
+
+.cs-video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border: none;
+}
+
+/* ===========================
+   Process Gallery (sketches, whiteboard)
+   =========================== */
+.cs-process {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cs-process__item {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+}
+
+.cs-process__item img {
+  width: 100%;
+  display: block;
+}
+
+.cs-process__caption {
+  padding: 0.6rem 0.85rem;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
 }
 
 /* ===========================
@@ -331,7 +774,7 @@
    =========================== */
 @media (max-width: 768px) {
   .cs {
-    padding: 2rem 0 3rem;
+    padding: 6rem 0 3rem;
   }
 
   .cs-title {
@@ -355,6 +798,37 @@
 
   .cs-stats {
     gap: 1.5rem;
+  }
+
+  .cs-impact-banner {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .cs-impact-stats {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .cs-outcomes {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-compare {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-screens {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cs-screens--four-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cs-process {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -4,11 +4,11 @@
 
 /* Cream image block background */
 .cs-image-block--cream {
-  background-color: #f5f0e8;
+  background-color: #fdf6ec;
 }
 
 .cs-screen-image--cream {
-  background-color: #f5f0e8;
+  background-color: #fdf6ec;
 }
 
 /* Gold-themed section titles */
@@ -27,7 +27,7 @@
 }
 
 .cs-cta--cream:hover {
-  background-color: #a8873f;
+  background-color: #a8894f;
 }
 
 /* Gold stats */
@@ -72,8 +72,8 @@
 .cs-highlight {
   text-align: center;
   padding: 2.5rem 2rem;
-  background: linear-gradient(135deg, #1a1f36, #0f1424);
-  border: 1px solid rgba(196, 162, 101, 0.3);
+  background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-secondary));
+  border: 1px solid rgba(196, 162, 101, 0.2);
   border-radius: 12px;
   margin-bottom: 2rem;
 }

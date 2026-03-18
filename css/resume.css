@@ -14,11 +14,51 @@
 }
 
 .resume-heading {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-display);
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-white);
   text-align: center;
+  letter-spacing: -0.03em;
+}
+
+.resume-summary {
+  max-width: 600px;
+  text-align: center;
+}
+
+.resume-summary-role {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.resume-summary-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.resume-summary-text strong {
+  color: var(--color-text);
+}
+
+.resume-summary-skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.resume-summary-skills span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  background-color: var(--color-tag-bg);
+  color: var(--color-tag-text);
 }
 
 .resume-preview {

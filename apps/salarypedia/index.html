@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0C3B2E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Salarypedia — Decode Your CTC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #F5F3EE;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  /* Prevent horizontal overflow from negative margins */
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px 64px;
+  padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ─── Header hero gradient ─── */
+.hero-gradient {
+  background: linear-gradient(135deg, #0C3B2E 0%, #1B5E40 40%, #2D6A4F 70%, #3A8F6A 100%);
+  margin: 0 -16px;
+  padding: 0 16px 28px;
+  padding-top: env(safe-area-inset-top, 0px);
+  border-radius: 0 0 24px 24px;
+}
+
+header {
+  padding: 48px 0 24px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+header p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+}
+
+/* ─── CTC Input ─── */
+.ctc-input-card {
+  background: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 24px 20px;
+  margin: 16px 0 0;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(12,59,46,0.12);
+}
+
+.ctc-input-card label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #6B6B6B;
+  margin-bottom: 8px;
+}
+
+.ctc-field-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid #E8E4DC;
+  padding-bottom: 8px;
+  transition: border-color 0.2s;
+}
+
+.ctc-field-wrap:focus-within {
+  border-color: #1B5E40;
+}
+
+.ctc-field-wrap .rupee {
+  font-size: 28px;
+  font-weight: 700;
+  color: #B0ADA6;
+  flex-shrink: 0;
+}
+
+.ctc-field {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 28px;
+  font-weight: 800;
+  color: #1A1A1A;
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  letter-spacing: -0.5px;
+}
+
+.ctc-field::placeholder {
+  color: #D0CCC4;
+  font-weight: 600;
+}
+
+.ctc-field-wrap .per-year {
+  font-size: 13px;
+  font-weight: 500;
+  color: #B0ADA6;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.lpa-hint {
+  font-size: 13px;
+  color: #8A8780;
+  margin-top: 8px;
+}
+
+.lpa-hint span {
+  color: #5A5856;
+  font-weight: 500;
+}
+
+/* ─── Options chips ─── */
+.options-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.chip-group {
+  display: flex;
+  background: #fff;
+  border: 1px solid #E8E4DC;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.chip {
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B6B6B;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  min-height: 44px;
+}
+
+.chip.active {
+  background: #1B5E40;
+  color: #fff;
+}
+
+.chip:not(.active):hover {
+  background: #F0EDE7;
+}
+
+/* ─── Empty state ─── */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #8A8780;
+}
+
+.empty-state .empty-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  color: #C8C4BC;
+}
+
+.empty-state p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ─── Results ─── */
+.results {
+  display: none;
+}
+
+.results.active {
+  display: block;
+}
+
+/* Hero */
+.hero-card {
+  background: linear-gradient(135deg, #0C3B2E 0%, #1B5E40 50%, #2D6A4F 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 28px 20px;
+  text-align: center;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 20px rgba(12,59,46,0.15);
+}
+
+.hero-card .label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 4px;
+}
+
+.hero-card .amount {
+  font-size: 48px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+
+.hero-card .sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  margin-top: 8px;
+}
+
+.hero-card .sub b {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ─── Visual bar ─── */
+.bar-card {
+  background: #fff;
+  border: 1px solid #E8E4DC;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bar-labels .green { color: #1B5E40; }
+.bar-labels .orange { color: #C1440E; }
+
+.bar {
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  background: #E8E4DC;
+}
+
+.bar[role="img"] { /* accessible bar */ }
+
+.bar .fill-green {
+  background: linear-gradient(90deg, #1B5E40, #3A8F6A);
+  transition: width 0.4s ease;
+}
+
+.bar .fill-orange {
+  background: linear-gradient(90deg, #C1440E, #E8652F);
+  transition: width 0.4s ease;
+}
+
+.bar-note {
+  text-align: center;
+  font-size: 13px;
+  color: #6B6B6B;
+  margin-top: 12px;
+}
+
+.bar-note b {
+  font-weight: 600;
+  color: #C1440E;
+}
+
+/* ─── Card ─── */
+.card {
+  background: #fff;
+  border: 1px solid #E8E4DC;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.dot-green { background: #2D6A4F; }
+.dot-orange { background: #C1440E; }
+.dot-gray { background: #B0ADA6; }
+
+/* ─── Row ─── */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid #F0EDE7;
+  font-size: 14px;
+}
+
+.row:last-child { border-bottom: none; }
+
+.row .name { color: #6B6B6B; }
+
+.row .val {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.row .val.green { color: #1B5E40; }
+.row .val.orange { color: #C1440E; }
+
+/* ─── Deduction detail card ─── */
+.ded-item {
+  background: linear-gradient(135deg, #FFFBF8, #FFF5EE);
+  border: 1px solid #F0DFD0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.ded-item:last-child { margin-bottom: 0; }
+
+.ded-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.ded-item-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ded-item-amt {
+  font-size: 14px;
+  font-weight: 700;
+  color: #C1440E;
+  font-variant-numeric: tabular-nums;
+}
+
+.ded-item-why {
+  font-size: 13px;
+  color: #6B6B6B;
+  line-height: 1.5;
+}
+
+/* ─── CTC split ─── */
+.ctc-split {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ctc-split-block {
+  flex: 1;
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.ctc-split-block.take-home {
+  background: linear-gradient(135deg, #E8F5EE, #D4EDDA);
+}
+
+.ctc-split-block.deductions {
+  background: linear-gradient(135deg, #FEF0E9, #FDDDD0);
+}
+
+.ctc-split-block.employer {
+  background: linear-gradient(135deg, #F0EDE7, #E8E4DC);
+}
+
+.ctc-split-block .val {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.ctc-split-block .lbl {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6B6B6B;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.take-home .val { color: #1B5E40; }
+.deductions .val { color: #C1440E; }
+.employer .val { color: #6B6B6B; }
+
+/* ─── Collapsible ─── */
+.collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  min-height: 44px;
+}
+
+.collapse-btn h3 { margin-bottom: 0; }
+
+.collapse-icon {
+  width: 20px;
+  height: 20px;
+  color: #B0ADA6;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.collapse-btn[aria-expanded="true"] .collapse-icon {
+  transform: rotate(180deg);
+}
+
+.collapse-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.collapse-body.open {
+  grid-template-rows: 1fr;
+}
+
+.collapse-body > div {
+  overflow: hidden;
+}
+
+/* ─── Footer / manual ─── */
+.manual-link {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.manual-link button {
+  background: none;
+  border: 1px solid #E8E4DC;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B6B6B;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  min-height: 44px;
+}
+
+.manual-link button:hover {
+  border-color: #1A1A1A;
+  color: #1A1A1A;
+}
+
+.footer {
+  text-align: center;
+  padding: 24px 0 16px;
+  font-size: 12px;
+  color: #B0ADA6;
+}
+
+/* ─── Manual mode ─── */
+.manual-mode {
+  display: none;
+}
+
+.manual-mode.active {
+  display: block;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.input-row input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #E8E4DC;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 16px;
+  color: #1A1A1A;
+  background: #FAFAF8;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-row input[type="text"]:focus {
+  border-color: #1B5E40;
+  box-shadow: 0 0 0 3px rgba(27,94,64,0.1);
+}
+
+.input-row input[type="text"].amt-input {
+  flex: 0 0 110px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.rm-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #B0ADA6;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
+}
+
+.rm-btn:hover { color: #C1440E; background: #FEF3EE; }
+
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 1px dashed #D0CCC4;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B6B6B;
+  cursor: pointer;
+  margin-top: 4px;
+  min-height: 44px;
+}
+
+.add-btn:hover { border-color: #1A1A1A; color: #1A1A1A; }
+
+.back-link {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.back-link button {
+  background: none;
+  border: 1px solid #E8E4DC;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B6B6B;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.back-link button:hover { border-color: #1A1A1A; color: #1A1A1A; }
+
+/* ─── Animation (respects reduce motion) ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeUp 0.3s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { animation: none; }
+  .collapse-body { transition: none; }
+  .bar .fill-green,
+  .bar .fill-orange { transition: none; }
+  .collapse-icon { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== CTC MODE ===== -->
+  <div id="ctc-mode">
+    <div class="hero-gradient">
+    <header>
+      <h1>Your CTC, decoded.</h1>
+      <p>Enter your annual CTC. We'll show you exactly what lands in your bank every month.</p>
+    </header>
+
+    <!-- CTC Input -->
+    <div class="ctc-input-card">
+      <label for="ctc-input">Annual CTC</label>
+      <div class="ctc-field-wrap">
+        <span class="rupee" aria-hidden="true">₹</span>
+        <input class="ctc-field" id="ctc-input" type="text" inputmode="numeric" placeholder="8,00,000" autocomplete="off" autofocus aria-label="Annual CTC in rupees">
+        <span class="per-year" aria-hidden="true">/ year</span>
+      </div>
+      <div class="lpa-hint" id="lpa-hint" aria-live="polite"></div>
+    </div>
+    </div><!-- /hero-gradient -->
+
+    <!-- Options -->
+    <div class="options-row">
+      <div class="chip-group" role="radiogroup" aria-label="City type" id="city-chips">
+        <button class="chip active" data-val="metro" role="radio" aria-checked="true">Metro</button>
+        <button class="chip" data-val="non-metro" role="radio" aria-checked="false">Non-metro</button>
+      </div>
+      <div class="chip-group" role="radiogroup" aria-label="Tax regime" id="regime-chips">
+        <button class="chip active" data-val="new" role="radio" aria-checked="true">New regime</button>
+        <button class="chip" data-val="old" role="radio" aria-checked="false">Old regime</button>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="empty-state">
+      <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      </svg>
+      <p>Type your annual CTC above to see<br>your monthly take-home breakdown</p>
+    </div>
+
+    <!-- Results -->
+    <div class="results" id="results">
+
+      <!-- Hero -->
+      <div class="hero-card fade-in" id="result-hero">
+        <div class="label">You take home</div>
+        <div class="amount" id="hero-takehome" aria-live="polite">₹0</div>
+        <div class="sub">per month, out of <b id="hero-gross">₹0</b> gross</div>
+      </div>
+
+      <!-- CTC split -->
+      <div class="card fade-in">
+        <h3>Where your CTC goes (monthly)</h3>
+        <div class="ctc-split">
+          <div class="ctc-split-block take-home">
+            <div class="val" id="split-takehome">₹0</div>
+            <div class="lbl">Take-home</div>
+          </div>
+          <div class="ctc-split-block deductions">
+            <div class="val" id="split-ded">₹0</div>
+            <div class="lbl">Deductions</div>
+          </div>
+          <div class="ctc-split-block employer">
+            <div class="val" id="split-employer">₹0</div>
+            <div class="lbl">Employer</div>
+          </div>
+        </div>
+        <div class="row">
+          <span class="name">Monthly CTC</span>
+          <span class="val" id="row-ctc-monthly">₹0</span>
+        </div>
+      </div>
+
+      <!-- Visual bar -->
+      <div class="bar-card fade-in">
+        <div class="bar-labels">
+          <span class="green" id="bar-lbl-green">0% take-home</span>
+          <span class="orange" id="bar-lbl-orange">0% deductions</span>
+        </div>
+        <div class="bar" role="img" id="bar-visual" aria-label="Take-home vs deductions ratio">
+          <div class="fill-green" id="bar-green" style="width:0%"></div>
+          <div class="fill-orange" id="bar-orange" style="width:0%"></div>
+        </div>
+        <div class="bar-note"><b id="bar-note-pct">0%</b> of your gross goes to deductions</div>
+      </div>
+
+      <!-- Monthly deductions explained -->
+      <div class="card fade-in">
+        <h3><span class="dot dot-orange"></span>Monthly deductions</h3>
+        <div id="ded-list"></div>
+      </div>
+
+      <!-- Monthly earnings -->
+      <div class="card fade-in">
+        <button class="collapse-btn" id="earn-toggle" aria-expanded="false">
+          <h3><span class="dot dot-green"></span>Monthly earnings breakdown</h3>
+          <svg class="collapse-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="collapse-body" id="earn-body">
+          <div id="earn-list" style="padding-top:8px"></div>
+        </div>
+      </div>
+
+      <!-- Employer contributions -->
+      <div class="card fade-in">
+        <button class="collapse-btn" id="employer-toggle" aria-expanded="false">
+          <h3><span class="dot dot-gray"></span>Hidden in your CTC (employer pays)</h3>
+          <svg class="collapse-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="collapse-body" id="employer-body">
+          <div id="employer-list" style="padding-top:8px"></div>
+        </div>
+      </div>
+
+      <!-- Manual link -->
+      <div class="manual-link">
+        <button id="go-manual">Have your actual payslip? Enter exact numbers</button>
+      </div>
+    </div>
+
+    <div class="footer">Salarypedia — your salary, explained simply</div>
+  </div>
+
+  <!-- ===== MANUAL MODE ===== -->
+  <div id="manual-mode" class="manual-mode">
+    <div class="hero-gradient" style="padding-bottom:20px">
+    <header>
+      <h1>Salarypedia</h1>
+      <p>Enter your exact salary components — results update live</p>
+    </header>
+
+    <!-- Manual result hero -->
+    <div class="hero-card" id="m-hero">
+      <div class="label">You take home</div>
+      <div class="amount" id="m-takehome" aria-live="polite">₹0</div>
+      <div class="sub">Out of <b id="m-gross">₹0</b> gross</div>
+    </div>
+    </div><!-- /hero-gradient -->
+
+    <!-- Manual bar -->
+    <div class="bar-card" style="margin-top:16px">
+      <div class="bar-labels">
+        <span class="green" id="m-bar-lbl-g">0%</span>
+        <span class="orange" id="m-bar-lbl-o">0%</span>
+      </div>
+      <div class="bar" role="img" aria-label="Take-home vs deductions ratio">
+        <div class="fill-green" id="m-bar-g" style="width:0%"></div>
+        <div class="fill-orange" id="m-bar-o" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Manual earnings -->
+    <div class="card">
+      <h3><span class="dot dot-green"></span>Earnings</h3>
+      <div id="m-earn-rows"></div>
+      <button class="add-btn" id="m-add-earn">+ Add component</button>
+    </div>
+
+    <!-- Manual deductions -->
+    <div class="card">
+      <h3><span class="dot dot-orange"></span>Deductions</h3>
+      <div id="m-ded-rows"></div>
+      <button class="add-btn" id="m-add-ded">+ Add component</button>
+    </div>
+
+    <!-- Manual deduction breakdown -->
+    <div class="card" id="m-ded-card" style="display:none">
+      <h3><span class="dot dot-orange"></span>What these deductions mean</h3>
+      <div id="m-ded-explain"></div>
+    </div>
+
+    <div class="back-link">
+      <button id="go-ctc">Back to CTC calculator</button>
+    </div>
+
+    <div class="footer">Salarypedia — your salary, explained simply</div>
+  </div>
+
+</div>
+
+<script>
+// ─── Helpers ───
+const fmt = n => {
+  if (isNaN(n) || n === 0) return '₹0';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+};
+
+const parseNum = str => {
+  const n = parseFloat(str.replace(/[₹,\s]/g, ''));
+  return isNaN(n) ? 0 : Math.round(n);
+};
+
+const escHtml = s => {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+};
+
+// ─── Tax calculation ───
+function calcTaxNew(taxableIncome) {
+  if (taxableIncome <= 700000) return 0;
+  let tax = 0;
+  const slabs = [
+    [300000, 0],
+    [400000, 0.05],
+    [300000, 0.10],
+    [200000, 0.15],
+    [300000, 0.20],
+    [Infinity, 0.30],
+  ];
+  let remaining = taxableIncome;
+  for (const [width, rate] of slabs) {
+    const chunk = Math.min(remaining, width);
+    tax += chunk * rate;
+    remaining -= chunk;
+    if (remaining <= 0) break;
+  }
+  if (taxableIncome > 700000 && taxableIncome <= 730000) {
+    tax = Math.min(tax, taxableIncome - 700000);
+  }
+  return Math.round(tax * 1.04);
+}
+
+function calcTaxOld(taxableIncome) {
+  if (taxableIncome <= 500000) return 0;
+  let tax = 0;
+  const slabs = [
+    [250000, 0],
+    [250000, 0.05],
+    [500000, 0.20],
+    [Infinity, 0.30],
+  ];
+  let remaining = taxableIncome;
+  for (const [width, rate] of slabs) {
+    const chunk = Math.min(remaining, width);
+    tax += chunk * rate;
+    remaining -= chunk;
+    if (remaining <= 0) break;
+  }
+  if (taxableIncome > 500000 && taxableIncome <= 520000) {
+    tax = Math.min(tax, taxableIncome - 500000);
+  }
+  return Math.round(tax * 1.04);
+}
+
+// ─── CTC Breakdown Engine ───
+function computeBreakdown(annualCTC, isMetro, isNewRegime) {
+  const basicAnnual = Math.round(annualCTC * 0.40);
+  const basicMonthly = Math.round(basicAnnual / 12);
+
+  const hraRate = isMetro ? 0.50 : 0.40;
+  const hraAnnual = Math.round(basicAnnual * hraRate);
+  const hraMonthly = Math.round(hraAnnual / 12);
+
+  const pfWageCeiling = 15000;
+  const employerPFMonthly = Math.round(Math.min(basicMonthly, pfWageCeiling) * 0.12);
+  const employerPFAnnual = employerPFMonthly * 12;
+
+  const employeePFMonthly = employerPFMonthly;
+  const employeePFAnnual = employeePFMonthly * 12;
+
+  const gratuityAnnual = Math.round(basicAnnual * 0.0481);
+  const gratuityMonthly = Math.round(gratuityAnnual / 12);
+
+  const grossAnnual = annualCTC - employerPFAnnual - gratuityAnnual;
+  const grossMonthly = Math.round(grossAnnual / 12);
+
+  let employerESIMonthly = 0;
+  let employeeESIMonthly = 0;
+  if (grossMonthly <= 21000) {
+    employeeESIMonthly = Math.round(grossMonthly * 0.0075);
+    employerESIMonthly = Math.round(grossMonthly * 0.0325);
+  }
+
+  const grossAdjustedAnnual = annualCTC - employerPFAnnual - gratuityAnnual - (employerESIMonthly * 12);
+  const grossAdjustedMonthly = Math.round(grossAdjustedAnnual / 12);
+
+  const specialMonthly = Math.max(0, grossAdjustedMonthly - basicMonthly - hraMonthly);
+
+  const ptMonthly = 200;
+
+  const stdDeduction = isNewRegime ? 75000 : 50000;
+  let taxableIncome;
+  if (isNewRegime) {
+    taxableIncome = Math.max(0, grossAdjustedAnnual - stdDeduction);
+  } else {
+    const section80C = Math.min(employeePFAnnual, 150000);
+    taxableIncome = Math.max(0, grossAdjustedAnnual - stdDeduction - section80C);
+  }
+
+  const annualTax = isNewRegime ? calcTaxNew(taxableIncome) : calcTaxOld(taxableIncome);
+  const tdsMonthly = Math.round(annualTax / 12);
+
+  const totalDedMonthly = employeePFMonthly + ptMonthly + tdsMonthly + employeeESIMonthly;
+  const takeHomeMonthly = grossAdjustedMonthly - totalDedMonthly;
+
+  const employerCostMonthly = employerPFMonthly + gratuityMonthly + employerESIMonthly;
+
+  return {
+    annualCTC,
+    monthlyCtc: Math.round(annualCTC / 12),
+    gross: grossAdjustedMonthly,
+    takeHome: takeHomeMonthly,
+    earnings: [
+      { name: 'Basic Salary', amount: basicMonthly },
+      { name: 'HRA', amount: hraMonthly },
+      { name: 'Special Allowance', amount: specialMonthly },
+    ].filter(e => e.amount > 0),
+    deductions: [
+      employeePFMonthly > 0 ? {
+        name: 'Provident Fund (Employee)',
+        amount: employeePFMonthly,
+        why: '12% of basic (up to ₹15,000 wage ceiling). Goes to your EPF account — you get this back when you retire or resign.',
+      } : null,
+      {
+        name: 'Professional Tax',
+        amount: ptMonthly,
+        why: 'State government tax. Usually ₹200/month. Varies by state — some states charge less.',
+      },
+      tdsMonthly > 0 ? {
+        name: 'TDS (Income Tax)',
+        amount: tdsMonthly,
+        why: `Tax deducted at source under the ${isNewRegime ? 'new' : 'old'} regime. File your ITR to claim refund if excess was deducted.`,
+      } : null,
+      employeeESIMonthly > 0 ? {
+        name: 'ESI (Employee)',
+        amount: employeeESIMonthly,
+        why: 'Health insurance for employees earning under ₹21,000/month. Covers you and your family.',
+      } : null,
+    ].filter(Boolean),
+    totalDeductions: totalDedMonthly,
+    employer: [
+      employerPFMonthly > 0 ? {
+        name: 'Employer PF',
+        amount: employerPFMonthly,
+        why: 'Your company contributes this to your EPF on top of your salary. Part of CTC, not your payslip.',
+      } : null,
+      gratuityMonthly > 0 ? {
+        name: 'Gratuity',
+        amount: gratuityMonthly,
+        why: '4.81% of basic. You receive this as a lump sum after 5 years of service.',
+      } : null,
+      employerESIMonthly > 0 ? {
+        name: 'Employer ESI',
+        amount: employerESIMonthly,
+        why: 'Company\'s share of your ESI health insurance. Part of CTC, not your payslip.',
+      } : null,
+    ].filter(Boolean),
+    totalEmployer: employerCostMonthly,
+    annualTax,
+    taxableIncome,
+  };
+}
+
+// ─── Render CTC results ───
+let hasScrolledToResults = false;
+
+function renderCTC() {
+  const raw = document.getElementById('ctc-input').value;
+  const ctc = parseNum(raw);
+  const results = document.getElementById('results');
+  const empty = document.getElementById('empty-state');
+
+  // LPA hint
+  const hint = document.getElementById('lpa-hint');
+  if (ctc >= 100000) {
+    hint.innerHTML = `That's <span>${(ctc / 100000).toFixed(1).replace(/\.0$/, '')} LPA</span>`;
+  } else {
+    hint.textContent = '';
+  }
+
+  if (ctc < 100000) {
+    results.classList.remove('active');
+    empty.style.display = '';
+    hasScrolledToResults = false;
+    return;
+  }
+
+  results.classList.add('active');
+  empty.style.display = 'none';
+
+  const isMetro = document.querySelector('#city-chips .chip.active').dataset.val === 'metro';
+  const isNewRegime = document.querySelector('#regime-chips .chip.active').dataset.val === 'new';
+  const b = computeBreakdown(ctc, isMetro, isNewRegime);
+
+  // Hero
+  document.getElementById('hero-takehome').textContent = fmt(b.takeHome);
+  document.getElementById('hero-gross').textContent = fmt(b.gross);
+
+  // Split
+  document.getElementById('split-takehome').textContent = fmt(b.takeHome);
+  document.getElementById('split-ded').textContent = fmt(b.totalDeductions);
+  document.getElementById('split-employer').textContent = fmt(b.totalEmployer);
+  document.getElementById('row-ctc-monthly').textContent = fmt(b.monthlyCtc);
+
+  // Bar
+  const earnPct = b.gross > 0 ? Math.round((b.takeHome / b.gross) * 100) : 100;
+  const dedPct = b.gross > 0 ? Math.round((b.totalDeductions / b.gross) * 100) : 0;
+  document.getElementById('bar-lbl-green').textContent = `${earnPct}% take-home`;
+  document.getElementById('bar-lbl-orange').textContent = `${dedPct}% deductions`;
+  document.getElementById('bar-green').style.width = `${earnPct}%`;
+  document.getElementById('bar-orange').style.width = `${dedPct}%`;
+  document.getElementById('bar-note-pct').textContent = `${dedPct}%`;
+  document.getElementById('bar-visual').setAttribute('aria-label',
+    `${earnPct}% take-home, ${dedPct}% deductions`);
+
+  // Deductions
+  document.getElementById('ded-list').innerHTML = b.deductions.map(d => `
+    <div class="ded-item">
+      <div class="ded-item-head">
+        <span class="ded-item-name">${escHtml(d.name)}</span>
+        <span class="ded-item-amt">&minus;${fmt(d.amount)}</span>
+      </div>
+      <div class="ded-item-why">${escHtml(d.why)}</div>
+    </div>
+  `).join('');
+
+  // Earnings
+  document.getElementById('earn-list').innerHTML = b.earnings.map(e => `
+    <div class="row">
+      <span class="name">${escHtml(e.name)}</span>
+      <span class="val green">${fmt(e.amount)}</span>
+    </div>
+  `).join('') + `
+    <div class="row" style="border-top:1px solid #E8E4DC;margin-top:4px;padding-top:12px">
+      <span class="name" style="font-weight:600;color:#1A1A1A">Monthly Gross</span>
+      <span class="val" style="font-weight:700">${fmt(b.gross)}</span>
+    </div>
+  `;
+
+  // Employer
+  document.getElementById('employer-list').innerHTML = b.employer.map(e => `
+    <div class="ded-item">
+      <div class="ded-item-head">
+        <span class="ded-item-name">${escHtml(e.name)}</span>
+        <span class="ded-item-amt" style="color:#6B6B6B">${fmt(e.amount)}</span>
+      </div>
+      <div class="ded-item-why">${escHtml(e.why)}</div>
+    </div>
+  `).join('') + `
+    <div class="row" style="border-top:1px solid #E8E4DC;margin-top:8px;padding-top:12px">
+      <span class="name" style="color:#6B6B6B">These don't appear on your payslip but are part of your CTC.</span>
+    </div>
+  `;
+
+  // Scroll to results on first render
+  if (!hasScrolledToResults) {
+    hasScrolledToResults = true;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => {
+      document.getElementById('result-hero').scrollIntoView({
+        behavior: prefersReducedMotion ? 'instant' : 'smooth',
+        block: 'start',
+      });
+    }, 100);
+  }
+}
+
+// ─── CTC input formatting ───
+const ctcInput = document.getElementById('ctc-input');
+ctcInput.addEventListener('input', () => {
+  let raw = ctcInput.value.replace(/[^\d]/g, '');
+  if (raw.length > 0) {
+    ctcInput.value = parseInt(raw, 10).toLocaleString('en-IN');
+  }
+  renderCTC();
+});
+
+// Blur input on Enter to dismiss keyboard
+ctcInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    ctcInput.blur();
+  }
+});
+
+// ─── Chip toggles ───
+document.querySelectorAll('.chip-group').forEach(group => {
+  group.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      group.querySelectorAll('.chip').forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-checked', 'false');
+      });
+      chip.classList.add('active');
+      chip.setAttribute('aria-checked', 'true');
+      hasScrolledToResults = false;
+      renderCTC();
+    });
+  });
+});
+
+// ─── Collapsibles ───
+['earn-toggle', 'employer-toggle'].forEach(id => {
+  document.getElementById(id).addEventListener('click', () => {
+    const btn = document.getElementById(id);
+    const body = document.getElementById(id.replace('toggle', 'body'));
+    const exp = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !exp);
+    body.classList.toggle('open');
+  });
+});
+
+// ─── Manual mode ───
+const EXPLANATIONS = {
+  'pf': '12% of basic salary. Saved in your EPF account — you get this back when you retire or resign.',
+  'provident fund': '12% of basic salary. Saved in your EPF account — you get this back when you retire or resign.',
+  'epf': '12% of basic salary. Saved in your EPF account — you get this back when you retire or resign.',
+  'esi': 'Health insurance for employees earning under ₹21,000/month. Covers you and your family.',
+  'esic': 'Health insurance for employees earning under ₹21,000/month. Covers you and your family.',
+  'professional tax': 'State government tax. Usually ₹200/month. Varies by state.',
+  'pt': 'State government tax. Usually ₹200/month. Varies by state.',
+  'tds': 'Tax deducted at source based on your annual income. File ITR to claim refund if excess was deducted.',
+  'income tax': 'Tax deducted at source based on your annual income. File ITR to claim refund if excess was deducted.',
+  'lop': 'Deduction for days you were absent or on unpaid leave.',
+  'loss of pay': 'Deduction for days you were absent or on unpaid leave.',
+  'loan recovery': 'EMI for a salary advance or company loan being deducted monthly.',
+  'loan': 'EMI for a salary advance or company loan being deducted monthly.',
+  'nps': 'National Pension System contribution. Tax-saving retirement investment.',
+};
+
+function getExplanation(name) {
+  const key = name.trim().toLowerCase();
+  if (EXPLANATIONS[key]) return EXPLANATIONS[key];
+  for (const [k, v] of Object.entries(EXPLANATIONS)) {
+    if (key.includes(k) || k.includes(key)) return v;
+  }
+  return 'Talk to your HR — this line item needs clarification.';
+}
+
+function makeRow(container, name, amount) {
+  const row = document.createElement('div');
+  row.className = 'input-row';
+  row.innerHTML = `
+    <input type="text" value="${escHtml(name)}" placeholder="Component name" aria-label="Component name">
+    <input type="text" class="amt-input" value="${amount > 0 ? amount.toLocaleString('en-IN') : '0'}" placeholder="₹" inputmode="numeric" aria-label="Amount">
+    <button class="rm-btn" aria-label="Remove row">&times;</button>
+  `;
+  container.appendChild(row);
+  row.querySelector('input').addEventListener('input', recalcManual);
+  const ai = row.querySelector('.amt-input');
+  ai.addEventListener('input', recalcManual);
+  ai.addEventListener('focus', () => { const v = parseNum(ai.value); ai.value = v > 0 ? v : ''; });
+  ai.addEventListener('blur', () => { const v = parseNum(ai.value); ai.value = v > 0 ? v.toLocaleString('en-IN') : '0'; });
+  row.querySelector('.rm-btn').addEventListener('click', () => { row.remove(); recalcManual(); });
+}
+
+function getManualRows(id) {
+  const out = [];
+  document.querySelectorAll(`#${id} .input-row`).forEach(r => {
+    const name = r.querySelector('input').value.trim();
+    const amt = parseNum(r.querySelector('.amt-input').value);
+    if (name || amt > 0) out.push({ name: name || 'Unnamed', amount: amt });
+  });
+  return out;
+}
+
+function recalcManual() {
+  const earn = getManualRows('m-earn-rows');
+  const ded = getManualRows('m-ded-rows');
+  const totalE = earn.reduce((s, e) => s + e.amount, 0);
+  const totalD = ded.reduce((s, d) => s + d.amount, 0);
+  const net = totalE - totalD;
+
+  document.getElementById('m-takehome').textContent = fmt(Math.max(net, 0));
+  document.getElementById('m-gross').textContent = fmt(totalE);
+
+  const ep = totalE > 0 ? Math.round((Math.max(net, 0) / totalE) * 100) : 100;
+  const dp = totalE > 0 ? Math.round((totalD / totalE) * 100) : 0;
+  document.getElementById('m-bar-lbl-g').textContent = `${ep}% take-home`;
+  document.getElementById('m-bar-lbl-o').textContent = `${dp}% deductions`;
+  document.getElementById('m-bar-g').style.width = `${ep}%`;
+  document.getElementById('m-bar-o').style.width = `${dp}%`;
+
+  const active = ded.filter(d => d.amount > 0);
+  const dedCard = document.getElementById('m-ded-card');
+  if (active.length > 0) {
+    dedCard.style.display = '';
+    document.getElementById('m-ded-explain').innerHTML = active.map(d => `
+      <div class="ded-item">
+        <div class="ded-item-head">
+          <span class="ded-item-name">${escHtml(d.name)}</span>
+          <span class="ded-item-amt">&minus;${fmt(d.amount)}</span>
+        </div>
+        <div class="ded-item-why">${getExplanation(d.name)}</div>
+      </div>
+    `).join('');
+  } else {
+    dedCard.style.display = 'none';
+  }
+}
+
+function initManual() {
+  const ec = document.getElementById('m-earn-rows');
+  const dc = document.getElementById('m-ded-rows');
+  ec.innerHTML = '';
+  dc.innerHTML = '';
+  [['Basic', 35000], ['HRA', 14000], ['Special Allowance', 18500], ['Conveyance', 1600], ['Medical', 1250]].forEach(([n, a]) => makeRow(ec, n, a));
+  [['Provident Fund', 4200], ['Professional Tax', 200], ['TDS', 3100], ['ESI', 0]].forEach(([n, a]) => makeRow(dc, n, a));
+  recalcManual();
+}
+
+document.getElementById('go-manual').addEventListener('click', () => {
+  document.getElementById('ctc-mode').style.display = 'none';
+  document.getElementById('manual-mode').classList.add('active');
+  initManual();
+  window.scrollTo(0, 0);
+});
+
+document.getElementById('go-ctc').addEventListener('click', () => {
+  document.getElementById('manual-mode').classList.remove('active');
+  document.getElementById('ctc-mode').style.display = '';
+  window.scrollTo(0, 0);
+});
+
+document.getElementById('m-add-earn').addEventListener('click', () => makeRow(document.getElementById('m-earn-rows'), '', 0));
+document.getElementById('m-add-ded').addEventListener('click', () => makeRow(document.getElementById('m-ded-rows'), '', 0));
+</script>
+</body>
+</html>

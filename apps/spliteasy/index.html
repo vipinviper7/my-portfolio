@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SplitEasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #E9EBF0;
+  --surface: #FFFFFF;
+  --surface-border: #DDDFE5;
+  --text-primary: #1A1C22;
+  --text-secondary: #555866;
+  --text-muted: #6F7180;
+  --accent: #8B7348;
+  --accent-dim: rgba(139, 115, 72, 0.08);
+  --danger: #8B5555;
+  --danger-dim: rgba(139, 85, 85, 0.08);
+  --success: #4A6E52;
+  --success-dim: rgba(74, 110, 82, 0.08);
+  --warning: #7A6035;
+  --warning-dim: rgba(122, 96, 53, 0.08);
+  --divider: #ECEDF0;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 100px;
+}
+
+[data-theme="dark"] {
+  --bg: #0D0F14;
+  --surface: #191C23;
+  --surface-border: #252830;
+  --text-primary: #D8D5CF;
+  --text-secondary: #9496A0;
+  --text-muted: #8A8C94;
+  --accent: #A68B5B;
+  --accent-dim: rgba(166, 139, 91, 0.12);
+  --danger: #B87878;
+  --danger-dim: rgba(184, 120, 120, 0.10);
+  --success: #8BB892;
+  --success-dim: rgba(139, 184, 146, 0.10);
+  --warning: #BFA06A;
+  --warning-dim: rgba(191, 160, 106, 0.10);
+  --divider: #1F2128;
+}
+
+html {
+  background: var(--bg);
+  transition: background 0.3s;
+}
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.4;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 0 16px calc(32px + env(safe-area-inset-bottom, 0px));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ==================== REDUCED MOTION ==================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==================== FOCUS VISIBLE ==================== */
+button:focus-visible, input:focus-visible, [role="button"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ==================== STICKY NAVBAR ==================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  padding: calc(16px + env(safe-area-inset-top, 0px)) 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 24px;
+}
+.navbar h1 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.navbar-spacer {
+  width: 44px;
+  flex-shrink: 0;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  padding: 0;
+  flex-shrink: 0;
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-secondary);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+.theme-toggle:active { background: var(--bg); }
+
+/* Theme toggle spin */
+@keyframes spinOnce {
+  from { transform: rotate(0deg) scale(0.6); opacity: 0; }
+  to { transform: rotate(360deg) scale(1); opacity: 1; }
+}
+.theme-toggle.spin svg {
+  animation: spinOnce 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==================== SECTION LABELS ==================== */
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* ==================== PEOPLE SECTION ==================== */
+.people-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  min-height: 56px;
+}
+
+.empty-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 4px 0;
+  width: 100%;
+}
+.empty-inline svg {
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-pill);
+  padding: 8px 8px 8px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  animation: chipIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes chipIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* Chip exit animation */
+.chip.chip-removing {
+  animation: chipOut 0.25s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  pointer-events: none;
+}
+@keyframes chipOut {
+  to { transform: scale(0.3); opacity: 0; }
+}
+
+.chip .avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  flex-shrink: 0;
+}
+.chip .remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.15s, background 0.15s;
+  padding: 0;
+  flex-shrink: 0;
+}
+.chip .remove:hover { color: var(--danger); background: var(--danger-dim); }
+
+.add-person-row {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--divider);
+  padding-top: 16px;
+}
+.add-person-row input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.15s;
+  min-height: 44px;
+}
+.add-person-row input::placeholder { color: var(--text-secondary); }
+.add-person-row input:focus { border-color: var(--accent); }
+.add-person-row button {
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
+  min-height: 44px;
+}
+.add-person-row button:hover { background: rgba(139, 115, 72, 0.12); }
+.add-person-row button:active { background: rgba(139, 115, 72, 0.2); transform: scale(0.96); }
+
+/* ==================== ITEMS SECTION ==================== */
+#itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.item-block {
+  animation: slideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+@keyframes slideIn {
+  0% { transform: translateY(12px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Item exit animation */
+.item-block.item-removing {
+  animation: itemOut 0.35s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes itemOut {
+  to { transform: translateX(-40px); opacity: 0; }
+}
+
+/* Card hover depth — desktop only */
+@media (hover: hover) {
+  .item-block {
+    transition: border-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  }
+  .item-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  [data-theme="dark"] .item-block:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
+  .item-block.item-removing:hover {
+    transform: translateX(-40px);
+    box-shadow: none;
+  }
+}
+
+/* Swipe-to-delete layers */
+.item-swipe-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80px;
+  background: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.item-swipe-bg svg {
+  width: 22px;
+  height: 22px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.item-swipe-content {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  transition: background 0.3s;
+}
+
+.item-color-bar {
+  height: 3px;
+  display: flex;
+  overflow: hidden;
+  transition: opacity 0.2s;
+}
+.item-color-bar.fading { opacity: 0; }
+.item-color-bar span {
+  flex: 1;
+  display: block;
+}
+
+.item-main-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 16px 16px 0;
+}
+.item-main-row input[type="text"] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--surface-border);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 0;
+  outline: none;
+  min-width: 0;
+  min-height: 44px;
+  transition: border-color 0.15s;
+}
+.item-main-row input[type="text"]:focus { border-color: var(--accent); }
+.item-main-row input[type="text"]::placeholder { color: var(--text-secondary); }
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.stepper button {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+.stepper button:hover { background: var(--divider); }
+.stepper button:active { background: var(--surface-border); color: var(--text-primary); transform: scale(0.9); }
+.stepper button.stepper-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.stepper .qty {
+  width: 32px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  border-left: 1px solid var(--surface-border);
+  border-right: 1px solid var(--surface-border);
+  line-height: 44px;
+}
+
+/* Qty bounce */
+@keyframes qtyBounce {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+.qty-bounce {
+  animation: qtyBounce 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.price-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 0 8px;
+  min-width: 80px;
+  min-height: 44px;
+}
+.price-input-wrap .rupee {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+.price-input-wrap input {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  width: 60px;
+  padding: 8px 0;
+  outline: none;
+  text-align: right;
+  min-height: 44px;
+}
+
+.item-subtotal {
+  padding: 8px 16px 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.item-assign-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 0;
+  flex-wrap: wrap;
+}
+.item-assign-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 0;
+}
+.assign-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px 8px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--surface-border);
+  background: var(--bg);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+  min-height: 44px;
+  font-family: inherit;
+}
+.assign-pill .pill-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: transparent;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+}
+.assign-pill.active {
+  color: #fff;
+  border-color: transparent;
+  transform: scale(1.08);
+}
+.assign-pill.active .pill-dot {
+  color: #fff;
+  transform: scale(1.1);
+}
+.assign-pill:active { transform: scale(0.92); }
+
+/* Pill pop animation */
+@keyframes pillPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1.08); }
+}
+.assign-pill.pill-pop {
+  animation: pillPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px 16px;
+}
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  transition: background 0.2s, color 0.2s;
+}
+.badge-success {
+  background: var(--success-dim);
+  color: var(--success);
+}
+.badge-warning {
+  background: var(--warning-dim);
+  color: var(--warning);
+}
+.btn-delete-item {
+  background: var(--danger-dim);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, transform 0.1s;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-delete-item:hover { background: rgba(139, 85, 85, 0.12); }
+.btn-delete-item:active { background: rgba(139, 85, 85, 0.2); transform: scale(0.96); }
+
+.add-item-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px dashed var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  user-select: none;
+  min-height: 48px;
+}
+.add-item-btn:hover { background: var(--accent-dim); border-color: var(--accent); }
+.add-item-btn:active { background: var(--accent-dim); transform: scale(0.98); }
+
+/* Add item pulse when no items */
+@keyframes addItemPulse {
+  0%, 100% { border-color: var(--surface-border); }
+  50% { border-color: var(--accent); background: var(--accent-dim); }
+}
+.add-item-btn.pulsing {
+  animation: addItemPulse 2.5s ease-in-out infinite;
+}
+
+/* Empty state with SVG illustration */
+.empty-state {
+  padding: 40px 16px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+}
+.empty-state svg {
+  width: 40px;
+  height: 40px;
+  stroke: var(--text-muted);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+.empty-state p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ==================== EXTRAS SECTION ==================== */
+.extras-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  min-height: 56px;
+}
+.extras-row + .extras-row { border-top: 1px solid var(--divider); }
+.extras-row label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.extras-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  min-height: 44px;
+}
+.extras-input-wrap .symbol {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+.extras-input-wrap input {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  width: 60px;
+  padding: 8px 0;
+  outline: none;
+  text-align: right;
+  min-height: 44px;
+}
+.extras-note {
+  padding: 0 16px 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--divider);
+  padding-top: 12px;
+}
+
+/* ==================== SUMMARY SECTION ==================== */
+.summary-person {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  animation: summaryIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes summaryIn {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.summary-person + .summary-person { border-top: 1px solid var(--divider); }
+.summary-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.summary-info {
+  flex: 1;
+  min-width: 0;
+}
+.summary-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.summary-items {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  word-break: break-word;
+}
+.summary-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-top: 2px solid var(--accent);
+  animation: summaryIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.summary-total-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.summary-total-amount {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ==================== ACTIONS ==================== */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.3s, transform 0.1s;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-primary svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+.btn-primary.copied { background: var(--success); }
+
+.btn-secondary {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  min-height: 48px;
+}
+.btn-secondary:hover { background: var(--surface); }
+.btn-secondary:active { background: var(--surface); transform: scale(0.98); }
+
+/* ==================== TOAST ==================== */
+.toast {
+  position: fixed;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: var(--text-primary);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 200;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==================== BOTTOM SHEET (Reset Confirm) ==================== */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  z-index: 300;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: background 0.3s;
+  pointer-events: none;
+}
+.sheet-overlay.active {
+  background: rgba(0,0,0,0.35);
+  pointer-events: auto;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.sheet {
+  background: var(--surface);
+  border-radius: 20px 20px 0 0;
+  padding: 8px 24px calc(24px + env(safe-area-inset-bottom, 0px));
+  width: 100%;
+  max-width: 460px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sheet-overlay.active .sheet {
+  transform: translateY(0);
+}
+.sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--surface-border);
+  border-radius: 2px;
+  margin: 8px auto 20px;
+}
+.sheet h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.sheet p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.sheet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.btn-danger {
+  width: 100%;
+  padding: 16px;
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  min-height: 48px;
+}
+.btn-danger:hover { opacity: 0.9; }
+.btn-danger:active { opacity: 0.85; transform: scale(0.98); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-spacer"></div>
+  <h1>SplitEasy</h1>
+  <div class="navbar-right">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
+  </div>
+</nav>
+
+<!-- PEOPLE -->
+<div class="section-label">People</div>
+<div class="card" id="peopleCard">
+  <div class="people-chips" id="peopleChips"></div>
+  <div class="add-person-row">
+    <input type="text" id="personInput" placeholder="Name" maxlength="20" autocomplete="off" aria-label="Person name">
+    <button onclick="addPerson()">Add</button>
+  </div>
+</div>
+
+<!-- ITEMS -->
+<div class="section-label">Items</div>
+<div id="itemsList"></div>
+<button class="add-item-btn" id="addItemBtn" onclick="addItem()">
+  <span>+</span> Add Item
+</button>
+
+<!-- EXTRAS -->
+<div class="section-label">Extras</div>
+<div class="card">
+  <div class="extras-row">
+    <label for="gstInput">GST</label>
+    <div class="extras-input-wrap">
+      <input type="number" id="gstInput" value="5" min="0" max="100" step="0.5" oninput="recalc()" aria-label="GST percentage">
+      <span class="symbol">%</span>
+    </div>
+  </div>
+  <div class="extras-row">
+    <label for="tipInput">Tip</label>
+    <div class="extras-input-wrap">
+      <span class="symbol">₹</span>
+      <input type="number" id="tipInput" value="0" min="0" step="10" oninput="recalc()" aria-label="Tip amount">
+    </div>
+  </div>
+  <div class="extras-note">Shared equally across everyone</div>
+</div>
+
+<!-- SUMMARY -->
+<div class="section-label">Summary</div>
+<div class="card" id="summaryCard" role="region" aria-label="Bill summary"></div>
+
+<!-- ACTIONS -->
+<div class="actions">
+  <button class="btn-primary" id="copyBtn" onclick="copyShare()">
+    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    Copy &amp; Share
+  </button>
+  <button class="btn-secondary" onclick="showResetSheet()">Reset</button>
+</div>
+
+<div class="toast" id="toast" aria-live="polite" role="status">Copied to clipboard!</div>
+
+<!-- Bottom sheet for reset confirmation -->
+<div class="sheet-overlay" id="sheetOverlay">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <h3>Reset everything?</h3>
+    <p>This will clear all people, items, and extras. This action can't be undone.</p>
+    <div class="sheet-actions">
+      <button class="btn-danger" onclick="confirmReset()">Yes, Reset</button>
+      <button class="btn-secondary" onclick="closeSheet()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== STATE ====================
+const AVATAR_COLORS = [
+  '#8B6F5E','#5E7B8E','#6E8B6A','#8E6B7D',
+  '#9E8A60','#7568A0','#5E8E85','#A06E6E',
+  '#7A7058','#6085A0','#8B7095','#5E907A'
+];
+let colorIdx = 0;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let people = [];
+let items = [];
+
+// ==================== HELPERS ====================
+function fmt(n) { return Number(n).toFixed(2); }
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+function haptic(ms) {
+  if (navigator.vibrate) navigator.vibrate(ms || 10);
+}
+
+// ==================== DATE (for copy/share) ====================
+const now = new Date();
+const navDateStr = now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+// ==================== SVG ICONS ====================
+const ICON_MOON = '<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>';
+const ICON_SUN = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+const ICON_TRASH = '<svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
+const ICON_CHECK = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+const ICON_SHARE = '<svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>';
+
+// ==================== THEME ====================
+function setThemeIcon() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.getElementById('themeToggle').innerHTML = isDark ? ICON_SUN : ICON_MOON;
+}
+
+function toggleTheme() {
+  haptic();
+  const btn = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+
+  if (reducedMotion) {
+    if (isDark) html.removeAttribute('data-theme');
+    else html.setAttribute('data-theme', 'dark');
+    setThemeIcon();
+    return;
+  }
+
+  // Spin animation: change icon mid-spin
+  btn.classList.remove('spin');
+  btn.offsetHeight;
+  btn.classList.add('spin');
+
+  setTimeout(() => {
+    if (isDark) html.removeAttribute('data-theme');
+    else html.setAttribute('data-theme', 'dark');
+    setThemeIcon();
+  }, 150);
+
+  btn.addEventListener('animationend', () => {
+    btn.classList.remove('spin');
+  }, { once: true });
+}
+
+setThemeIcon();
+
+// ==================== PEOPLE ====================
+function addPerson(name) {
+  const input = document.getElementById('personInput');
+  const n = (name || input.value).trim();
+  if (!n) return;
+  if (people.find(p => p.name.toLowerCase() === n.toLowerCase())) {
+    input.value = '';
+    return;
+  }
+  haptic();
+  const color = AVATAR_COLORS[colorIdx % AVATAR_COLORS.length];
+  colorIdx++;
+  people.push({ id: Date.now() + Math.random(), name: n, color });
+  if (!name) input.value = '';
+  renderPeople();
+  renderAllItems();
+  recalc();
+}
+
+function removePerson(id) {
+  haptic(15);
+  const chip = document.querySelector(`.chip[data-person-id="${id}"]`);
+  if (chip && !reducedMotion) {
+    chip.classList.add('chip-removing');
+    chip.addEventListener('animationend', () => {
+      doRemovePerson(id);
+    }, { once: true });
+  } else {
+    doRemovePerson(id);
+  }
+}
+
+function doRemovePerson(id) {
+  people = people.filter(p => p.id !== id);
+  items.forEach(item => {
+    item.assignedIds = item.assignedIds.filter(aid => aid !== id);
+  });
+  renderPeople();
+  renderAllItems();
+  recalc();
+}
+
+function renderPeople() {
+  const c = document.getElementById('peopleChips');
+  if (!people.length) {
+    c.innerHTML = `<div class="empty-inline">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      <span>No one added yet</span>
+    </div>`;
+    return;
+  }
+  c.innerHTML = people.map(p => `
+    <div class="chip" data-person-id="${p.id}">
+      <div class="avatar" style="background:${p.color}">${p.name[0].toUpperCase()}</div>
+      <span>${esc(p.name)}</span>
+      <button class="remove" onclick="removePerson(${p.id})" aria-label="Remove ${esc(p.name)}">×</button>
+    </div>
+  `).join('');
+}
+
+document.getElementById('personInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addPerson();
+});
+
+// ==================== ITEMS ====================
+function addItem(preset) {
+  haptic();
+  const item = {
+    id: Date.now() + Math.random(),
+    name: preset?.name || '',
+    qty: preset?.qty || 1,
+    price: preset?.price || 0,
+    assignedIds: preset?.assignedIds || []
+  };
+  items.push(item);
+  renderAllItems();
+  recalc();
+}
+
+function removeItem(id) {
+  haptic(15);
+  const block = document.querySelector(`[data-item-id="${id}"]`);
+  if (block && !block.classList.contains('item-removing')) {
+    block.classList.add('item-removing');
+    setTimeout(() => {
+      items = items.filter(i => i.id !== id);
+      renderAllItems();
+      recalc();
+    }, reducedMotion ? 0 : 350);
+  }
+}
+
+function removeItemDirect(id) {
+  items = items.filter(i => i.id !== id);
+  renderAllItems();
+  recalc();
+}
+
+function updateItem(id, field, value) {
+  const item = items.find(i => i.id === id);
+  if (!item) return;
+  item[field] = value;
+  if (field === 'qty' || field === 'price') {
+    updateSubtotal(id);
+    updateBadge(id);
+    updateColorBar(id);
+  }
+  recalc();
+}
+
+function toggleAssign(itemId, personId) {
+  haptic();
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  const idx = item.assignedIds.indexOf(personId);
+  if (idx >= 0) item.assignedIds.splice(idx, 1);
+  else item.assignedIds.push(personId);
+  renderItemAssignRow(itemId);
+  updateBadge(itemId);
+  updateColorBar(itemId);
+  recalc();
+}
+
+function renderAllItems() {
+  const container = document.getElementById('itemsList');
+  const addBtn = document.getElementById('addItemBtn');
+
+  if (!items.length) {
+    container.innerHTML = `<div class="empty-state">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+        <path d="M7 2v20"/>
+        <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>
+      </svg>
+      <p>No items added yet</p>
+    </div>`;
+    if (addBtn) addBtn.classList.add('pulsing');
+    return;
+  }
+  if (addBtn) addBtn.classList.remove('pulsing');
+  container.innerHTML = items.map(item => renderItemBlock(item)).join('');
+  initSwipeHandlers();
+}
+
+function renderItemBlock(item) {
+  const total = item.qty * item.price;
+  const assignedPeople = people.filter(p => item.assignedIds.includes(p.id));
+  const perPerson = assignedPeople.length ? total / assignedPeople.length : 0;
+  const colorBarHtml = assignedPeople.length
+    ? assignedPeople.map(p => `<span style="background:${p.color}"></span>`).join('')
+    : `<span style="background:var(--surface-border)"></span>`;
+
+  const pillsHtml = people.map(p => {
+    const active = item.assignedIds.includes(p.id);
+    const bgStyle = active
+      ? `background:${p.color};border-color:${p.color};`
+      : '';
+    return `<button class="assign-pill${active ? ' active' : ''}"
+        style="${bgStyle}"
+        onclick="toggleAssign(${item.id}, ${p.id})"
+        aria-pressed="${active}"
+        aria-label="Assign to ${esc(p.name)}">
+      <span class="pill-dot" style="background:${active ? 'rgba(255,255,255,0.25)' : p.color}">${p.name[0].toUpperCase()}</span>
+      ${esc(p.name)}
+    </button>`;
+  }).join('');
+
+  const badgeHtml = item.assignedIds.length
+    ? `<span class="badge badge-success">₹${fmt(perPerson)} each</span>`
+    : `<span class="badge badge-warning">Not assigned</span>`;
+
+  const minusDisabled = item.qty <= 1 ? ' stepper-disabled' : '';
+
+  return `<div class="item-block" data-item-id="${item.id}">
+    <div class="item-swipe-bg">${ICON_TRASH}</div>
+    <div class="item-swipe-content">
+      <div class="item-color-bar" id="colorbar-${item.id}">${colorBarHtml}</div>
+      <div class="item-main-row">
+        <input type="text" value="${esc(item.name)}" placeholder="Item name" aria-label="Item name"
+          oninput="updateItem(${item.id},'name',this.value)">
+        <div class="stepper">
+          <button onclick="stepQty(${item.id},-1)" class="${minusDisabled}" aria-label="Decrease quantity">−</button>
+          <div class="qty" id="qty-${item.id}">${item.qty}</div>
+          <button onclick="stepQty(${item.id},1)" aria-label="Increase quantity">+</button>
+        </div>
+        <div class="price-input-wrap">
+          <span class="rupee">₹</span>
+          <input type="number" value="${item.price || ''}" min="0" placeholder="0" aria-label="Price"
+            oninput="updateItem(${item.id},'price',parseFloat(this.value)||0)">
+        </div>
+      </div>
+      <div class="item-subtotal" id="subtotal-${item.id}">${item.qty} × ₹${fmt(item.price)} = ₹${fmt(total)}</div>
+      <div class="item-assign-row" id="assign-${item.id}">
+        <span class="item-assign-label">Split for:</span>
+        ${pillsHtml || '<span style="font-size:12px;color:var(--text-muted)">Add people first</span>'}
+      </div>
+      <div class="item-footer" id="footer-${item.id}">
+        ${badgeHtml}
+        <button class="btn-delete-item" onclick="removeItem(${item.id})">Delete</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function stepQty(id, delta) {
+  haptic();
+  const item = items.find(i => i.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  const qtyEl = document.getElementById(`qty-${id}`);
+  if (qtyEl) {
+    qtyEl.textContent = item.qty;
+    // Bounce animation
+    if (!reducedMotion) {
+      qtyEl.classList.remove('qty-bounce');
+      qtyEl.offsetHeight;
+      qtyEl.classList.add('qty-bounce');
+      qtyEl.addEventListener('animationend', () => qtyEl.classList.remove('qty-bounce'), { once: true });
+    }
+  }
+  // Update minus button disabled state
+  const block = document.querySelector(`[data-item-id="${id}"]`);
+  if (block) {
+    const minusBtn = block.querySelector('.stepper button:first-child');
+    if (minusBtn) {
+      if (item.qty <= 1) minusBtn.classList.add('stepper-disabled');
+      else minusBtn.classList.remove('stepper-disabled');
+    }
+  }
+  updateSubtotal(id);
+  updateBadge(id);
+  recalc();
+}
+
+function updateSubtotal(id) {
+  const item = items.find(i => i.id === id);
+  if (!item) return;
+  const total = item.qty * item.price;
+  const el = document.getElementById(`subtotal-${id}`);
+  if (el) el.textContent = `${item.qty} × ₹${fmt(item.price)} = ₹${fmt(total)}`;
+}
+
+function updateBadge(id) {
+  const item = items.find(i => i.id === id);
+  if (!item) return;
+  const total = item.qty * item.price;
+  const assignedPeople = people.filter(p => item.assignedIds.includes(p.id));
+  const perPerson = assignedPeople.length ? total / assignedPeople.length : 0;
+  const el = document.getElementById(`footer-${id}`);
+  if (!el) return;
+  const badgeHtml = item.assignedIds.length
+    ? `<span class="badge badge-success">₹${fmt(perPerson)} each</span>`
+    : `<span class="badge badge-warning">Not assigned</span>`;
+  el.innerHTML = `${badgeHtml}<button class="btn-delete-item" onclick="removeItem(${item.id})">Delete</button>`;
+}
+
+function updateColorBar(id) {
+  const item = items.find(i => i.id === id);
+  if (!item) return;
+  const assignedPeople = people.filter(p => item.assignedIds.includes(p.id));
+  const el = document.getElementById(`colorbar-${id}`);
+  if (!el) return;
+
+  if (!reducedMotion) {
+    el.classList.add('fading');
+    setTimeout(() => {
+      el.innerHTML = assignedPeople.length
+        ? assignedPeople.map(p => `<span style="background:${p.color}"></span>`).join('')
+        : `<span style="background:var(--surface-border)"></span>`;
+      el.classList.remove('fading');
+    }, 200);
+  } else {
+    el.innerHTML = assignedPeople.length
+      ? assignedPeople.map(p => `<span style="background:${p.color}"></span>`).join('')
+      : `<span style="background:var(--surface-border)"></span>`;
+  }
+}
+
+function renderItemAssignRow(itemId) {
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  const el = document.getElementById(`assign-${itemId}`);
+  if (!el) return;
+
+  const pillsHtml = people.map(p => {
+    const active = item.assignedIds.includes(p.id);
+    const bgStyle = active
+      ? `background:${p.color};border-color:${p.color};`
+      : '';
+    return `<button class="assign-pill${active ? ' active' : ''}${active ? ' pill-pop' : ''}"
+        style="${bgStyle}"
+        onclick="toggleAssign(${item.id}, ${p.id})"
+        aria-pressed="${active}"
+        aria-label="Assign to ${esc(p.name)}">
+      <span class="pill-dot" style="background:${active ? 'rgba(255,255,255,0.25)' : p.color}">${p.name[0].toUpperCase()}</span>
+      ${esc(p.name)}
+    </button>`;
+  }).join('');
+
+  el.innerHTML = `<span class="item-assign-label">Split for:</span>
+    ${pillsHtml || '<span style="font-size:12px;color:var(--text-muted)">Add people first</span>'}`;
+}
+
+// ==================== SWIPE TO DELETE ====================
+function initSwipeHandlers() {
+  document.querySelectorAll('.item-block').forEach(block => {
+    if (block.dataset.swipeInit) return;
+    block.dataset.swipeInit = 'true';
+
+    let startX, startY, currentX, swiping = null;
+    const content = block.querySelector('.item-swipe-content');
+    const bg = block.querySelector('.item-swipe-bg');
+    const itemId = parseFloat(block.dataset.itemId);
+
+    block.addEventListener('touchstart', e => {
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      currentX = startX;
+      swiping = null;
+      content.style.transition = 'none';
+    }, { passive: true });
+
+    block.addEventListener('touchmove', e => {
+      const touch = e.touches[0];
+      currentX = touch.clientX;
+      const dx = currentX - startX;
+      const dy = touch.clientY - startY;
+
+      if (swiping === null) {
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+          swiping = true;
+        } else if (Math.abs(dy) > 8) {
+          swiping = false;
+        }
+      }
+
+      if (swiping && dx < 0) {
+        e.preventDefault();
+        const tx = Math.max(-120, dx);
+        content.style.transform = `translateX(${tx}px)`;
+        bg.style.opacity = Math.min(1, Math.abs(tx) / 80);
+      }
+    }, { passive: false });
+
+    block.addEventListener('touchend', () => {
+      if (!swiping) return;
+      content.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)';
+      const dx = currentX - startX;
+
+      if (dx < -80) {
+        haptic(20);
+        content.style.transform = 'translateX(-100%)';
+        bg.style.opacity = 1;
+        setTimeout(() => removeItemDirect(itemId), 300);
+      } else {
+        content.style.transform = 'translateX(0)';
+        setTimeout(() => { bg.style.opacity = 0; }, 50);
+      }
+      swiping = null;
+    });
+  });
+}
+
+// ==================== CALCULATION ====================
+const prevAmounts = {};
+
+function recalc() {
+  const gst = parseFloat(document.getElementById('gstInput').value) || 0;
+  const tip = parseFloat(document.getElementById('tipInput').value) || 0;
+  const card = document.getElementById('summaryCard');
+
+  if (!people.length) {
+    card.innerHTML = '<div class="summary-empty">Add people to see the breakdown</div>';
+    return;
+  }
+
+  const breakdown = {};
+  people.forEach(p => { breakdown[p.id] = { items: [], subtotal: 0 }; });
+
+  items.forEach(item => {
+    const total = item.qty * item.price;
+    const assigned = people.filter(p => item.assignedIds.includes(p.id));
+    if (!assigned.length || !total) return;
+    const share = total / assigned.length;
+    assigned.forEach(p => {
+      breakdown[p.id].items.push({ name: item.name || 'Unnamed', share });
+      breakdown[p.id].subtotal += share;
+    });
+  });
+
+  const itemsGrandTotal = items.reduce((s, i) => s + i.qty * i.price, 0);
+  const gstAmount = itemsGrandTotal * (gst / 100);
+  const extraPerPerson = people.length ? (gstAmount + tip) / people.length : 0;
+  let grandTotal = 0;
+
+  let html = '';
+  people.forEach((p, idx) => {
+    const b = breakdown[p.id];
+    const personTotal = b.subtotal + extraPerPerson;
+    grandTotal += personTotal;
+
+    const itemList = b.items.length
+      ? b.items.map(i => `${i.name} ₹${fmt(i.share)}`).join(' · ')
+      : 'No items';
+    const extraNote = extraPerPerson > 0
+      ? ` · GST+Tip ₹${fmt(extraPerPerson)}`
+      : '';
+
+    const prev = prevAmounts[p.id] || 0;
+    const amountId = `amt-${p.id}`;
+    const delay = idx * 0.06;
+
+    html += `<div class="summary-person" style="animation-delay:${delay}s">
+      <div class="summary-avatar" style="background:${p.color}">${p.name[0].toUpperCase()}</div>
+      <div class="summary-info">
+        <div class="summary-name">${esc(p.name)}</div>
+        <div class="summary-items">${itemList}${extraNote}</div>
+      </div>
+      <div class="summary-amount" id="${amountId}">₹${fmt(personTotal)}</div>
+    </div>`;
+
+    if (!reducedMotion && Math.abs(prev - personTotal) > 0.01) {
+      requestAnimationFrame(() => animateAmount(amountId, prev, personTotal));
+    }
+    prevAmounts[p.id] = personTotal;
+  });
+
+  const totalDelay = people.length * 0.06;
+  html += `<div class="summary-total" style="animation-delay:${totalDelay}s">
+    <span class="summary-total-label">Grand Total</span>
+    <span class="summary-total-amount">₹${fmt(grandTotal)}</span>
+  </div>`;
+
+  card.innerHTML = html;
+}
+
+function animateAmount(elId, from, to) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const duration = 400;
+  const start = performance.now();
+
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = from + (to - from) * eased;
+    el.textContent = `₹${fmt(current)}`;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ==================== COPY & SHARE ====================
+function copyShare() {
+  const gst = parseFloat(document.getElementById('gstInput').value) || 0;
+  const tip = parseFloat(document.getElementById('tipInput').value) || 0;
+  if (!people.length) return;
+
+  haptic(15);
+
+  const itemsGrandTotal = items.reduce((s, i) => s + i.qty * i.price, 0);
+  const gstAmount = itemsGrandTotal * (gst / 100);
+  const extraPerPerson = people.length ? (gstAmount + tip) / people.length : 0;
+
+  let lines = [`🍽️ *SplitEasy — Bill Split*`, `📅 ${navDateStr}`, ''];
+
+  const breakdown = {};
+  people.forEach(p => { breakdown[p.id] = { items: [], subtotal: 0 }; });
+  items.forEach(item => {
+    const total = item.qty * item.price;
+    const assigned = people.filter(p => item.assignedIds.includes(p.id));
+    if (!assigned.length || !total) return;
+    const share = total / assigned.length;
+    assigned.forEach(p => {
+      breakdown[p.id].items.push({ name: item.name || 'Unnamed', share });
+      breakdown[p.id].subtotal += share;
+    });
+  });
+
+  let grandTotal = 0;
+  people.forEach(p => {
+    const b = breakdown[p.id];
+    const personTotal = b.subtotal + extraPerPerson;
+    grandTotal += personTotal;
+    const itemList = b.items.map(i => `  ${i.name}: ₹${fmt(i.share)}`).join('\n');
+    lines.push(`👤 *${p.name}*`);
+    if (itemList) lines.push(itemList);
+    if (extraPerPerson > 0) lines.push(`  GST+Tip: ₹${fmt(extraPerPerson)}`);
+    lines.push(`  *Total: ₹${fmt(personTotal)}*`);
+    lines.push('');
+  });
+
+  lines.push(`💰 *Grand Total: ₹${fmt(grandTotal)}*`);
+  if (gst) lines.push(`  GST ${gst}%: ₹${fmt(gstAmount)}`);
+  if (tip) lines.push(`  Tip: ₹${fmt(tip)}`);
+
+  const text = lines.join('\n');
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = `${ICON_CHECK} Copied!`;
+    showToast('Copied to clipboard!');
+
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `${ICON_SHARE} Copy &amp; Share`;
+    }, 2000);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ==================== BOTTOM SHEET (Reset) ====================
+function showResetSheet() {
+  if (!people.length && !items.length) return;
+  haptic();
+  document.getElementById('sheetOverlay').classList.add('active');
+}
+
+function closeSheet() {
+  document.getElementById('sheetOverlay').classList.remove('active');
+}
+
+function confirmReset() {
+  haptic(20);
+  closeSheet();
+  people = [];
+  items = [];
+  colorIdx = 0;
+  Object.keys(prevAmounts).forEach(k => delete prevAmounts[k]);
+  document.getElementById('gstInput').value = '0';
+  document.getElementById('tipInput').value = '0';
+  renderPeople();
+  renderAllItems();
+  recalc();
+  showToast('All cleared');
+}
+
+// Close sheet on backdrop click
+document.getElementById('sheetOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeSheet();
+});
+// Close sheet on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeSheet();
+});
+
+// ==================== PRELOAD ====================
+function loadSample() {
+  ['Vipin', 'Shiny', 'Karthik', 'Divya'].forEach(n => addPerson(n));
+
+  const vipin = people.find(p => p.name === 'Vipin');
+  const shiny = people.find(p => p.name === 'Shiny');
+  const karthik = people.find(p => p.name === 'Karthik');
+  const divya = people.find(p => p.name === 'Divya');
+  const everyone = people.map(p => p.id);
+
+  addItem({ name: 'Mutton Biryani', qty: 2, price: 320, assignedIds: [vipin.id, karthik.id] });
+  addItem({ name: 'Dal Rice + Rasam', qty: 1, price: 120, assignedIds: [shiny.id, divya.id] });
+  addItem({ name: 'Prawn Fry', qty: 1, price: 280, assignedIds: [karthik.id] });
+  addItem({ name: 'Fresh Lime Soda', qty: 4, price: 60, assignedIds: [...everyone] });
+
+  document.getElementById('gstInput').value = '5';
+  recalc();
+}
+
+// Sample data removed — start fresh
+</script>
+</body>
+</html>

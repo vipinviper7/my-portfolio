@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CabFare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#000000;
+  --surface:#161616;
+  --surface2:#1E1E1E;
+  --border:#2A2A2A;
+  --text:#FFFFFF;
+  --text2:#A0A0A0;
+  --text3:#808080;
+  --green:#0B8A3E;
+  --red:#E03131;
+  --radius:12px;
+  --sat:env(safe-area-inset-top, 0px);
+  --sab:env(safe-area-inset-bottom, 0px);
+}
+html,body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  height:100%;overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-font-smoothing:antialiased;
+}
+.app{
+  max-width:420px;margin:0 auto;
+  height:100dvh;height:100vh;
+  position:relative;overflow:hidden;
+}
+
+/* Screens */
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  transition:transform 300ms cubic-bezier(.4,0,.2,1),opacity 250ms ease;
+  will-change:transform,opacity;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.screen::-webkit-scrollbar{display:none}
+.screen.active{transform:translateX(0);opacity:1;pointer-events:auto}
+.screen.off-r{transform:translateX(100%);opacity:0;pointer-events:none}
+.screen.off-l{transform:translateX(-100%);opacity:0;pointer-events:none}
+
+/* INPUT */
+.input-screen{padding:0 20px calc(20px + var(--sab))}
+
+.brand{padding:calc(20px + var(--sat)) 0 6px}
+.brand h1{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.tagline{font-size:14px;color:var(--text2);margin:4px 0 28px;line-height:1.4}
+
+/* Sections */
+.section{margin-bottom:24px}
+.section-label{
+  font-size:12px;font-weight:600;color:var(--text2);
+  margin-bottom:10px;text-transform:uppercase;letter-spacing:.3px;
+}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  padding:10px 16px;min-height:44px;
+  display:inline-flex;align-items:center;
+  background:var(--surface2);
+  color:var(--text2);
+  font-size:13px;font-weight:500;
+  border:none;border-radius:100px;
+  cursor:pointer;
+  transition:transform 150ms ease,background 100ms ease,color 100ms ease;
+  -webkit-user-select:none;user-select:none;font-family:inherit;
+}
+.chip:focus-visible{outline:2px solid #FFF;outline-offset:2px}
+.chip:active{transform:scale(.95)}
+.chip[aria-checked="true"]{background:#FFF;color:#000;font-weight:600}
+
+/* Cab type — larger cards */
+.type-row{display:flex;gap:8px}
+.type-card{
+  flex:1;padding:14px 10px;min-height:56px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  background:var(--surface2);color:var(--text2);
+  font-size:12px;font-weight:600;
+  border:1.5px solid transparent;border-radius:var(--radius);
+  cursor:pointer;font-family:inherit;
+  transition:transform 150ms ease,background 100ms ease,color 100ms ease,border-color 100ms ease;
+  -webkit-user-select:none;user-select:none;
+}
+.type-card:focus-visible{outline:2px solid #FFF;outline-offset:2px}
+.type-card:active{transform:scale(.96)}
+.type-card .icon{font-size:20px;line-height:1}
+.type-card .name{font-size:12px;font-weight:600}
+.type-card .price{font-size:11px;font-weight:400;color:var(--text3)}
+.type-card[aria-checked="true"]{background:transparent;border-color:#FFF;color:#FFF}
+.type-card[aria-checked="true"] .price{color:var(--text2)}
+
+/* Stepper */
+.stepper-card{
+  background:var(--surface);
+  border-radius:var(--radius);
+  padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.step-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--surface2);border:none;
+  color:var(--text);font-size:20px;font-weight:600;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background 100ms ease,transform 100ms ease;
+  font-family:inherit;line-height:1;flex-shrink:0;
+}
+.step-btn:focus-visible{outline:2px solid #FFF;outline-offset:2px}
+.step-btn:active:not(:disabled){background:#333;transform:scale(.92)}
+.step-btn:disabled{opacity:.15;cursor:default}
+.step-mid{
+  display:flex;align-items:baseline;gap:4px;justify-content:center;
+}
+.step-num{
+  font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;
+  color:var(--text);text-align:center;
+  background:none;border:none;outline:none;width:70px;font-family:inherit;
+}
+.step-num:focus-visible{outline:2px solid #FFF;outline-offset:-2px;border-radius:4px}
+.step-num::-webkit-inner-spin-button,
+.step-num::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.step-num[type=number]{-moz-appearance:textfield}
+.step-unit{font-size:14px;color:var(--text3);font-weight:600}
+
+/* Time row */
+.time-row{display:flex;gap:8px}
+.time-pill{
+  flex:1;padding:12px 8px;min-height:44px;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  background:var(--surface2);color:var(--text2);
+  font-size:13px;font-weight:500;
+  border:none;border-radius:var(--radius);
+  cursor:pointer;font-family:inherit;
+  transition:transform 150ms ease,background 100ms ease,color 100ms ease;
+  -webkit-user-select:none;user-select:none;
+}
+.time-pill:focus-visible{outline:2px solid #FFF;outline-offset:2px}
+.time-pill:active{transform:scale(.97)}
+.time-pill[aria-checked="true"]{background:#FFF;color:#000;font-weight:600}
+.time-pill .sub{font-size:11px;color:var(--text3);font-weight:400}
+.time-pill[aria-checked="true"] .sub{color:#666}
+
+/* Extras row */
+.extras{display:flex;gap:8px;flex-wrap:wrap}
+.ext{
+  padding:10px 14px;min-height:44px;
+  display:inline-flex;align-items:center;
+  background:var(--surface2);color:var(--text3);
+  font-size:13px;font-weight:500;
+  border:1.5px solid transparent;border-radius:100px;
+  cursor:pointer;font-family:inherit;
+  transition:transform 150ms ease,background 100ms ease,color 100ms ease,border-color 100ms ease;
+  -webkit-user-select:none;user-select:none;
+}
+.ext:focus-visible{outline:2px solid #FFF;outline-offset:2px}
+.ext:active{transform:scale(.95)}
+.ext[aria-checked="true"]{
+  background:transparent;color:var(--text);
+  border-color:var(--text2);
+}
+
+/* CTA */
+.btn-go{
+  width:100%;min-height:52px;padding:14px 24px;
+  background:#FFF;color:#000;
+  font-size:15px;font-weight:700;
+  border:none;border-radius:var(--radius);
+  cursor:pointer;font-family:inherit;
+  transition:transform 100ms ease,opacity 100ms ease;
+  -webkit-user-select:none;user-select:none;
+  position:relative;overflow:hidden;
+  margin-top:4px;
+}
+.btn-go:focus-visible{outline:2px solid #FFF;outline-offset:2px}
+.btn-go:active{transform:scale(.98);opacity:.9}
+.btn-go.loading{pointer-events:none;opacity:.7}
+.btn-go.loading::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.06),transparent);
+  animation:shim 600ms ease forwards;
+}
+@keyframes shim{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* RESULT */
+.result-screen{padding:0 20px calc(20px + var(--sab));justify-content:center}
+
+.r-topbar{
+  position:absolute;top:0;left:0;right:0;
+  padding:calc(12px + var(--sat)) 20px 12px;
+  display:flex;align-items:center;gap:12px;
+  z-index:5;
+}
+.btn-edit{
+  background:var(--surface2);border:none;
+  color:var(--text2);font-size:13px;font-weight:600;
+  padding:10px 16px;min-height:44px;border-radius:100px;
+  cursor:pointer;font-family:inherit;
+  display:inline-flex;align-items:center;
+  transition:transform 100ms ease;
+}
+.btn-edit:focus-visible{outline:2px solid #FFF;outline-offset:2px}
+.btn-edit:active{transform:scale(.95)}
+.r-tag{
+  font-size:11px;font-weight:600;color:var(--text3);
+  margin-left:auto;
+}
+
+/* Receipt card */
+.receipt{
+  background:#FFF;border-radius:16px;
+  overflow:hidden;color:#000;
+  transform:translateY(24px);opacity:0;
+  transition:transform 380ms cubic-bezier(.25,.46,.45,.94),opacity 300ms ease;
+}
+.receipt.show{transform:translateY(0);opacity:1}
+
+.r-head{
+  padding:20px 22px 16px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid #F0F0F0;
+}
+.r-head-icon{font-size:22px;line-height:1}
+.r-head-title{font-size:15px;font-weight:700;color:#000}
+.r-head-badge{
+  margin-left:auto;
+  font-size:11px;font-weight:600;color:#666;
+}
+
+/* Hero fare */
+.fare-hero{padding:24px 22px 20px;text-align:center}
+.fare-range{
+  font-size:44px;font-weight:800;
+  letter-spacing:-2px;line-height:1;
+  font-variant-numeric:tabular-nums;color:#000;
+}
+.fare-range .sym{font-size:24px;color:#767676}
+.fare-range .dash{font-size:24px;color:#ADADAD;margin:0 2px}
+.fare-hint{font-size:12px;color:#767676;margin-top:6px;font-weight:500}
+
+/* Breakdown */
+.bd{padding:0 22px 20px}
+.bd-line{height:1px;background:#EBEBEB;margin-bottom:12px}
+.bd-row{
+  display:flex;justify-content:space-between;
+  padding:4px 0;font-size:13px;
+}
+.bd-row .l{color:#666;font-weight:500}
+.bd-row .r{color:#333;font-weight:600;font-variant-numeric:tabular-nums}
+.bd-total{
+  display:flex;justify-content:space-between;
+  padding:12px 0 0;margin-top:8px;
+  border-top:1px solid #000;
+}
+.bd-total .l{font-size:14px;font-weight:700;color:#000}
+.bd-total .r{font-size:16px;font-weight:800;color:#000;font-variant-numeric:tabular-nums}
+
+.r-foot{
+  padding:12px 22px;background:#F7F7F7;
+  border-top:1px solid #EBEBEB;
+  font-size:12px;color:#767676;text-align:center;font-weight:500;
+}
+
+/* Overcharge */
+.cmp{margin-top:18px}
+.cmp-row{display:flex;align-items:center;gap:10px}
+.cmp-label-text{font-size:12px;color:var(--text3);font-weight:600;white-space:nowrap}
+.cmp-input{
+  flex:1;height:44px;
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:10px;padding:0 14px;
+  font-size:16px;font-weight:700;font-family:inherit;
+  color:var(--text);font-variant-numeric:tabular-nums;
+  outline:none;transition:border-color 150ms ease;
+}
+.cmp-input:focus{border-color:#666}
+.cmp-input::placeholder{color:var(--text3);font-weight:400;font-size:13px}
+
+.cmp-ok{
+  margin-top:12px;padding:12px 14px;
+  background:rgba(11,138,62,.08);border:1px solid rgba(11,138,62,.2);
+  border-radius:10px;text-align:center;
+  font-size:13px;font-weight:600;color:var(--green);
+  display:none;
+}
+.cmp-ok.show{display:block}
+
+.cmp-bad{
+  margin-top:12px;padding:14px;
+  background:rgba(224,49,49,.06);border:1px solid rgba(224,49,49,.15);
+  border-radius:10px;display:none;
+}
+.cmp-bad.show{display:block;animation:nudge 300ms ease}
+@keyframes nudge{
+  0%{transform:translateX(0)}20%{transform:translateX(-5px)}
+  40%{transform:translateX(5px)}60%{transform:translateX(-3px)}
+  80%{transform:translateX(3px)}100%{transform:translateX(0)}
+}
+.cmp-bad-head{
+  font-size:12px;font-weight:700;color:var(--red);
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;
+}
+.bar-group{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.bar-row{display:flex;align-items:center;gap:10px}
+.bar-label{font-size:12px;color:var(--text3);font-weight:600;width:40px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:20px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.bar-fill{
+  height:100%;border-radius:6px;
+  display:flex;align-items:center;justify-content:flex-end;padding-right:8px;
+  font-size:11px;font-weight:700;color:#fff;
+  transition:width 400ms cubic-bezier(.4,0,.2,1);
+  min-width:40px;
+}
+.bar-fill.ok{background:var(--green)}
+.bar-fill.bad{background:var(--red)}
+.cmp-bad-foot{font-size:14px;font-weight:700;color:var(--red);text-align:center}
+
+/* Actions */
+.actions{display:flex;gap:10px;margin-top:18px}
+.btn-a{
+  flex:1;min-height:48px;padding:12px 16px;
+  border-radius:var(--radius);font-size:14px;font-weight:700;
+  cursor:pointer;font-family:inherit;border:none;
+  transition:transform 100ms ease,opacity 100ms ease;
+  -webkit-user-select:none;user-select:none;
+}
+.btn-a:focus-visible{outline:2px solid #FFF;outline-offset:2px}
+.btn-a:active{transform:scale(.97);opacity:.85}
+.btn-a.sec{background:var(--surface2);color:var(--text)}
+.btn-a.pri{background:#FFF;color:#000}
+.btn-a.copied{background:var(--green);color:#fff}
+
+/* Disclaimer */
+.disc{
+  margin-top:12px;padding:10px 14px;
+  background:var(--surface);border-radius:10px;
+  font-size:12px;color:var(--text3);text-align:center;line-height:1.5;
+  display:none;
+}
+.disc.show{display:block}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- INPUT -->
+  <div id="s0" class="screen input-screen active">
+
+    <div class="brand"><h1>CabFare</h1></div>
+    <p class="tagline">Know the fair cab fare before you ride.</p>
+
+    <div class="section">
+      <div class="section-label" id="cityLabel">City</div>
+      <div class="chips" id="cityChips" role="radiogroup" aria-labelledby="cityLabel">
+        <button class="chip" role="radio" aria-checked="true" data-v="chennai" onclick="pickCity(this)">Chennai</button>
+        <button class="chip" role="radio" aria-checked="false" data-v="bengaluru" onclick="pickCity(this)">Bengaluru</button>
+        <button class="chip" role="radio" aria-checked="false" data-v="hyderabad" onclick="pickCity(this)">Hyderabad</button>
+        <button class="chip" role="radio" aria-checked="false" data-v="mumbai" onclick="pickCity(this)">Mumbai</button>
+        <button class="chip" role="radio" aria-checked="false" data-v="pune" onclick="pickCity(this)">Pune</button>
+        <button class="chip" role="radio" aria-checked="false" data-v="delhi" onclick="pickCity(this)">Delhi</button>
+        <button class="chip" role="radio" aria-checked="false" data-v="other" onclick="pickCity(this)">Other</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label" id="typeLabel">Cab type</div>
+      <div class="type-row" id="typeRow" role="radiogroup" aria-labelledby="typeLabel">
+        <button class="type-card" role="radio" aria-checked="true" data-v="mini" onclick="pickType(this)">
+          <span class="icon">🚗</span>
+          <span class="name">Mini</span>
+          <span class="price" id="tpMini"></span>
+        </button>
+        <button class="type-card" role="radio" aria-checked="false" data-v="sedan" onclick="pickType(this)">
+          <span class="icon">🚘</span>
+          <span class="name">Sedan</span>
+          <span class="price" id="tpSedan"></span>
+        </button>
+        <button class="type-card" role="radio" aria-checked="false" data-v="suv" onclick="pickType(this)">
+          <span class="icon">🚙</span>
+          <span class="name">SUV</span>
+          <span class="price" id="tpSuv"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label" id="distLabel">Distance</div>
+      <div class="stepper-card" role="group" aria-labelledby="distLabel">
+        <button class="step-btn" id="dM" onclick="stepD(-1)" aria-label="Decrease distance by 1 km">−</button>
+        <div class="step-mid">
+          <input type="number" class="step-num" id="dI" value="5"
+                 step="1" min="1" max="100" aria-label="Distance in kilometres"
+                 oninput="liveD()" onblur="snapD()">
+          <span class="step-unit" aria-hidden="true">km</span>
+        </div>
+        <button class="step-btn" id="dP" onclick="stepD(1)" aria-label="Increase distance by 1 km">+</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label" id="timeLabel">Time</div>
+      <div class="time-row" id="timeRow" role="radiogroup" aria-labelledby="timeLabel">
+        <button class="time-pill" role="radio" aria-checked="true" data-v="day" onclick="pickTime(this)">☀️ Day</button>
+        <button class="time-pill" role="radio" aria-checked="false" data-v="peak" onclick="pickTime(this)">⚡ Peak</button>
+        <button class="time-pill" role="radio" aria-checked="false" data-v="night" onclick="pickTime(this)">🌙 Night</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label" id="extLabel">Extras</div>
+      <div class="extras" id="extWrap" role="group" aria-labelledby="extLabel">
+        <button class="ext" role="checkbox" aria-checked="false" data-v="toll" onclick="togExt(this)">🛣️ Toll</button>
+        <button class="ext" role="checkbox" aria-checked="false" data-v="airport" onclick="togExt(this)">✈️ Airport</button>
+        <button class="ext" role="checkbox" aria-checked="false" data-v="wait" onclick="togExt(this)">⏱️ Waiting</button>
+      </div>
+    </div>
+
+    <button class="btn-go" id="goBtn" onclick="calc()">Calculate fare</button>
+  </div>
+
+  <!-- RESULT -->
+  <div id="s1" class="screen result-screen off-r">
+
+    <div class="r-topbar">
+      <button class="btn-edit" onclick="back()" aria-label="Go back and edit inputs">← Edit</button>
+      <span class="r-tag" id="rTag"></span>
+    </div>
+
+    <div>
+      <div class="receipt" id="receipt" role="region" aria-label="Fare breakdown">
+        <div class="r-head">
+          <span class="r-head-icon" aria-hidden="true">🚕</span>
+          <span class="r-head-title">Fair Fare</span>
+          <span class="r-head-badge" id="rBadge"></span>
+        </div>
+        <div class="fare-hero">
+          <div class="fare-range" id="fareRange" aria-live="polite"></div>
+          <div class="fare-hint">estimated range</div>
+        </div>
+        <div class="bd" id="bd"></div>
+        <div class="r-foot" id="rFoot"></div>
+      </div>
+
+      <div class="cmp">
+        <div class="cmp-row">
+          <label for="askIn" class="cmp-label-text">Driver asked ₹</label>
+          <input type="number" class="cmp-input" id="askIn"
+                 placeholder="enter amount" inputmode="numeric"
+                 oninput="chkOC()">
+        </div>
+        <div class="cmp-ok" id="cmpOk" role="status">Looks fair — within range.</div>
+        <div class="cmp-bad" id="cmpBad" role="alert">
+          <div class="cmp-bad-head">Overcharge detected</div>
+          <div class="bar-group">
+            <div class="bar-row">
+              <span class="bar-label">Fair</span>
+              <div class="bar-track"><div class="bar-fill ok" id="bFair"></div></div>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Asked</span>
+              <div class="bar-track"><div class="bar-fill bad" id="bAsk"></div></div>
+            </div>
+          </div>
+          <div class="cmp-bad-foot" id="ocAmt"></div>
+        </div>
+      </div>
+
+      <div class="disc" id="disc">Using Chennai rates — actual rates may differ in your city.</div>
+
+      <div class="actions">
+        <button class="btn-a sec" onclick="back()">Recalculate</button>
+        <button class="btn-a pri" id="shareBtn" onclick="share()">Share</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const S={city:'chennai',type:'mini',dist:5,time:'day',ext:[],res:null};
+
+/* Rates: b=base, bd=base dist, pk=per km after base,
+   n=night multiplier, p=peak multiplier,
+   tl=toll, ap=airport surcharge, wt=waiting per 5min */
+const R={
+  chennai:{
+    l:'Chennai',
+    mini:  {b:60, bd:2,pk:12},
+    sedan: {b:100,bd:4,pk:15},
+    suv:   {b:150,bd:4,pk:19},
+    n:.50,nl:'11pm–5am',p:.20,pl:'8–10am, 5–8pm',
+    tl:30,ap:80,wt:5
+  },
+  bengaluru:{
+    l:'Bengaluru',
+    mini:  {b:50, bd:2,pk:11},
+    sedan: {b:100,bd:4,pk:14},
+    suv:   {b:150,bd:4,pk:18},
+    n:.50,nl:'10pm–5am',p:.20,pl:'8–10am, 5–8pm',
+    tl:25,ap:100,wt:5
+  },
+  hyderabad:{
+    l:'Hyderabad',
+    mini:  {b:50, bd:2,pk:11},
+    sedan: {b:100,bd:4,pk:14},
+    suv:   {b:140,bd:4,pk:17},
+    n:.50,nl:'10pm–5am',p:.15,pl:'8–10am, 5–9pm',
+    tl:20,ap:70,wt:4
+  },
+  mumbai:{
+    l:'Mumbai',
+    mini:  {b:60, bd:2,pk:11},
+    sedan: {b:80, bd:2,pk:13},
+    suv:   {b:120,bd:2,pk:17},
+    n:.25,nl:'12am–5am',p:.25,pl:'8–11am, 5–9pm',
+    tl:40,ap:90,wt:5
+  },
+  pune:{
+    l:'Pune',
+    mini:  {b:50, bd:2,pk:10},
+    sedan: {b:80, bd:2,pk:14},
+    suv:   {b:120,bd:2,pk:17},
+    n:.50,nl:'10pm–6am',p:.15,pl:'8–10am, 5–8pm',
+    tl:20,ap:60,wt:4
+  },
+  delhi:{
+    l:'Delhi',
+    mini:  {b:50, bd:2,pk:10},
+    sedan: {b:80, bd:2,pk:14},
+    suv:   {b:120,bd:2,pk:18},
+    n:.25,nl:'11pm–5am',p:.25,pl:'8–10am, 5–9pm',
+    tl:30,ap:100,wt:5
+  },
+  other:{
+    l:'Other',
+    mini:  {b:60, bd:2,pk:12},
+    sedan: {b:100,bd:4,pk:15},
+    suv:   {b:150,bd:4,pk:19},
+    n:.50,nl:'10pm–6am',p:.20,pl:'8–10am, 5–8pm',
+    tl:30,ap:80,wt:5
+  },
+};
+
+const typeNames={mini:'Mini',sedan:'Sedan',suv:'SUV'};
+
+function fare(){
+  const c=R[S.city]||R.other, t=c[S.type], rows=[];
+  rows.push({l:'Base fare (first '+t.bd+' km)',a:t.b});
+  let d=0;if(S.dist>t.bd)d=Math.round((S.dist-t.bd)*t.pk);
+  rows.push({l:'Per km ('+S.dist+' km)',a:d});
+  let s=t.b+d;
+
+  if(S.time==='night'){
+    const ng=Math.round(s*c.n);
+    rows.push({l:'Night surcharge ('+Math.round(c.n*100)+'%)',a:ng});s+=ng;
+  }
+  if(S.time==='peak'){
+    const pk=Math.round(s*c.p);
+    rows.push({l:'Peak surcharge ('+Math.round(c.p*100)+'%)',a:pk});s+=pk;
+  }
+
+  if(S.ext.includes('toll')&&c.tl){rows.push({l:'Toll',a:c.tl});s+=c.tl}
+  if(S.ext.includes('airport')&&c.ap){rows.push({l:'Airport pickup',a:c.ap});s+=c.ap}
+  if(S.ext.includes('wait')&&c.wt){
+    const wc=c.wt*3;
+    rows.push({l:'Waiting (~15 min)',a:wc});s+=wc;
+  }
+
+  const margin=Math.round(s*.08);
+  return{rows,tot:s,lo:Math.max(s-margin,0),hi:s+margin,city:c.l,nl:c.nl,pl:c.pl};
+}
+
+function haptic(ms){try{navigator.vibrate(ms||10)}catch(e){}}
+
+// Update type card prices
+function updTypePrices(){
+  const c=R[S.city]||R.other;
+  document.getElementById('tpMini').textContent='₹'+c.mini.pk+'/km';
+  document.getElementById('tpSedan').textContent='₹'+c.sedan.pk+'/km';
+  document.getElementById('tpSuv').textContent='₹'+c.suv.pk+'/km';
+}
+
+// Nav
+function go(n){
+  const a=document.getElementById('s0'),b=document.getElementById('s1');
+  if(n===0){a.className='screen input-screen active';b.className='screen result-screen off-r'}
+  else{a.className='screen input-screen off-l';b.className='screen result-screen active'}
+}
+function back(){go(0)}
+
+// Swipe-from-left-edge to go back
+(function(){
+  const rs=document.getElementById('s1');
+  let sx=0,sy=0,tracking=false;
+  rs.addEventListener('touchstart',function(e){
+    const t=e.touches[0];
+    if(t.clientX<30){sx=t.clientX;sy=t.clientY;tracking=true}
+    else{tracking=false}
+  },{passive:true});
+  rs.addEventListener('touchend',function(e){
+    if(!tracking)return;
+    const t=e.changedTouches[0];
+    const dx=t.clientX-sx,dy=Math.abs(t.clientY-sy);
+    if(dx>60&&dy<80){haptic(8);back()}
+    tracking=false;
+  },{passive:true});
+})();
+
+// Inputs
+function pickCity(el){
+  document.querySelectorAll('#cityChips .chip').forEach(c=>c.setAttribute('aria-checked','false'));
+  el.setAttribute('aria-checked','true');S.city=el.dataset.v;
+  updTypePrices();
+}
+function pickType(el){
+  document.querySelectorAll('#typeRow .type-card').forEach(c=>c.setAttribute('aria-checked','false'));
+  el.setAttribute('aria-checked','true');S.type=el.dataset.v;
+}
+function pickTime(el){
+  document.querySelectorAll('#timeRow .time-pill').forEach(c=>c.setAttribute('aria-checked','false'));
+  el.setAttribute('aria-checked','true');S.time=el.dataset.v;
+}
+function togExt(el){
+  const v=el.dataset.v;
+  const on=el.getAttribute('aria-checked')==='true';
+  if(on){el.setAttribute('aria-checked','false');S.ext=S.ext.filter(e=>e!==v)}
+  else{el.setAttribute('aria-checked','true');S.ext.push(v)}
+}
+
+function stepD(d){
+  const i=document.getElementById('dI');
+  let v=parseFloat(i.value)||5;
+  v=Math.round(v+d);v=Math.max(1,Math.min(100,v));
+  i.value=v;S.dist=v;updS();haptic(6);
+}
+function liveD(){const v=parseFloat(document.getElementById('dI').value);if(!isNaN(v))S.dist=v;updS()}
+function snapD(){
+  const i=document.getElementById('dI');let v=parseFloat(i.value);
+  if(isNaN(v)||v<1)v=1;if(v>100)v=100;v=Math.round(v);
+  i.value=v;S.dist=v;updS();
+}
+function updS(){
+  document.getElementById('dM').disabled=S.dist<=1;
+  document.getElementById('dP').disabled=S.dist>=100;
+}
+
+// Calculate
+function calc(){
+  snapD();
+  const b=document.getElementById('goBtn');
+  b.classList.add('loading');b.textContent='Calculating...';
+  haptic(15);
+  setTimeout(()=>{
+    b.classList.remove('loading');b.textContent='Calculate fare';
+    S.res=fare();render();go(1);
+  },400);
+}
+
+// Render
+function render(){
+  const r=S.res;if(!r)return;
+
+  document.getElementById('rTag').textContent=r.city+' · '+typeNames[S.type]+' · '+S.dist+' km';
+  let badge=S.time==='day'?'Day':S.time==='peak'?'Peak ('+r.pl+')':'Night ('+r.nl+')';
+  document.getElementById('rBadge').textContent=badge;
+
+  const fr=document.getElementById('fareRange');
+  fr.innerHTML='<span class="sym">₹</span><span id="fL">0</span><span class="dash"> – </span><span class="sym">₹</span><span id="fH">0</span>';
+
+  const bd=document.getElementById('bd');
+  bd.innerHTML='<div class="bd-line"></div>';
+  r.rows.forEach(row=>{
+    if(row.a===0&&!row.l.includes('km'))return;
+    const d=document.createElement('div');d.className='bd-row';
+    d.innerHTML='<span class="l">'+row.l+'</span><span class="r">₹'+row.a+'</span>';
+    bd.appendChild(d);
+  });
+  const t=document.createElement('div');t.className='bd-total';
+  t.innerHTML='<span class="l">Total</span><span class="r">₹'+r.tot+'</span>';
+  bd.appendChild(t);
+
+  document.getElementById('rFoot').textContent=r.city+' · '+typeNames[S.type]+' · '+(S.time==='day'?'Day fare':S.time==='peak'?'Peak fare':'Night fare');
+  document.getElementById('disc').classList.toggle('show',S.city==='other');
+
+  document.getElementById('askIn').value='';
+  document.getElementById('cmpBad').classList.remove('show');
+  document.getElementById('cmpOk').classList.remove('show');
+
+  const sb=document.getElementById('shareBtn');sb.classList.remove('copied');sb.textContent='Share';
+
+  const rc=document.getElementById('receipt');rc.classList.remove('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    rc.classList.add('show');
+    anim('fL',r.lo,500);anim('fH',r.hi,500);
+  }));
+}
+
+function anim(id,tgt,dur){
+  const el=document.getElementById(id);if(!el)return;
+  const t0=performance.now();
+  !function tick(now){
+    const p=Math.min((now-t0)/dur,1);
+    el.textContent=Math.round(tgt*(1-Math.pow(1-p,3)));
+    if(p<1)requestAnimationFrame(tick);
+  }(t0);
+}
+
+// Overcharge
+function chkOC(){
+  const ask=parseInt(document.getElementById('askIn').value);
+  const ok=document.getElementById('cmpOk'),bad=document.getElementById('cmpBad');
+  if(!ask||!S.res){ok.classList.remove('show');bad.classList.remove('show');return}
+  if(ask>S.res.hi){
+    ok.classList.remove('show');
+    const f=S.res.tot,ov=ask-f;
+    document.getElementById('bFair').style.width=(f/ask*100)+'%';
+    document.getElementById('bFair').textContent='₹'+f;
+    document.getElementById('bAsk').style.width='100%';
+    document.getElementById('bAsk').textContent='₹'+ask;
+    document.getElementById('ocAmt').textContent='₹'+ov+' over fair fare';
+    bad.classList.remove('show');void bad.offsetWidth;bad.classList.add('show');
+    haptic(20);
+  } else {
+    bad.classList.remove('show');ok.classList.add('show');
+  }
+}
+
+// Share
+function share(){
+  const r=S.res;if(!r)return;
+  let t='🚕 CabFare — Fair Fare\n━━━━━━━━━━━━━━\n';
+  r.rows.forEach(row=>{if(row.a===0&&!row.l.includes('km'))return;t+=row.l+': ₹'+row.a+'\n'});
+  t+='━━━━━━━━━━━━━━\nTotal: ₹'+r.tot+'\nFair range: ₹'+r.lo+' – ₹'+r.hi+'\n\n';
+  t+=r.city+' · '+typeNames[S.type]+' · '+S.dist+' km · '+(S.time==='day'?'Day':S.time==='peak'?'Peak':'Night');
+  const ask=parseInt(document.getElementById('askIn').value);
+  if(ask&&ask>r.hi)t+='\n\n⚠️ Driver asked ₹'+ask+' — ₹'+(ask-r.tot)+' overcharge';
+
+  if(navigator.share){
+    navigator.share({title:'CabFare — Fair Fare',text:t}).catch(()=>copyFallback(t));
+  } else {
+    copyFallback(t);
+  }
+}
+function copyFallback(t){
+  navigator.clipboard.writeText(t).then(copied).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=t;
+    ta.style.cssText='position:fixed;opacity:0';
+    document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);copied();
+  });
+}
+function copied(){
+  const b=document.getElementById('shareBtn');
+  b.classList.add('copied');b.textContent='Copied ✓';
+  haptic(10);
+  setTimeout(()=>{b.classList.remove('copied');b.textContent='Share'},1500);
+}
+
+updS();
+updTypePrices();
+</script>
+</body>
+</html>

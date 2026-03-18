@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Deal ya No Deal?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0F0F0F;
+  --surface: #1C1C1E;
+  --surface-light: #242424;
+  --border: #2C2C2E;
+  --border-light: #3A3A3C;
+  --text: #F5F5F7;
+  --text-secondary: #8E8E93;
+  --chip-selected: #F5A623;
+  --green: #1A7F4B;
+  --amber: #C8892A;
+  --red: #C0392B;
+  --flag-red: #FF453A;
+  --flag-green: #32D74B;
+  --verdict-color: #1A7F4B;
+}
+
+html { font-size: 16px; -webkit-tap-highlight-color: transparent; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+#app {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+  position: relative;
+}
+
+/* ===== GLOW OVERLAY ===== */
+#glow {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 280px;
+  background: radial-gradient(ellipse at top center, var(--verdict-glow, transparent), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+#glow.active { opacity: 1; }
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  padding: 48px 0 32px;
+  position: relative;
+  z-index: 1;
+}
+.header h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+.header h1 span { color: var(--chip-selected); }
+.header p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* ===== FORM ===== */
+.form-section {
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  display: block;
+}
+.form-label.error { color: var(--flag-red); }
+
+/* ===== CHIPS ===== */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  padding: 10px 16px;
+  border-radius: 20px;
+  background: var(--border);
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  white-space: nowrap;
+}
+.chip:active { transform: scale(0.95); }
+.chip.selected {
+  background: var(--chip-selected);
+  color: #000;
+  font-weight: 600;
+  border-color: var(--chip-selected);
+}
+.chip-group.error .chip:not(.selected) {
+  border-color: var(--flag-red);
+}
+
+/* ===== PRICE INPUTS ===== */
+.price-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--border);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.price-wrapper:focus-within {
+  border-color: var(--chip-selected);
+}
+.price-wrapper.error {
+  border-color: var(--flag-red);
+}
+.currency {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  padding: 0 0 0 16px;
+  line-height: 1;
+}
+.price-wrapper.large .currency { font-size: 28px; }
+.price-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 500;
+  padding: 14px 16px 14px 8px;
+  width: 100%;
+  -moz-appearance: textfield;
+}
+.price-wrapper.large .price-input { font-size: 28px; padding: 16px 16px 16px 8px; }
+.price-input::placeholder { color: #4A4A4E; }
+.price-input::-webkit-outer-spin-button,
+.price-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* ===== SUBMIT BUTTON ===== */
+.submit-btn {
+  width: 100%;
+  padding: 18px 24px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--chip-selected), #E09100);
+  color: #000;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 32px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  z-index: 1;
+}
+.submit-btn:active { transform: scale(0.97); }
+.submit-btn:hover { box-shadow: 0 4px 24px rgba(245, 166, 35, 0.3); }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.submit-btn.shake { animation: shake 0.4s ease; }
+
+/* ===== SCREEN TRANSITIONS ===== */
+.screen { transition: opacity 0.3s ease, transform 0.3s ease; }
+.screen.hidden { display: none; }
+.screen.fading-out { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+.screen.fading-in { opacity: 0; transform: translateY(8px); }
+
+/* ===== VERDICT BADGE ===== */
+.verdict-badge {
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  position: sticky;
+  top: 8px;
+  z-index: 10;
+  margin-top: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  animation: flipIn 0.4s ease-out both;
+}
+@keyframes flipIn {
+  0% { transform: perspective(400px) rotateX(90deg); opacity: 0; }
+  100% { transform: perspective(400px) rotateX(0); opacity: 1; }
+}
+
+/* ===== RESULT CARDS ===== */
+.result-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  padding-bottom: 24px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  border-left: 3px solid var(--verdict-color);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: slideUp 0.35s ease-out forwards;
+}
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* ===== NUMBERS CARD ===== */
+.number-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid #2A2A2C;
+}
+.number-row:last-of-type { border-bottom: none; }
+.number-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.number-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.number-value.save { color: var(--flag-green); font-weight: 700; }
+.number-value.inflated { color: var(--flag-red); }
+
+/* ===== DISCOUNT BARS ===== */
+.discount-bars { margin-top: 14px; }
+.bar-row {
+  margin-bottom: 10px;
+}
+.bar-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+}
+.bar-label span:last-child {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+.bar-track {
+  height: 8px;
+  background: #2A2A2C;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  width: 0;
+  animation: fillBar 0.6s ease-out 0.5s forwards;
+}
+.bar-fill.claimed { background: #6B6B6F; }
+.bar-fill.actual-green { background: var(--green); }
+.bar-fill.actual-amber { background: var(--amber); }
+.bar-fill.actual-red { background: var(--red); }
+@keyframes fillBar {
+  to { width: var(--fill); }
+}
+.bar-note {
+  font-size: 12px;
+  color: var(--flag-red);
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* ===== FLAGS ===== */
+.flag-list { list-style: none; }
+.flag-item {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 8px 0;
+  border-bottom: 1px solid #2A2A2C;
+  opacity: 0;
+  animation: fadeIn 0.25s ease-out forwards;
+}
+.flag-item:last-child { border-bottom: none; }
+.flag-item.red { color: var(--flag-red); }
+.flag-item.green { color: var(--flag-green); }
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ===== EXPLANATION ===== */
+.explanation {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  font-weight: 400;
+}
+
+/* ===== NEXT MOVE CARD ===== */
+.next-move-card {
+  background: var(--surface-light);
+}
+.next-move-action {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.next-move-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ===== BEST TIME CARD ===== */
+.best-time-events {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.best-time-tip {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+.next-sale-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--chip-selected);
+}
+
+/* ===== RESET BUTTON ===== */
+.reset-btn {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+}
+.reset-btn:hover { border-color: var(--text-secondary); color: var(--text); }
+.reset-btn:active { transform: scale(0.97); }
+
+/* ===== OPTIONAL LABEL ===== */
+.optional-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: #4A4A4E;
+  text-transform: uppercase;
+  margin-left: 6px;
+  letter-spacing: 0.3px;
+}
+</style>
+</head>
+<body>
+
+<div id="glow"></div>
+
+<div id="app">
+
+  <!-- ===== INPUT SCREEN ===== -->
+  <div id="input-screen" class="screen">
+    <header class="header">
+      <h1>Deal <span>ya</span> No Deal?</h1>
+      <p>Is it a real deal? Should you buy?</p>
+    </header>
+
+    <!-- Category -->
+    <div class="form-section">
+      <label class="form-label" id="lbl-category">Product category</label>
+      <div class="chip-group" data-field="category">
+        <button type="button" class="chip" data-value="phone">&#x1F4F1; Phone</button>
+        <button type="button" class="chip" data-value="laptop">&#x1F4BB; Laptop</button>
+        <button type="button" class="chip" data-value="tv">&#x1F4FA; TV</button>
+        <button type="button" class="chip" data-value="clothing">&#x1F45F; Clothing</button>
+        <button type="button" class="chip" data-value="audio">&#x1F3A7; Audio</button>
+        <button type="button" class="chip" data-value="appliance">&#x1F3E0; Appliance</button>
+        <button type="button" class="chip" data-value="other">&#x1F4E6; Other</button>
+      </div>
+    </div>
+
+    <!-- Sale price -->
+    <div class="form-section">
+      <label class="form-label" id="lbl-salePrice">Price you're seeing</label>
+      <div class="price-wrapper large" id="wrap-salePrice">
+        <span class="currency">&#8377;</span>
+        <input type="number" class="price-input" id="salePrice" placeholder="32,999" inputmode="numeric">
+      </div>
+    </div>
+
+    <!-- MRP -->
+    <div class="form-section">
+      <label class="form-label" id="lbl-mrp">MRP or 'was' price</label>
+      <div class="price-wrapper" id="wrap-mrp">
+        <span class="currency">&#8377;</span>
+        <input type="number" class="price-input" id="mrp" placeholder="85,990" inputmode="numeric">
+      </div>
+    </div>
+
+    <!-- Platform -->
+    <div class="form-section">
+      <label class="form-label" id="lbl-platform">Platform</label>
+      <div class="chip-group" data-field="platform">
+        <button type="button" class="chip" data-value="flipkart">Flipkart</button>
+        <button type="button" class="chip" data-value="amazon">Amazon</button>
+        <button type="button" class="chip" data-value="myntra">Myntra</button>
+        <button type="button" class="chip" data-value="meesho">Meesho</button>
+        <button type="button" class="chip" data-value="other">Other</button>
+      </div>
+    </div>
+
+    <!-- Sale event -->
+    <div class="form-section">
+      <label class="form-label" id="lbl-saleEvent">Sale event</label>
+      <div class="chip-group" data-field="saleEvent">
+        <button type="button" class="chip" data-value="bbd">Big Billion Days</button>
+        <button type="button" class="chip" data-value="gif">Great Indian Festival</button>
+        <button type="button" class="chip" data-value="eoss">End of Season</button>
+        <button type="button" class="chip" data-value="flash">Flash Sale</button>
+        <button type="button" class="chip" data-value="none">No sale / regular</button>
+      </div>
+    </div>
+
+    <!-- Urgency -->
+    <div class="form-section">
+      <label class="form-label" id="lbl-urgency">Do you need this now?</label>
+      <div class="chip-group" data-field="urgency">
+        <button type="button" class="chip" data-value="urgent">&#x1F525; Urgent need</button>
+        <button type="button" class="chip" data-value="flexible">&#x1F4C5; Soon but flexible</button>
+        <button type="button" class="chip" data-value="browsing">&#x1F440; Just browsing</button>
+      </div>
+    </div>
+
+    <!-- Need level -->
+    <div class="form-section">
+      <label class="form-label" id="lbl-need">What is this to you?</label>
+      <div class="chip-group" data-field="need">
+        <button type="button" class="chip" data-value="broken">&#x1F527; Replacing something broken</button>
+        <button type="button" class="chip" data-value="upgrade">&#x2B06;&#xFE0F; It's an upgrade</button>
+        <button type="button" class="chip" data-value="want">&#x1F49B; Want, not a need</button>
+      </div>
+    </div>
+
+    <!-- Cheaper price -->
+    <div class="form-section">
+      <label class="form-label">Lowest price you've seen <span class="optional-tag">optional</span></label>
+      <div class="price-wrapper" id="wrap-cheaperPrice">
+        <span class="currency">&#8377;</span>
+        <input type="number" class="price-input" id="cheaperPrice" placeholder="—" inputmode="numeric">
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button type="button" class="submit-btn" id="submit-btn">Get my verdict &#8594;</button>
+  </div>
+
+  <!-- ===== RESULT SCREEN ===== -->
+  <div id="result-screen" class="screen hidden">
+    <header class="header">
+      <h1>Deal <span>ya</span> No Deal?</h1>
+    </header>
+    <div id="verdict-badge" class="verdict-badge"></div>
+    <div id="result-cards" class="result-cards"></div>
+    <button type="button" class="reset-btn" id="reset-btn">Check another deal</button>
+  </div>
+
+</div>
+
+<script>
+// ===== CONSTANTS =====
+const FAIR_PRICE_DIV = {
+  phone: 1.2, laptop: 1.35, tv: 1.75, clothing: 4.0,
+  audio: 1.45, appliance: 1.55, other: 1.3
+};
+const CAT_LABELS = {
+  phone: 'Phone', laptop: 'Laptop', tv: 'TV', clothing: 'Clothing',
+  audio: 'Audio', appliance: 'Appliance', other: 'Product'
+};
+const ELECTRONICS = ['phone', 'laptop', 'tv', 'audio', 'appliance'];
+const SALE_LABEL = {
+  bbd: 'Big Billion Days', gif: 'Great Indian Festival',
+  eoss: 'End of Season Sale', flash: 'Flash Sale', none: 'regular pricing'
+};
+const BEST_TIMES = {
+  phone: { events: 'Republic Day (Jan) \u00B7 Independence Day (Aug) \u00B7 Big Billion Days (Oct)', tip: 'Phone prices genuinely drop during Republic Day and Big Billion Days.' },
+  laptop: { events: 'End of financial year (Mar) \u00B7 Back to school (Jul) \u00B7 Big Billion Days (Oct)', tip: 'March clearance and October sales offer the deepest genuine cuts on laptops.' },
+  tv: { events: 'Diwali sales (Oct\u2013Nov) \u00B7 Republic Day (Jan)', tip: 'TVs are the most MRP-inflated category in India. Avoid flash sales entirely.' },
+  clothing: { events: 'End of Season Sale \u2014 July + January', tip: 'EOSS discounts are genuinely real \u2014 brands are clearing actual stock.' },
+  audio: { events: 'Big Billion Days \u00B7 Great Indian Festival', tip: 'Audio deals are most genuine during the big October sales.' },
+  appliance: { events: 'Diwali \u00B7 Republic Day \u00B7 End of financial year', tip: 'Appliances see real discounts during Diwali and Republic Day.' },
+  other: { events: 'Big Billion Days (Oct) \u00B7 Republic Day (Jan)', tip: 'Major sale events offer the best prices across categories.' }
+};
+const SALE_CALENDAR = [
+  { name: 'End of Season Sale (Winter)', m: 0, d: 5 },
+  { name: 'Republic Day Sale', m: 0, d: 19 },
+  { name: 'Holi Sale', m: 2, d: 10 },
+  { name: 'End of Season Sale (Summer)', m: 6, d: 1 },
+  { name: 'Big Billion Days / Great Indian Festival', m: 9, d: 7 },
+  { name: 'Diwali Sale', m: 9, d: 25 }
+];
+
+// ===== STATE =====
+const form = { category: null, salePrice: 0, mrp: 0, platform: null, saleEvent: null, urgency: null, need: null, cheaperPrice: null };
+
+// ===== FORMATTING =====
+function fmt(n) { return '\u20B9' + Number(n).toLocaleString('en-IN'); }
+function pct(n) { return Math.round(n) + '%'; }
+
+// ===== CHIP HANDLING =====
+document.querySelectorAll('.chip-group').forEach(group => {
+  const field = group.dataset.field;
+  group.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      group.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      form[field] = chip.dataset.value;
+      group.classList.remove('error');
+      document.getElementById('lbl-' + field)?.classList.remove('error');
+    });
+  });
+});
+
+// ===== VALIDATION =====
+function validate() {
+  let ok = true;
+  const fields = ['category', 'platform', 'saleEvent', 'urgency', 'need'];
+  fields.forEach(f => {
+    const group = document.querySelector(`.chip-group[data-field="${f}"]`);
+    const label = document.getElementById('lbl-' + f);
+    if (!form[f]) {
+      group.classList.add('error');
+      if (label) label.classList.add('error');
+      ok = false;
+    }
+  });
+  const sp = document.getElementById('salePrice');
+  const mrpEl = document.getElementById('mrp');
+  form.salePrice = parseFloat(sp.value) || 0;
+  form.mrp = parseFloat(mrpEl.value) || 0;
+  form.cheaperPrice = parseFloat(document.getElementById('cheaperPrice').value) || null;
+
+  if (form.salePrice <= 0) {
+    document.getElementById('wrap-salePrice').classList.add('error');
+    document.getElementById('lbl-salePrice').classList.add('error');
+    ok = false;
+  } else {
+    document.getElementById('wrap-salePrice').classList.remove('error');
+    document.getElementById('lbl-salePrice').classList.remove('error');
+  }
+  if (form.mrp <= 0 || form.mrp <= form.salePrice) {
+    document.getElementById('wrap-mrp').classList.add('error');
+    document.getElementById('lbl-mrp').classList.add('error');
+    ok = false;
+  } else {
+    document.getElementById('wrap-mrp').classList.remove('error');
+    document.getElementById('lbl-mrp').classList.remove('error');
+  }
+  return ok;
+}
+
+// ===== VERDICT ENGINE =====
+function analyze() {
+  const { category, salePrice, mrp, platform, saleEvent, urgency, need, cheaperPrice } = form;
+  const claimed = ((mrp - salePrice) / mrp) * 100;
+  const fairPrice = mrp / FAIR_PRICE_DIV[category];
+  const actual = ((fairPrice - salePrice) / fairPrice) * 100;
+  const realSave = Math.max(0, fairPrice - salePrice);
+
+  // Red flags
+  const redFlags = [];
+  if (claimed > 70 && ELECTRONICS.includes(category))
+    redFlags.push('\uD83D\uDEA9 Discount over 70% on electronics \u2014 MRP is almost certainly fake');
+  if (claimed > 80)
+    redFlags.push('\uD83D\uDEA9 Discount over 80% \u2014 that MRP was never real');
+  if (mrp > 3 * salePrice)
+    redFlags.push('\uD83D\uDEA9 MRP is more than 3x the sale price \u2014 padding detected');
+  if (saleEvent === 'flash')
+    redFlags.push('\uD83D\uDEA9 Flash sale urgency \u2014 this price will likely return next week');
+  if (category === 'tv')
+    redFlags.push('\uD83D\uDEA9 TVs are the most MRP-inflated category in India. Real discount is likely ' + pct(Math.max(0, actual)) + ', not ' + pct(claimed));
+  if (cheaperPrice && cheaperPrice < salePrice)
+    redFlags.push('\uD83D\uDEA9 You found it cheaper elsewhere \u2014 this isn\u2019t the best price');
+  if (actual < 5 && actual >= 0)
+    redFlags.push('\uD83D\uDEA9 Barely a deal \u2014 actual discount is under 5%');
+  if (actual < 0)
+    redFlags.push('\uD83D\uDEA9 Sale price is above estimated fair market value \u2014 you\u2019re overpaying');
+
+  // Green flags
+  const greenFlags = [];
+  if ((platform === 'flipkart' || platform === 'amazon') && (saleEvent === 'bbd' || saleEvent === 'gif'))
+    greenFlags.push('\u2705 ' + (platform === 'flipkart' ? 'Flipkart' : 'Amazon') + ' during ' + SALE_LABEL[saleEvent] + ' = most trustworthy pricing');
+  if (category === 'clothing' && saleEvent === 'eoss')
+    greenFlags.push('\u2705 EOSS clothing discounts are real \u2014 brands clear actual stock');
+  if (saleEvent === 'bbd' && category === 'laptop')
+    greenFlags.push('\u2705 Big Billion Days laptop deals are historically genuine');
+  if (actual > 20)
+    greenFlags.push('\u2705 Discount is in the realistic range for this category');
+  if (actual > 10 && actual <= 20)
+    greenFlags.push('\u2705 Price is within a reasonable range of fair market value');
+  if (salePrice < fairPrice * 0.9 && !greenFlags.some(f => f.includes('realistic range')))
+    greenFlags.push('\u2705 Price is more than 10% below estimated fair market value');
+
+  // Verdict
+  let verdict;
+  if (cheaperPrice && cheaperPrice < salePrice) verdict = 'skip';
+  else if (redFlags.length >= 2) verdict = 'skip';
+  else if (redFlags.length === 1 && greenFlags.length === 0) verdict = 'think';
+  else if (redFlags.length === 0 && greenFlags.length >= 1) verdict = 'buy';
+  else verdict = 'think';
+
+  // Next move
+  const nextMove = getNextMove(verdict, urgency, need, salePrice);
+
+  // Explanation
+  const explanation = buildExplanation(verdict, form, claimed, actual, fairPrice);
+
+  return { claimed, actual, fairPrice, realSave, redFlags, greenFlags, verdict, nextMove, explanation };
+}
+
+function getNextMove(verdict, urgency, need, price) {
+  const isUrgent = urgency === 'urgent' || need === 'broken';
+  // CHECK PRIORITIES override only for BUY + browsing + want + high price
+  if (verdict === 'buy' && urgency === 'browsing' && need === 'want' && price > 20000)
+    return 'check-priorities';
+  if (verdict === 'buy') {
+    if (isUrgent) return 'buy-now';
+    if (urgency === 'flexible') return 'buy-verify';
+    return 'wait';
+  }
+  if (verdict === 'think') {
+    if (isUrgent) return 'find-better';
+    return 'wait';
+  }
+  // skip
+  if (isUrgent) return 'find-better';
+  if (urgency === 'browsing' && need === 'want') return 'walk-away';
+  return 'walk-away';
+}
+
+const NEXT_MOVE_DATA = {
+  'buy-now': {
+    label: '\u2192 BUY NOW',
+    color: 'var(--green)',
+    body: 'Open the app and buy it in the next 2 hours. This is a real price and you need it. Don\u2019t overthink this one.'
+  },
+  'buy-verify': {
+    label: '\u2192 BUY \u2014 but verify first',
+    color: '#5FA64A',
+    body: 'Add to cart. Then search \u201C[category] price history India\u201D or check Smartprix. If this matches the 3-month low, complete the purchase. Takes 5 minutes.'
+  },
+  'wait': {
+    label: '\u2192 WAIT for the right sale',
+    color: 'var(--amber)',
+    body: ''
+  },
+  'find-better': {
+    label: '\u2192 FIND A BETTER PRICE',
+    color: '#B85C30',
+    body: 'The product is fine. This deal isn\u2019t. Search it on Smartprix or compare across platforms. You\u2019ll likely find it cheaper without a fake MRP.'
+  },
+  'walk-away': {
+    label: '\u2192 WALK AWAY',
+    color: 'var(--red)',
+    body: 'The discount is manufactured and you don\u2019t need it yet. Add to wishlist, set a price alert, and check back during Big Billion Days or Republic Day sale.'
+  },
+  'check-priorities': {
+    label: '\u2192 CHECK YOUR PRIORITIES',
+    color: 'var(--red)',
+    body: ''
+  }
+};
+
+function getNextSaleEvent() {
+  const now = new Date();
+  for (const ev of SALE_CALENDAR) {
+    const d = new Date(now.getFullYear(), ev.m, ev.d);
+    if (d > now) {
+      const weeks = Math.max(1, Math.ceil((d - now) / (7 * 864e5)));
+      return { name: ev.name, weeks };
+    }
+  }
+  const first = SALE_CALENDAR[0];
+  const d = new Date(now.getFullYear() + 1, first.m, first.d);
+  const weeks = Math.max(1, Math.ceil((d - now) / (7 * 864e5)));
+  return { name: first.name, weeks };
+}
+
+function buildExplanation(verdict, data, claimed, actual, fairPrice) {
+  const { category, salePrice, mrp, saleEvent, urgency, need } = data;
+  const cat = CAT_LABELS[category].toLowerCase();
+  const sp = fmt(salePrice);
+  const mp = fmt(mrp);
+  const fp = fmt(Math.round(fairPrice));
+  const cl = Math.round(claimed);
+  const ac = Math.round(Math.max(0, actual));
+  const saleName = SALE_LABEL[saleEvent];
+
+  if (verdict === 'buy' && (urgency === 'urgent' || need === 'broken')) {
+    return sp + ' for a ' + cat + ' in this range is a real price. The ' + mp + ' MRP is inflated, but the street price checks out. You need it \u2014 buy it.';
+  }
+  if (verdict === 'buy' && urgency === 'browsing') {
+    return 'The deal is real. But you said you\u2019re just browsing. Come back when you actually need it \u2014 this price will return at the next sale.';
+  }
+  if (verdict === 'buy') {
+    return 'This is a genuine ' + ac + '% discount on a ' + cat + '. The MRP is marked up, but ' + sp + ' is a fair price. If it fits your budget, go for it.';
+  }
+  if (category === 'tv' && verdict !== 'buy') {
+    return 'That ' + cl + '% off is mostly fake. The ' + cat.toUpperCase() + ' never actually sold at ' + mp + ' \u2014 that\u2019s a number platforms use to make the deal look bigger. Real discount is closer to ' + ac + '%. Not worth it right now.';
+  }
+  if (category === 'clothing' && saleEvent === 'eoss') {
+    return ac + '% off during End of Season is actually real \u2014 brands are clearing genuine stock. If you like it and it fits your budget, this is one of the few times the discount means something.';
+  }
+  if (verdict === 'skip') {
+    if (data.cheaperPrice && data.cheaperPrice < salePrice) {
+      return 'You already found this cheaper at ' + fmt(data.cheaperPrice) + '. Even ignoring the inflated MRP, this isn\u2019t the best price available. Go with the cheaper option.';
+    }
+    return 'The ' + cl + '% discount is mostly manufactured. The real price of this ' + cat + ' is closer to ' + fp + ', making the actual discount about ' + ac + '%. This deal isn\u2019t what it looks like.';
+  }
+  // think twice
+  if (saleEvent === 'flash') {
+    return 'Flash sale pricing creates urgency, but this price will almost certainly return. The actual discount is about ' + ac + '% once you strip the MRP padding. No rush.';
+  }
+  return 'The ' + mp + ' MRP is inflated \u2014 most ' + cat + 's in this range have a fair market price around ' + fp + '. The real discount is ' + ac + '%, not ' + cl + '%. Not terrible, but not the deal it claims to be.';
+}
+
+// ===== RENDERING =====
+function showResult() {
+  if (!validate()) {
+    const btn = document.getElementById('submit-btn');
+    btn.classList.add('shake');
+    setTimeout(() => btn.classList.remove('shake'), 400);
+    // Scroll to first error
+    const firstError = document.querySelector('.form-label.error');
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const r = analyze();
+  const verdictColors = { buy: 'var(--green)', think: 'var(--amber)', skip: 'var(--red)' };
+  const verdictLabels = { buy: '\u2705 BUY IT NOW', think: '\u26A0\uFE0F THINK TWICE', skip: '\u274C SKIP THIS DEAL' };
+  const verdictHex = { buy: '#1A7F4B', think: '#C8892A', skip: '#C0392B' };
+
+  // Set verdict color globally
+  document.documentElement.style.setProperty('--verdict-color', verdictColors[r.verdict]);
+
+  // Glow
+  const glow = document.getElementById('glow');
+  glow.style.setProperty('--verdict-glow', verdictHex[r.verdict] + '1A');
+
+  // Badge
+  const badge = document.getElementById('verdict-badge');
+  badge.style.background = verdictColors[r.verdict];
+  badge.textContent = verdictLabels[r.verdict];
+  badge.style.animation = 'none';
+  badge.offsetHeight; // reflow
+  badge.style.animation = '';
+
+  // Build cards
+  const container = document.getElementById('result-cards');
+  container.innerHTML = '';
+  let delay = 0.15;
+
+  // Card 1 — Numbers
+  const c1 = makeCard('The Numbers', delay);
+  delay += 0.06;
+  const claimedPct = Math.round(r.claimed);
+  const actualPct = Math.round(Math.max(0, r.actual));
+  const savingsLabel = r.actual > 0 ? fmt(Math.round(r.realSave)) : '\u20B90';
+  const inflated = Math.abs(claimedPct - actualPct) > 10;
+  c1.innerHTML += `
+    <div class="number-row"><span class="number-label">MRP</span><span class="number-value">${fmt(form.mrp)}</span></div>
+    <div class="number-row"><span class="number-label">Sale price</span><span class="number-value">${fmt(form.salePrice)}</span></div>
+    <div class="number-row"><span class="number-label">Claimed discount</span><span class="number-value">${claimedPct}%</span></div>
+    <div class="number-row"><span class="number-label">Actual discount</span><span class="number-value ${inflated ? 'inflated' : ''}">${actualPct}%</span></div>
+    <div class="number-row"><span class="number-label">You save (real)</span><span class="number-value save">${savingsLabel}</span></div>
+    <div class="discount-bars">
+      <div class="bar-row">
+        <div class="bar-label"><span>Claimed</span><span>${claimedPct}%</span></div>
+        <div class="bar-track"><div class="bar-fill claimed" style="--fill: ${Math.min(100, claimedPct)}%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>Actual</span><span>${actualPct}%</span></div>
+        <div class="bar-track"><div class="bar-fill actual-${r.verdict === 'buy' ? 'green' : r.verdict === 'think' ? 'amber' : 'red'}" style="--fill: ${Math.min(100, Math.max(0, actualPct))}%"></div></div>
+      </div>
+      ${inflated ? '<div class="bar-note">MRP looks inflated</div>' : ''}
+    </div>`;
+  container.appendChild(c1);
+
+  // Card 2 — Flags
+  if (r.redFlags.length || r.greenFlags.length) {
+    const c2 = makeCard('What We Found', delay);
+    delay += 0.06;
+    let flagHtml = '<ul class="flag-list">';
+    let flagDelay = delay;
+    r.redFlags.forEach((f, i) => {
+      flagHtml += `<li class="flag-item red" style="animation-delay: ${flagDelay + i * 0.05}s">${f}</li>`;
+    });
+    r.greenFlags.forEach((f, i) => {
+      flagHtml += `<li class="flag-item green" style="animation-delay: ${flagDelay + (r.redFlags.length + i) * 0.05}s">${f}</li>`;
+    });
+    flagHtml += '</ul>';
+    c2.innerHTML += flagHtml;
+    container.appendChild(c2);
+  }
+
+  // Card 3 — Explanation
+  const c3 = makeCard('Plain English', delay);
+  delay += 0.06;
+  c3.innerHTML += `<p class="explanation">${r.explanation}</p>`;
+  container.appendChild(c3);
+
+  // Card 4 — Next move
+  const move = NEXT_MOVE_DATA[r.nextMove];
+  const c4 = makeCard('Your Next Move', delay);
+  delay += 0.06;
+  c4.classList.add('next-move-card');
+  c4.style.borderLeftColor = move.color;
+  let moveBody = move.body;
+  // Dynamic replacements
+  if (r.nextMove === 'buy-verify') {
+    moveBody = moveBody.replace('[category]', CAT_LABELS[form.category].toLowerCase());
+  }
+  if (r.nextMove === 'wait') {
+    const next = getNextSaleEvent();
+    moveBody = 'This isn\u2019t peak pricing. ' + next.name + ' is approximately ' + next.weeks + ' weeks away \u2014 that\u2019s when this category genuinely drops. Screenshot this price as your anchor.';
+  }
+  if (r.nextMove === 'check-priorities') {
+    moveBody = 'You said it\u2019s a want, not a need. Even if the deal is real, buying now means ' + fmt(form.salePrice) + ' less in your account. Sleep on it. If you still want it tomorrow, go for it.';
+  }
+  if (r.nextMove === 'find-better') {
+    const diff = Math.round(form.salePrice * 0.08);
+    moveBody = 'The product is fine. This deal isn\u2019t. Search it on Smartprix or compare across platforms. You\u2019ll likely find it ' + fmt(diff) + ' cheaper without a fake MRP.';
+  }
+  c4.innerHTML += `<div class="next-move-action" style="color: ${move.color}">${move.label}</div><p class="next-move-body">${moveBody}</p>`;
+  container.appendChild(c4);
+
+  // Card 5 — Best time
+  const c5 = makeCard('Best Time to Buy ' + CAT_LABELS[form.category] + 's', delay);
+  const bt = BEST_TIMES[form.category];
+  const nextSale = getNextSaleEvent();
+  c5.innerHTML += `
+    <p class="best-time-events">${bt.events}</p>
+    <p class="best-time-tip">${bt.tip}</p>
+    <div class="next-sale-badge">\uD83D\uDCC5 Next major sale: ${nextSale.name} \u2014 ~${nextSale.weeks} weeks away</div>`;
+  container.appendChild(c5);
+
+  // Transition
+  const inputScreen = document.getElementById('input-screen');
+  const resultScreen = document.getElementById('result-screen');
+  inputScreen.classList.add('fading-out');
+  setTimeout(() => {
+    inputScreen.classList.add('hidden');
+    inputScreen.classList.remove('fading-out');
+    resultScreen.classList.remove('hidden');
+    resultScreen.classList.add('fading-in');
+    glow.classList.add('active');
+    requestAnimationFrame(() => {
+      resultScreen.classList.remove('fading-in');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+  }, 300);
+}
+
+function makeCard(title, delay) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.animationDelay = delay + 's';
+  card.innerHTML = `<div class="card-title">${title}</div>`;
+  return card;
+}
+
+// ===== RESET =====
+function resetToInput() {
+  const inputScreen = document.getElementById('input-screen');
+  const resultScreen = document.getElementById('result-screen');
+  const glow = document.getElementById('glow');
+
+  resultScreen.classList.add('fading-out');
+  glow.classList.remove('active');
+  setTimeout(() => {
+    resultScreen.classList.add('hidden');
+    resultScreen.classList.remove('fading-out');
+    // Reset form
+    form.category = form.platform = form.saleEvent = form.urgency = form.need = null;
+    form.salePrice = form.mrp = 0;
+    form.cheaperPrice = null;
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('.price-input').forEach(i => i.value = '');
+    document.querySelectorAll('.form-label').forEach(l => l.classList.remove('error'));
+    document.querySelectorAll('.chip-group').forEach(g => g.classList.remove('error'));
+    document.querySelectorAll('.price-wrapper').forEach(w => w.classList.remove('error'));
+    inputScreen.classList.remove('hidden');
+    inputScreen.classList.add('fading-in');
+    requestAnimationFrame(() => {
+      inputScreen.classList.remove('fading-in');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }, 300);
+}
+
+// ===== EVENT LISTENERS =====
+document.getElementById('submit-btn').addEventListener('click', showResult);
+document.getElementById('reset-btn').addEventListener('click', resetToInput);
+</script>
+</body>
+</html>

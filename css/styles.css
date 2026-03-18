@@ -710,7 +710,7 @@ body.nav-open {
 }
 
 .tag {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   padding: 0.25rem 0.75rem;
   border-radius: 4px;
@@ -807,8 +807,8 @@ body.nav-open {
 .challenge-subtitle {
   font-size: 0.95rem;
   color: var(--color-text-muted);
-  margin-top: -2rem;
-  margin-bottom: 2rem;
+  margin-top: -1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .challenge-progress {
@@ -875,7 +875,7 @@ body.nav-open {
 }
 
 .app-card__day {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--color-accent);
   text-transform: uppercase;
@@ -917,7 +917,7 @@ body.nav-open {
 .app-card__tag {
   display: inline-flex;
   align-self: flex-start;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   padding: 0.25rem 0.65rem;
   border-radius: 4px;
@@ -996,7 +996,7 @@ a.app-card {
 }
 
 .app-card__try {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-accent);
   text-transform: uppercase;

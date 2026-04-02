@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TipRight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #E9EBF0;
+  --surface: #FFFFFF;
+  --surface-border: #DDDFE5;
+  --text-primary: #1A1C22;
+  --text-secondary: #555866;
+  --text-muted: #6F7180;
+  --accent: #6B7A5E;
+  --accent-dim: rgba(107, 122, 94, 0.08);
+  --accent-light: rgba(107, 122, 94, 0.15);
+  --danger: #8B5555;
+  --danger-dim: rgba(139, 85, 85, 0.08);
+  --success: #4A6E52;
+  --success-dim: rgba(74, 110, 82, 0.08);
+  --warning: #7A6035;
+  --warning-dim: rgba(122, 96, 53, 0.08);
+  --info: #5E6E8B;
+  --info-dim: rgba(94, 110, 139, 0.08);
+  --divider: #ECEDF0;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 100px;
+}
+
+[data-theme="dark"] {
+  --bg: #0D0F14;
+  --surface: #191C23;
+  --surface-border: #252830;
+  --text-primary: #D8D5CF;
+  --text-secondary: #9496A0;
+  --text-muted: #8A8C94;
+  --accent: #8FA07A;
+  --accent-dim: rgba(143, 160, 122, 0.12);
+  --accent-light: rgba(143, 160, 122, 0.18);
+  --danger: #B87878;
+  --danger-dim: rgba(184, 120, 120, 0.10);
+  --success: #8BB892;
+  --success-dim: rgba(139, 184, 146, 0.10);
+  --warning: #BFA06A;
+  --warning-dim: rgba(191, 160, 106, 0.10);
+  --info: #7A8EB8;
+  --info-dim: rgba(122, 142, 184, 0.10);
+  --divider: #1F2128;
+}
+
+html { background: var(--bg); transition: background 0.3s; }
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.4;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 0 16px calc(32px + env(safe-area-inset-bottom, 0px));
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  transition: background 0.3s, color 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  padding: calc(16px + env(safe-area-inset-top, 0px)) 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 24px;
+}
+.navbar h1 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.navbar-spacer { width: 44px; flex-shrink: 0; }
+.navbar-right { display: flex; align-items: center; }
+.theme-toggle {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  padding: 0; flex-shrink: 0;
+}
+.theme-toggle svg {
+  width: 18px; height: 18px;
+  stroke: var(--text-secondary); fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+@keyframes spinOnce {
+  from { transform: rotate(0deg) scale(0.6); opacity: 0; }
+  to { transform: rotate(360deg) scale(1); opacity: 1; }
+}
+.theme-toggle.spin svg { animation: spinOnce 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* ==================== SECTION LABELS ==================== */
+.section-label {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px; padding-left: 4px;
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* ==================== CONTEXT PICKER ==================== */
+.context-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 16px;
+}
+.context-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  color: var(--text-secondary);
+}
+.context-btn:hover { border-color: var(--surface-border); }
+.context-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+.context-btn.active .context-icon { color: var(--accent); }
+.context-icon {
+  font-size: 24px;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+.context-btn.active .context-icon { transform: scale(1.15); }
+.context-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.context-btn.pop { animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* ==================== BILL INPUT ==================== */
+.bill-section { padding: 16px; }
+.bill-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg);
+  border: 2px solid var(--surface-border);
+  border-radius: var(--radius);
+  padding: 0 16px;
+  transition: border-color 0.2s;
+}
+.bill-input-wrap:focus-within { border-color: var(--accent); }
+.bill-input-wrap .rupee {
+  color: var(--text-muted);
+  font-size: 20px;
+  font-weight: 600;
+}
+.bill-input-wrap input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 16px 0;
+  outline: none;
+  min-height: 56px;
+  width: 100%;
+}
+.bill-input-wrap input::placeholder { color: var(--text-secondary); font-weight: 500; }
+
+/* Quick amount chips */
+.quick-amounts {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.quick-chip {
+  padding: 8px 14px;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.quick-chip:hover { border-color: var(--accent); color: var(--accent); }
+.quick-chip:active { transform: scale(0.95); }
+
+/* ==================== SERVICE QUALITY ==================== */
+.quality-section { padding: 16px; border-top: 1px solid var(--divider); }
+.quality-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.quality-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.quality-value {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.quality-pills {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.quality-pill {
+  padding: 10px 4px;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.quality-pill:hover { border-color: var(--surface-border); }
+.quality-pill.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+/* ==================== RESULT CARD ==================== */
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: all 0.3s;
+  animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes slideUp {
+  0% { transform: translateY(16px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.result-header {
+  padding: 20px 16px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--divider);
+}
+.result-tip-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.result-tip-amount {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.result-percent {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.result-breakdown {
+  padding: 16px;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+.result-row + .result-row { border-top: 1px solid var(--divider); }
+.result-row-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.result-row-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.result-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-top: 2px solid var(--accent);
+  background: var(--accent-dim);
+}
+.result-total-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.result-total-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==================== TIP RANGE BAR ==================== */
+.range-section { padding: 0 16px 16px; }
+.range-bar-wrap {
+  position: relative;
+  height: 8px;
+  background: var(--bg);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.range-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ==================== ETIQUETTE CARD ==================== */
+.etiquette-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.etiquette-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--divider);
+}
+.etiquette-icon { font-size: 20px; }
+.etiquette-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.etiquette-list {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.etiquette-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.etiquette-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ==================== EMPTY STATE ==================== */
+.empty-result {
+  text-align: center;
+  padding: 40px 16px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+.empty-result svg {
+  width: 40px; height: 40px;
+  stroke: var(--text-muted); fill: none;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  margin-bottom: 12px; opacity: 0.4;
+}
+.empty-result p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ==================== ACTIONS ==================== */
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.btn-primary {
+  flex: 1;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-primary svg {
+  width: 18px; height: 18px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+.btn-primary.copied { background: var(--success); }
+
+.btn-secondary {
+  padding: 16px;
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  min-height: 48px;
+}
+.btn-secondary:hover { background: var(--surface); }
+.btn-secondary:active { transform: scale(0.98); }
+
+/* ==================== TOAST ==================== */
+.toast {
+  position: fixed;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: var(--text-primary);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 200;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-spacer"></div>
+  <h1>TipRight</h1>
+  <div class="navbar-right">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
+  </div>
+</nav>
+
+<!-- CONTEXT -->
+<div class="section-label">Where are you?</div>
+<div class="card">
+  <div class="context-grid" id="contextGrid"></div>
+</div>
+
+<!-- BILL AMOUNT -->
+<div class="section-label">Bill Amount</div>
+<div class="card">
+  <div class="bill-section">
+    <div class="bill-input-wrap">
+      <span class="rupee">&#8377;</span>
+      <input type="number" id="billInput" placeholder="0" min="0" inputmode="numeric" aria-label="Bill amount" oninput="calculate()">
+    </div>
+    <div class="quick-amounts">
+      <button class="quick-chip" onclick="setBill(200)">&#8377;200</button>
+      <button class="quick-chip" onclick="setBill(500)">&#8377;500</button>
+      <button class="quick-chip" onclick="setBill(1000)">&#8377;1k</button>
+      <button class="quick-chip" onclick="setBill(2500)">&#8377;2.5k</button>
+      <button class="quick-chip" onclick="setBill(5000)">&#8377;5k</button>
+    </div>
+  </div>
+  <div class="quality-section">
+    <div class="quality-header">
+      <span class="quality-title">Service Quality</span>
+      <span class="quality-value" id="qualityBadge" style="background:var(--accent-dim);color:var(--accent)">Good</span>
+    </div>
+    <div class="quality-pills" id="qualityPills"></div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="section-label">Suggested Tip</div>
+<div id="resultArea"></div>
+
+<!-- ETIQUETTE -->
+<div id="etiquetteArea"></div>
+
+<!-- ACTIONS -->
+<div class="actions" id="actionsArea" style="display:none;">
+  <button class="btn-primary" id="copyBtn" onclick="copyResult()">
+    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    Copy Summary
+  </button>
+  <button class="btn-secondary" onclick="resetAll()">Reset</button>
+</div>
+
+<div class="toast" id="toast" aria-live="polite" role="status">Copied!</div>
+
+<script>
+// ==================== DATA ====================
+const CONTEXTS = [
+  { id: 'restaurant', icon: '\uD83C\uDF7D\uFE0F', label: 'Restaurant', tips: [5, 10, 15], etiquette: [
+    'In India, tipping 5\u201310% is standard at restaurants',
+    'Many restaurants add a service charge (check your bill first)',
+    'If service charge is included, additional tip is optional but appreciated',
+    'For small dhabas/street food, rounding up the bill is sufficient'
+  ]},
+  { id: 'delivery', icon: '\uD83D\uDEF5', label: 'Delivery', tips: [3, 5, 8], etiquette: [
+    '\u20B920\u201350 is the norm for food delivery in most cities',
+    'Tip more during bad weather or late-night orders',
+    'In-app tips often go directly to the delivery partner',
+    'Cash tips are always appreciated and ensure the partner gets 100%'
+  ]},
+  { id: 'salon', icon: '\u2702\uFE0F', label: 'Salon / Spa', tips: [5, 10, 15], etiquette: [
+    '10% is a good benchmark at salons and spas',
+    'Tip your stylist directly \u2014 not at the counter if possible',
+    'For premium services (bridal, spa packages), 5\u20137% is acceptable',
+    'Regular customers often tip less per visit but maintain consistency'
+  ]},
+  { id: 'hotel', icon: '\uD83C\uDFE8', label: 'Hotel', tips: [3, 5, 10], etiquette: [
+    'Bellboys: \u20B950\u2013100 per bag is standard',
+    'Room service: \u20B950\u2013100 per delivery, or 5\u201310% of order',
+    'Housekeeping: \u20B950\u2013100/day left on the bed or nightstand',
+    'Concierge: \u20B9100\u2013500 for special arrangements or reservations'
+  ]},
+  { id: 'cafe', icon: '\u2615', label: 'Caf\u00E9', tips: [0, 5, 10], etiquette: [
+    'Tipping at cafes in India is less expected than restaurants',
+    'Dropping change or rounding up is a common gesture',
+    'For table service, 5\u201310% is generous and appreciated',
+    'Most cafes have a tip jar \u2014 even small amounts add up for staff'
+  ]},
+  { id: 'auto', icon: '\uD83D\uDEFA', label: 'Auto / Cab', tips: [0, 5, 10], etiquette: [
+    'Rounding up the fare is the most common practice',
+    'No tip expected if the driver overcharged or refused meter',
+    'For airport/long rides, \u20B920\u201350 extra is a kind gesture',
+    'App-based cabs: in-app ratings matter more than tips to drivers'
+  ]},
+  { id: 'valet', icon: '\uD83D\uDD11', label: 'Valet', tips: [0, 5, 10], etiquette: [
+    '\u20B950\u2013100 is standard for valet parking in metros',
+    'Tip when collecting your car, not when dropping it off',
+    'At luxury venues, \u20B9100\u2013200 is appropriate',
+    'If the valet is complimentary, a tip is still expected'
+  ]},
+  { id: 'home', icon: '\uD83C\uDFE0', label: 'Home Help', tips: [5, 10, 15], etiquette: [
+    'For plumbers, electricians: rounding up or \u20B950\u2013100 extra',
+    'Regular house help: festival bonuses (1 month salary) are customary',
+    'Movers & packers: \u20B9200\u2013500 split among the team',
+    'Tip based on effort and complexity of the job'
+  ]},
+  { id: 'tour', icon: '\uD83E\uDDED', label: 'Tour Guide', tips: [5, 10, 15], etiquette: [
+    '10% of the tour cost is a solid guideline',
+    'For free walking tours, \u20B9200\u2013500 per person is fair',
+    'Tip at the end of the tour directly to the guide',
+    'Group tours: each person should tip individually'
+  ]}
+];
+
+const QUALITIES = [
+  { id: 'poor', label: 'Poor', multiplier: 0.5, color: 'var(--danger)', bg: 'var(--danger-dim)' },
+  { id: 'okay', label: 'Okay', multiplier: 0.75, color: 'var(--warning)', bg: 'var(--warning-dim)' },
+  { id: 'good', label: 'Good', multiplier: 1.0, color: 'var(--accent)', bg: 'var(--accent-dim)' },
+  { id: 'great', label: 'Excellent', multiplier: 1.3, color: 'var(--success)', bg: 'var(--success-dim)' }
+];
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let selectedContext = null;
+let selectedQuality = 'good';
+
+// ==================== SVG ICONS ====================
+const ICON_MOON = '<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>';
+const ICON_SUN = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+const ICON_CHECK = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+const ICON_SHARE = '<svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>';
+
+// ==================== HELPERS ====================
+function fmt(n) { return Number(n).toFixed(0); }
+function fmtDec(n) { return Number(n).toFixed(2); }
+function haptic(ms) { if (navigator.vibrate) navigator.vibrate(ms || 10); }
+
+// ==================== THEME ====================
+function setThemeIcon() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.getElementById('themeToggle').innerHTML = isDark ? ICON_SUN : ICON_MOON;
+}
+
+function toggleTheme() {
+  haptic();
+  const btn = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+
+  if (reducedMotion) {
+    if (isDark) html.removeAttribute('data-theme');
+    else html.setAttribute('data-theme', 'dark');
+    setThemeIcon();
+    return;
+  }
+
+  btn.classList.remove('spin');
+  btn.offsetHeight;
+  btn.classList.add('spin');
+
+  setTimeout(() => {
+    if (isDark) html.removeAttribute('data-theme');
+    else html.setAttribute('data-theme', 'dark');
+    setThemeIcon();
+  }, 150);
+
+  btn.addEventListener('animationend', () => btn.classList.remove('spin'), { once: true });
+}
+
+setThemeIcon();
+
+// ==================== CONTEXT GRID ====================
+function renderContextGrid() {
+  const grid = document.getElementById('contextGrid');
+  grid.innerHTML = CONTEXTS.map(c => `
+    <button class="context-btn${selectedContext === c.id ? ' active' : ''}" data-ctx="${c.id}" onclick="selectContext('${c.id}')">
+      <span class="context-icon">${c.icon}</span>
+      <span class="context-label">${c.label}</span>
+    </button>
+  `).join('');
+}
+
+function selectContext(id) {
+  haptic();
+  selectedContext = id;
+  renderContextGrid();
+
+  // Pop animation
+  if (!reducedMotion) {
+    const btn = document.querySelector(`[data-ctx="${id}"]`);
+    if (btn) {
+      btn.classList.remove('pop');
+      btn.offsetHeight;
+      btn.classList.add('pop');
+    }
+  }
+
+  calculate();
+}
+
+// ==================== QUALITY PILLS ====================
+function renderQualityPills() {
+  const container = document.getElementById('qualityPills');
+  container.innerHTML = QUALITIES.map(q => `
+    <button class="quality-pill${selectedQuality === q.id ? ' active' : ''}" onclick="selectQuality('${q.id}')">${q.label}</button>
+  `).join('');
+  updateQualityBadge();
+}
+
+function selectQuality(id) {
+  haptic();
+  selectedQuality = id;
+  renderQualityPills();
+  calculate();
+}
+
+function updateQualityBadge() {
+  const q = QUALITIES.find(q => q.id === selectedQuality);
+  const badge = document.getElementById('qualityBadge');
+  badge.textContent = q.label;
+  badge.style.background = q.bg;
+  badge.style.color = q.color;
+}
+
+// ==================== BILL INPUT ====================
+function setBill(amount) {
+  haptic();
+  document.getElementById('billInput').value = amount;
+  calculate();
+}
+
+// ==================== CALCULATE ====================
+function calculate() {
+  const bill = parseFloat(document.getElementById('billInput').value) || 0;
+  const resultArea = document.getElementById('resultArea');
+  const etiquetteArea = document.getElementById('etiquetteArea');
+  const actionsArea = document.getElementById('actionsArea');
+
+  if (!selectedContext || bill <= 0) {
+    resultArea.innerHTML = `<div class="empty-result">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/>
+        <path d="M12 16v-4"/>
+        <path d="M12 8h.01"/>
+      </svg>
+      <p>${!selectedContext ? 'Pick a context above to get started' : 'Enter a bill amount'}</p>
+    </div>`;
+    etiquetteArea.innerHTML = '';
+    actionsArea.style.display = 'none';
+    return;
+  }
+
+  const ctx = CONTEXTS.find(c => c.id === selectedContext);
+  const quality = QUALITIES.find(q => q.id === selectedQuality);
+
+  // Base tip % from context (use middle value), adjusted by quality
+  const basePct = ctx.tips[1];
+  const adjustedPct = Math.round(basePct * quality.multiplier);
+  const tipAmount = bill * (adjustedPct / 100);
+  const total = bill + tipAmount;
+
+  // Range
+  const minPct = Math.round(ctx.tips[0] * quality.multiplier);
+  const maxPct = Math.round(ctx.tips[2] * quality.multiplier);
+  const rangeFill = maxPct > 0 ? ((adjustedPct - minPct) / (maxPct - minPct)) * 100 : 50;
+
+  // Smart rounding suggestion
+  const roundedTip = smartRound(tipAmount);
+  const roundedTotal = bill + roundedTip;
+
+  resultArea.innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <div class="result-tip-label">Suggested Tip</div>
+        <div class="result-tip-amount">\u20B9${fmt(roundedTip)}</div>
+        <div class="result-percent">${adjustedPct}% of \u20B9${fmt(bill)}</div>
+      </div>
+      <div class="range-section">
+        <div class="range-bar-wrap">
+          <div class="range-bar-fill" style="width:${Math.max(10, Math.min(100, rangeFill))}%"></div>
+        </div>
+        <div class="range-labels">
+          <span>\u20B9${fmt(bill * minPct / 100)} (${minPct}%)</span>
+          <span>\u20B9${fmt(bill * maxPct / 100)} (${maxPct}%)</span>
+        </div>
+      </div>
+      <div class="result-breakdown">
+        <div class="result-row">
+          <span class="result-row-label">Bill Amount</span>
+          <span class="result-row-value">\u20B9${fmtDec(bill)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Tip (${adjustedPct}%)</span>
+          <span class="result-row-value">\u20B9${fmtDec(tipAmount)}</span>
+        </div>
+        ${roundedTip !== tipAmount ? `<div class="result-row">
+          <span class="result-row-label">Rounded Tip</span>
+          <span class="result-row-value" style="color:var(--accent);font-weight:800">\u20B9${fmt(roundedTip)}</span>
+        </div>` : ''}
+      </div>
+      <div class="result-total-row">
+        <span class="result-total-label">You Pay</span>
+        <span class="result-total-value">\u20B9${fmt(roundedTotal)}</span>
+      </div>
+    </div>
+  `;
+
+  // Etiquette
+  etiquetteArea.innerHTML = `
+    <div class="section-label">Indian Tipping Etiquette</div>
+    <div class="etiquette-card">
+      <div class="etiquette-header">
+        <span class="etiquette-icon">${ctx.icon}</span>
+        <span class="etiquette-title">${ctx.label} Tips</span>
+      </div>
+      <div class="etiquette-list">
+        ${ctx.etiquette.map(e => `
+          <div class="etiquette-item">
+            <span class="etiquette-bullet"></span>
+            <span>${e}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  actionsArea.style.display = 'flex';
+}
+
+function smartRound(amount) {
+  if (amount <= 0) return 0;
+  if (amount <= 20) return Math.ceil(amount / 5) * 5;
+  if (amount <= 100) return Math.round(amount / 10) * 10;
+  if (amount <= 500) return Math.round(amount / 25) * 25;
+  return Math.round(amount / 50) * 50;
+}
+
+// ==================== COPY ====================
+function copyResult() {
+  const bill = parseFloat(document.getElementById('billInput').value) || 0;
+  if (!selectedContext || bill <= 0) return;
+
+  haptic(15);
+
+  const ctx = CONTEXTS.find(c => c.id === selectedContext);
+  const quality = QUALITIES.find(q => q.id === selectedQuality);
+  const basePct = ctx.tips[1];
+  const adjustedPct = Math.round(basePct * quality.multiplier);
+  const tipAmount = bill * (adjustedPct / 100);
+  const roundedTip = smartRound(tipAmount);
+  const roundedTotal = bill + roundedTip;
+
+  const text = [
+    `${ctx.icon} TipRight \u2014 ${ctx.label}`,
+    `Bill: \u20B9${fmtDec(bill)}`,
+    `Service: ${quality.label}`,
+    `Tip: \u20B9${fmt(roundedTip)} (${adjustedPct}%)`,
+    `Total: \u20B9${fmt(roundedTotal)}`
+  ].join('\n');
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = `${ICON_CHECK} Copied!`;
+    showToast('Copied to clipboard!');
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `${ICON_SHARE} Copy Summary`;
+    }, 2000);
+  });
+}
+
+function resetAll() {
+  haptic();
+  selectedContext = null;
+  document.getElementById('billInput').value = '';
+  selectedQuality = 'good';
+  renderContextGrid();
+  renderQualityPills();
+  calculate();
+  showToast('Reset');
+}
+
+// ==================== TOAST ====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ==================== INIT ====================
+renderContextGrid();
+renderQualityPills();
+calculate();
+</script>
+</body>
+</html>

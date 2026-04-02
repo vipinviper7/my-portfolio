@@ -837,7 +837,7 @@ body.nav-open {
 
 .challenge-progress-fill {
   height: 100%;
-  width: 28.6%;
+  width: 33.3%;
   background: linear-gradient(90deg, var(--color-accent), #38bdf8);
   border-radius: 3px;
   transition: width 0.6s ease;

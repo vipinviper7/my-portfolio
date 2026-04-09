@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiet Verse — Vipin</title>
-  <meta name="description" content="Quiet Verse — a distraction-free, offline-first Bible companion. Designed and built in ~3 hours with Claude Code.">
+  <meta name="description" content="Quiet Verse — a distraction-free, offline-first Bible companion. Designed and built with Cursor.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,12 +51,13 @@
         <div class="cs-meta">
           <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Designer &amp; Developer</span></div>
           <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Built with</span><span class="cs-meta-value">: Claude Code, React, Tailwind CSS, Capacitor</span></div>
+          <div class="cs-meta-row"><span class="cs-meta-label">Built with</span><span class="cs-meta-value">: Cursor, React Native (Expo), React Navigation</span></div>
         </div>
       </header>
 
       <div class="cs-cta-row">
-        <a href="https://vipinviper7.github.io/10k-project" target="_blank" rel="noopener noreferrer" class="cs-cta cs-cta--cream">Open Quiet Verse &rarr;</a>
+        <a href="https://vipinviper7.github.io/quiet-verse/" target="_blank" rel="noopener noreferrer" class="cs-cta cs-cta--cream">Open Quiet Verse &rarr;</a>
+        <a href="https://github.com/vipinviper7/quiet-verse" target="_blank" rel="noopener noreferrer" class="cs-cta cs-cta--cream" style="background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #C9A84C;">View on GitHub &rarr;</a>
       </div>
 
 
@@ -127,23 +128,19 @@
 
       <!-- Built in 3 Hours -->
       <section class="cs-section">
-        <h2 class="cs-section-title cs-section-title--cream">Built in 3 Hours</h2>
-        <div class="cs-highlight">
-          <div class="cs-highlight-number">~3 hrs</div>
-          <div class="cs-highlight-label">From idea to working iOS app</div>
-        </div>
+        <h2 class="cs-section-title cs-section-title--cream">How It Was Built</h2>
         <div class="cs-body">
-          <p>This app was built entirely through conversation with Claude Code &mdash; <strong>no manual coding.</strong></p>
-          <p>I described the vision and aesthetic in plain English. Claude generated the React components, styling, and data architecture. I iterated on feel and interactions through conversational feedback. Then I wrapped it as a native app with Capacitor in the same session.</p>
-          <p>The entire process &mdash; from &ldquo;I want a calm Bible app&rdquo; to a working iOS app with all 66 books loaded &mdash; took about three hours.</p>
+          <p>This app was built using <strong>Cursor</strong> &mdash; an AI-powered code editor. I described the vision and iterated on the design and code through conversational prompts, refining the feel and interactions until it matched what I had in mind.</p>
+          <p>The result is a cross-platform app that works on iOS, Android, and the web &mdash; all from a single codebase.</p>
         </div>
         <div class="cs-body">
           <p>Under the hood:</p>
           <ul>
-            <li>React 19 with Tailwind CSS for theming</li>
-            <li>Capacitor for native iOS/Android shell</li>
-            <li>Complete offline operation &mdash; self-hosted fonts, localStorage for bookmarks</li>
-            <li>Lazy loading &mdash; each Bible book loads only when opened (114 KB initial load)</li>
+            <li>React Native with Expo SDK 54 for cross-platform support</li>
+            <li>React Navigation 7 with book sidebar and chapter grid</li>
+            <li>Full KJV Bible with lazy-loaded chapters (JSON imports)</li>
+            <li>AsyncStorage for bookmarks, theme persistence</li>
+            <li>Smooth theme transitions (light cream / dark navy) with gold accents</li>
           </ul>
         </div>
       </section>
@@ -153,7 +150,7 @@
         <h2 class="cs-section-title cs-section-title--cream">What I Learned</h2>
         <div class="cs-body">
           <p>Deciding early on no social features, no accounts, and no internet requirement made every design decision simpler. The constraints were freeing, not limiting.</p>
-          <p>Describing what I wanted in plain English and iterating through conversation gave me a working product in hours instead of weeks. Changed how I think about prototyping.</p>
+          <p>Using Cursor to iterate through conversation gave me a working product quickly. Changed how I think about prototyping.</p>
           <p>Every Bible app I tried had more features than Quiet Verse. None of them were better for actually reading.</p>
         </div>
       </section>
@@ -166,7 +163,7 @@
           <p>Experience Quiet Verse in your browser &mdash; no install required.</p>
         </div>
         <div class="cs-cta-row">
-          <a href="https://vipinviper7.github.io/10k-project" target="_blank" rel="noopener noreferrer" class="cs-cta cs-cta--cream">Open Quiet Verse &rarr;</a>
+          <a href="https://vipinviper7.github.io/quiet-verse/" target="_blank" rel="noopener noreferrer" class="cs-cta cs-cta--cream">Open Quiet Verse &rarr;</a>
         </div>
       </section>
 

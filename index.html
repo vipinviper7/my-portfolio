@@ -15,7 +15,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -61,7 +61,6 @@
 
     <!-- Selected Work -->
     <section id="works" class="works">
-      <div class="orb orb--3"></div>
       <div class="container">
         <span class="section-label">Selected Work</span>
         <h2 class="section-title">Case Studies & Projects</h2>
@@ -81,7 +80,10 @@
               <h3 class="project-title">Recent Updates Feature — Zoho Sprints</h3>
               <p class="project-desc">Zoho Sprints had no way to reach users inside the product. I designed a single feed that handles announcements, reminders, and promotions without adding noise.</p>
               <p class="project-impact">Shipped &middot; 2 sprints</p>
-              <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
+              <div class="project-read-wrap">
+                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
+                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
+              </div>
             </div>
           </a>
 
@@ -98,7 +100,10 @@
               <h3 class="project-title">Product Tour &mdash; Zoho Sprints</h3>
               <p class="project-desc">New users couldn't find their way around Sprints. I designed a guided tour that walks them through key sections without pulling them out of the product.</p>
               <p class="project-impact">Shipped &middot; Product-wide rollout</p>
-              <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
+              <div class="project-read-wrap">
+                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
+                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
+              </div>
             </div>
           </a>
 
@@ -115,7 +120,10 @@
               <h3 class="project-title">Settings Page Redesign — Zoho Sprints</h3>
               <p class="project-desc">The settings page had no visual hierarchy — every option looked the same. I redesigned it for Sprints 2.0 so users could actually scan it.</p>
               <p class="project-impact">Shipped with Sprints 2.0 launch</p>
-              <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
+              <div class="project-read-wrap">
+                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
+                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
+              </div>
             </div>
           </a>
 
@@ -132,7 +140,10 @@
               <h3 class="project-title">CaterEase &mdash; Catering Discovery & Booking</h3>
               <p class="project-desc">Couldn't find a good caterer for my son's birthday. Turned that frustration into a full case study — research, personas, design, and a working app.</p>
               <p class="project-impact">10K Designers cohort &middot; Research to working app</p>
-              <span class="project-read">Case Study &middot; 8 min read <span class="arrow">&rarr;</span></span>
+              <div class="project-read-wrap">
+                <span class="project-read">Case Study &middot; 8 min read <span class="arrow">&rarr;</span></span>
+                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
+              </div>
             </div>
           </a>
 
@@ -149,7 +160,10 @@
               <h3 class="project-title">Quiet Verse &mdash; A Daily Bible Companion</h3>
               <p class="project-desc">Every Bible app I tried was full of social features and streak badges. I wanted one that felt like opening a book &mdash; so I built one.</p>
               <p class="project-impact">Offline-first &middot; Designed &amp; built with Cursor</p>
-              <span class="project-read">Case Study &middot; 4 min read <span class="arrow">&rarr;</span></span>
+              <div class="project-read-wrap">
+                <span class="project-read">Case Study &middot; 4 min read <span class="arrow">&rarr;</span></span>
+                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
+              </div>
             </div>
           </a>
 
@@ -320,6 +334,7 @@
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
+      <canvas class="contact-wave-canvas" id="waveCanvas"></canvas>
       <div class="container">
         <div class="contact-inner">
           <span class="section-label">Get in Touch</span>
@@ -340,7 +355,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 &mdash; Designed & built by Vipin.</p>
+      <p>&copy; 2026 &mdash; Designed & built by V.</p>
     </div>
   </footer>
 

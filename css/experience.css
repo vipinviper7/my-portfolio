@@ -237,7 +237,7 @@
   padding: 0.15rem 0.6rem;
   background-color: rgba(74, 222, 128, 0.1);
   color: #4ade80;
-  border-radius: 50px;
+  border-radius: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -303,8 +303,8 @@
   font-size: 0.7rem;
   font-weight: 600;
   padding: 0.2rem 0.6rem;
-  background-color: var(--color-tag-bg);
-  color: var(--color-tag-text);
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
   border-radius: 4px;
 }
 
@@ -320,6 +320,7 @@
   font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 700;
+  font-style: italic;
   color: var(--color-white);
   margin-bottom: 2rem;
   text-align: center;

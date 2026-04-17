@@ -115,38 +115,38 @@
 
 .qv-phone {
   position: relative;
-  width: 320px;
-  height: 640px;
+  width: 375px;
+  height: 780px;
   background: #1a1a2e;
-  border-radius: 40px;
-  padding: 12px;
+  border-radius: 48px;
+  padding: 14px;
   box-shadow:
     0 0 0 2px rgba(196, 162, 101, 0.25),
     0 20px 60px rgba(0, 0, 0, 0.5),
     0 0 80px rgba(196, 162, 101, 0.06);
 }
 
+/* Dynamic Island */
 .qv-phone-notch {
   position: absolute;
-  top: 12px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
+  width: 100px;
   height: 28px;
-  background: #1a1a2e;
-  border-radius: 0 0 18px 18px;
+  background: #000;
+  border-radius: 20px;
   z-index: 2;
 }
 
 .qv-phone-notch::before {
   content: "";
   position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  background: rgba(196, 162, 101, 0.3);
+  top: 11px;
+  left: 30px;
+  width: 6px;
+  height: 6px;
+  background: rgba(40, 40, 60, 0.8);
   border-radius: 50%;
 }
 
@@ -154,13 +154,34 @@
   width: 100%;
   height: 100%;
   border: none;
-  border-radius: 28px;
+  border-radius: 34px;
   background: #fdf6ec;
+  overflow: hidden;
 }
 
 /* ===========================
    Responsive
    =========================== */
+@media (max-width: 420px) {
+  .qv-phone {
+    width: calc(100vw - 80px);
+    height: calc((100vw - 80px) * 2.08);
+    border-radius: 40px;
+    padding: 10px;
+  }
+
+  .qv-phone-notch {
+    top: 16px;
+    width: 80px;
+    height: 22px;
+    border-radius: 14px;
+  }
+
+  .qv-phone-screen {
+    border-radius: 30px;
+  }
+}
+
 @media (max-width: 480px) {
   .cs-highlight {
     padding: 2rem 1.5rem;
@@ -175,20 +196,27 @@
   }
 
   .qv-phone {
-    width: 280px;
-    height: 560px;
-    border-radius: 36px;
+    width: 300px;
+    height: 624px;
+    border-radius: 40px;
     padding: 10px;
   }
 
   .qv-phone-notch {
-    top: 10px;
-    width: 100px;
-    height: 24px;
-    border-radius: 0 0 14px 14px;
+    top: 16px;
+    width: 80px;
+    height: 22px;
+    border-radius: 14px;
+  }
+
+  .qv-phone-notch::before {
+    top: 9px;
+    left: 24px;
+    width: 5px;
+    height: 5px;
   }
 
   .qv-phone-screen {
-    border-radius: 26px;
+    border-radius: 30px;
   }
 }

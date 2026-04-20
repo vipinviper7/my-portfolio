@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>RentCheck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #E9EBF0;
+  --surface: #FFFFFF;
+  --surface-border: #DDDFE5;
+  --text-primary: #1A1C22;
+  --text-secondary: #555866;
+  --text-muted: #6F7180;
+  --accent: #5E6B8B;
+  --accent-dim: rgba(94, 107, 139, 0.08);
+  --accent-light: rgba(94, 107, 139, 0.15);
+  --danger: #8B5555;
+  --danger-dim: rgba(139, 85, 85, 0.08);
+  --success: #4A6E52;
+  --success-dim: rgba(74, 110, 82, 0.08);
+  --warning: #7A6035;
+  --warning-dim: rgba(122, 96, 53, 0.08);
+  --info: #5E6E8B;
+  --info-dim: rgba(94, 110, 139, 0.08);
+  --divider: #ECEDF0;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 100px;
+}
+
+[data-theme="dark"] {
+  --bg: #0D0F14;
+  --surface: #191C23;
+  --surface-border: #252830;
+  --text-primary: #D8D5CF;
+  --text-secondary: #9496A0;
+  --text-muted: #8A8C94;
+  --accent: #8B9ABF;
+  --accent-dim: rgba(139, 154, 191, 0.12);
+  --accent-light: rgba(139, 154, 191, 0.18);
+  --danger: #B87878;
+  --danger-dim: rgba(184, 120, 120, 0.10);
+  --success: #8BB892;
+  --success-dim: rgba(139, 184, 146, 0.10);
+  --warning: #BFA06A;
+  --warning-dim: rgba(191, 160, 106, 0.10);
+  --info: #7A8EB8;
+  --info-dim: rgba(122, 142, 184, 0.10);
+  --divider: #1F2128;
+}
+
+html { background: var(--bg); transition: background 0.3s; }
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.4;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 0 16px calc(32px + env(safe-area-inset-bottom, 0px));
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  transition: background 0.3s, color 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  padding: calc(16px + env(safe-area-inset-top, 0px)) 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 24px;
+}
+.navbar h1 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.navbar-spacer { width: 44px; flex-shrink: 0; }
+.navbar-right { display: flex; align-items: center; }
+.theme-toggle {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  padding: 0; flex-shrink: 0;
+}
+.theme-toggle svg {
+  width: 18px; height: 18px;
+  stroke: var(--text-secondary); fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.theme-toggle:hover { background: var(--accent-dim); border-color: var(--accent); }
+@keyframes spinToggle { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+.theme-toggle.spin svg { animation: spinToggle 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* ==================== SECTION LABELS ==================== */
+.section-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 2px;
+}
+
+/* ==================== CARD ==================== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--accent-light); }
+
+/* ==================== SELECTS & INPUTS ==================== */
+.input-section { padding: 16px; }
+.input-section + .input-section { border-top: 1px solid var(--divider); }
+.input-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  display: block;
+}
+.styled-select {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236F7180' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color 0.15s;
+}
+.styled-select:hover { border-color: var(--accent); }
+
+.styled-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+}
+.styled-input:hover { border-color: var(--accent); }
+.styled-input::placeholder { color: var(--text-muted); font-weight: 500; }
+
+/* ==================== PILLS GRID ==================== */
+.pills-grid {
+  display: grid;
+  gap: 6px;
+}
+.pills-grid--4 { grid-template-columns: repeat(4, 1fr); }
+.pills-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.pill-btn {
+  padding: 10px 4px;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.pill-btn:hover { border-color: var(--surface-border); }
+.pill-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+/* ==================== RENT INPUT ==================== */
+.rent-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 14px;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s;
+}
+.rent-input-wrap:focus-within { border-color: var(--accent); }
+.rupee {
+  color: var(--text-muted);
+  font-size: 20px;
+  font-weight: 600;
+}
+.rent-input-wrap input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 16px 0;
+  outline: none;
+  min-height: 56px;
+  width: 100%;
+}
+.rent-input-wrap input::placeholder { color: var(--text-secondary); font-weight: 500; }
+
+/* Quick amount chips */
+.quick-amounts {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.quick-chip {
+  padding: 8px 14px;
+  background: var(--bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.quick-chip:hover { border-color: var(--accent); color: var(--accent); }
+.quick-chip:active { transform: scale(0.95); }
+
+/* ==================== RESULT CARD ==================== */
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: all 0.3s;
+  animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes slideUp {
+  0% { transform: translateY(16px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.result-header {
+  padding: 20px 16px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--divider);
+}
+.result-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.result-verdict {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.result-verdict--great { color: var(--success); }
+.result-verdict--fair { color: var(--accent); }
+.result-verdict--high { color: var(--warning); }
+.result-verdict--overpriced { color: var(--danger); }
+
+.result-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.result-breakdown {
+  padding: 16px;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+.result-row + .result-row { border-top: 1px solid var(--divider); }
+.result-row-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.result-row-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Range bar */
+.range-section { padding: 0 16px 16px; }
+.range-bar-wrap {
+  position: relative;
+  height: 8px;
+  background: var(--bg);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.range-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.range-marker {
+  position: absolute;
+  top: -6px;
+  width: 3px;
+  height: 20px;
+  border-radius: 2px;
+  transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ==================== TIPS CARD ==================== */
+.tips-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.tips-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--divider);
+}
+.tips-icon { font-size: 20px; }
+.tips-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.tips-list {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tips-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.tips-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ==================== EMPTY STATE ==================== */
+.empty-result {
+  text-align: center;
+  padding: 40px 16px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+.empty-result svg {
+  width: 40px; height: 40px;
+  stroke: var(--text-muted); fill: none;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  margin-bottom: 12px; opacity: 0.4;
+}
+.empty-result p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ==================== ACTIONS ==================== */
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.btn-primary {
+  flex: 1;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-primary svg {
+  width: 18px; height: 18px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+.btn-primary.copied { background: var(--success); }
+
+.btn-secondary {
+  padding: 16px;
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  min-height: 48px;
+}
+.btn-secondary:hover { background: var(--surface); }
+.btn-secondary:active { transform: scale(0.98); }
+
+/* ==================== TOAST ==================== */
+.toast {
+  position: fixed;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: var(--text-primary);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 200;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-spacer"></div>
+  <h1>RentCheck</h1>
+  <div class="navbar-right">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
+  </div>
+</nav>
+
+<!-- CITY -->
+<div class="section-label">City</div>
+<div class="card">
+  <div class="input-section">
+    <select class="styled-select" id="citySelect" onchange="calculate()">
+      <option value="">Select a city</option>
+      <option value="mumbai">Mumbai</option>
+      <option value="delhi">Delhi NCR</option>
+      <option value="bangalore">Bangalore</option>
+      <option value="hyderabad">Hyderabad</option>
+      <option value="chennai">Chennai</option>
+      <option value="pune">Pune</option>
+      <option value="kolkata">Kolkata</option>
+      <option value="ahmedabad">Ahmedabad</option>
+    </select>
+  </div>
+</div>
+
+<!-- LOCALITY -->
+<div class="section-label">Locality Type</div>
+<div class="card">
+  <div class="input-section">
+    <div class="pills-grid pills-grid--3" id="localityPills"></div>
+  </div>
+</div>
+
+<!-- BHK -->
+<div class="section-label">BHK</div>
+<div class="card">
+  <div class="input-section">
+    <div class="pills-grid pills-grid--4" id="bhkPills"></div>
+  </div>
+</div>
+
+<!-- FURNISHING -->
+<div class="section-label">Furnishing</div>
+<div class="card">
+  <div class="input-section">
+    <div class="pills-grid pills-grid--3" id="furnishPills"></div>
+  </div>
+</div>
+
+<!-- MONTHLY RENT -->
+<div class="section-label">Your Monthly Rent</div>
+<div class="card">
+  <div class="input-section">
+    <div class="rent-input-wrap">
+      <span class="rupee">&#8377;</span>
+      <input type="number" id="rentInput" placeholder="0" min="0" inputmode="numeric" aria-label="Monthly rent" oninput="calculate()">
+    </div>
+    <div class="quick-amounts">
+      <button class="quick-chip" onclick="setRent(8000)">&#8377;8k</button>
+      <button class="quick-chip" onclick="setRent(15000)">&#8377;15k</button>
+      <button class="quick-chip" onclick="setRent(25000)">&#8377;25k</button>
+      <button class="quick-chip" onclick="setRent(40000)">&#8377;40k</button>
+      <button class="quick-chip" onclick="setRent(60000)">&#8377;60k</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="section-label">Verdict</div>
+<div id="resultArea"></div>
+
+<!-- TIPS -->
+<div id="tipsArea"></div>
+
+<!-- ACTIONS -->
+<div class="actions" id="actionsArea" style="display:none;">
+  <button class="btn-primary" id="copyBtn" onclick="copyResult()">
+    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    Copy Summary
+  </button>
+  <button class="btn-secondary" onclick="resetAll()">Reset</button>
+</div>
+
+<div class="toast" id="toast" aria-live="polite" role="status">Copied!</div>
+
+<script>
+// ==================== DATA ====================
+// Base rents: per month for 1BHK unfurnished in each city by locality
+const RENT_DATA = {
+  mumbai: {
+    name: 'Mumbai',
+    base: { prime: 35000, suburban: 18000, outskirts: 10000 },
+    tips: [
+      'Mumbai rents vary wildly — South Mumbai can be 4x the suburbs for the same BHK',
+      'Always check if maintenance is included in rent or charged separately (typically ₹3–8K)',
+      'Negotiate 11-month lock-in; most landlords expect 2–3 months deposit',
+      'Western line suburbs (Andheri, Borivali) offer best value for professionals'
+    ]
+  },
+  delhi: {
+    name: 'Delhi NCR',
+    base: { prime: 28000, suburban: 14000, outskirts: 7000 },
+    tips: [
+      'South Delhi (GK, Hauz Khas) commands premium; Noida/Gurgaon offer newer apartments cheaper',
+      'Check DDA vs builder flats — DDA flats are cheaper but older',
+      'Parking is often ₹1–3K extra in gated societies',
+      'Winter months (Oct–Dec) see higher demand — try negotiating in summer'
+    ]
+  },
+  bangalore: {
+    name: 'Bangalore',
+    base: { prime: 30000, suburban: 16000, outskirts: 8000 },
+    tips: [
+      'IT corridor (Whitefield, Sarjapur) sees peak demand — rents spike near office hubs',
+      'Most landlords ask for 10-month deposit upfront (unique to Bangalore)',
+      'Negotiate deposit down to 5–6 months; some new landlords agree',
+      'Indiranagar and Koramangala have the highest rents per sq ft in the city'
+    ]
+  },
+  hyderabad: {
+    name: 'Hyderabad',
+    base: { prime: 22000, suburban: 12000, outskirts: 6000 },
+    tips: [
+      'HITEC City and Gachibowli areas command premium due to IT proximity',
+      'Old city areas (Charminar side) are significantly cheaper but farther from offices',
+      'Standard deposit is 2–3 months; much more reasonable than Bangalore',
+      'New gated communities in Kondapur offer good value with amenities'
+    ]
+  },
+  chennai: {
+    name: 'Chennai',
+    base: { prime: 24000, suburban: 13000, outskirts: 7000 },
+    tips: [
+      'OMR (IT Expressway) has the most rental options for tech professionals',
+      'T. Nagar and Adyar are premium residential areas with limited new supply',
+      'Water scarcity can affect some areas — check borewell availability',
+      'Porur and Ambattur are emerging affordable alternatives near IT parks'
+    ]
+  },
+  pune: {
+    name: 'Pune',
+    base: { prime: 22000, suburban: 12000, outskirts: 6500 },
+    tips: [
+      'Hinjewadi and Kharadi are IT hubs — expect ₹2–5K premium over similar BHK elsewhere',
+      'Pune has more reasonable deposits (2–3 months) compared to other metros',
+      'Kothrud and Aundh offer good balance of connectivity and rent',
+      'New townships (Wakad, Baner) have many options in gated complexes'
+    ]
+  },
+  kolkata: {
+    name: 'Kolkata',
+    base: { prime: 18000, suburban: 9000, outskirts: 5000 },
+    tips: [
+      'Kolkata remains one of the most affordable metros for renting',
+      'Salt Lake and New Town are IT hubs with modern apartments',
+      'South Kolkata (Ballygunge, Alipore) is the premium residential belt',
+      'Most landlords expect 2-month deposit with 11-month lease agreement'
+    ]
+  },
+  ahmedabad: {
+    name: 'Ahmedabad',
+    base: { prime: 18000, suburban: 10000, outskirts: 5500 },
+    tips: [
+      'SG Highway and Prahlad Nagar are premium commercial-residential zones',
+      'West Ahmedabad (Satellite, Bodakdev) commands highest residential rents',
+      'Very affordable compared to other metros — great value for space',
+      'Most societies include maintenance in rent or charge minimal extra'
+    ]
+  }
+};
+
+// BHK multipliers
+const BHK_MULT = { '1': 1.0, '2': 1.65, '3': 2.3, '4': 3.1 };
+
+// Furnishing multipliers
+const FURNISH_MULT = { unfurnished: 1.0, semi: 1.3, fully: 1.7 };
+
+const LOCALITIES = [
+  { id: 'prime', label: 'Prime' },
+  { id: 'suburban', label: 'Suburban' },
+  { id: 'outskirts', label: 'Outskirts' }
+];
+
+const BHK_OPTIONS = [
+  { id: '1', label: '1 BHK' },
+  { id: '2', label: '2 BHK' },
+  { id: '3', label: '3 BHK' },
+  { id: '4', label: '4 BHK' }
+];
+
+const FURNISH_OPTIONS = [
+  { id: 'unfurnished', label: 'Unfurnished' },
+  { id: 'semi', label: 'Semi' },
+  { id: 'fully', label: 'Fully' }
+];
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let selectedLocality = 'suburban';
+let selectedBhk = '2';
+let selectedFurnish = 'semi';
+
+// ==================== SVG ICONS ====================
+const ICON_MOON = '<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>';
+const ICON_SUN = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+const ICON_CHECK = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+const ICON_SHARE = '<svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>';
+
+// ==================== HELPERS ====================
+function fmt(n) { return Number(n).toLocaleString('en-IN', { maximumFractionDigits: 0 }); }
+function haptic(ms) { if (navigator.vibrate) navigator.vibrate(ms || 10); }
+
+// ==================== THEME ====================
+function setThemeIcon() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.getElementById('themeToggle').innerHTML = isDark ? ICON_SUN : ICON_MOON;
+}
+
+function toggleTheme() {
+  haptic();
+  const btn = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+
+  if (reducedMotion) {
+    if (isDark) html.removeAttribute('data-theme');
+    else html.setAttribute('data-theme', 'dark');
+    setThemeIcon();
+    return;
+  }
+
+  btn.classList.remove('spin');
+  btn.offsetHeight;
+  btn.classList.add('spin');
+
+  setTimeout(() => {
+    if (isDark) html.removeAttribute('data-theme');
+    else html.setAttribute('data-theme', 'dark');
+    setThemeIcon();
+  }, 150);
+
+  btn.addEventListener('animationend', () => btn.classList.remove('spin'), { once: true });
+}
+
+setThemeIcon();
+
+// ==================== PILLS ====================
+function renderPills(containerId, options, selected, selectFn) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = options.map(o => `
+    <button class="pill-btn${selected === o.id ? ' active' : ''}" onclick="${selectFn}('${o.id}')">${o.label}</button>
+  `).join('');
+}
+
+function selectLocality(id) { haptic(); selectedLocality = id; renderPills('localityPills', LOCALITIES, selectedLocality, 'selectLocality'); calculate(); }
+function selectBhk(id) { haptic(); selectedBhk = id; renderPills('bhkPills', BHK_OPTIONS, selectedBhk, 'selectBhk'); calculate(); }
+function selectFurnish(id) { haptic(); selectedFurnish = id; renderPills('furnishPills', FURNISH_OPTIONS, selectedFurnish, 'selectFurnish'); calculate(); }
+
+// ==================== RENT INPUT ====================
+function setRent(amount) {
+  haptic();
+  document.getElementById('rentInput').value = amount;
+  calculate();
+}
+
+// ==================== CALCULATE ====================
+function calculate() {
+  const city = document.getElementById('citySelect').value;
+  const rent = parseFloat(document.getElementById('rentInput').value) || 0;
+  const resultArea = document.getElementById('resultArea');
+  const tipsArea = document.getElementById('tipsArea');
+  const actionsArea = document.getElementById('actionsArea');
+
+  if (!city || rent <= 0) {
+    resultArea.innerHTML = `<div class="empty-result">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <p>${!city ? 'Select a city to get started' : 'Enter your monthly rent'}</p>
+    </div>`;
+    tipsArea.innerHTML = '';
+    actionsArea.style.display = 'none';
+    return;
+  }
+
+  const data = RENT_DATA[city];
+  const baseRent = data.base[selectedLocality];
+  const fairRent = Math.round(baseRent * BHK_MULT[selectedBhk] * FURNISH_MULT[selectedFurnish]);
+
+  // Range: -20% to +20% of fair rent
+  const minFair = Math.round(fairRent * 0.8);
+  const maxFair = Math.round(fairRent * 1.2);
+
+  // Verdict
+  let verdict, verdictClass, verdictEmoji;
+  const ratio = rent / fairRent;
+
+  if (ratio <= 0.85) {
+    verdict = 'Great Deal'; verdictClass = 'great'; verdictEmoji = '\uD83C\uDF89';
+  } else if (ratio <= 1.10) {
+    verdict = 'Fair Rent'; verdictClass = 'fair'; verdictEmoji = '\u2705';
+  } else if (ratio <= 1.30) {
+    verdict = 'Slightly High'; verdictClass = 'high'; verdictEmoji = '\u26A0\uFE0F';
+  } else {
+    verdict = 'Overpriced'; verdictClass = 'overpriced'; verdictEmoji = '\uD83D\uDED1';
+  }
+
+  const diff = rent - fairRent;
+  const diffText = diff > 0 ? `\u20B9${fmt(diff)} above` : diff < 0 ? `\u20B9${fmt(Math.abs(diff))} below` : 'At';
+
+  // Range bar position: where does rent fall in min–max
+  const rangePos = Math.max(0, Math.min(100, ((rent - minFair) / (maxFair - minFair)) * 100));
+
+  resultArea.innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <div class="result-label">Verdict</div>
+        <div class="result-verdict result-verdict--${verdictClass}">${verdictEmoji} ${verdict}</div>
+        <div class="result-subtitle">${diffText} fair market rent</div>
+      </div>
+      <div class="range-section">
+        <div class="range-bar-wrap">
+          <div class="range-bar-fill" style="width:${Math.max(5, Math.min(100, rangePos))}%"></div>
+          <div class="range-marker" style="left:${rangePos}%;background:${verdictClass === 'great' ? 'var(--success)' : verdictClass === 'fair' ? 'var(--accent)' : verdictClass === 'high' ? 'var(--warning)' : 'var(--danger)'}"></div>
+        </div>
+        <div class="range-labels">
+          <span>\u20B9${fmt(minFair)}</span>
+          <span>Fair: \u20B9${fmt(fairRent)}</span>
+          <span>\u20B9${fmt(maxFair)}</span>
+        </div>
+      </div>
+      <div class="result-breakdown">
+        <div class="result-row">
+          <span class="result-row-label">Your Rent</span>
+          <span class="result-row-value">\u20B9${fmt(rent)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Fair Market Rent</span>
+          <span class="result-row-value" style="color:var(--accent)">\u20B9${fmt(fairRent)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Difference</span>
+          <span class="result-row-value" style="color:${diff > 0 ? 'var(--danger)' : diff < 0 ? 'var(--success)' : 'var(--accent)'}">${diff > 0 ? '+' : ''}\u20B9${fmt(diff)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Config</span>
+          <span class="result-row-value">${selectedBhk} BHK \u00B7 ${selectedFurnish === 'semi' ? 'Semi-Furnished' : selectedFurnish === 'fully' ? 'Fully Furnished' : 'Unfurnished'} \u00B7 ${LOCALITIES.find(l => l.id === selectedLocality).label}</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // City tips
+  tipsArea.innerHTML = `
+    <div class="section-label">${data.name} Rental Tips</div>
+    <div class="tips-card">
+      <div class="tips-header">
+        <span class="tips-icon">\uD83C\uDFE0</span>
+        <span class="tips-title">Local Insights</span>
+      </div>
+      <div class="tips-list">
+        ${data.tips.map(t => `
+          <div class="tips-item">
+            <span class="tips-bullet"></span>
+            <span>${t}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  actionsArea.style.display = 'flex';
+}
+
+// ==================== COPY ====================
+function copyResult() {
+  const city = document.getElementById('citySelect').value;
+  const rent = parseFloat(document.getElementById('rentInput').value) || 0;
+  if (!city || rent <= 0) return;
+
+  haptic(15);
+
+  const data = RENT_DATA[city];
+  const fairRent = Math.round(data.base[selectedLocality] * BHK_MULT[selectedBhk] * FURNISH_MULT[selectedFurnish]);
+  const ratio = rent / fairRent;
+  let verdict;
+  if (ratio <= 0.85) verdict = 'Great Deal';
+  else if (ratio <= 1.10) verdict = 'Fair Rent';
+  else if (ratio <= 1.30) verdict = 'Slightly High';
+  else verdict = 'Overpriced';
+
+  const text = [
+    `\uD83C\uDFE0 RentCheck \u2014 ${data.name}`,
+    `Config: ${selectedBhk} BHK \u00B7 ${selectedFurnish === 'semi' ? 'Semi-Furnished' : selectedFurnish === 'fully' ? 'Fully Furnished' : 'Unfurnished'} \u00B7 ${LOCALITIES.find(l => l.id === selectedLocality).label}`,
+    `Your Rent: \u20B9${fmt(rent)}`,
+    `Fair Market Rent: \u20B9${fmt(fairRent)}`,
+    `Verdict: ${verdict}`
+  ].join('\n');
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = `${ICON_CHECK} Copied!`;
+    showToast('Copied to clipboard!');
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `${ICON_SHARE} Copy Summary`;
+    }, 2000);
+  });
+}
+
+function resetAll() {
+  haptic();
+  document.getElementById('citySelect').value = '';
+  document.getElementById('rentInput').value = '';
+  selectedLocality = 'suburban';
+  selectedBhk = '2';
+  selectedFurnish = 'semi';
+  renderPills('localityPills', LOCALITIES, selectedLocality, 'selectLocality');
+  renderPills('bhkPills', BHK_OPTIONS, selectedBhk, 'selectBhk');
+  renderPills('furnishPills', FURNISH_OPTIONS, selectedFurnish, 'selectFurnish');
+  calculate();
+  showToast('Reset');
+}
+
+// ==================== TOAST ====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ==================== INIT ====================
+renderPills('localityPills', LOCALITIES, selectedLocality, 'selectLocality');
+renderPills('bhkPills', BHK_OPTIONS, selectedBhk, 'selectBhk');
+renderPills('furnishPills', FURNISH_OPTIONS, selectedFurnish, 'selectFurnish');
+calculate();
+</script>
+</body>
+</html>

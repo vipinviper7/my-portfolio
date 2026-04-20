@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gold Price Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #E9EBF0;
+  --surface: #FFFFFF;
+  --surface-border: #DDDFE5;
+  --text-primary: #1A1C22;
+  --text-secondary: #555866;
+  --text-muted: #6F7180;
+  --gold: #B8860B;
+  --gold-dim: rgba(184, 134, 11, 0.08);
+  --gold-light: rgba(184, 134, 11, 0.15);
+  --gold-soft: #F5EDD6;
+  --divider: #ECEDF0;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 100px;
+  --success: #4A6E52;
+  --success-dim: rgba(74, 110, 82, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg: #0D0F14;
+  --surface: #191C23;
+  --surface-border: #252830;
+  --text-primary: #D8D5CF;
+  --text-secondary: #9496A0;
+  --text-muted: #8A8C94;
+  --gold: #D4A731;
+  --gold-dim: rgba(212, 167, 49, 0.12);
+  --gold-light: rgba(212, 167, 49, 0.18);
+  --gold-soft: rgba(212, 167, 49, 0.08);
+  --divider: #1F2128;
+  --success: #8BB892;
+  --success-dim: rgba(139, 184, 146, 0.10);
+}
+
+html { background: var(--bg); transition: background 0.3s; }
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.4;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 0 16px calc(32px + env(safe-area-inset-bottom, 0px));
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  transition: background 0.3s, color 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  padding: calc(16px + env(safe-area-inset-top, 0px)) 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 24px;
+}
+.navbar h1 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.navbar h1 span { color: var(--gold); }
+.navbar-spacer { width: 44px; flex-shrink: 0; }
+.navbar-right { display: flex; align-items: center; }
+.theme-toggle {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  padding: 0; flex-shrink: 0;
+}
+.theme-toggle svg {
+  width: 18px; height: 18px;
+  stroke: var(--text-secondary); fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.theme-toggle:hover { border-color: var(--gold); }
+@keyframes spinOnce {
+  from { transform: rotate(0deg) scale(0.6); opacity: 0; }
+  to { transform: rotate(360deg) scale(1); opacity: 1; }
+}
+.theme-toggle.spin svg { animation: spinOnce 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* ==================== SECTION LABELS ==================== */
+.section-label {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px; padding-left: 4px;
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* ==================== UPDATED BANNER ==================== */
+.updated-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-light);
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+}
+.updated-banner svg {
+  width: 14px; height: 14px;
+  stroke: var(--gold); fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ==================== PRICE CARDS ==================== */
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 16px;
+}
+.price-tile {
+  text-align: center;
+  padding: 14px 8px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+.price-tile.highlight {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+.price-tile .karat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.price-tile.highlight .karat-label { color: var(--gold); }
+.price-tile .karat-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+.price-tile.highlight .karat-price { color: var(--gold); }
+.price-tile .karat-unit {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ==================== CITY SELECTOR ==================== */
+.city-scroll-wrap {
+  padding: 16px;
+  padding-bottom: 8px;
+}
+.city-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.city-scroll::-webkit-scrollbar { display: none; }
+.city-chip {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--surface-border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.city-chip:hover { border-color: var(--gold); color: var(--gold); }
+.city-chip.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+/* ==================== CALCULATOR ==================== */
+.calc-section { padding: 16px; }
+.calc-row {
+  margin-bottom: 16px;
+}
+.calc-row:last-child { margin-bottom: 0; }
+.calc-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.calc-label svg {
+  width: 14px; height: 14px;
+  stroke: var(--text-muted); fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Karat buttons */
+.karat-btns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.karat-btn {
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--surface-border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.karat-btn:hover { border-color: var(--gold); color: var(--gold); }
+.karat-btn.active {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+
+/* Weight input */
+.weight-input-group {
+  display: flex;
+  gap: 8px;
+}
+.weight-input-wrap {
+  flex: 1;
+  position: relative;
+}
+.weight-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--surface-border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: border-color 0.2s, background 0.2s;
+  -moz-appearance: textfield;
+}
+.weight-input::-webkit-inner-spin-button,
+.weight-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.weight-input:focus {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+.weight-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.unit-toggle {
+  display: flex;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--surface-border);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.unit-btn {
+  padding: 10px 12px;
+  border: none;
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.unit-btn + .unit-btn { border-left: 1.5px solid var(--surface-border); }
+.unit-btn.active {
+  background: var(--gold);
+  color: #fff;
+}
+
+/* Making charges slider */
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.slider-track {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-border);
+  outline: none;
+  cursor: pointer;
+}
+.slider-track::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.slider-track::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.slider-track::-moz-range-thumb {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+.slider-value {
+  min-width: 44px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--gold-dim);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gold);
+  text-align: center;
+}
+
+/* GST toggle */
+.gst-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+.gst-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.gst-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.gst-subtitle {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.toggle-switch {
+  width: 48px; height: 28px;
+  background: var(--surface-border);
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.25s;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+}
+.toggle-switch.on { background: var(--gold); }
+.toggle-knob {
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.toggle-switch.on .toggle-knob { transform: translateX(20px); }
+
+/* ==================== RESULTS ==================== */
+.results-card {
+  border-color: var(--gold-light);
+}
+.results-inner { padding: 16px; }
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--divider);
+}
+.result-row:last-child { border-bottom: none; }
+.result-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.result-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.result-total {
+  margin-top: 4px;
+  padding: 16px;
+  background: var(--gold-dim);
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.result-total-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.result-total-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -0.5px;
+}
+.weight-note {
+  padding: 10px 16px 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+}
+.results-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+.results-empty svg {
+  width: 40px; height: 40px;
+  stroke: var(--gold-light);
+  fill: none;
+  stroke-width: 1.2;
+  margin-bottom: 10px;
+}
+
+/* ==================== TIPS SECTION ==================== */
+.tips-card {
+  border-color: var(--gold-light);
+}
+.tip-inner {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.tip-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.tip-icon svg {
+  width: 16px; height: 16px;
+  stroke: var(--gold); fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.tip-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.tip-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.tip-nav {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+.tip-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--surface-border);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+}
+.tip-dot.active {
+  background: var(--gold);
+  width: 18px;
+  border-radius: 3px;
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+  text-align: center;
+  padding: 16px 0 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.footer a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.4s ease-out both;
+}
+.fade-up:nth-child(2) { animation-delay: 0.05s; }
+.fade-up:nth-child(3) { animation-delay: 0.1s; }
+.fade-up:nth-child(4) { animation-delay: 0.15s; }
+.fade-up:nth-child(5) { animation-delay: 0.2s; }
+.fade-up:nth-child(6) { animation-delay: 0.25s; }
+
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+.result-pop {
+  animation: countUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar">
+  <div class="navbar-spacer"></div>
+  <h1><span>Gold</span> Price</h1>
+  <div class="navbar-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg id="themeIcon"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ==================== UPDATED BANNER ==================== -->
+<div class="updated-banner fade-up">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+  <span>Rates updated: <span id="updateDate"></span></span>
+</div>
+
+<!-- ==================== TODAY'S PRICES ==================== -->
+<div class="section-label fade-up">Today's Gold Price</div>
+<div class="card fade-up">
+  <div class="price-grid" id="priceGrid">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ==================== CITY SELECTOR ==================== -->
+<div class="section-label fade-up">Select City</div>
+<div class="card fade-up">
+  <div class="city-scroll-wrap">
+    <div class="city-scroll" id="cityScroll">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CALCULATOR ==================== -->
+<div class="section-label fade-up">Calculator</div>
+<div class="card fade-up">
+  <div class="calc-section">
+
+    <!-- Karat -->
+    <div class="calc-row">
+      <div class="calc-label">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Purity
+      </div>
+      <div class="karat-btns" id="karatBtns">
+        <button class="karat-btn active" data-karat="24">24K</button>
+        <button class="karat-btn" data-karat="22">22K</button>
+        <button class="karat-btn" data-karat="18">18K</button>
+      </div>
+    </div>
+
+    <!-- Weight -->
+    <div class="calc-row">
+      <div class="calc-label">
+        <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        Weight
+      </div>
+      <div class="weight-input-group">
+        <div class="weight-input-wrap">
+          <input type="number" class="weight-input" id="weightInput" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+        </div>
+        <div class="unit-toggle" id="unitToggle">
+          <button class="unit-btn active" data-unit="grams">g</button>
+          <button class="unit-btn" data-unit="tola">tola</button>
+          <button class="unit-btn" data-unit="sovereign">svn</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Making Charges -->
+    <div class="calc-row">
+      <div class="calc-label">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        Making Charges
+      </div>
+      <div class="slider-wrap">
+        <input type="range" class="slider-track" id="makingSlider" min="8" max="25" value="12" step="1">
+        <div class="slider-value" id="makingValue">12%</div>
+      </div>
+    </div>
+
+    <!-- GST -->
+    <div class="calc-row">
+      <div class="gst-row">
+        <div class="gst-info">
+          <div class="gst-title">Include GST</div>
+          <div class="gst-subtitle">3% on gold value + making charges</div>
+        </div>
+        <button class="toggle-switch on" id="gstToggle" role="switch" aria-checked="true" aria-label="Toggle GST">
+          <div class="toggle-knob"></div>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== RESULTS ==================== -->
+<div class="section-label fade-up">Estimate</div>
+<div class="card results-card fade-up" id="resultsCard">
+  <div id="resultsContent">
+    <div class="results-empty">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      <div>Enter weight to see estimate</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BUYING TIPS ==================== -->
+<div class="section-label fade-up">Buying Tip</div>
+<div class="card tips-card fade-up">
+  <div class="tip-inner" id="tipContent">
+    <!-- filled by JS -->
+  </div>
+  <div class="tip-nav" id="tipNav">
+    <!-- filled by JS -->
+  </div>
+  <div style="height: 12px;"></div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="footer fade-up">
+  Prices are indicative and may vary by jeweller.<br>
+  Part of <a href="https://vipinfolio.in" target="_blank">vipinfolio.in</a>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ==================== DATA ==================== */
+  const BASE_PRICES = { 24: 7850, 22: 7190, 18: 5888 };
+
+  const CITIES = [
+    { name: 'Delhi',     offset: { 24: 0,    22: 0,    18: 0    } },
+    { name: 'Mumbai',    offset: { 24: 50,   22: 45,   18: 38   } },
+    { name: 'Chennai',   offset: { 24: 120,  22: 110,  18: 90   } },
+    { name: 'Bangalore', offset: { 24: 80,   22: 73,   18: 60   } },
+    { name: 'Hyderabad', offset: { 24: 60,   22: 55,   18: 45   } },
+    { name: 'Kolkata',   offset: { 24: -50,  22: -46,  18: -38  } },
+    { name: 'Jaipur',    offset: { 24: -80,  22: -73,  18: -60  } },
+    { name: 'Pune',      offset: { 24: 30,   22: 28,   18: 22   } },
+    { name: 'Ahmedabad', offset: { 24: -100, 22: -92,  18: -75  } },
+    { name: 'Lucknow',   offset: { 24: -120, 22: -110, 18: -90  } },
+  ];
+
+  const CONVERSIONS = { grams: 1, tola: 11.664, sovereign: 8 };
+
+  const TIPS = [
+    {
+      title: 'Check BIS Hallmark',
+      text: 'Always buy hallmarked gold jewellery with the BIS logo, purity grade, and jeweller identification mark. Since July 2021, hallmarking is mandatory in India.'
+    },
+    {
+      title: 'Compare Making Charges',
+      text: 'Making charges vary significantly across jewellers (8-25%). Machine-made pieces are cheaper than handcrafted ones. Always ask for a detailed bill with gold and making charges separated.'
+    },
+    {
+      title: 'Best Time to Buy',
+      text: 'Gold prices tend to dip during Dhanteras week and wedding off-seasons (June-July). Historically, buying during price corrections of 5-8% gives better value.'
+    },
+    {
+      title: 'Track the Gold-Silver Ratio',
+      text: 'When the gold-silver ratio exceeds 80, gold is considered relatively expensive. Consider buying on dips. Use this calculator to track daily city rates before visiting a jeweller.'
+    },
+    {
+      title: 'Digital Gold as Alternative',
+      text: 'Platforms like MMTC-PAMP and Augmont let you buy 24K gold starting at Re 1 with zero making charges. You can redeem it as physical gold later or sell it anytime.'
+    },
+    {
+      title: 'Keep Your Invoice Safe',
+      text: 'Always retain your gold purchase invoice with weight, purity, making charges, and HUID number. This is critical for resale value, insurance claims, and proving authenticity.'
+    }
+  ];
+
+  /* ==================== STATE ==================== */
+  let state = {
+    city: 0,
+    karat: 24,
+    unit: 'grams',
+    weight: '',
+    making: 12,
+    gst: true,
+    tipIndex: 0,
+    dark: false
+  };
+
+  /* ==================== HELPERS ==================== */
+  function getPrice(karat) {
+    return BASE_PRICES[karat] + CITIES[state.city].offset[karat];
+  }
+
+  function formatINR(num) {
+    if (num === 0) return '0';
+    const isNeg = num < 0;
+    num = Math.abs(Math.round(num));
+    let str = num.toString();
+    let result = '';
+    let count = 0;
+    for (let i = str.length - 1; i >= 0; i--) {
+      result = str[i] + result;
+      count++;
+      if (count === 3 && i !== 0) { result = ',' + result; count = 0; }
+      else if (count > 3 && (count - 3) % 2 === 0 && i !== 0) { result = ',' + result; }
+    }
+    // re-do with Indian formatting
+    str = num.toString();
+    if (str.length <= 3) return (isNeg ? '-' : '') + str;
+    result = str.slice(-3);
+    str = str.slice(0, -3);
+    while (str.length > 2) {
+      result = str.slice(-2) + ',' + result;
+      str = str.slice(0, -2);
+    }
+    if (str.length) result = str + ',' + result;
+    return (isNeg ? '-' : '') + result;
+  }
+
+  /* ==================== RENDER: UPDATE DATE ==================== */
+  function renderDate() {
+    const now = new Date();
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    document.getElementById('updateDate').textContent = now.toLocaleDateString('en-IN', options);
+  }
+
+  /* ==================== RENDER: PRICE GRID ==================== */
+  function renderPrices() {
+    const grid = document.getElementById('priceGrid');
+    grid.innerHTML = [24, 22, 18].map(k => {
+      const price = getPrice(k);
+      const isActive = k === state.karat;
+      return `
+        <div class="price-tile${isActive ? ' highlight' : ''}">
+          <div class="karat-label">${k}K Gold</div>
+          <div class="karat-price">\u20B9${formatINR(price)}</div>
+          <div class="karat-unit">per gram</div>
+        </div>`;
+    }).join('');
+  }
+
+  /* ==================== RENDER: CITIES ==================== */
+  function renderCities() {
+    const scroll = document.getElementById('cityScroll');
+    scroll.innerHTML = CITIES.map((c, i) =>
+      `<button class="city-chip${i === state.city ? ' active' : ''}" data-city="${i}">${c.name}</button>`
+    ).join('');
+  }
+
+  /* ==================== RENDER: RESULTS ==================== */
+  function renderResults() {
+    const container = document.getElementById('resultsContent');
+    const w = parseFloat(state.weight);
+    if (!w || w <= 0) {
+      container.innerHTML = `
+        <div class="results-empty">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <div>Enter weight to see estimate</div>
+        </div>`;
+      return;
+    }
+
+    const grams = w * CONVERSIONS[state.unit];
+    const pricePerGram = getPrice(state.karat);
+    const goldValue = grams * pricePerGram;
+    const makingAmt = goldValue * (state.making / 100);
+    const subtotal = goldValue + makingAmt;
+    const gstAmt = state.gst ? subtotal * 0.03 : 0;
+    const total = subtotal + gstAmt;
+
+    let unitLabel = state.unit === 'grams' ? 'g' : state.unit === 'tola' ? ' tola' : ' sovereign';
+    let weightNote = '';
+    if (state.unit !== 'grams') {
+      weightNote = `<div class="weight-note">${w} ${state.unit} = ${grams.toFixed(3)} grams</div>`;
+    }
+
+    container.innerHTML = `
+      <div class="results-inner">
+        <div class="result-row">
+          <span class="result-label">${state.karat}K Gold (${grams.toFixed(3)}g @ \u20B9${formatINR(pricePerGram)}/g)</span>
+          <span class="result-value">\u20B9${formatINR(goldValue)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Making Charges (${state.making}%)</span>
+          <span class="result-value">\u20B9${formatINR(makingAmt)}</span>
+        </div>
+        ${state.gst ? `
+        <div class="result-row">
+          <span class="result-label">GST (3%)</span>
+          <span class="result-value">\u20B9${formatINR(gstAmt)}</span>
+        </div>` : ''}
+      </div>
+      ${weightNote}
+      <div class="results-inner">
+        <div class="result-total result-pop">
+          <span class="result-total-label">Total Cost</span>
+          <span class="result-total-value">\u20B9${formatINR(total)}</span>
+        </div>
+      </div>`;
+  }
+
+  /* ==================== RENDER: TIPS ==================== */
+  function renderTip() {
+    const tip = TIPS[state.tipIndex];
+    document.getElementById('tipContent').innerHTML = `
+      <div class="tip-header">
+        <div class="tip-icon">
+          <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <span class="tip-title">${tip.title}</span>
+      </div>
+      <span class="tip-text">${tip.text}</span>`;
+
+    document.getElementById('tipNav').innerHTML = TIPS.map((_, i) =>
+      `<button class="tip-dot${i === state.tipIndex ? ' active' : ''}" data-tip="${i}" aria-label="Tip ${i + 1}"></button>`
+    ).join('');
+  }
+
+  /* ==================== EVENT HANDLERS ==================== */
+
+  // City selector
+  document.getElementById('cityScroll').addEventListener('click', function(e) {
+    const btn = e.target.closest('.city-chip');
+    if (!btn) return;
+    state.city = parseInt(btn.dataset.city);
+    renderCities();
+    renderPrices();
+    renderResults();
+  });
+
+  // Karat buttons
+  document.getElementById('karatBtns').addEventListener('click', function(e) {
+    const btn = e.target.closest('.karat-btn');
+    if (!btn) return;
+    state.karat = parseInt(btn.dataset.karat);
+    document.querySelectorAll('.karat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderPrices();
+    renderResults();
+  });
+
+  // Unit toggle
+  document.getElementById('unitToggle').addEventListener('click', function(e) {
+    const btn = e.target.closest('.unit-btn');
+    if (!btn) return;
+    state.unit = btn.dataset.unit;
+    document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('weightInput').placeholder = state.unit === 'grams' ? '0.00' : state.unit === 'tola' ? '0.00' : '0';
+    renderResults();
+  });
+
+  // Weight input
+  document.getElementById('weightInput').addEventListener('input', function(e) {
+    state.weight = e.target.value;
+    renderResults();
+  });
+
+  // Making charges slider
+  document.getElementById('makingSlider').addEventListener('input', function(e) {
+    state.making = parseInt(e.target.value);
+    document.getElementById('makingValue').textContent = state.making + '%';
+    renderResults();
+  });
+
+  // GST toggle
+  document.getElementById('gstToggle').addEventListener('click', function() {
+    state.gst = !state.gst;
+    this.classList.toggle('on', state.gst);
+    this.setAttribute('aria-checked', state.gst);
+    renderResults();
+  });
+
+  // Tip dots
+  document.getElementById('tipNav').addEventListener('click', function(e) {
+    const dot = e.target.closest('.tip-dot');
+    if (!dot) return;
+    state.tipIndex = parseInt(dot.dataset.tip);
+    renderTip();
+  });
+
+  // Auto-rotate tips
+  setInterval(function() {
+    state.tipIndex = (state.tipIndex + 1) % TIPS.length;
+    renderTip();
+  }, 8000);
+
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+
+  function setTheme(dark) {
+    state.dark = dark;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    if (dark) {
+      themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    } else {
+      themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+    }
+    localStorage.setItem('goldprice-theme', dark ? 'dark' : 'light');
+  }
+
+  themeToggle.addEventListener('click', function() {
+    themeToggle.classList.add('spin');
+    setTimeout(() => themeToggle.classList.remove('spin'), 450);
+    setTheme(!state.dark);
+  });
+
+  // Load saved theme
+  const saved = localStorage.getItem('goldprice-theme');
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    setTheme(true);
+  }
+
+  /* ==================== SLIDER FILL (cross-browser) ==================== */
+  function updateSliderFill() {
+    const slider = document.getElementById('makingSlider');
+    const min = parseInt(slider.min);
+    const max = parseInt(slider.max);
+    const val = parseInt(slider.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    const goldColor = state.dark ? '#D4A731' : '#B8860B';
+    slider.style.background = `linear-gradient(to right, ${goldColor} 0%, ${goldColor} ${pct}%, var(--surface-border) ${pct}%, var(--surface-border) 100%)`;
+  }
+  document.getElementById('makingSlider').addEventListener('input', updateSliderFill);
+
+  // SVG viewbox fix for navbar icon
+  themeIcon.setAttribute('viewBox', '0 0 24 24');
+
+  /* ==================== INIT ==================== */
+  renderDate();
+  renderPrices();
+  renderCities();
+  renderResults();
+  renderTip();
+  updateSliderFill();
+
+})();
+</script>
+</body>
+</html>

@@ -34,7 +34,8 @@
 .cs-title {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
+  font-weight: 400;
+  font-style: italic;
   color: var(--color-white);
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;

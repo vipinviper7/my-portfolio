@@ -1,4 +1,20 @@
 // ===========================
+// Smooth scroll for anchor links only
+// ===========================
+document.addEventListener('click', function(e) {
+  const link = e.target.closest('a[href*="#"]');
+  if (!link) return;
+  const hash = link.getAttribute('href');
+  const targetId = hash.includes('#') ? hash.split('#')[1] : null;
+  if (!targetId) return;
+  const target = document.getElementById(targetId);
+  if (target) {
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// ===========================
 // Mobile navigation toggle
 // ===========================
 const navToggle = document.querySelector('.nav-toggle');

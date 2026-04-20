@@ -45,7 +45,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -167,6 +167,7 @@ body.nav-open {
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+  will-change: backdrop-filter;
 }
 
 .nav.scrolled {

@@ -181,13 +181,13 @@
 }
 
 .cs-section-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.2rem;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
   margin-bottom: 1.25rem;
 }
 

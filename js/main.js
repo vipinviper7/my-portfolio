@@ -52,7 +52,7 @@ if (nav) {
 // ===========================
 // Scroll reveal (IntersectionObserver)
 // ===========================
-const revealElements = document.querySelectorAll('.reveal');
+const revealElements = document.querySelectorAll('.reveal, .reveal-scale, .section-title, .challenge-subtitle, .challenge-progress, .contact-reveal');
 
 if (revealElements.length > 0) {
   const revealObserver = new IntersectionObserver((entries) => {
@@ -62,7 +62,7 @@ if (revealElements.length > 0) {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
 
   revealElements.forEach(el => revealObserver.observe(el));
 }

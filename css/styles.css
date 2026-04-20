@@ -661,7 +661,6 @@ body.nav-open {
 
 .challenge-progress-fill {
   height: 100%;
-  width: 33.3%;
   background: var(--color-accent);
   border-radius: 2px;
 }
@@ -994,13 +993,95 @@ a.app-card {
    =========================== */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Staggered delays for grid children */
+.reveal.reveal-d1 { transition-delay: 0.08s; }
+.reveal.reveal-d2 { transition-delay: 0.16s; }
+.reveal.reveal-d3 { transition-delay: 0.24s; }
+.reveal.reveal-d4 { transition-delay: 0.32s; }
+.reveal.reveal-d5 { transition-delay: 0.40s; }
+.reveal.reveal-d6 { transition-delay: 0.48s; }
+
+/* Section title reveal — slide up + fade */
+.section-title {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Challenge subtitle + progress bar */
+.challenge-subtitle {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+
+.challenge-subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.challenge-progress {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s;
+}
+
+.challenge-progress.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress bar fill animation */
+.challenge-progress-fill {
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+}
+
+.challenge-progress.visible .challenge-progress-fill {
+  width: 33.3%;
+}
+
+/* Contact section staggered reveal */
+.contact-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-reveal.cr-1 { transition-delay: 0s; }
+.contact-reveal.cr-2 { transition-delay: 0.12s; }
+.contact-reveal.cr-3 { transition-delay: 0.24s; }
+.contact-reveal.cr-4 { transition-delay: 0.36s; }
+
+/* Scale-in variant for visual design cards */
+.reveal-scale {
+  opacity: 0;
+  transform: translateY(20px) scale(0.97);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* ===========================

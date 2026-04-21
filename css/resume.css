@@ -3,6 +3,28 @@
   min-height: 80vh;
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.resume-section::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  width: 160%;
+  height: 140%;
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(30, 64, 175, 0.3) 0%, transparent 55%),
+    radial-gradient(ellipse at 30% 10%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 15%, rgba(37, 99, 235, 0.15) 0%, transparent 45%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.resume-section > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .resume-wrapper {

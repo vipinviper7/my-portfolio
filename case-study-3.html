@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Product Tour — Zoho Sprints | Vipin</title>
-  <meta name="description" content="Case study: Designing a guided product tour for Zoho Sprints to help users navigate a feature-dense interface. Shipped to 50K+ users.">
+  <meta name="description" content="New users were lost in Sprints' dense UI. I explored three tour patterns and shipped a split-panel walkthrough across every module. 50K+ users.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,15 +45,13 @@
 
       <header class="cs-header">
         <h1 class="cs-title">Product Tour &mdash; Zoho Sprints</h1>
-        <p class="cs-subtitle">Designing a guided walkthrough to help users navigate a feature-dense project management tool</p>
-
-        <div class="cs-meta">
-          <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: Zoho Sprints</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Product Designer</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">: 1 week design + 3 weeks implementation</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
-        </div>
+        <p class="cs-subtitle">New users couldn&rsquo;t orient themselves in a dense interface. The brief: explain what each part does without pulling them out of the product.</p>
       </header>
+
+      <section class="cs-tldr-section" aria-labelledby="cs-tldr-heading">
+        <h2 class="cs-tldr-section__title" id="cs-tldr-heading">TL;DR</h2>
+        <p class="cs-tldr-section__text">Sprints throws a lot at you on day one &mdash; work items, sprints, filters, create, settings, all visible at once. I explored three tour patterns (full overlay, tooltip, split-panel), landed on the split-panel card, and refined it over five iterations. Shipped across every module in four weeks to 50K+ users. Animated illustrations were approved in concept, cut for timeline.</p>
+      </section>
 
       <!-- Team -->
       <div class="cs-team">
@@ -63,41 +61,23 @@
         <span class="cs-team-member">PM <span class="cs-team-member__role">&mdash; Product</span></span>
       </div>
 
-      <!-- Impact Banner -->
+      <!-- Impact -->
       <div class="cs-impact-banner">
         <span class="cs-impact-label">Impact</span>
-        <div class="cs-impact-stats">
-          <span>50K+ users</span>
-          <span class="cs-impact-dot">&middot;</span>
-          <span>Product-wide rollout</span>
-          <span class="cs-impact-dot">&middot;</span>
-          <span>Shipped</span>
-        </div>
-      </div>
-
-      <!-- Outcome Metrics -->
-      <div class="cs-outcomes">
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">3</div>
-          <div class="cs-outcome__label">Design directions explored</div>
-        </div>
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">5</div>
-          <div class="cs-outcome__label">Iterations on the chosen direction</div>
-        </div>
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">4 weeks</div>
-          <div class="cs-outcome__label">From brief to production</div>
-        </div>
+        <ul class="cs-impact-stats">
+          <li>50K+ users</li>
+          <li>Every module in the product</li>
+          <li>4 weeks brief to production</li>
+        </ul>
       </div>
 
       <!-- Key Takeaways -->
       <div class="cs-takeaways">
         <h2 class="cs-takeaways-title">Key Takeaways</h2>
         <ul class="cs-takeaways-list">
-          <li>Explored three different directions — full overlay, tooltip, and split-panel — before picking the one that balanced context with usability</li>
-          <li>Pitched animated illustrations per step; approved in concept, dropped due to resource constraints</li>
-          <li>Shipped across every module in the product, not just one page</li>
+          <li>Three directions first &mdash; aggressive overlay, detached tooltip, split-panel. Needed the extremes to trust the middle.</li>
+          <li>Split-panel won: room for text and a screenshot without covering the whole screen.</li>
+          <li>A tour that only works on one page isn&rsquo;t useful. The component had to scale across Projects, Backlog, Board, Timesheet, Reports.</li>
         </ul>
       </div>
 
@@ -110,8 +90,8 @@
       <section class="cs-section">
         <h2 class="cs-section-title">How It Started</h2>
         <div class="cs-body">
-          <p>New users were struggling to orient themselves in Sprints. The interface is dense — work items, sprints, filters, creation tools, settings — all visible at once. The PM wanted a guided tour that walks users through the key sections of each page.</p>
-          <p>My manager passed the task to me. The brief: <strong>help users understand what each part of the interface does, without pulling them out of the product.</strong></p>
+          <p>New users were getting lost. Work items, sprints, filters, create, settings &mdash; all on screen at once. The PM wanted a guided tour for the key parts of each page.</p>
+          <p>My manager handed it to me. The brief was simple: <strong>explain what each area does, without pulling people out of the product.</strong></p>
         </div>
       </section>
 
@@ -125,9 +105,9 @@
           <img src="assets/images/cs3-opt1-2.png" alt="Option 1 — Step 2: Create button highlighted with overlay" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>Large bold text overlaid directly on the interface with a circular spotlight highlighting the target element. Carousel navigation with dots, Skip, and Next/Prev buttons.</p>
-          <p><strong>Pros:</strong> High visual impact. Impossible to miss. Clear spotlight draws the eye exactly where it needs to go.</p>
-          <p><strong>Cons:</strong> Extremely intrusive &mdash; covers the entire page. Users can't interact with the product during the tour. The overlay text competes with the actual UI underneath, making it hard to connect the explanation to the element being explained.</p>
+          <p>Big text on top of the UI, circular spotlight on the target, carousel with dots and Skip/Next.</p>
+          <p><strong>Pros:</strong> Impossible to miss. Spotlight tells you exactly where to look.</p>
+          <p><strong>Cons:</strong> Covers the whole page. You can&rsquo;t use the product during the tour. The overlay fights the UI underneath &mdash; hard to connect the explanation to the thing it&rsquo;s about.</p>
         </div>
         <div class="cs-image-block cs-image-block--mint">
           <img src="assets/images/cs3-opt1-3.png" alt="Option 1 — Step 3: Filter highlighted" loading="lazy" onerror="this.style.display='none'">
@@ -147,9 +127,9 @@
           <img src="assets/images/cs3-opt2-2.png" alt="Option 2 — Step 2: Tooltip near Create button" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>A smaller card anchored near the highlighted UI element. Each step shows a wireframe screenshot preview, title, description, and a step counter (e.g. "1 of 4"). Previous/Next navigation buttons.</p>
-          <p><strong>Pros:</strong> Less intrusive than the full overlay. Users can still see most of the interface. The screenshot preview gives context.</p>
-          <p><strong>Cons:</strong> The card floats without a strong visual connection to the element it's explaining. The wireframe preview is small and abstract. With 4 steps, the card needs to jump to different positions on screen &mdash; which can feel disorienting.</p>
+          <p>Smaller card near the highlighted element. Wireframe preview, title, description, step counter. Previous/Next buttons.</p>
+          <p><strong>Pros:</strong> Less in your face. Most of the UI still visible.</p>
+          <p><strong>Cons:</strong> Card feels disconnected from what it&rsquo;s pointing at. Preview is small and abstract. Four steps means the card jumps around the screen &mdash; disorienting.</p>
         </div>
         <div class="cs-image-block cs-image-block--mint">
           <img src="assets/images/cs3-opt2-3.png" alt="Option 2 — Step 3: Filter tooltip" loading="lazy" onerror="this.style.display='none'">
@@ -169,13 +149,13 @@
           <img src="assets/images/cs3-opt3-2.png" alt="Option 3 — Create step with split panel" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>A two-column card: bullet-point explanation on the left, screenshot preview on the right. Anchored near the relevant UI element with a clear pointer. Includes a "Go to help" link for users who want to learn more, plus Skip Tour and navigation controls.</p>
+          <p>Bullets on the left, screenshot on the right. Anchored near the UI with a pointer. Skip Tour, arrows, dot nav, and a &ldquo;Go to help&rdquo; link for people who want docs instead.</p>
           <p><strong>Why this won:</strong></p>
           <ul>
-            <li><strong>Best balance of context and space.</strong> The split layout gives room for both a text explanation and a visual reference without overwhelming the screen.</li>
-            <li><strong>Text + visual pairing.</strong> Users see what the feature does (bullet points) and where it lives (screenshot) simultaneously. No guessing.</li>
-            <li><strong>Non-intrusive but present.</strong> The card doesn't cover the whole page, but it's prominent enough that users won't accidentally dismiss it.</li>
-            <li><strong>"Go to help" escape hatch.</strong> Power users who want deeper documentation can jump straight to help docs without finishing the tour.</li>
+            <li><strong>Room for both.</strong> Text and visual reference without covering the page.</li>
+            <li><strong>No guessing.</strong> You read what it does and see where it lives at the same time.</li>
+            <li><strong>Present but not blocking.</strong> Big enough to notice, small enough to still feel like you&rsquo;re in the product.</li>
+            <li><strong>Escape hatch.</strong> Power users can jump to help without finishing the tour.</li>
           </ul>
         </div>
         <div class="cs-image-block cs-image-block--mint">
@@ -190,8 +170,7 @@
       <section class="cs-section">
         <h2 class="cs-section-title">The Pitch That Was Dropped</h2>
         <div class="cs-body">
-          <p>After picking Option 3, I pitched an addition: <strong>animated illustrations for each step.</strong> Instead of a static screenshot, the right panel would show a minimal animation of the action being explained — like the Create button being clicked and the resulting screen appearing.</p>
-          <p>The team liked it, <strong>but it was dropped.</strong> Creating custom animations for every step across every module didn't fit the timeline. Screenshots shipped instead — still effective, just less delightful.</p>
+          <p>After we picked Option 3, I pitched <strong>animated illustrations per step</strong> &mdash; the right panel showing the action, not a static screenshot. Team liked it. Timeline didn&rsquo;t. Custom animation for every step across every module was a no. Screenshots shipped. Still worked, just less fun.</p>
         </div>
       </section>
 
@@ -242,7 +221,7 @@
       <section class="cs-section">
         <h2 class="cs-section-title">Shipped to Production</h2>
         <div class="cs-body">
-          <p>Implementation took 3 weeks because the tour had to work across every module — Projects, Backlog, Board, Timesheet, Reports — each with its own steps and screenshots.</p>
+          <p>Implementation took three weeks. Every module &mdash; Projects, Backlog, Board, Timesheet, Reports &mdash; needed its own steps and screenshots.</p>
         </div>
 
         <div class="cs-image-block cs-image-block--mint">
@@ -256,7 +235,7 @@
         </div>
 
         <div class="cs-body">
-          <p>Core design shipped intact. The expandable bullet list (green panel) was an engineering addition that worked well with the original layout.</p>
+          <p>Core design shipped as designed. Eng added an expandable bullet list on the live UI &mdash; wasn&rsquo;t in my spec, but it fit the layout well.</p>
         </div>
       </section>
 
@@ -264,9 +243,9 @@
       <section class="cs-section">
         <h2 class="cs-section-title">What I Took Away</h2>
         <div class="cs-body">
-          <p><strong>Explore the extremes first.</strong> Three very different options gave the team a real choice. Without trying the aggressive overlay and the detached tooltip, we wouldn't have been confident in the middle ground.</p>
-          <p><strong>Pitch high, ship what's practical.</strong> The animation idea was worth proposing even though it got cut. It showed the team what the ceiling could look like.</p>
-          <p><strong>Design for scale.</strong> A tour that works on one page but breaks on another isn't useful. The component had to be flexible enough for every module while still feeling like one experience.</p>
+          <p><strong>Try the extremes first.</strong> Overlay and tooltip weren&rsquo;t wastes of time &mdash; they made the split-panel choice obvious.</p>
+          <p><strong>Pitch high, ship what fits.</strong> Animations got cut. Worth showing the ceiling anyway.</p>
+          <p><strong>One component, many screens.</strong> If it only works on one page, it&rsquo;s a demo, not a feature.</p>
         </div>
       </section>
 

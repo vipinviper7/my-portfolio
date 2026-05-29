@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Settings Redesign — Zoho Sprints | Vipin</title>
-  <meta name="description" content="Case study: Redesigning the settings experience as part of Zoho Sprints 2.0 launch.">
+  <meta name="description" content="Settings was marked low priority for Sprints 2.0. I pushed to include it — same options, better hierarchy. Shipped with the launch to 50K+ users.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,15 +45,13 @@
 
       <header class="cs-header">
         <h1 class="cs-title">Settings Screen Redesign — Zoho Sprints</h1>
-        <p class="cs-subtitle">Redesigning the settings experience as part of Sprints 2.0</p>
-
-        <div class="cs-meta">
-          <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: Zoho Sprints</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Product Designer</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">: ~2 weeks</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
-        </div>
+        <p class="cs-subtitle">Sprints 2.0 was redoing everything except settings. I didn&rsquo;t think &ldquo;it works fine&rdquo; was good enough for a page people hit constantly.</p>
       </header>
+
+      <section class="cs-tldr-section" aria-labelledby="cs-tldr-heading">
+        <h2 class="cs-tldr-section__title" id="cs-tldr-heading">TL;DR</h2>
+        <p class="cs-tldr-section__text">Visual redesign only &mdash; no settings moved, no behavior changed. Profile got real visual weight, related options grouped under clear headers, everything matched 2.0 tokens. I advocated to include it in the launch instead of deferring it. Shipped with Sprints 2.0 to 50K+ users; eng implemented in under a week using existing components.</p>
+      </section>
 
       <!-- Team -->
       <div class="cs-team">
@@ -62,41 +60,23 @@
         <span class="cs-team-member">Sprints 2.0 Team <span class="cs-team-member__role">&mdash; Engineering</span></span>
       </div>
 
-      <!-- Impact Banner -->
+      <!-- Impact -->
       <div class="cs-impact-banner">
         <span class="cs-impact-label">Impact</span>
-        <div class="cs-impact-stats">
-          <span>Sprints 2.0 launch</span>
-          <span class="cs-impact-dot">&middot;</span>
-          <span>50K+ users</span>
-          <span class="cs-impact-dot">&middot;</span>
-          <span>Shipped</span>
-        </div>
-      </div>
-
-      <!-- Outcome Metrics -->
-      <div class="cs-outcomes">
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">5</div>
-          <div class="cs-outcome__label">Sections grouped from a flat layout</div>
-        </div>
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">2 weeks</div>
-          <div class="cs-outcome__label">Design to handoff</div>
-        </div>
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">Shipped</div>
-          <div class="cs-outcome__label">With the Sprints 2.0 launch</div>
-        </div>
+        <ul class="cs-impact-stats">
+          <li>Shipped with Sprints 2.0 launch</li>
+          <li>50K+ users</li>
+          <li>Under 1 week eng implementation</li>
+        </ul>
       </div>
 
       <!-- Key Takeaways -->
       <div class="cs-takeaways">
         <h2 class="cs-takeaways-title">Key Takeaways</h2>
         <ul class="cs-takeaways-list">
-          <li>Visual redesign, not re-architecture — all existing settings and behaviors stayed the same</li>
-          <li>Profile section given proper visual prominence as the most-used area</li>
-          <li>Clear section grouping with defined hierarchy made the page scannable</li>
+          <li>Nothing added or removed. Same settings, same places &mdash; just organized so you don&rsquo;t have to read every label.</li>
+          <li>Profile is where people go first. It finally looked like the most important thing on the page.</li>
+          <li>The layout later became the template for settings in other Sprints modules.</li>
         </ul>
       </div>
 
@@ -109,7 +89,7 @@
       <section class="cs-section">
         <h2 class="cs-section-title">The Problem</h2>
         <div class="cs-body">
-          <p>Sprints 2.0 was getting a full visual overhaul, but the settings page was marked low priority — "it works fine." I pushed for it to be included. It's one of the most visited screens, and every setting had the same visual weight. Users had to read every label to find anything.</p>
+          <p>Sprints 2.0 was getting a full visual overhaul. Settings was on the cut list &mdash; &ldquo;it works fine.&rdquo; I pushed back. It&rsquo;s one of the most visited screens in the product, and every row had the same visual weight. You had to read every label to find anything.</p>
         </div>
       </section>
 
@@ -123,8 +103,8 @@
 
 
         <div class="cs-body">
-          <p>Everything worked, but the layout was flat. Profile (the most-used section) looked the same as everything else. No grouping, no hierarchy — you had to read every label.</p>
-          <p>I looked at settings pages in Zoho's other products (Projects, CRM, Mail). The best ones gave the most-used section the most visual weight. Ours didn't.</p>
+          <p>Nothing was broken. The layout was just flat. Profile &mdash; the thing people open first &mdash; looked identical to everything else. No grouping, no landmarks. You read the whole page or you gave up.</p>
+          <p>I looked at settings in other Zoho products. The ones that worked gave the most-used block the most weight. Ours didn&rsquo;t.</p>
         </div>
       </section>
 
@@ -132,21 +112,8 @@
       <section class="cs-section">
         <h2 class="cs-section-title">Constraints</h2>
         <div class="cs-body">
-          <p>Pure visual redesign — no settings moved, no behavior changed. Had to match the 2.0 design language and ship in 2 weeks.</p>
-        </div>
-        <div class="cs-insights">
-          <div class="cs-insight">
-            <div class="cs-insight-title">Don't break existing behavior</div>
-            <p>50K+ users already know where everything is. Moving settings around would cause confusion and support tickets.</p>
-          </div>
-          <div class="cs-insight">
-            <div class="cs-insight-title">Match 2.0 design language</div>
-            <p>Other screens (dashboard, board view, backlog) were being redesigned simultaneously. The settings page had to feel like the same product.</p>
-          </div>
-          <div class="cs-insight">
-            <div class="cs-insight-title">Ship with the launch</div>
-            <p>2-week timeline. No room for scope creep or re-architecture — this had to be a visual lift that engineering could implement quickly.</p>
-          </div>
+          <p>Pure visual lift. No settings moved, no behavior changed. Had to match 2.0 tokens and ship in two weeks alongside the rest of the launch.</p>
+          <p>50K+ users already know where things live. Moving rows around would&rsquo;ve meant support tickets, not better UX. The win was hierarchy, not re-architecture.</p>
         </div>
       </section>
 
@@ -160,7 +127,7 @@
           <img src="assets/images/cs2-iterations-2.png" alt="Later iterations" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>Started with the profile section — gave it proper visual weight since it's where users go most. Then grouped related settings under clear headers so the page is scannable. Kept everything consistent with the 2.0 patterns used elsewhere in the product.</p>
+          <p>Started with profile &mdash; card treatment, avatar, name, email up front. Then grouped related settings under headers with consistent spacing. Same radius and type as dashboard and board so it felt like one product, not a leftover screen.</p>
         </div>
       </section>
 
@@ -175,11 +142,10 @@
 
         <div class="cs-body">
           <ul>
-            <li><strong>Profile section elevated</strong> — given a card treatment with avatar, name, and email prominently displayed. This is what users look for first.</li>
-            <li><strong>Clear section grouping</strong> — related settings grouped under headers with consistent spacing. Each group is visually distinct.</li>
-            <li><strong>Scannable layout</strong> — find what you need without reading every label. Section headers act as landmarks.</li>
-            <li><strong>Scalable structure</strong> — new settings can slot into existing groups without breaking the layout. The engineering team confirmed this made their implementation faster.</li>
-            <li><strong>2.0 consistency</strong> — same card radius, spacing tokens, and typography as the rest of the redesign.</li>
+            <li><strong>Profile up front.</strong> Card with avatar, name, email &mdash; what people actually open settings for.</li>
+            <li><strong>Grouped sections.</strong> Related options under headers. Each block reads as its own thing.</li>
+            <li><strong>Landmarks, not labels.</strong> Scan by section title instead of reading every row.</li>
+            <li><strong>Room to grow.</strong> New settings slot into existing groups. Eng said that made implementation faster.</li>
           </ul>
         </div>
 
@@ -211,8 +177,8 @@
 
 
         <div class="cs-body">
-          <p>Shipped with the 2.0 launch. Engineering implemented it in under a week because the specs used existing components — no custom work needed.</p>
-          <p>The layout later became the template for settings screens in other Sprints modules.</p>
+          <p>Shipped with 2.0. Eng had it live in under a week &mdash; existing components, no custom builds.</p>
+          <p>The grouped layout later became the default for settings in other Sprints modules.</p>
         </div>
       </section>
 
@@ -220,9 +186,9 @@
       <section class="cs-section">
         <h2 class="cs-section-title">What I Took Away</h2>
         <div class="cs-body">
-          <p><strong>Push for the boring screens.</strong> Settings doesn't get attention, but it's where users go when something matters. I advocated for including it in the launch instead of deferring it.</p>
-          <p><strong>Same content, different hierarchy.</strong> Nothing was added or removed. The redesign just organized what was already there. That made the entire difference.</p>
-          <p><strong>Think about who builds it next.</strong> Used existing components so engineers could ship fast, and future designers could extend the pattern without starting over.</p>
+          <p><strong>Push for the boring screens.</strong> Settings rarely gets portfolio love, but people hit it when something actually matters. Worth fighting to include in a launch.</p>
+          <p><strong>Hierarchy beats novelty.</strong> Same rows, different order of importance. That was the whole redesign.</p>
+          <p><strong>Design for the person implementing it.</strong> Existing components meant fast ship and a pattern others could reuse.</p>
         </div>
       </section>
 

@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Recent Updates — Zoho Sprints | Vipin</title>
-  <meta name="description" content="Case study: Designing a centralized in-product updates system for Zoho Sprints. Shipped to 50K+ users.">
+  <meta name="description" content="Renewal reminders were going out by email and nobody was reading them. So I built a feed inside Zoho Sprints to fix that. Shipped in 2 weeks, 50K+ users.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/case-study.css">
 </head>
@@ -45,15 +45,13 @@
 
       <header class="cs-header">
         <h1 class="cs-title">Recent Updates — Zoho Sprints</h1>
-        <p class="cs-subtitle">Designing a centralized in-product updates system for Zoho Sprints</p>
-
-        <div class="cs-meta">
-          <div class="cs-meta-row"><span class="cs-meta-label">Product</span><span class="cs-meta-value">: Zoho Sprints</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-value">: Product Designer</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">: ~2 weeks</span></div>
-          <div class="cs-meta-row"><span class="cs-meta-label">Status</span><span class="cs-meta-value">: Shipped</span></div>
-        </div>
+        <p class="cs-subtitle">Renewal reminders were going out over email. Most people never opened them. This is the feed I built to fix that.</p>
       </header>
+
+      <section class="cs-tldr-section" aria-labelledby="cs-tldr-heading">
+        <h2 class="cs-tldr-section__title" id="cs-tldr-heading">TL;DR</h2>
+        <p class="cs-tldr-section__text">Sprints had no way to reach users inside the product, so renewal reminders and updates were going out over email where nobody saw them. I designed an in-app feed that put it all in one place. Pushed back on the &ldquo;one flat list&rdquo; brief so action items don&rsquo;t look like stuff you can ignore. Shipped in 2 weeks to 50K+ users, with zero design changes after handoff.</p>
+      </section>
 
       <!-- Team -->
       <div class="cs-team">
@@ -63,41 +61,23 @@
         <span class="cs-team-member">PM <span class="cs-team-member__role">&mdash; Product</span></span>
       </div>
 
-      <!-- Impact Banner -->
+      <!-- Impact -->
       <div class="cs-impact-banner">
         <span class="cs-impact-label">Impact</span>
-        <div class="cs-impact-stats">
-          <span>50K+ users</span>
-          <span class="cs-impact-dot">&middot;</span>
-          <span>2 sprints</span>
-          <span class="cs-impact-dot">&middot;</span>
-          <span>Shipped</span>
-        </div>
-      </div>
-
-      <!-- Outcome Metrics -->
-      <div class="cs-outcomes">
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">4</div>
-          <div class="cs-outcome__label">Content types unified into one feed</div>
-        </div>
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">2 weeks</div>
-          <div class="cs-outcome__label">Design to handoff</div>
-        </div>
-        <div class="cs-outcome">
-          <div class="cs-outcome__number">Shipped</div>
-          <div class="cs-outcome__label">Live in production</div>
-        </div>
+        <ul class="cs-impact-stats">
+          <li>50K+ users</li>
+          <li>4 update types in one feed</li>
+          <li>0 layout changes after handoff</li>
+        </ul>
       </div>
 
       <!-- Key Takeaways -->
       <div class="cs-takeaways">
         <h2 class="cs-takeaways-title">Key Takeaways</h2>
         <ul class="cs-takeaways-list">
-          <li>One feed for announcements, subscription reminders, community updates, and promotions</li>
-          <li>Pushed back on a flat list — got approval to visually separate action-required items from passive ones</li>
-          <li>Shipped intact, only change was icon redrawing during eng review</li>
+          <li>The whole point was reach. Renewal notices were sitting in inboxes nobody opened. This put them where users actually look.</li>
+          <li>The brief wanted one flat list. I pushed back and got the okay to make action items look different from the stuff you can ignore.</li>
+          <li>Shipped exactly as designed. Only thing that changed was the icons, and that was during eng review.</li>
         </ul>
       </div>
 
@@ -110,8 +90,8 @@
       <section class="cs-section">
         <h2 class="cs-section-title">The Problem</h2>
         <div class="cs-body">
-          <p>Sprints had no way to reach users inside the product. Updates went out via email — most people never saw them. Subscription reminders, community posts, promotions — nothing reached users in-app.</p>
-          <p>I worked with the PM to map out what needed to go in the feed and what didn't. The engineering team flagged what was feasible within the existing notification infrastructure, which shaped the structure early on.</p>
+          <p>Sprints couldn&rsquo;t really reach users inside the product. Everything went out over email &mdash; renewal reminders, community posts, promotions. And email open rates were what they were. People were missing renewal notices, which isn&rsquo;t a UX nitpick, that&rsquo;s money walking out the door.</p>
+          <p>So I sat with the PM and we worked out what belonged in the feed and what didn&rsquo;t. Engineering told us early what the existing notification setup could and couldn&rsquo;t do. That shaped the structure before I&rsquo;d drawn a single frame.</p>
         </div>
       </section>
 
@@ -122,8 +102,9 @@
           <img src="assets/images/cs1-problem.png" alt="Problem analysis" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p>The hard part wasn't building a notification panel. It was fitting very different types of content into one space — announcements, subscription reminders, community updates, and promotions. Each has a different urgency and frequency.</p>
-          <p>Show too much, users ignore everything. Show too little, they miss what matters.</p>
+          <p>Building a notification panel is easy. That wasn&rsquo;t the problem.</p>
+          <p>The problem was four different kinds of content sharing one space &mdash; announcements, renewal reminders, community updates, promotions. A renewal reminder needs you to do something today. A community post doesn&rsquo;t. If they all look the same, people stop reading all of them. Including the one that costs them money to miss.</p>
+          <p>The brief said put it all in one flat list. I didn&rsquo;t agree with that, and I said so early.</p>
         </div>
       </section>
 
@@ -131,7 +112,8 @@
       <section class="cs-section">
         <h2 class="cs-section-title">Early Exploration</h2>
         <div class="cs-body">
-          <p>Before jumping into Figma, I listed out the content types on paper to understand urgency, frequency, and what actions each type needed. Wanted to get the structure right before touching pixels.</p>
+          <p>Before opening Figma I just listed everything out on paper. How urgent is each type, how often it shows up, whether it needs the user to act. Wanted the hierarchy clear in my head before I started pushing pixels around.</p>
+          <p>That&rsquo;s where the real tension showed up &mdash; a renewal reminder and a promo banner have nothing in common except they&rsquo;d be sitting in the same panel. They couldn&rsquo;t look the same.</p>
         </div>
       </section>
 
@@ -139,16 +121,16 @@
       <section class="cs-section">
         <h2 class="cs-section-title">How the Design Evolved</h2>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-iterations-1.png" alt="Early iterations — structured cards with heavy visual hierarchy" loading="lazy" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-iterations-1.png" alt="First go — heavy cards. Looked nice. Way too much for something you open three times a day." loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-iterations-2.png" alt="Later iterations — simplified notification-style items" loading="lazy" onerror="this.style.display='none'">
+          <img src="assets/images/cs1-iterations-2.png" alt="Where it landed — notification-style. Light, quick to scan, CTAs only where they're needed." loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="cs-body">
-          <p><strong>Early versions</strong> — Structured cards with heavy visual hierarchy. Looked polished but too heavy for something users see multiple times a day.</p>
-          <p><strong>Where I pushed back</strong> — The brief said all updates go in one flat list. I argued that subscription reminders (which need action) should look different from passive updates. A user missing a renewal notice is a business problem. I showed both approaches in mockups, and the PM agreed.</p>
-          <p><strong>Where I was wrong</strong> — I spent two iterations on a custom card system that broke Sprints' design language. My manager pulled me back, and he was right. It should feel like it always existed in the product.</p>
-          <p><strong>What landed</strong> — Notification-style items. Simple to scan, action-driven updates get CTAs, passive ones don't.</p>
+          <p><strong>First versions</strong> &mdash; Cards with a lot of visual weight. On their own they looked good. But you open this panel a few times a day, and all that hierarchy got tiring fast. It was too much.</p>
+          <p><strong>Where I pushed back</strong> &mdash; Brief said flat list. I said renewal reminders shouldn&rsquo;t look like a community post &mdash; one needs you to act, the other doesn&rsquo;t. Someone missing a renewal is a real cost. I put both versions side by side in mockups and the PM came around pretty quick.</p>
+          <p><strong>Where I got it wrong</strong> &mdash; I burned two iterations building a custom card system. Looked great in isolation. My manager pulled me back and said it didn&rsquo;t feel like Sprints. He was right. A panel like this should feel like it was always there, not like something a designer dropped in to show off.</p>
+          <p><strong>What stuck</strong> &mdash; Notification-style items that match how Sprints already looks. Action stuff gets a CTA. Passive stuff doesn&rsquo;t. The difference comes from colour, not heavy boxes.</p>
         </div>
       </section>
 
@@ -162,12 +144,12 @@
 
 
         <div class="cs-body">
-          <p>A single update feed inside the product. One place for everything.</p>
+          <p>One feed. Everything in one place &mdash; both for the teams sending updates and the users checking what needs them.</p>
           <ul>
-            <li><strong>One stream, no tabs.</strong> Everything sorted by time. We debated tabs-by-type early on, but the PM and I agreed it would fragment attention — users should see everything in one scan.</li>
-            <li><strong>Visual distinction by update type</strong> — colour-coded indicators let users tell at a glance what needs attention vs. what's informational.</li>
-            <li><strong>Scannable by default, expandable for detail.</strong> Most updates show title + one-liner. Tap to expand for full context.</li>
-            <li><strong>Action-driven updates</strong> (subscription reminders) visually separated from passive ones — because the engineering team needed a clear hook for CTA buttons.</li>
+            <li><strong>One stream, no tabs.</strong> We talked about splitting by type. Decided against it &mdash; tabs would just split attention. You should know what&rsquo;s waiting in one look.</li>
+            <li><strong>Colour does the sorting.</strong> A coloured indicator tells you what needs action vs. what&rsquo;s just info. You don&rsquo;t have to read everything to find the one that matters.</li>
+            <li><strong>Short by default, expand if you want.</strong> Title and a line. Tap for the rest.</li>
+            <li><strong>CTAs only where they belong.</strong> Eng needed a clean place to hang the buttons. Keeping action items visually separate solved that at the same time.</li>
           </ul>
         </div>
 
@@ -182,7 +164,8 @@
         </div>
 
         <div class="cs-body">
-          <p>Design shipped intact. Only change was redrawing icons to match Sprints' existing style — caught during eng review. The marketing and product teams now actively use the feed to reach users.</p>
+          <p>Shipped the way I designed it. Nothing changed in the layout or the flow after handoff. The one thing that did change was the icons &mdash; I&rsquo;d used placeholders, and we swapped them for Sprints&rsquo; own set during eng review. Caught it early because I stayed in the loop.</p>
+          <p>Marketing and product both use the feed now as their main way to reach users in-app. That&rsquo;s the win &mdash; the product got a channel it just didn&rsquo;t have before.</p>
         </div>
 
       </section>
@@ -191,9 +174,9 @@
       <section class="cs-section">
         <h2 class="cs-section-title">What I Took Away</h2>
         <div class="cs-body">
-          <p><strong>Pick the right battles.</strong> Separating action-required from passive updates was worth fighting for. Not every design disagreement is — but this one affected the business.</p>
-          <p><strong>Follow the system.</strong> My custom card designs looked good alone but felt foreign in the product. Consistency matters more than novelty in utility screens.</p>
-          <p><strong>Move fast, don't get attached.</strong> Several iterations, two weeks. Most of them were wrong. That's fine — that's how you find the right one.</p>
+          <p><strong>Pick the fight you can back up.</strong> I pushed on the flat list because I could point at a real cost &mdash; people missing renewals. That&rsquo;s what moved the PM. &ldquo;It doesn&rsquo;t feel right&rdquo; wouldn&rsquo;t have.</p>
+          <p><strong>Fitting in beats standing out.</strong> My custom cards were good. They were also wrong for the product. A screen that feels foreign just makes people trust it less. Best case is nobody notices it&rsquo;s new.</p>
+          <p><strong>Stick around after handoff.</strong> The icon thing got caught in eng review, not after launch, because I was still paying attention. That last bit of involvement isn&rsquo;t extra work. It&rsquo;s what keeps the rest from breaking.</p>
         </div>
       </section>
 

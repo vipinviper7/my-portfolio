@@ -133,19 +133,19 @@ if (canvas) {
     ctx.clearRect(0, 0, w, h);
 
     // Deep background wave — large, slow
-    drawWave(h * 0.35, 30, 0.003, 0.4, 'rgba(15, 30, 120, 0.5)', 40);
+    drawWave(h * 0.35, 30, 0.003, 0.4, 'rgba(20, 20, 32, 0.52)', 40);
 
     // Mid wave — medium
-    drawWave(h * 0.28, 25, 0.005, 0.6, 'rgba(30, 64, 175, 0.45)', 30);
+    drawWave(h * 0.28, 25, 0.005, 0.6, 'rgba(38, 38, 52, 0.45)', 30);
 
     // Bright wave — sharper
-    drawWave(h * 0.22, 20, 0.007, 0.8, 'rgba(59, 130, 246, 0.35)', 20);
+    drawWave(h * 0.22, 20, 0.007, 0.8, 'rgba(65, 65, 82, 0.38)', 20);
 
     // Top shimmer wave — fast, subtle
-    drawWave(h * 0.18, 15, 0.009, 1.0, 'rgba(96, 165, 250, 0.2)', 15);
+    drawWave(h * 0.18, 15, 0.009, 1.0, 'rgba(105, 105, 125, 0.24)', 15);
 
     // Lightest accent
-    drawWave(h * 0.12, 10, 0.011, 1.2, 'rgba(147, 197, 253, 0.1)', 10);
+    drawWave(h * 0.12, 10, 0.011, 1.2, 'rgba(165, 165, 185, 0.12)', 10);
 
     time += 0.02;
     animationId = requestAnimationFrame(animate);

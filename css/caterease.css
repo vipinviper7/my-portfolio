@@ -45,7 +45,7 @@
 }
 
 .cs-persona-quote {
-  font-style: italic;
+  font-style: normal;
   color: var(--color-accent);
   font-size: 0.95rem;
   line-height: 1.6;

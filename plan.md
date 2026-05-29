@@ -40,7 +40,7 @@ my-portfolio/
 ### Typography & Color
 - System font stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`) for zero-latency rendering
 - Neutral dark background (`#0f172a`) with light text for a modern developer look
-- Accent color (`#3b82f6` blue) for links, buttons, and highlights
+- Accent: neutral light grey (`#c4c4d4`) for links and highlights; frosted white/grey for primary-style controls
 
 ### Sections
 

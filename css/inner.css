@@ -1,0 +1,152 @@
+/* ============================================================
+   INNER — shared editorial skin for all non-home pages.
+   Loaded after each page's own stylesheet; re-themes existing
+   markup to match the homepage's editorial language.
+   ============================================================ */
+:root {
+  --ink: #f2f2ed;
+  --ink-dim: #9a9aa6;
+  --ink-faint: #5c5c68;
+  --paper: #050507;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --serif: "Instrument Serif", Georgia, serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background-color: var(--paper);
+}
+
+/* Kill the old radial-glow hero backdrops — flat editorial dark */
+.about-hero::before,
+.exp-hero::before,
+.cs::before,
+.gal-hero::before,
+.resume-section::before {
+  display: none;
+}
+
+/* ============================================================
+   Eyebrow kicker (added in markup above each page h1)
+   ============================================================ */
+.in-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-dim);
+  margin-bottom: 1.5rem;
+}
+
+.in-eyebrow::before {
+  content: '';
+  width: 2.5rem;
+  height: 1px;
+  background: var(--ink-faint);
+  flex-shrink: 0;
+}
+
+/* centered-hero pages keep the kicker centered too */
+.exp-hero .in-eyebrow,
+.gal-hero .in-eyebrow {
+  justify-content: center;
+}
+
+/* ============================================================
+   Page titles — big editorial display
+   ============================================================ */
+.about-title,
+.exp-hero-title,
+.resume-heading,
+.cs-title,
+.gal-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5.5vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.about-title em,
+.exp-hero-title em,
+.resume-heading em,
+.cs-title em,
+.gal-hero-title em,
+.about-section-title em,
+.cs-section-title em,
+.gal-section-title em,
+.education-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-size: 1.04em;
+}
+
+/* hero subtitles under the big titles */
+.exp-hero-sub,
+.gal-hero-sub,
+.cs-subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  color: var(--ink-dim);
+  letter-spacing: 0.01em;
+}
+
+/* ============================================================
+   Section titles — left-aligned, confident
+   ============================================================ */
+.about-section-title,
+.cs-section-title,
+.cs-tldr-section__title,
+.cs-takeaways-title,
+.gal-section-title,
+.education-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-align: left;
+}
+
+/* keep Quiet Verse's gold-tinted section titles */
+.cs-section-title--cream {
+  color: #c4a265;
+}
+
+/* ============================================================
+   Page entrance — gentle rise on the hero block
+   ============================================================ */
+@keyframes inRise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about-hero .container,
+.exp-hero .container,
+.gal-hero .container,
+.resume-section .container,
+.cs-header,
+.cs-back {
+  animation: inRise 0.9s var(--ease-out) both;
+}
+
+.cs-header { animation-delay: 0.08s; }
+
+/* ============================================================
+   Footer — match homepage bar
+   ============================================================ */
+.footer {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 1.75rem 0;
+}

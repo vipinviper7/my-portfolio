@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -15,12 +15,20 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
-<body>
+<body class="page-home">
 
-  <div class="scroll-progress"></div>
+  <!-- Preloader -->
+  <div class="hm-preloader" aria-hidden="true">
+    <div class="hm-preloader-inner">
+      <span class="hm-preloader-name">Vipin Ebenezer</span>
+      <span class="hm-preloader-count">000</span>
+    </div>
+  </div>
+
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- Navigation -->
@@ -46,87 +54,103 @@
 
   <main id="main">
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container hero-content">
-        <h1 class="hero-heading">Hey, I'm Vipin.</h1>
-        <p class="hero-sub">Product Designer with 4 years of hands-on experience and 6 years in the design industry. Building user-centered digital products using AI, research, and data-driven design.</p>
-        <span class="hero-status"><span class="hero-status-dot"></span> Open to product design roles</span>
-        <div class="hero-ctas">
-          <a href="#works" class="hero-btn hero-btn--primary">View My Work <span>&darr;</span></a>
-          <a href="assets/docs/vipin_s_resume.pdf" class="hero-btn hero-btn--secondary" download>Download Resume</a>
+    <!-- Hero -->
+    <section class="hm-hero">
+      <div class="hm-wrap">
+        <p class="hm-eyebrow">Vipin Ebenezer &mdash; Product Designer at Zoho</p>
+        <h1 class="hm-title">
+          <span class="hm-line"><span>I design products</span></span>
+          <span class="hm-line"><span>people don&rsquo;t need</span></span>
+          <span class="hm-line"><span>a <em>tutorial</em> for.</span></span>
+        </h1>
+        <div class="hm-hero-foot">
+          <div class="hm-hero-meta">
+            <span class="hm-avail"><i></i>Open to product design roles</span>
+            <span>4 years of hands-on product design, 6 in the industry. Research, AI, and data-driven design &mdash; shipped to 50K+ users.</span>
+            <span>Chennai, India &mdash; <span data-local-time>--:--</span> IST</span>
+          </div>
+          <div class="hm-hero-ctas">
+            <a href="#works" class="hm-btn hm-btn--solid" data-magnetic>View Work &darr;</a>
+            <a href="assets/docs/vipin_s_resume.pdf" class="hm-btn" data-magnetic download>Resume &darr;</a>
+          </div>
         </div>
+      </div>
+      <div class="hm-scrollhint" aria-hidden="true">Scroll</div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="hm-marquee" aria-hidden="true">
+      <div class="hm-marquee-track">
+        <span>Product Design</span><i>&#10022;</i>
+        <span>UX Research</span><i>&#10022;</i>
+        <span>Design Systems</span><i>&#10022;</i>
+        <span>Icon Design</span><i>&#10022;</i>
+        <span>Prototyping</span><i>&#10022;</i>
+        <span>Illustration</span><i>&#10022;</i>
+      </div>
+      <div class="hm-marquee-track">
+        <span>Product Design</span><i>&#10022;</i>
+        <span>UX Research</span><i>&#10022;</i>
+        <span>Design Systems</span><i>&#10022;</i>
+        <span>Icon Design</span><i>&#10022;</i>
+        <span>Prototyping</span><i>&#10022;</i>
+        <span>Illustration</span><i>&#10022;</i>
+      </div>
+    </div>
+
+    <!-- Selected Work -->
+    <section id="works" class="hm-works">
+      <div class="hm-wrap">
+        <header class="hm-sec-head" data-reveal>
+          <h2 class="hm-sec-label">Selected <em>work</em></h2>
+          <span class="hm-sec-count">(03)</span>
+        </header>
+
+        <a href="case-study-1.html" class="hm-work" data-cursor="View &#8599;" data-reveal>
+          <div class="hm-work-info">
+            <span class="hm-work-idx">(01)</span>
+            <h3 class="hm-work-title">Recent Updates Feature</h3>
+            <p class="hm-work-sub">Zoho Sprints &middot; Product Design &middot; Shipped</p>
+            <p class="hm-work-desc">Sprints had personal notifications but no announcement channel. I designed one feed for the team to broadcast features, updates, and reminders without everything looking the same.</p>
+            <span class="hm-work-cta"><span class="hm-cta-line"></span>Case Study &middot; 5 min</span>
+          </div>
+          <div class="hm-work-media">
+            <img src="assets/images/project-recent-updates.png" alt="Recent Updates Feature" data-parallax="8">
+          </div>
+        </a>
+
+        <a href="case-study-3.html" class="hm-work" data-cursor="View &#8599;" data-reveal>
+          <div class="hm-work-info">
+            <span class="hm-work-idx">(02)</span>
+            <h3 class="hm-work-title">Product Tour</h3>
+            <p class="hm-work-sub">Zoho Sprints &middot; Product Design &middot; Shipped</p>
+            <p class="hm-work-desc">New users couldn&rsquo;t find their way around Sprints. I designed a guided tour that walks them through key sections without pulling them out of the product.</p>
+            <span class="hm-work-cta"><span class="hm-cta-line"></span>Case Study &middot; 5 min</span>
+          </div>
+          <div class="hm-work-media">
+            <img src="assets/images/project-product-tour.png" alt="Product Tour Feature" data-parallax="8">
+          </div>
+        </a>
+
+        <a href="case-study-2.html" class="hm-work" data-cursor="View &#8599;" data-reveal>
+          <div class="hm-work-info">
+            <span class="hm-work-idx">(03)</span>
+            <h3 class="hm-work-title">Settings Page Redesign</h3>
+            <p class="hm-work-sub">Zoho Sprints &middot; Visual Redesign &middot; Shipped</p>
+            <p class="hm-work-desc">The settings page had no visual hierarchy &mdash; every option looked the same. I redesigned it for Sprints 2.0 so users could actually scan it.</p>
+            <span class="hm-work-cta"><span class="hm-cta-line"></span>Case Study &middot; 5 min</span>
+          </div>
+          <div class="hm-work-media">
+            <img src="assets/images/project-settings.png" alt="Settings Page Redesign" data-parallax="8">
+          </div>
+        </a>
       </div>
     </section>
 
-    <!-- Selected Work -->
-    <section id="works" class="works">
-      <div class="container section-header-reveal">
-        <h2 class="section-title reveal-child">Case Studies</h2>
-
-        <div class="works-grid">
-
-          <!-- Project 1: Recent Updates -->
-          <a href="case-study-1.html" class="project-card reveal reveal-d1">
-            <div class="project-thumb project-thumb--green">
-              <img src="assets/images/project-recent-updates.png" alt="Recent Updates Feature" onerror="this.parentElement.classList.add('no-img')">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag tag--blue">product design</span>
-                <span class="tag tag--green">shipped</span>
-              </div>
-              <h3 class="project-title">Recent Updates Feature — Zoho Sprints</h3>
-              <p class="project-desc">Sprints had personal notifications but no announcement channel. I designed one feed for the team to broadcast features, updates, and reminders without everything looking the same.</p>
-              <p class="project-impact">Shipped &middot; 2 sprints</p>
-              <div class="project-read-wrap">
-                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
-                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Project 2: Product Tour -->
-          <a href="case-study-3.html" class="project-card reveal reveal-d2">
-            <div class="project-thumb project-thumb--blue">
-              <img src="assets/images/project-product-tour.png" alt="Product Tour Feature" onerror="this.parentElement.classList.add('no-img')">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag tag--blue">product design</span>
-                <span class="tag tag--green">shipped</span>
-              </div>
-              <h3 class="project-title">Product Tour &mdash; Zoho Sprints</h3>
-              <p class="project-desc">New users couldn't find their way around Sprints. I designed a guided tour that walks them through key sections without pulling them out of the product.</p>
-              <p class="project-impact">Shipped &middot; Product-wide rollout</p>
-              <div class="project-read-wrap">
-                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
-                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Project 3: Settings Redesign -->
-          <a href="case-study-2.html" class="project-card reveal reveal-d3">
-            <div class="project-thumb project-thumb--blue">
-              <img src="assets/images/project-settings.png" alt="Settings Page Redesign" onerror="this.parentElement.classList.add('no-img')">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag tag--blue">visual redesign</span>
-                <span class="tag tag--green">shipped</span>
-              </div>
-              <h3 class="project-title">Settings Page Redesign — Zoho Sprints</h3>
-              <p class="project-desc">The settings page had no visual hierarchy — every option looked the same. I redesigned it for Sprints 2.0 so users could actually scan it.</p>
-              <p class="project-impact">Shipped with Sprints 2.0 launch</p>
-              <div class="project-read-wrap">
-                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
-                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
-              </div>
-            </div>
-          </a>
-
-        </div>
+    <!-- Statement -->
+    <section class="hm-statement">
+      <div class="hm-wrap">
+        <p>I research the problem, design the solution, and build it if I have to &mdash; <em>four years</em> shipping product at Zoho to <em>50,000+ users</em>, from icon systems to entire feature flows.</p>
       </div>
     </section>
 
@@ -181,58 +205,51 @@
     </section>
 
     <!-- Visual Design -->
-    <section class="vd-section">
-      <div class="container section-header-reveal">
-        <h2 class="section-title reveal-child">Illustrations, Icons & Marketing</h2>
-
-        <div class="vd-grid">
-          <a href="visual-design.html#icons" class="vd-card reveal-scale reveal-d1">
-            <div class="vd-card-img">
-              <img src="assets/images/vd-icons.gif" alt="Icon Systems" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-            </div>
-            <div class="vd-card-body">
-              <h3 class="vd-card-title">Icon Systems</h3>
-              <p class="vd-card-desc">Custom icon sets for product interfaces at Zoho</p>
-            </div>
-          </a>
-
-          <a href="visual-design.html#product-design" class="vd-card reveal-scale reveal-d2">
-            <div class="vd-card-img">
-              <img src="assets/images/vd-illustrations.gif" alt="Product Visual Design" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-            </div>
-            <div class="vd-card-body">
-              <h3 class="vd-card-title">Product Visual Design</h3>
-              <p class="vd-card-desc">Empty states, campaigns, and marketing creatives</p>
+    <section class="hm-vd">
+      <div class="hm-wrap">
+        <header class="hm-sec-head" data-reveal>
+          <h2 class="hm-sec-label">Beyond <em>product</em></h2>
+          <span class="hm-sec-count">(03)</span>
+        </header>
+        <div class="hm-vd-grid">
+          <a href="visual-design.html#icons" class="hm-vd-card" data-cursor="Explore &#8599;" data-reveal>
+            <img src="assets/images/vd-icons.gif" alt="Icon Systems" loading="lazy">
+            <div class="hm-vd-meta">
+              <span class="hm-vd-title">Icon Systems</span>
+              <span class="hm-vd-idx">(01)</span>
             </div>
           </a>
-
-          <a href="visual-design.html#art" class="vd-card reveal-scale reveal-d3">
-            <div class="vd-card-img">
-              <img src="assets/images/vd-art.gif" alt="Digital Art" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+          <a href="visual-design.html#product-design" class="hm-vd-card" data-cursor="Explore &#8599;" data-reveal data-reveal-delay="100">
+            <img src="assets/images/vd-illustrations.gif" alt="Product Visual Design" loading="lazy">
+            <div class="hm-vd-meta">
+              <span class="hm-vd-title">Product Visual Design</span>
+              <span class="hm-vd-idx">(02)</span>
             </div>
-            <div class="vd-card-body">
-              <h3 class="vd-card-title">Digital Art</h3>
-              <p class="vd-card-desc">Personal illustrations, portraits, and character work</p>
+          </a>
+          <a href="visual-design.html#art" class="hm-vd-card" data-cursor="Explore &#8599;" data-reveal data-reveal-delay="200">
+            <img src="assets/images/vd-art.gif" alt="Digital Art" loading="lazy">
+            <div class="hm-vd-meta">
+              <span class="hm-vd-title">Digital Art</span>
+              <span class="hm-vd-idx">(03)</span>
             </div>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <canvas class="contact-wave-canvas" id="waveCanvas"></canvas>
-      <div class="container">
-        <div class="contact-inner">
-          <span class="section-label">Get in Touch</span>
-          <h2 class="contact-heading contact-reveal cr-1">Let's Work Together</h2>
-          <p class="contact-text contact-reveal cr-2">I'm currently open to new opportunities. Whether you have a role in mind or just want to chat, I'd love to hear from you.</p>
-          <a href="mailto:vipvipernezer7@gmail.com" class="contact-cta contact-reveal cr-3">Say Hello &rarr;</a>
-          <div class="contact-socials contact-reveal cr-4">
-            <a href="https://www.linkedin.com/in/vipin-ebenezer-678677158/" class="social-pill" target="_blank" rel="noopener noreferrer">LinkedIn <span class="external-indicator" aria-hidden="true">&#8599;</span></a>
-            <a href="https://www.behance.net/vipvipernef58a" class="social-pill" target="_blank" rel="noopener noreferrer">Behance <span class="external-indicator" aria-hidden="true">&#8599;</span></a>
-            <a href="https://dribbble.com/vipinkick7" class="social-pill" target="_blank" rel="noopener noreferrer">Dribbble <span class="external-indicator" aria-hidden="true">&#8599;</span></a>
-          </div>
+    <!-- Contact -->
+    <section id="contact" class="hm-contact">
+      <div class="hm-wrap">
+        <p class="hm-contact-kicker" data-reveal>Got a role or a project in mind?</p>
+        <a href="mailto:vipvipernezer7@gmail.com" class="hm-contact-mail" data-reveal data-reveal-delay="100">
+          Let&rsquo;s talk &rarr;
+          <span class="hm-mail-fill" aria-hidden="true">Let&rsquo;s talk &rarr;</span>
+        </a>
+        <p class="hm-contact-email" data-reveal data-reveal-delay="200">vipvipernezer7@gmail.com</p>
+        <div class="hm-contact-socials" data-reveal data-reveal-delay="300">
+          <a href="https://www.linkedin.com/in/vipin-ebenezer-678677158/" class="hm-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.behance.net/vipvipernef58a" class="hm-social" target="_blank" rel="noopener noreferrer">Behance</a>
+          <a href="https://dribbble.com/vipinkick7" class="hm-social" target="_blank" rel="noopener noreferrer">Dribbble</a>
         </div>
       </div>
     </section>
@@ -240,13 +257,20 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer reveal">
-    <div class="container">
-      <p>&copy; 2026 &mdash; Designed & built by V.</p>
+  <footer class="hm-footer">
+    <div class="hm-footer-name" aria-hidden="true">VIPIN</div>
+    <div class="hm-wrap">
+      <div class="hm-footer-bar">
+        <span>&copy; 2026 Vipin Ebenezer</span>
+        <span>Chennai, India &mdash; <span data-local-time>--:--</span> IST</span>
+        <a href="#" class="hm-totop">Back to top &uarr;</a>
+      </div>
     </div>
   </footer>
 
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/animations.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>

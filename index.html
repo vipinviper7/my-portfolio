@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Vipin — Product Designer</title>
-  <meta name="description" content="Product Designer at Zoho, shipping features to 50K+ users. I research the problem, design the solution, and build it if I have to.">
-  <meta property="og:title" content="Vipin — Product Designer">
+  <title>Vipin Ebenezer — Product Designer</title>
+  <meta name="description" content="Product Designer at Zoho Sprints. I design products people don't need a tutorial for — research, ship, repeat.">
+  <meta property="og:title" content="Vipin Ebenezer — Product Designer">
   <meta property="og:description" content="Product Designer at Zoho. I design products people don't need a tutorial for.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vipinfolio.in">
@@ -15,16 +15,19 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
-<body>
+<body class="page-home">
 
-  <div class="scroll-progress"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor-dot"></span></div>
+
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav nav--editorial">
     <a href="#" class="nav-logo">Vipin</a>
     <div class="nav-center">
       <div class="nav-pill">
@@ -46,144 +49,127 @@
 
   <main id="main">
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Hero -->
+    <section class="hero hero--editorial">
       <div class="container hero-content">
-        <h1 class="hero-heading">Hey, I'm Vipin.</h1>
-        <p class="hero-sub">Product Designer with 4 years of hands-on experience and 6 years in the design industry. Building user-centered digital products using AI, research, and data-driven design.</p>
-        <span class="hero-status"><span class="hero-status-dot"></span> Open to product design roles</span>
-        <div class="hero-ctas">
-          <a href="#works" class="hero-btn hero-btn--primary">View My Work <span>&darr;</span></a>
-          <a href="assets/docs/vipin_s_resume.pdf" class="hero-btn hero-btn--secondary" download>Download Resume</a>
+        <p class="hero-meta">Product Designer · Zoho Sprints</p>
+        <h1 class="hero-display">
+          <span class="hero-line">Vipin</span>
+          <span class="hero-line">Ebenezer</span>
+        </h1>
+        <p class="hero-deck">I design products people don't need a tutorial for — research the problem, ship the solution, build it if I have to.</p>
+        <div class="hero-foot">
+          <span class="hero-status"><span class="hero-status-dot"></span> Open to product design roles</span>
+          <a href="#works" class="hero-scroll-hint" aria-label="Scroll to selected work">
+            <span>Scroll</span>
+            <span class="hero-scroll-arrow" aria-hidden="true">↓</span>
+          </a>
         </div>
       </div>
     </section>
 
     <!-- Selected Work -->
-    <section id="works" class="works">
+    <section id="works" class="works works--editorial">
       <div class="container">
-        <span class="section-label">Selected Work</span>
-        <h2 class="section-title">Case Studies</h2>
+        <header class="works-header">
+          <span class="section-label">Selected Work</span>
+          <h2 class="section-title section-title--left">Index</h2>
+        </header>
 
-        <div class="works-grid">
+        <div class="project-index">
 
-          <!-- Project 1: Recent Updates -->
-          <a href="case-study-1.html" class="project-card reveal reveal-d1">
-            <div class="project-thumb project-thumb--green">
-              <img src="assets/images/project-recent-updates.png" alt="Recent Updates Feature" onerror="this.parentElement.classList.add('no-img')">
+          <a href="case-study-1.html" class="project-row" data-preview="assets/images/project-recent-updates.png" aria-label="Recent Updates — Zoho Sprints case study">
+            <span class="project-row__num">01</span>
+            <div class="project-row__body">
+              <h3 class="project-row__title">Recent Updates — Zoho Sprints</h3>
+              <p class="project-row__desc">One feed for the team to broadcast features, updates, and reminders — without everything looking the same.</p>
+              <span class="project-row__meta">Shipped · 2 sprints · 50K+ users</span>
             </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag tag--blue">product design</span>
-                <span class="tag tag--green">shipped</span>
-              </div>
-              <h3 class="project-title">Recent Updates Feature — Zoho Sprints</h3>
-              <p class="project-desc">Sprints had personal notifications but no announcement channel. I designed one feed for the team to broadcast features, updates, and reminders without everything looking the same.</p>
-              <p class="project-impact">Shipped &middot; 2 sprints</p>
-              <div class="project-read-wrap">
-                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
-                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
-              </div>
+            <div class="project-row__thumb">
+              <img src="assets/images/project-recent-updates.png" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
             </div>
           </a>
 
-          <!-- Project 2: Product Tour -->
-          <a href="case-study-3.html" class="project-card reveal reveal-d2">
-            <div class="project-thumb project-thumb--blue">
-              <img src="assets/images/project-product-tour.png" alt="Product Tour Feature" onerror="this.parentElement.classList.add('no-img')">
+          <a href="case-study-3.html" class="project-row" data-preview="assets/images/project-product-tour.png" aria-label="Product Tour — Zoho Sprints case study">
+            <span class="project-row__num">02</span>
+            <div class="project-row__body">
+              <h3 class="project-row__title">Product Tour — Zoho Sprints</h3>
+              <p class="project-row__desc">A guided tour that walks new users through key sections without pulling them out of the product.</p>
+              <span class="project-row__meta">Shipped · Product-wide rollout</span>
             </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag tag--blue">product design</span>
-                <span class="tag tag--green">shipped</span>
-              </div>
-              <h3 class="project-title">Product Tour &mdash; Zoho Sprints</h3>
-              <p class="project-desc">New users couldn't find their way around Sprints. I designed a guided tour that walks them through key sections without pulling them out of the product.</p>
-              <p class="project-impact">Shipped &middot; Product-wide rollout</p>
-              <div class="project-read-wrap">
-                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
-                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
-              </div>
+            <div class="project-row__thumb">
+              <img src="assets/images/project-product-tour.png" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
             </div>
           </a>
 
-          <!-- Project 3: Settings Redesign -->
-          <a href="case-study-2.html" class="project-card reveal reveal-d3">
-            <div class="project-thumb project-thumb--blue">
-              <img src="assets/images/project-settings.png" alt="Settings Page Redesign" onerror="this.parentElement.classList.add('no-img')">
+          <a href="case-study-2.html" class="project-row" data-preview="assets/images/project-settings.png" aria-label="Settings Page Redesign — Zoho Sprints case study">
+            <span class="project-row__num">03</span>
+            <div class="project-row__body">
+              <h3 class="project-row__title">Settings Page Redesign — Zoho Sprints</h3>
+              <p class="project-row__desc">Redesigned for Sprints 2.0 so users could actually scan settings — visual hierarchy where there was none.</p>
+              <span class="project-row__meta">Shipped · Sprints 2.0 launch</span>
             </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag tag--blue">visual redesign</span>
-                <span class="tag tag--green">shipped</span>
-              </div>
-              <h3 class="project-title">Settings Page Redesign — Zoho Sprints</h3>
-              <p class="project-desc">The settings page had no visual hierarchy — every option looked the same. I redesigned it for Sprints 2.0 so users could actually scan it.</p>
-              <p class="project-impact">Shipped with Sprints 2.0 launch</p>
-              <div class="project-read-wrap">
-                <span class="project-read">Case Study &middot; 5 min read <span class="arrow">&rarr;</span></span>
-                <span class="project-read project-read--hover">Open Case Study <span class="arrow">&rarr;</span></span>
-              </div>
+            <div class="project-row__thumb">
+              <img src="assets/images/project-settings.png" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
             </div>
           </a>
 
+        </div>
+
+        <div class="project-preview" aria-hidden="true">
+          <div class="project-preview__inner">
+            <img src="" alt="">
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Visual Design -->
-    <section class="vd-section">
+    <section class="vd-section vd-section--editorial">
       <div class="container">
-        <span class="section-label">Visual Design</span>
-        <h2 class="section-title">Illustrations, Icons & Marketing</h2>
+        <header class="vd-header">
+          <span class="section-label">Visual Design</span>
+          <h2 class="section-title section-title--left section-title--small">Illustrations &amp; Icons</h2>
+        </header>
 
-        <div class="vd-grid">
-          <a href="visual-design.html#icons" class="vd-card reveal-scale reveal-d1">
-            <div class="vd-card-img">
-              <img src="assets/images/vd-icons.gif" alt="Icon Systems" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+        <div class="vd-strip">
+          <a href="visual-design.html#icons" class="vd-strip-item reveal">
+            <div class="vd-strip-thumb">
+              <img src="assets/images/vd-icons.gif" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
             </div>
-            <div class="vd-card-body">
-              <h3 class="vd-card-title">Icon Systems</h3>
-              <p class="vd-card-desc">Custom icon sets for product interfaces at Zoho</p>
-            </div>
+            <span class="vd-strip-label">Icon Systems</span>
           </a>
-
-          <a href="visual-design.html#product-design" class="vd-card reveal-scale reveal-d2">
-            <div class="vd-card-img">
-              <img src="assets/images/vd-illustrations.gif" alt="Product Visual Design" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+          <a href="visual-design.html#product-design" class="vd-strip-item reveal reveal-d1">
+            <div class="vd-strip-thumb">
+              <img src="assets/images/vd-illustrations.gif" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
             </div>
-            <div class="vd-card-body">
-              <h3 class="vd-card-title">Product Visual Design</h3>
-              <p class="vd-card-desc">Empty states, campaigns, and marketing creatives</p>
-            </div>
+            <span class="vd-strip-label">Product Visuals</span>
           </a>
-
-          <a href="visual-design.html#art" class="vd-card reveal-scale reveal-d3">
-            <div class="vd-card-img">
-              <img src="assets/images/vd-art.gif" alt="Digital Art" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+          <a href="visual-design.html#art" class="vd-strip-item reveal reveal-d2">
+            <div class="vd-strip-thumb">
+              <img src="assets/images/vd-art.gif" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
             </div>
-            <div class="vd-card-body">
-              <h3 class="vd-card-title">Digital Art</h3>
-              <p class="vd-card-desc">Personal illustrations, portraits, and character work</p>
-            </div>
+            <span class="vd-strip-label">Digital Art</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- Contact -->
+    <section id="contact" class="contact contact--editorial">
       <canvas class="contact-wave-canvas" id="waveCanvas"></canvas>
       <div class="container">
         <div class="contact-inner">
           <span class="section-label">Get in Touch</span>
-          <h2 class="contact-heading contact-reveal cr-1">Let's Work Together</h2>
-          <p class="contact-text contact-reveal cr-2">I'm currently open to new opportunities. Whether you have a role in mind or just want to chat, I'd love to hear from you.</p>
-          <a href="mailto:vipvipernezer7@gmail.com" class="contact-cta contact-reveal cr-3">Say Hello &rarr;</a>
+          <h2 class="contact-heading contact-reveal cr-1">Let's work<br>together.</h2>
+          <p class="contact-text contact-reveal cr-2">Open to new opportunities. Whether you have a role in mind or just want to chat — I'd love to hear from you.</p>
+          <a href="mailto:vipvipernezer7@gmail.com" class="contact-cta contact-reveal cr-3 magnetic" data-magnetic>Say hello →</a>
           <div class="contact-socials contact-reveal cr-4">
-            <a href="https://www.linkedin.com/in/vipin-ebenezer-678677158/" class="social-pill" target="_blank" rel="noopener noreferrer">LinkedIn <span class="external-indicator" aria-hidden="true">&#8599;</span></a>
-            <a href="https://www.behance.net/vipvipernef58a" class="social-pill" target="_blank" rel="noopener noreferrer">Behance <span class="external-indicator" aria-hidden="true">&#8599;</span></a>
-            <a href="https://dribbble.com/vipinkick7" class="social-pill" target="_blank" rel="noopener noreferrer">Dribbble <span class="external-indicator" aria-hidden="true">&#8599;</span></a>
+            <a href="https://www.linkedin.com/in/vipin-ebenezer-678677158/" class="contact-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <span class="contact-link-sep" aria-hidden="true">·</span>
+            <a href="https://www.behance.net/vipvipernef58a" class="contact-link" target="_blank" rel="noopener noreferrer">Behance</a>
+            <span class="contact-link-sep" aria-hidden="true">·</span>
+            <a href="https://dribbble.com/vipinkick7" class="contact-link" target="_blank" rel="noopener noreferrer">Dribbble</a>
           </div>
         </div>
       </div>
@@ -191,13 +177,16 @@
 
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer footer--editorial">
     <div class="container">
-      <p>&copy; 2026 &mdash; Designed & built by V.</p>
+      <p>&copy; 2026 — Designed &amp; built by V.</p>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/motion.js"></script>
 </body>
 </html>

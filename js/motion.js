@@ -96,13 +96,6 @@
     });
   }
 
-  function enableNoMotionFallback() {
-    window.setTimeout(function () {
-      if (!document.body.classList.contains('no-motion')) return;
-      prepareHeroLines();
-    }, 100);
-  }
-
   function initHeroAnimation() {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 

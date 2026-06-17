@@ -8,20 +8,12 @@
   --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
   --max-width: 1320px;
   --section-pad: clamp(5rem, 10vw, 8rem);
-  cursor: none;
 }
 
-.page-home a,
-.page-home button {
+.page-home.has-custom-cursor,
+.page-home.has-custom-cursor a,
+.page-home.has-custom-cursor button {
   cursor: none;
-}
-
-@media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  .page-home,
-  .page-home a,
-  .page-home button {
-    cursor: auto;
-  }
 }
 
 /* Grain overlay */
@@ -154,6 +146,7 @@ body.page-home::before {
   margin-bottom: 2rem;
 }
 
+/* GSAP enhances — content stays visible if JS fails */
 .page-home .hero-line {
   display: block;
   overflow: hidden;
@@ -223,16 +216,6 @@ body.page-home::before {
   display: none;
 }
 
-/* GSAP initial states */
-.page-home.motion-ready .hero-meta,
-.page-home.motion-ready .hero-deck,
-.page-home.motion-ready .hero-foot {
-  opacity: 0;
-}
-
-.page-home.no-motion .hero-meta,
-.page-home.no-motion .hero-deck,
-.page-home.no-motion .hero-foot,
 .page-home.no-motion .hero-line-inner,
 .page-home.no-motion .project-row,
 .page-home.no-motion .vd-strip-item,

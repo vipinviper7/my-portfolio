@@ -1,6 +1,6 @@
 /**
  * Homepage motion layer — Lenis, GSAP, cursor, project preview
- * Only loaded on index.html
+ * Only loaded on index.html. Content stays visible if scripts fail.
  */
 (function () {
   'use strict';
@@ -9,158 +9,140 @@
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  const canUseMotion = !prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
 
-  if (prefersReducedMotion) {
+  prepareHeroLines();
+
+  if (!canUseMotion) {
     document.body.classList.add('no-motion');
-    initReducedMotion();
     return;
   }
 
-  document.body.classList.add('motion-ready');
-
   let lenis = null;
 
-  // Lenis smooth scroll
-  if (typeof Lenis !== 'undefined') {
-    lenis = new Lenis({
-      duration: 1.2,
-      easing: function (t) {
-        return Math.min(1, 1.001 - Math.pow(2, -10 * t));
-      },
-      smoothWheel: true,
-      touchMultiplier: 1.5,
-    });
-
-    lenis.on('scroll', function () {
-      const nav = document.querySelector('.nav');
-      if (nav) {
-        if (lenis.scroll > 50) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
-      }
-      if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.update();
-      }
-    });
-
-    if (typeof gsap !== 'undefined') {
-      gsap.ticker.add(function (time) {
-        lenis.raf(time * 1000);
+  // Lenis only on desktop — native scroll on touch devices
+  if (isFinePointer && typeof Lenis !== 'undefined') {
+    try {
+      lenis = new Lenis({
+        duration: 1.1,
+        easing: function (t) {
+          return Math.min(1, 1.001 - Math.pow(2, -10 * t));
+        },
+        smoothWheel: true,
       });
-      gsap.ticker.lagSmoothing(0);
-    } else {
+
+      lenis.on('scroll', function () {
+        const nav = document.querySelector('.nav');
+        if (nav) {
+          nav.classList.toggle('scrolled', lenis.scroll > 50);
+        }
+        ScrollTrigger.update();
+      });
+
       function raf(time) {
         lenis.raf(time);
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
+    } catch (err) {
+      lenis = null;
     }
   }
 
-  // GSAP animations
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  try {
     gsap.registerPlugin(ScrollTrigger);
-
     initHeroAnimation();
     initProjectIndexAnimation();
     initSectionReveals();
-
     ScrollTrigger.refresh();
-  } else {
-    document.body.classList.remove('motion-ready');
+  } catch (err) {
     document.body.classList.add('no-motion');
-    initReducedMotion();
+    return;
   }
 
   if (isFinePointer) {
+    document.body.classList.add('has-custom-cursor');
     initCursor();
     initProjectPreview();
     initMagnetic();
   }
 
-  // Anchor scroll via Lenis
   document.addEventListener('click', function (e) {
     const link = e.target.closest('a[href*="#"]');
-    if (!link || !lenis) return;
+    if (!link) return;
     const hash = link.getAttribute('href');
     const targetId = hash.includes('#') ? hash.split('#')[1] : null;
     if (!targetId) return;
     const target = document.getElementById(targetId);
-    if (target) {
-      e.preventDefault();
+    if (!target) return;
+
+    e.preventDefault();
+    if (lenis) {
       lenis.scrollTo(target, { offset: -80 });
+    } else {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 
-  function initHeroAnimation() {
-    const lines = document.querySelectorAll('.hero-line');
-    lines.forEach(function (line) {
-      const text = line.textContent;
+  function prepareHeroLines() {
+    document.querySelectorAll('.hero-line').forEach(function (line) {
+      if (line.querySelector('.hero-line-inner')) return;
+      const text = line.textContent.trim();
       line.textContent = '';
       const inner = document.createElement('span');
       inner.className = 'hero-line-inner';
       inner.textContent = text;
       line.appendChild(inner);
     });
+  }
 
+  function enableNoMotionFallback() {
+    window.setTimeout(function () {
+      if (!document.body.classList.contains('no-motion')) return;
+      prepareHeroLines();
+    }, 100);
+  }
+
+  function initHeroAnimation() {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.from('.hero-meta', { y: 24, opacity: 0, duration: 0.8 })
-      .from('.hero-line-inner', { y: '110%', duration: 1, stagger: 0.12 }, '-=0.5')
-      .from('.hero-deck', { y: 20, opacity: 0, duration: 0.7 }, '-=0.5')
-      .from('.hero-foot', { y: 16, opacity: 0, duration: 0.6 }, '-=0.4');
+    tl.from('.hero-meta', { y: 20, opacity: 0, duration: 0.7 })
+      .from('.hero-line-inner', { y: '100%', duration: 0.9, stagger: 0.1 }, '-=0.45')
+      .from('.hero-deck', { y: 16, opacity: 0, duration: 0.6 }, '-=0.45')
+      .from('.hero-foot', { y: 12, opacity: 0, duration: 0.5 }, '-=0.35');
   }
 
   function initProjectIndexAnimation() {
-    gsap.from('.project-row', {
-      scrollTrigger: {
-        trigger: '.project-index',
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-      },
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power3.out',
-    });
-  }
-
-  function initSectionReveals() {
-    gsap.utils.toArray('.vd-strip-item, .contact-reveal, .section-title').forEach(function (el) {
-      gsap.from(el, {
+    gsap.utils.toArray('.project-row').forEach(function (row) {
+      gsap.from(row, {
         scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
+          trigger: row,
+          start: 'top 90%',
+          once: true,
         },
-        y: 30,
+        y: 32,
         opacity: 0,
         duration: 0.7,
         ease: 'power3.out',
+        immediateRender: false,
       });
     });
   }
 
-  function initReducedMotion() {
-    document.querySelectorAll('.hero-line').forEach(function (line) {
-      if (!line.querySelector('.hero-line-inner')) {
-        const text = line.textContent;
-        line.textContent = '';
-        const inner = document.createElement('span');
-        inner.className = 'hero-line-inner';
-        inner.textContent = text;
-        line.appendChild(inner);
-      }
-    });
-    fallbackReveal();
-  }
-
-  function fallbackReveal() {
-    document.querySelectorAll('.reveal, .reveal-scale, .section-title, .contact-reveal').forEach(function (el) {
-      el.classList.add('visible');
+  function initSectionReveals() {
+    gsap.utils.toArray('.vd-strip-item, .contact-reveal, .works-header .section-title, .vd-header .section-title').forEach(function (el) {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 92%',
+          once: true,
+        },
+        y: 24,
+        opacity: 0,
+        duration: 0.65,
+        ease: 'power3.out',
+        immediateRender: false,
+      });
     });
   }
 
@@ -255,15 +237,15 @@
         const relX = e.clientX - rect.left - rect.width / 2;
         const relY = e.clientY - rect.top - rect.height / 2;
         gsap.to(el, {
-          x: relX * 0.25,
-          y: relY * 0.25,
+          x: relX * 0.2,
+          y: relY * 0.2,
           duration: 0.3,
           ease: 'power2.out',
         });
       });
 
       el.addEventListener('mouseleave', function () {
-        gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+        gsap.to(el, { x: 0, y: 0, duration: 0.4, ease: 'power2.out' });
       });
     });
   }

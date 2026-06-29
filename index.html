@@ -15,7 +15,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/home.css">
 </head>
@@ -28,6 +28,16 @@
       <span class="hm-preloader-count">000</span>
     </div>
   </div>
+
+  <!-- Aurora backdrop -->
+  <div class="hm-aurora" aria-hidden="true">
+    <span class="hm-aurora-blob hm-aurora-blob--1"></span>
+    <span class="hm-aurora-blob hm-aurora-blob--2"></span>
+    <span class="hm-aurora-blob hm-aurora-blob--3"></span>
+  </div>
+
+  <!-- Scroll progress -->
+  <div class="hm-progress" aria-hidden="true"><span></span></div>
 
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -98,10 +108,39 @@
       </div>
     </div>
 
+    <!-- Approach -->
+    <section class="hm-approach">
+      <div class="hm-wrap">
+        <header class="hm-sec-head" data-reveal>
+          <span class="hm-sec-tag">Chapter 01</span>
+          <h2 class="hm-sec-label">How I <em>work</em></h2>
+          <span class="hm-sec-count">(03)</span>
+        </header>
+        <div class="hm-approach-grid">
+          <article class="hm-step" data-reveal>
+            <span class="hm-step-idx">01</span>
+            <h3 class="hm-step-title">Research</h3>
+            <p class="hm-step-desc">I start with the problem, not the pixels &mdash; interviews, product data, and support tickets tell me what actually hurts before I ever open Figma.</p>
+          </article>
+          <article class="hm-step" data-reveal data-reveal-delay="80">
+            <span class="hm-step-idx">02</span>
+            <h3 class="hm-step-title">Design</h3>
+            <p class="hm-step-desc">Then I shape the solution &mdash; flows, systems, and prototypes that earn their complexity and carry nothing more than they need to.</p>
+          </article>
+          <article class="hm-step" data-reveal data-reveal-delay="160">
+            <span class="hm-step-idx">03</span>
+            <h3 class="hm-step-title">Build</h3>
+            <p class="hm-step-desc">And when it helps, I build it &mdash; front-end, motion, the rough edges &mdash; so the idea actually ships, not just the mockup.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- Selected Work -->
     <section id="works" class="hm-works">
       <div class="hm-wrap">
         <header class="hm-sec-head" data-reveal>
+          <span class="hm-sec-tag">Chapter 02</span>
           <h2 class="hm-sec-label">Selected <em>work</em></h2>
           <span class="hm-sec-count">(03)</span>
         </header>
@@ -115,7 +154,7 @@
             <span class="hm-work-cta"><span class="hm-cta-line"></span>Case Study &middot; 5 min</span>
           </div>
           <div class="hm-work-media">
-            <img src="assets/images/project-recent-updates.png" alt="Recent Updates Feature" data-parallax="8">
+            <img src="assets/images/project-recent-updates.png" alt="Recent Updates Feature" loading="lazy" decoding="async" data-parallax="8">
           </div>
         </a>
 
@@ -128,7 +167,7 @@
             <span class="hm-work-cta"><span class="hm-cta-line"></span>Case Study &middot; 5 min</span>
           </div>
           <div class="hm-work-media">
-            <img src="assets/images/project-product-tour.png" alt="Product Tour Feature" data-parallax="8">
+            <img src="assets/images/project-product-tour.png" alt="Product Tour Feature" loading="lazy" decoding="async" data-parallax="8">
           </div>
         </a>
 
@@ -141,7 +180,7 @@
             <span class="hm-work-cta"><span class="hm-cta-line"></span>Case Study &middot; 5 min</span>
           </div>
           <div class="hm-work-media">
-            <img src="assets/images/project-settings.png" alt="Settings Page Redesign" data-parallax="8">
+            <img src="assets/images/project-settings.png" alt="Settings Page Redesign" loading="lazy" decoding="async" data-parallax="8">
           </div>
         </a>
       </div>
@@ -208,6 +247,7 @@
     <section class="hm-vd">
       <div class="hm-wrap">
         <header class="hm-sec-head" data-reveal>
+          <span class="hm-sec-tag">Chapter 03</span>
           <h2 class="hm-sec-label">Beyond <em>product</em></h2>
           <span class="hm-sec-count">(03)</span>
         </header>

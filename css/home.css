@@ -2,12 +2,12 @@
    HOME — editorial layer (index.html only)
    ============================================================ */
 :root {
-  --ink: #f2f2ed;
-  --ink-dim: #9a9aa6;
-  --ink-faint: #5c5c68;
-  --paper: #050507;
-  --hairline: rgba(255, 255, 255, 0.08);
-  --serif: "Instrument Serif", Georgia, serif;
+  --ink: #ededed;        /* near-white */
+  --ink-dim: #8d8f96;
+  --ink-faint: #54565c;
+  --paper: #08090c;      /* near-true black */
+  --hairline: rgba(255, 255, 255, 0.09);
+  --serif: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
@@ -50,7 +50,7 @@
 
 .hm-preloader-name {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   color: var(--ink);
   letter-spacing: 0.01em;
@@ -116,7 +116,7 @@ body.no-preloader .hm-preloader { display: none; }
 
 .hm-title em {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   letter-spacing: -0.01em;
   font-size: 1.04em;
@@ -323,7 +323,7 @@ body.is-loaded .hm-scrollhint {
 
 .hm-marquee-track span:nth-child(4n+3) {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   color: var(--ink-dim);
 }
@@ -354,7 +354,7 @@ body.is-loaded .hm-scrollhint {
 
 .hm-sec-label em {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
 }
 
@@ -389,7 +389,7 @@ body.is-loaded .hm-scrollhint {
   border-radius: 6px;
   overflow: hidden;
   aspect-ratio: 16 / 11;
-  background: #0c0c14;
+  background: #101319;
 }
 
 .hm-work-media img {
@@ -411,7 +411,7 @@ body.is-loaded .hm-scrollhint {
 
 .hm-work-idx {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 1.1rem;
   color: var(--ink-faint);
   margin-bottom: 1.25rem;
@@ -495,7 +495,7 @@ body.is-loaded .hm-scrollhint {
 
 .hm-statement em {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
 }
 
@@ -515,7 +515,7 @@ body.is-loaded .hm-scrollhint {
   border-radius: 6px;
   overflow: hidden;
   aspect-ratio: 4 / 5;
-  background: #0c0c14;
+  background: #101319;
   display: block;
 }
 
@@ -559,7 +559,7 @@ body.is-loaded .hm-scrollhint {
 
 .hm-vd-idx {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.65);
 }
@@ -574,7 +574,7 @@ body.is-loaded .hm-scrollhint {
 
 .hm-contact-kicker {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   color: var(--ink-dim);
   margin-bottom: 1.5rem;
@@ -694,7 +694,7 @@ body.is-loaded .hm-scrollhint {
 [data-reveal] {
   opacity: 0;
   transform: translateY(2.5rem);
-  transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
 }
 
 [data-reveal].is-in {
@@ -714,9 +714,263 @@ body.is-loaded .hm-scrollhint {
 .no-js .hm-statement .hm-word { color: var(--ink); }
 
 /* ============================================================
+   Aurora colour system  (cobalt -> violet -> teal)
+   ============================================================ */
+:root {
+  --c-blue: #2e7dff;          /* Azure — primary accent */
+  --c-blue-bright: #5e9bff;
+  --c-blue-soft: #8fc0ff;     /* sky blue — secondary, used on indices */
+  --c-blue-deep: #1452c8;
+  --accent: var(--c-blue);
+  --grad: linear-gradient(110deg, var(--c-blue), var(--c-blue-bright));
+}
+
+/* ============================================================
+   Premium polish (UI/UX Pro Max pass)
+   depth/elevation · press feedback · focus · selection
+   ============================================================ */
+
+/* accent text selection + focus ring */
+.page-home ::selection { background: var(--c-blue); color: #fff; }
+.page-home :focus-visible {
+  outline: 2px solid var(--c-blue);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Work media — depth, accent glow + lift on hover, press feedback */
+.hm-work-media {
+  border: 1px solid var(--hairline);
+  box-shadow: 0 14px 50px -28px rgba(0, 0, 0, 0.9);
+  transition: border-color 0.5s var(--ease-out),
+              box-shadow 0.5s var(--ease-out),
+              transform 0.5s var(--ease-out);
+}
+.hm-work:hover .hm-work-media {
+  border-color: rgba(46, 125, 255, 0.5);
+  box-shadow: 0 36px 90px -34px rgba(46, 125, 255, 0.4);
+  transform: translateY(-4px);
+}
+.hm-work:active .hm-work-media { transform: translateY(-1px) scale(0.995); }
+
+/* Visual-design cards — same depth language */
+.hm-vd-card {
+  border: 1px solid var(--hairline);
+  transition: border-color 0.5s var(--ease-out),
+              box-shadow 0.5s var(--ease-out),
+              transform 0.5s var(--ease-out);
+}
+.hm-vd-card:hover {
+  border-color: rgba(46, 125, 255, 0.5);
+  box-shadow: 0 34px 80px -34px rgba(46, 125, 255, 0.4);
+  transform: translateY(-5px);
+}
+.hm-vd-card:active { transform: translateY(-1px) scale(0.99); }
+
+/* Approach steps — subtle lift */
+.hm-step { transition: transform 0.4s var(--ease-out); }
+.hm-step:hover { transform: translateY(-3px); }
+
+/* Marquee pauses on hover so it can be read */
+.hm-marquee:hover .hm-marquee-track { animation-play-state: paused; }
+
+/* Nav CTA press feedback */
+.nav-cta { transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s var(--ease-out); }
+.nav-cta:active { transform: scale(0.96); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-work:hover .hm-work-media,
+  .hm-vd-card:hover,
+  .hm-step:hover { transform: none; }
+}
+
+/* keep all real content above the aurora */
+.page-home .nav,
+.page-home main,
+.page-home .hm-footer { position: relative; z-index: 1; }
+
+.hm-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* readability scrim so type stays crisp over the glows */
+.hm-aurora::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse at 50% 38%, transparent 0%, rgba(8, 9, 12, 0.62) 70%),
+    rgba(8, 9, 12, 0.38);
+}
+
+.hm-aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.hm-aurora-blob--1 {
+  width: 60vw; height: 60vw; left: -12vw; top: -14vw;
+  background: radial-gradient(circle, var(--c-blue), transparent 64%);
+  opacity: 0.46;
+  animation: auroraA 26s var(--ease-out) infinite alternate;
+}
+.hm-aurora-blob--2 {
+  width: 52vw; height: 52vw; right: -10vw; top: 14vh;
+  background: radial-gradient(circle, var(--c-blue-deep), transparent 64%);
+  opacity: 0.5;
+  animation: auroraB 32s var(--ease-out) infinite alternate;
+}
+.hm-aurora-blob--3 {
+  width: 54vw; height: 54vw; left: 16vw; bottom: -20vw;
+  background: radial-gradient(circle, var(--c-blue-bright), transparent 64%);
+  opacity: 0.32;
+  animation: auroraC 30s var(--ease-out) infinite alternate;
+}
+
+@keyframes auroraA {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(14vw, 10vh) scale(1.18); }
+}
+@keyframes auroraB {
+  0%   { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(-12vw, 12vh) scale(0.9); }
+}
+@keyframes auroraC {
+  0%   { transform: translate(0, 0) scale(0.95); }
+  100% { transform: translate(10vw, -14vh) scale(1.2); }
+}
+
+/* ============================================================
+   Scroll progress
+   ============================================================ */
+.hm-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 9970;
+  pointer-events: none;
+}
+.hm-progress span {
+  display: block;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--grad);
+}
+
+/* ============================================================
+   Accent applications
+   ============================================================ */
+.hm-title em,
+.hm-sec-label em,
+.hm-contact-kicker {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.hm-eyebrow::before { background: var(--grad); height: 2px; }
+.hm-sec-count { color: var(--c-blue-soft); }
+.hm-work-idx { color: var(--c-blue-soft); -webkit-text-fill-color: var(--c-blue-soft); }
+.hm-marquee-track i { color: var(--c-blue-soft); }
+.hm-work-cta .hm-cta-line { background: var(--grad); height: 2px; }
+.hm-social::after { background: var(--grad); height: 2px; }
+.hm-vd-idx { color: var(--c-blue-soft); }
+.hm-step-idx { color: var(--c-blue-soft); }
+
+/* ============================================================
+   Section tag (chapter eyebrow)
+   ============================================================ */
+.hm-sec-head { flex-wrap: wrap; row-gap: 0.5rem; }
+
+.hm-sec-tag {
+  flex-basis: 100%;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.hm-sec-tag::before {
+  content: '';
+  width: 1.75rem;
+  height: 2px;
+  background: var(--grad);
+}
+
+/* ============================================================
+   Approach — How I work
+   ============================================================ */
+.hm-approach { padding-bottom: 2rem; }
+
+.hm-approach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  border-top: 1px solid var(--hairline);
+  padding-top: clamp(2rem, 4vh, 3rem);
+}
+
+.hm-step {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.hm-step::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.35rem; bottom: 0.35rem;
+  width: 2px;
+  background: var(--grad);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.7s var(--ease-out);
+}
+.hm-step.is-in::before { transform: scaleY(1); }
+
+.hm-step-idx {
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: 2.4rem;
+  line-height: 1;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.hm-step-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.85rem;
+}
+
+.hm-step-desc {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--ink-dim);
+  max-width: 24rem;
+}
+
+/* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 900px) {
+  .hm-approach-grid { grid-template-columns: 1fr; gap: 2rem; }
   .hm-work {
     grid-template-columns: 1fr;
     gap: 1.75rem;
@@ -734,6 +988,11 @@ body.is-loaded .hm-scrollhint {
   }
 
   .hm-scrollhint { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-aurora-blob { animation: none !important; }
+  .hm-aurora { transition: none !important; }
 }
 
 @media (max-width: 540px) {

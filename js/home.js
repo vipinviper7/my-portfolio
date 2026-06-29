@@ -90,4 +90,56 @@
       updateWords();
     }
   }
+
+  // ----------------------------------------------------------
+  // Hero scroll-parallax + scroll progress bar
+  // ----------------------------------------------------------
+  var heroInner = document.querySelector('.hm-hero .hm-wrap');
+  var heroHint = document.querySelector('.hm-scrollhint');
+  var progressBar = document.querySelector('.hm-progress span');
+  var scrollTicking = false;
+
+  var updateScroll = function () {
+    scrollTicking = false;
+    var y = window.scrollY || window.pageYOffset;
+    var vh = window.innerHeight;
+
+    if (progressBar) {
+      var max = document.documentElement.scrollHeight - vh;
+      progressBar.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+    }
+
+    if (!reduceMotion && heroInner && y < vh) {
+      var p = y / vh;
+      heroInner.style.transform = 'translateY(' + (p * 12) + '%)';
+      heroInner.style.opacity = String(Math.max(0, 1 - p * 1.15));
+      if (heroHint) heroHint.style.opacity = String(Math.max(0, 1 - p * 3));
+    }
+  };
+
+  window.addEventListener('scroll', function () {
+    if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(updateScroll); }
+  }, { passive: true });
+  updateScroll();
+
+  // ----------------------------------------------------------
+  // Aurora pointer-drift — backdrop leans toward the cursor
+  // ----------------------------------------------------------
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var aurora = document.querySelector('.hm-aurora');
+  if (aurora && finePointer && !reduceMotion) {
+    var px = 0, py = 0, ax = 0, ay = 0, raf = null;
+    document.addEventListener('mousemove', function (e) {
+      px = (e.clientX / window.innerWidth - 0.5) * -40;
+      py = (e.clientY / window.innerHeight - 0.5) * -40;
+      if (!raf) raf = requestAnimationFrame(function follow() {
+        ax += (px - ax) * 0.06;
+        ay += (py - ay) * 0.06;
+        aurora.style.transform = 'translate(' + ax + 'px,' + ay + 'px)';
+        if (Math.abs(px - ax) > 0.1 || Math.abs(py - ay) > 0.1) {
+          raf = requestAnimationFrame(follow);
+        } else { raf = null; }
+      });
+    }, { passive: true });
+  }
 })();

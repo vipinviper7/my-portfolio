@@ -7,7 +7,8 @@
   --ink-faint: #54565c;
   --paper: #08090c;      /* near-true black */
   --hairline: rgba(255, 255, 255, 0.09);
-  --serif: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: "Bricolage Grotesque", "Host Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-accent: "Bricolage Grotesque", "Host Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
@@ -49,8 +50,9 @@
 }
 
 .hm-preloader-name {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
+  font-weight: 300;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   color: var(--ink);
   letter-spacing: 0.01em;
@@ -106,18 +108,18 @@ body.no-preloader .hm-preloader { display: none; }
 .hm-title {
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 8.2vw, 8.25rem);
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.025em;
   color: var(--ink);
   margin-bottom: clamp(2rem, 5vh, 4rem);
   text-wrap: balance;
 }
 
 .hm-title em {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: -0.01em;
   font-size: 1.04em;
   color: var(--ink);
@@ -322,9 +324,9 @@ body.is-loaded .hm-scrollhint {
 }
 
 .hm-marquee-track span:nth-child(4n+3) {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   color: var(--ink-dim);
 }
 
@@ -347,15 +349,15 @@ body.is-loaded .hm-scrollhint {
 .hm-sec-label {
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4.5vw, 3.75rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   color: var(--ink);
 }
 
 .hm-sec-label em {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .hm-sec-count {
@@ -410,8 +412,9 @@ body.is-loaded .hm-scrollhint {
 }
 
 .hm-work-idx {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
+  font-weight: 300;
   font-size: 1.1rem;
   color: var(--ink-faint);
   margin-bottom: 1.25rem;
@@ -420,8 +423,8 @@ body.is-loaded .hm-scrollhint {
 .hm-work-title {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3.4vw, 3rem);
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.08;
   color: var(--ink);
   margin-bottom: 0.85rem;
@@ -494,9 +497,9 @@ body.is-loaded .hm-scrollhint {
 .hm-statement .hm-word.on { color: var(--ink); }
 
 .hm-statement em {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* ============================================================
@@ -558,8 +561,9 @@ body.is-loaded .hm-scrollhint {
 }
 
 .hm-vd-idx {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
+  font-weight: 300;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.65);
 }
@@ -573,8 +577,9 @@ body.is-loaded .hm-scrollhint {
 }
 
 .hm-contact-kicker {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
+  font-weight: 300;
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   color: var(--ink-dim);
   margin-bottom: 1.5rem;
@@ -584,8 +589,8 @@ body.is-loaded .hm-scrollhint {
   display: inline-block;
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 8.5vw, 8rem);
-  font-weight: 600;
-  letter-spacing: -0.035em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   line-height: 1.05;
   color: var(--ink);
   position: relative;
@@ -654,17 +659,21 @@ body.is-loaded .hm-scrollhint {
   font-family: var(--font-display);
   font-size: clamp(4rem, 17.5vw, 19rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   line-height: 0.85;
   text-align: center;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.055);
   user-select: none;
   margin-bottom: -0.08em;
-  transition: -webkit-text-stroke-color 0.6s ease;
+  transition: color 0.6s ease;
 }
 
-.hm-footer-name:hover { -webkit-text-stroke-color: rgba(255, 255, 255, 0.4); }
+.hm-footer-name:hover { color: rgba(255, 255, 255, 0.12); }
+
+.hm-footer-letter {
+  display: inline-block;
+  will-change: transform;
+}
 
 .hm-footer-bar {
   display: flex;
@@ -773,6 +782,14 @@ body.is-loaded .hm-scrollhint {
 
 /* Marquee pauses on hover so it can be read */
 .hm-marquee:hover .hm-marquee-track { animation-play-state: paused; }
+
+/* Lottie microanimation containers */
+.hm-preloader-lottie { display: block; width: 54px; height: 54px; margin-bottom: 0.35rem; }
+.hm-avail-ping { display: inline-block; width: 22px; height: 22px; flex-shrink: 0; margin: -7px 0 -7px -4px; }
+.hm-scrollhint .hm-scroll-lottie { display: block; width: 28px; height: 44px; }
+.hm-scrollhint::after { display: none; }   /* replaced by Lottie chevron */
+.hm-contact-lottie { display: block; width: 60px; height: 34px; margin: 1.75rem auto 0; }
+[data-lottie] svg { display: block; }
 
 /* Nav CTA press feedback */
 .nav-cta { transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s var(--ease-out); }
@@ -942,8 +959,9 @@ body.is-loaded .hm-scrollhint {
 .hm-step.is-in::before { transform: scaleY(1); }
 
 .hm-step-idx {
-  font-family: var(--serif);
+  font-family: var(--font-accent);
   font-style: normal;
+  font-weight: 300;
   font-size: 2.4rem;
   line-height: 1;
   display: block;
@@ -953,8 +971,8 @@ body.is-loaded .hm-scrollhint {
 .hm-step-title {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 2.2vw, 1.85rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   color: var(--ink);
   margin-bottom: 0.85rem;
 }

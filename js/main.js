@@ -1,4 +1,30 @@
 // ===========================
+// Shared scroll manager
+// One passive scroll listener + rAF tick dispatching to registered callbacks.
+// ===========================
+const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const scrollCallbacks = [];
+let scrollTickQueued = false;
+
+function onScrollTick(fn) {
+  scrollCallbacks.push(fn);
+}
+
+function runScrollTick() {
+  scrollTickQueued = false;
+  const y = window.scrollY;
+  for (let i = 0; i < scrollCallbacks.length; i++) scrollCallbacks[i](y);
+}
+
+window.addEventListener('scroll', () => {
+  if (!scrollTickQueued) {
+    scrollTickQueued = true;
+    requestAnimationFrame(runScrollTick);
+  }
+}, { passive: true });
+
+// ===========================
 // Smooth scroll for anchor links only
 // ===========================
 document.addEventListener('click', function(e) {
@@ -66,21 +92,91 @@ if (nav) {
 }
 
 // ===========================
+// Case-study auto-reveal
+// Adds reveal classes via JS so the 5 case-study HTML files stay untouched.
+// JS failure = fully visible static page.
+// ===========================
+(function () {
+  const cs = document.querySelector('.cs');
+
+  // Footer reveal site-wide
+  const footer = document.querySelector('.footer');
+  if (footer) footer.classList.add('reveal');
+
+  if (!cs) return;
+
+  cs.querySelectorAll('.cs-tldr-section, .cs-impact-banner, .cs-takeaways, .cs-section, .cs-end-cta')
+    .forEach(el => el.classList.add('reveal'));
+
+  // Staggered settle on media/insert blocks, restarting the count per section
+  const sections = cs.querySelectorAll('.cs-section');
+  sections.forEach(section => {
+    section.querySelectorAll('.cs-image-block, .cs-insight, .cs-outcome').forEach((el, i) => {
+      el.classList.add('reveal-settle', 'reveal-d' + (Math.min(i, 5) + 1));
+    });
+  });
+
+  // Settle blocks living outside .cs-section (e.g. the lead image)
+  cs.querySelectorAll('.cs-image-block, .cs-insight, .cs-outcome').forEach(el => {
+    if (!el.classList.contains('reveal-settle')) el.classList.add('reveal-settle', 'reveal-d1');
+  });
+})();
+
+// ===========================
 // Scroll reveal (IntersectionObserver)
 // ===========================
-const revealElements = document.querySelectorAll('.reveal, .reveal-scale, .section-title, .challenge-subtitle, .challenge-progress, .contact-reveal');
+const revealElements = document.querySelectorAll('.reveal, .reveal-scale, .reveal-settle, .section-title, .challenge-subtitle, .challenge-progress, .contact-reveal');
 
 if (revealElements.length > 0) {
+  // After the entrance transition completes, swap to a fast hover-lift transition
+  function markRevealDone(el) {
+    const done = (e) => {
+      if (e && (e.target !== el || e.propertyName !== 'transform')) return;
+      el.removeEventListener('transitionend', done);
+      clearTimeout(timer);
+      el.classList.add('reveal-done');
+    };
+    el.addEventListener('transitionend', done);
+    const timer = setTimeout(() => done(), 1300);
+  }
+
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        markRevealDone(entry.target);
         revealObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
   revealElements.forEach(el => revealObserver.observe(el));
+}
+
+// ===========================
+// Reading progress bar (case-study pages only)
+// ===========================
+if (document.querySelector('.cs')) {
+  const progressBar = document.createElement('div');
+  progressBar.className = 'scroll-progress';
+  progressBar.setAttribute('aria-hidden', 'true');
+  document.body.prepend(progressBar);
+
+  onScrollTick((y) => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+  });
+}
+
+// ===========================
+// Hero parallax — gradient drifts slower than content
+// ===========================
+if (motionOK && document.querySelector('.hero')) {
+  onScrollTick((y) => {
+    if (y < 1000) {
+      document.documentElement.style.setProperty('--hero-par', (y * 0.12).toFixed(2));
+    }
+  });
 }
 
 // ===========================
@@ -102,6 +198,15 @@ if (canvas) {
     const dpr = getDpr();
     return { dpr, w: canvas.width / dpr, h: canvas.height / dpr };
   }
+
+  // Scroll energy — waves surge while scrolling, then calm down
+  let energy = 0;
+  let lastScrollY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    energy = Math.min(energy + Math.abs(y - lastScrollY) * 0.012, 2.0);
+    lastScrollY = y;
+  }, { passive: true });
 
   function resize() {
     const rect = canvas.parentElement.getBoundingClientRect();
@@ -138,26 +243,33 @@ if (canvas) {
     ctx.restore();
   }
 
-  function animate() {
-    const { dpr, w, h } = getSize();
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.scale(dpr, dpr);
+  function drawFrame() {
+    const w = canvas.width / window.devicePixelRatio;
+    const h = canvas.height / window.devicePixelRatio;
+    const amp = 1 + energy * 0.35;
+
     ctx.clearRect(0, 0, w, h);
 
-    if (isMobile) {
-      drawWave(w, h, h * 0.32, 28, 0.004, 0.45, 'rgba(28, 28, 42, 0.65)', 0);
-      drawWave(w, h, h * 0.24, 22, 0.006, 0.65, 'rgba(48, 48, 64, 0.55)', 0);
-      drawWave(w, h, h * 0.17, 16, 0.008, 0.85, 'rgba(72, 72, 92, 0.42)', 0);
-      drawWave(w, h, h * 0.1, 12, 0.01, 1.0, 'rgba(110, 110, 130, 0.28)', 0);
-    } else {
-      drawWave(w, h, h * 0.35, 30, 0.003, 0.4, 'rgba(20, 20, 32, 0.52)', 40);
-      drawWave(w, h, h * 0.28, 25, 0.005, 0.6, 'rgba(38, 38, 52, 0.45)', 30);
-      drawWave(w, h, h * 0.22, 20, 0.007, 0.8, 'rgba(65, 65, 82, 0.38)', 20);
-      drawWave(w, h, h * 0.18, 15, 0.009, 1.0, 'rgba(105, 105, 125, 0.24)', 15);
-      drawWave(w, h, h * 0.12, 10, 0.011, 1.2, 'rgba(165, 165, 185, 0.12)', 10);
-    }
+    // Deep background wave — large, slow
+    drawWave(h * 0.35, 30 * amp, 0.003, 0.4, 'rgba(20, 20, 32, 0.52)', 40);
 
-    time += 0.02;
+    // Mid wave — medium
+    drawWave(h * 0.28, 25 * amp, 0.005, 0.6, 'rgba(38, 38, 52, 0.45)', 30);
+
+    // Bright wave — sharper
+    drawWave(h * 0.22, 20 * amp, 0.007, 0.8, 'rgba(65, 65, 82, 0.38)', 20);
+
+    // Top shimmer wave — fast, subtle
+    drawWave(h * 0.18, 15 * amp, 0.009, 1.0, 'rgba(105, 105, 125, 0.24)', 15);
+
+    // Lightest accent
+    drawWave(h * 0.12, 10 * amp, 0.011, 1.2, 'rgba(165, 165, 185, 0.12)', 10);
+  }
+
+  function animate() {
+    drawFrame();
+    energy *= 0.93;
+    time += 0.02 * (1 + energy);
     animationId = requestAnimationFrame(animate);
   }
 
@@ -178,10 +290,20 @@ if (canvas) {
 
   const waveObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        startAnimation();
-      } else {
-        stopAnimation();
+      if (entry.isIntersecting && !isAnimating) {
+        if (!motionOK) {
+          // Reduced motion: render a single static frame, no loop
+          resize();
+          energy = 0;
+          drawFrame();
+          return;
+        }
+        isAnimating = true;
+        resize();
+        animate();
+      } else if (!entry.isIntersecting && isAnimating) {
+        isAnimating = false;
+        cancelAnimationFrame(animationId);
       }
     });
   }, { threshold: 0, rootMargin: '80px 0px' });
@@ -207,3 +329,119 @@ if (canvas) {
     });
   }
 }
+
+// ===========================
+// Pixel-to-Polish boot sequence (index only)
+// Page loads as an 8-bit "boot screen" and resolves into the
+// polished site over the first ~180px of scroll. Fully reversible.
+// JS failure or any guard tripping = current site unchanged.
+// ===========================
+(function () {
+  const heroHeading = document.querySelector('.hero-heading');
+  if (!heroHeading) return;
+
+  // Guards: never enter pixel mode on reduced motion, anchor landings,
+  // or restored scroll positions.
+  if (!motionOK || location.hash || window.scrollY > 60) return;
+
+  const root = document.documentElement;
+  const hero = document.querySelector('.hero');
+  root.classList.add('pixel-mode');
+
+  // --- 8-bit text layer (built from hero text — no HTML duplication, zero CLS)
+  const layer = document.createElement('div');
+  layer.className = 'hero-pixel-layer';
+  layer.setAttribute('aria-hidden', 'true');
+
+  const title = document.createElement('div');
+  title.className = 'hero-pixel-title';
+  title.textContent = heroHeading.textContent;
+
+  const prompt = document.createElement('div');
+  prompt.className = 'hero-pixel-prompt';
+  prompt.textContent = '\u25BC SCROLL TO START';
+
+  layer.appendChild(title);
+  layer.appendChild(prompt);
+
+  // Gate on the pixel font so the title never flashes in the wrong face.
+  // Race against 250ms — the fallback stack (Courier New) takes over if slow.
+  const fontReady = (document.fonts && document.fonts.load)
+    ? Promise.race([
+        document.fonts.load('1em "Press Start 2P"').catch(() => {}),
+        new Promise(resolve => setTimeout(resolve, 250))
+      ])
+    : Promise.resolve();
+
+  fontReady.then(() => hero.appendChild(layer));
+
+  // --- Dither dissolve canvas (desktop only)
+  let dither = null;
+  if (window.matchMedia('(min-width: 769px)').matches) {
+    dither = (function () {
+      const CELL = 14; // CSS pixels per dither cell (~3,500 cells at 1080p)
+      const COLORS = ['#06060f', '#0c0c1a', '#111128'];
+      const canvas = document.createElement('canvas');
+      canvas.className = 'pixel-dither-canvas';
+      canvas.setAttribute('aria-hidden', 'true');
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = false;
+
+      let cols, rows, thresholds, colorIdx;
+
+      function initGrid() {
+        cols = Math.ceil(window.innerWidth / CELL);
+        rows = Math.ceil(window.innerHeight / CELL);
+        canvas.width = cols;   // 1 backing-store pixel per cell,
+        canvas.height = rows;  // CSS stretches it (image-rendering: pixelated)
+        thresholds = new Float32Array(cols * rows);
+        colorIdx = new Uint8Array(cols * rows);
+        for (let i = 0; i < thresholds.length; i++) {
+          thresholds[i] = Math.random();
+          colorIdx[i] = (Math.random() * COLORS.length) | 0;
+        }
+      }
+
+      function draw(p) {
+        ctx.clearRect(0, 0, cols, rows);
+        if (p >= 0.999) return; // fully dissolved — nothing to draw, zero idle cost
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const i = r * cols + c;
+            if (thresholds[i] > p) {
+              ctx.fillStyle = COLORS[colorIdx[i]];
+              ctx.fillRect(c, r, 1, 1);
+            }
+          }
+        }
+      }
+
+      initGrid();
+      document.body.appendChild(canvas);
+
+      window.addEventListener('resize', () => {
+        if (root.classList.contains('px-out')) return;
+        initGrid();
+        draw(currentP);
+      });
+
+      return { draw };
+    })();
+  }
+
+  // --- Scroll scrub: p goes 0 → 1 over the first 180px, smoothstepped
+  let currentP = -1;
+
+  function scrub(y) {
+    const t = Math.min(Math.max(y / 180, 0), 1);
+    const p = t * t * (3 - 2 * t); // smoothstep
+    if (p === currentP) return;
+    currentP = p;
+    root.style.setProperty('--px', p.toFixed(4));
+    root.classList.toggle('px-out', p >= 0.999);
+    if (dither) dither.draw(p);
+  }
+
+  onScrollTick(scrub);
+  scrub(window.scrollY); // initial boot-state paint
+})();

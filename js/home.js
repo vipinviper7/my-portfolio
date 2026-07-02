@@ -92,6 +92,27 @@
   }
 
   // ----------------------------------------------------------
+  // Lottie microanimations — [data-lottie]
+  // (reduced-motion: load but freeze on a representative frame)
+  // ----------------------------------------------------------
+  if (window.lottie) {
+    document.querySelectorAll('[data-lottie]').forEach(function (el) {
+      var anim = window.lottie.loadAnimation({
+        container: el,
+        renderer: 'svg',
+        loop: !reduceMotion,
+        autoplay: !reduceMotion,
+        path: el.getAttribute('data-lottie')
+      });
+      if (reduceMotion) {
+        anim.addEventListener('DOMLoaded', function () {
+          anim.goToAndStop(Math.floor(anim.totalFrames * 0.3), true);
+        });
+      }
+    });
+  }
+
+  // ----------------------------------------------------------
   // Hero scroll-parallax + scroll progress bar
   // ----------------------------------------------------------
   var heroInner = document.querySelector('.hm-hero .hm-wrap');
@@ -121,6 +142,68 @@
     if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(updateScroll); }
   }, { passive: true });
   updateScroll();
+
+  // ----------------------------------------------------------
+  // Footer name — letters pull toward the cursor when it's near
+  // ----------------------------------------------------------
+  var footerLetters = document.querySelectorAll('.hm-footer-letter');
+  if (footerLetters.length && finePointer && !reduceMotion) {
+    var RADIUS = 260;
+    var MAX_OFFSET = 46;
+    var letters = Array.prototype.map.call(footerLetters, function (el) {
+      return { el: el, x: 0, y: 0, tx: 0, ty: 0 };
+    });
+    var mouseX = -9999, mouseY = -9999;
+    var footerRafId = null;
+    var footerActive = false;
+
+    var tick = function () {
+      var moving = false;
+      letters.forEach(function (s) {
+        var r = s.el.getBoundingClientRect();
+        var cx = r.left + r.width / 2;
+        var cy = r.top + r.height / 2;
+        var dx = mouseX - cx;
+        var dy = mouseY - cy;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < RADIUS) {
+          var pull = 1 - dist / RADIUS;
+          var tx = dx * pull * 0.5;
+          var ty = dy * pull * 0.5;
+          var mag = Math.sqrt(tx * tx + ty * ty);
+          if (mag > MAX_OFFSET) {
+            var k = MAX_OFFSET / mag;
+            tx *= k; ty *= k;
+          }
+          s.tx = tx; s.ty = ty;
+        } else {
+          s.tx = 0; s.ty = 0;
+        }
+
+        s.x += (s.tx - s.x) * 0.15;
+        s.y += (s.ty - s.y) * 0.15;
+        s.el.style.transform = 'translate(' + s.x.toFixed(2) + 'px,' + s.y.toFixed(2) + 'px)';
+        if (Math.abs(s.tx - s.x) > 0.1 || Math.abs(s.ty - s.y) > 0.1) moving = true;
+      });
+      footerRafId = moving ? requestAnimationFrame(tick) : null;
+    };
+
+    var kick = function () { if (!footerRafId) footerRafId = requestAnimationFrame(tick); };
+
+    document.addEventListener('mousemove', function (e) {
+      if (!footerActive) return;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      kick();
+    }, { passive: true });
+
+    var footerNameEl = document.querySelector('.hm-footer-name');
+    new IntersectionObserver(function (entries) {
+      footerActive = entries[0].isIntersecting;
+      if (!footerActive) { mouseX = -9999; mouseY = -9999; kick(); }
+    }, { rootMargin: '260px' }).observe(footerNameEl);
+  }
 
   // ----------------------------------------------------------
   // Aurora pointer-drift — backdrop leans toward the cursor

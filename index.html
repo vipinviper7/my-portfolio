@@ -15,7 +15,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Host+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/home.css">
 </head>
@@ -24,6 +24,7 @@
   <!-- Preloader -->
   <div class="hm-preloader" aria-hidden="true">
     <div class="hm-preloader-inner">
+      <span class="hm-preloader-lottie" data-lottie="assets/lottie/loader.json"></span>
       <span class="hm-preloader-name">Vipin Ebenezer</span>
       <span class="hm-preloader-count">000</span>
     </div>
@@ -75,7 +76,7 @@
         </h1>
         <div class="hm-hero-foot">
           <div class="hm-hero-meta">
-            <span class="hm-avail"><i></i>Open to product design roles</span>
+            <span class="hm-avail"><span class="hm-avail-ping" data-lottie="assets/lottie/pulse.json"></span>Open to product design roles</span>
             <span>4 years of hands-on product design, 6 in the industry. Research, AI, and data-driven design &mdash; shipped to 50K+ users.</span>
             <span>Chennai, India &mdash; <span data-local-time>--:--</span> IST</span>
           </div>
@@ -85,7 +86,7 @@
           </div>
         </div>
       </div>
-      <div class="hm-scrollhint" aria-hidden="true">Scroll</div>
+      <div class="hm-scrollhint" aria-hidden="true">Scroll<span class="hm-scroll-lottie" data-lottie="assets/lottie/scroll.json"></span></div>
     </section>
 
     <!-- Marquee -->
@@ -285,6 +286,7 @@
           Let&rsquo;s talk &rarr;
           <span class="hm-mail-fill" aria-hidden="true">Let&rsquo;s talk &rarr;</span>
         </a>
+        <span class="hm-contact-lottie" data-lottie="assets/lottie/arrow.json" data-reveal data-reveal-delay="150" aria-hidden="true"></span>
         <p class="hm-contact-email" data-reveal data-reveal-delay="200">vipvipernezer7@gmail.com</p>
         <div class="hm-contact-socials" data-reveal data-reveal-delay="300">
           <a href="https://www.linkedin.com/in/vipin-ebenezer-678677158/" class="hm-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -298,7 +300,7 @@
 
   <!-- Footer -->
   <footer class="hm-footer">
-    <div class="hm-footer-name" aria-hidden="true">VIPIN</div>
+    <div class="hm-footer-name" aria-hidden="true"><span class="hm-footer-letter">V</span><span class="hm-footer-letter">I</span><span class="hm-footer-letter">P</span><span class="hm-footer-letter">I</span><span class="hm-footer-letter">N</span></div>
     <div class="hm-wrap">
       <div class="hm-footer-bar">
         <span>&copy; 2026 Vipin Ebenezer</span>
@@ -308,6 +310,7 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/global.js"></script>

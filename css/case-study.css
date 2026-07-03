@@ -1,27 +1,11 @@
 /* ===========================
-   Case Study Layout
+   Case Study Layout — Light Editorial
    =========================== */
 .cs {
   padding: max(8rem, calc(5rem + env(safe-area-inset-top, 0px))) 0 max(4rem, env(safe-area-inset-bottom, 0px));
   position: relative;
   overflow-x: clip;
   overflow-y: visible;
-}
-
-.cs::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: min(70vh, 520px);
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.085) 0%, transparent 55%),
-    radial-gradient(ellipse at 30% 0%, rgba(185, 185, 205, 0.065) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 0%, rgba(100, 100, 120, 0.07) 0%, transparent 45%);
-  z-index: 0;
-  pointer-events: none;
 }
 
 .cs > .container {
@@ -33,21 +17,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem 1.25rem;
+  padding: 0.5rem 1rem;
   min-height: 44px;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
+  background-color: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 500;
   margin-bottom: 2.5rem;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .cs-back:hover {
-  color: var(--color-white);
-  background-color: var(--color-bg-elevated);
+  color: var(--ink);
+  border-color: var(--border-strong);
 }
 
 /* Header */
@@ -58,9 +42,8 @@
 .cs-title {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 400;
-  font-style: normal;
-  color: var(--color-white);
+  font-weight: 700;
+  color: var(--ink);
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
   overflow-wrap: break-word;
@@ -68,7 +51,7 @@
 
 .cs-subtitle {
   font-size: clamp(0.9rem, 2.5vw, 0.95rem);
-  color: var(--color-text-muted);
+  color: var(--body);
   margin-bottom: 1.5rem;
   max-width: 40rem;
   line-height: 1.6;
@@ -78,22 +61,23 @@
 .cs-tldr-section {
   margin-bottom: 2.5rem;
   padding: 1.5rem 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .cs-tldr-section__title {
+  font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-text-muted);
+  color: var(--muted);
   margin-bottom: 0.75rem;
 }
 
 .cs-tldr-section__text {
   font-size: clamp(0.88rem, 2.5vw, 0.92rem);
-  color: var(--color-text);
+  color: var(--body);
   line-height: 1.7;
   max-width: 40rem;
   margin: 0;
@@ -112,11 +96,11 @@
 
 .cs-meta-label {
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--ink);
 }
 
 .cs-meta-value {
-  color: var(--color-text-muted);
+  color: var(--body);
 }
 
 /* ===========================
@@ -127,20 +111,22 @@
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 0.75rem 1.5rem;
-  padding: 1.25rem clamp(1rem, 3vw, 1.75rem);
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-left: 3px solid var(--color-accent);
-  border-radius: 8px;
+  padding: 1.25rem 0;
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
   margin-bottom: 2rem;
 }
 
 .cs-impact-label {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  color: var(--muted);
 }
 
 .cs-impact-stats {
@@ -156,7 +142,7 @@
   font-size: clamp(0.82rem, 2.5vw, 0.9rem);
   font-weight: 600;
   line-height: 1.45;
-  color: var(--color-white);
+  color: var(--ink);
 }
 
 .cs-impact-stats li {
@@ -167,31 +153,34 @@
 .cs-impact-stats li:not(:last-child)::after {
   content: '·';
   margin-inline: 0.55rem;
-  color: var(--color-text-muted);
+  color: var(--muted);
   font-weight: 400;
 }
 
 .cs-impact-dot {
-  color: var(--color-text-muted);
+  color: var(--muted);
 }
 
 /* ===========================
    Key Takeaways
    =========================== */
 .cs-takeaways {
-  padding: 1.5rem clamp(1rem, 3vw, 1.75rem);
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  padding: 1.5rem 0;
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
   margin-bottom: 2.5rem;
 }
 
 .cs-takeaways-title {
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  color: var(--muted);
   margin-bottom: 0.75rem;
 }
 
@@ -202,7 +191,7 @@
 
 .cs-takeaways-list li {
   font-size: 0.88rem;
-  color: var(--color-text);
+  color: var(--body);
   line-height: 1.65;
   margin-bottom: 0.35rem;
 }
@@ -216,18 +205,18 @@
 
 .cs-body p {
   font-size: 0.95rem;
-  color: var(--color-text);
+  color: var(--body);
   line-height: 1.75;
   margin-bottom: 1rem;
 }
 
 .cs-body strong {
-  color: var(--color-white);
+  color: var(--ink);
   font-weight: 700;
 }
 
 .cs-body em {
-  color: var(--color-white);
+  color: var(--ink);
 }
 
 .cs-body ul {
@@ -238,13 +227,13 @@
 
 .cs-body li {
   font-size: 0.9rem;
-  color: var(--color-text);
+  color: var(--body);
   line-height: 1.75;
   margin-bottom: 0.25rem;
 }
 
 .cs-body li strong {
-  color: var(--color-white);
+  color: var(--ink);
 }
 
 /* Sections */
@@ -253,13 +242,11 @@
 }
 
 .cs-section-title {
-  font-family: var(--font-body);
-  font-style: normal;
-  font-size: 0.72rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
   font-weight: 700;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  color: var(--ink);
+  letter-spacing: -0.02em;
   margin-bottom: 1.25rem;
 }
 
@@ -267,7 +254,7 @@
    Image Blocks
    =========================== */
 .cs-image-block {
-  border-radius: 12px;
+  border-radius: var(--radius);
   overflow: hidden;
   margin-bottom: 1.5rem;
   padding: clamp(1rem, 3vw, 2rem);
@@ -275,22 +262,22 @@
   align-items: center;
   justify-content: center;
   min-height: 0;
+  background-color: var(--raised);
 }
 
 .cs-image-block img {
   width: 100%;
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px var(--color-card-shadow);
+  border-radius: calc(var(--radius) / 2);
+  box-shadow: none;
 }
 
-.cs-image-block--mint {
-  background-color: #d8f5e0;
-}
-
-.cs-image-block--blue {
-  background-color: #e6e6ec;
+.cs-image-block--mint,
+.cs-image-block--blue,
+.cs-image-block--coral,
+.cs-image-block--cream {
+  background-color: var(--raised);
 }
 
 /* ===========================
@@ -304,22 +291,22 @@
 }
 
 .cs-insight {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: 1.25rem;
 }
 
 .cs-insight-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--ink);
   margin-bottom: 0.35rem;
 }
 
 .cs-insight p {
   font-size: 0.88rem;
-  color: var(--color-text);
+  color: var(--body);
   line-height: 1.7;
   margin: 0;
 }
@@ -341,17 +328,18 @@
 .cs-stat-number {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--ink);
   line-height: 1;
   margin-bottom: 0.25rem;
 }
 
 .cs-stat-label {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 
 /* ===========================
@@ -360,7 +348,7 @@
 .cs-screen-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--ink);
   margin-bottom: 1rem;
 }
 
@@ -391,7 +379,7 @@
   align-items: flex-start;
   gap: 0.6rem;
   font-size: 0.88rem;
-  color: var(--color-text);
+  color: var(--body);
   line-height: 1.6;
 }
 
@@ -401,13 +389,13 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--color-accent);
+  background-color: var(--muted);
   flex-shrink: 0;
   margin-top: 0.5rem;
 }
 
 .cs-annotation strong {
-  color: var(--color-white);
+  color: var(--ink);
   font-weight: 600;
 }
 
@@ -425,65 +413,50 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.85rem 2rem;
-  background-color: var(--color-accent-muted-bg);
-  border: 1px solid var(--color-accent-muted-border);
-  color: #fff;
-  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--surface);
+  font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: var(--radius);
+  transition: opacity 0.3s ease;
 }
 
 .cs-cta:hover {
-  background-color: var(--color-accent-muted-bg-hover);
-  transform: translateY(-1px);
+  opacity: 0.85;
 }
 
 .cs-figma-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.85rem 1.5rem;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  color: var(--color-white);
-  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-size: 0.85rem;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 
 .cs-figma-link:hover {
-  background-color: var(--color-bg-elevated);
+  border-color: var(--ink);
 }
 
 /* End-of-study CTA */
 .cs-end-cta {
   margin-top: 4rem;
   padding-top: 2.5rem;
-  border-top: 1px solid var(--color-border-strong);
+  border-top: 1px solid var(--border);
 }
 
 .cs-end-cta-text {
-  color: var(--color-white);
-  font-size: 1.15rem;
+  color: var(--ink);
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1.25rem;
-}
-
-/* Quiet Verse cream/gold variants */
-.cs-section-title--cream {
-  color: #c4a265;
-}
-
-.cs-cta--cream {
-  background-color: #c4a265;
-  color: #091019;
-}
-
-.cs-cta--cream:hover {
-  background-color: #a8894f;
 }
 
 /* ===========================
@@ -495,36 +468,37 @@
 
 .cs-persona-content {
   padding: 1.5rem;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
+  background-color: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .cs-persona-quote {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-style: normal;
-  color: var(--color-white);
+  color: var(--ink);
   margin-bottom: 0.75rem;
   line-height: 1.4;
 }
 
 .cs-persona-name {
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--ink);
   font-size: 0.9rem;
   margin-bottom: 0.15rem;
 }
 
 .cs-persona-role {
+  font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--color-text-muted);
+  color: var(--muted);
   margin-bottom: 0.5rem;
 }
 
 .cs-persona-desc {
   font-size: 0.85rem;
-  color: var(--color-text);
+  color: var(--body);
   line-height: 1.6;
 }
 
@@ -540,21 +514,21 @@
 
 .cs-philosophy-item {
   padding: 1.25rem;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  background-color: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .cs-philosophy-decision {
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--ink);
   font-size: 0.9rem;
   margin-bottom: 0.35rem;
 }
 
 .cs-philosophy-why {
   font-size: 0.85rem;
-  color: var(--color-text-muted);
+  color: var(--body);
   line-height: 1.6;
 }
 
@@ -564,25 +538,25 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
+  background-color: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   margin-bottom: 2rem;
 }
 
 .cs-highlight-number {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--ink);
   line-height: 1;
 }
 
 .cs-highlight-label {
   font-size: 0.95rem;
-  color: var(--color-text-muted);
+  color: var(--body);
 }
 
-/* Research to product table */
+/* Table */
 .cs-table-wrap {
   overflow-x: auto;
   margin-bottom: 2rem;
@@ -597,16 +571,16 @@
 .cs-table th {
   text-align: left;
   padding: 0.75rem 1rem;
-  background-color: var(--color-bg-card);
-  color: var(--color-white);
+  background-color: transparent;
+  color: var(--ink);
   font-weight: 700;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--border-strong);
 }
 
 .cs-table td {
   padding: 0.75rem 1rem;
-  color: var(--color-text);
-  border-bottom: 1px solid var(--color-border);
+  color: var(--body);
+  border-bottom: 1px solid var(--border);
   line-height: 1.5;
 }
 
@@ -615,7 +589,7 @@
 }
 
 /* ===========================
-   Outcome Metrics Row
+   Outcome Metrics
    =========================== */
 .cs-outcomes {
   display: grid;
@@ -626,26 +600,27 @@
 
 .cs-outcome {
   padding: 1.25rem;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
+  background-color: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   text-align: center;
 }
 
 .cs-outcome__number {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #4ade80;
+  color: var(--ink);
   line-height: 1;
   margin-bottom: 0.35rem;
 }
 
 .cs-outcome__label {
+  font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--color-text-muted);
+  color: var(--muted);
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   line-height: 1.3;
 }
 
@@ -664,15 +639,15 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 0.85rem;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
+  background-color: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   font-size: 0.78rem;
-  color: var(--color-text);
+  color: var(--body);
 }
 
 .cs-team-member__role {
-  color: var(--color-text-muted);
+  color: var(--muted);
 }
 
 /* ===========================
@@ -686,34 +661,37 @@
 }
 
 .cs-compare__side {
-  border-radius: 12px;
+  border-radius: var(--radius);
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
 }
 
 .cs-compare__label {
   display: block;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   padding: 0.6rem 1rem;
   text-align: center;
 }
 
 .cs-compare__label--before {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
+  background-color: transparent;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
 }
 
 .cs-compare__label--after {
-  background-color: rgba(74, 222, 128, 0.1);
-  color: #4ade80;
+  background-color: transparent;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
 }
 
 .cs-compare__img {
   padding: 1rem;
-  background-color: var(--color-bg-card);
+  background-color: var(--raised);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -721,9 +699,33 @@
 
 .cs-compare__img img {
   max-width: 100%;
-  border-radius: 6px;
+  border-radius: calc(var(--radius) / 2);
 }
 
+/* Quiet Verse cream/gold variants */
+.cs-section-title--cream {
+  color: var(--ink);
+}
+
+.cs-cta--cream {
+  background-color: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--surface);
+}
+
+.cs-cta--cream:hover {
+  opacity: 0.85;
+}
+
+.cs-cta--cream-outline {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--ink);
+}
+
+.cs-cta--cream-outline:hover {
+  border-color: var(--ink);
+}
 
 /* ===========================
    Responsive
@@ -770,7 +772,6 @@
     direction: ltr;
   }
 
-
   .cs-stats {
     gap: 1.5rem;
   }
@@ -782,7 +783,6 @@
   .cs-compare {
     grid-template-columns: 1fr;
   }
-
 }
 
 @media (max-width: 480px) {
@@ -801,7 +801,6 @@
   .cs-image-block {
     padding: 0.75rem;
     min-height: 120px;
-    border-radius: 8px;
   }
 
   .cs-body p {
@@ -819,7 +818,7 @@
   .cs-cta,
   .cs-figma-link {
     font-size: 0.82rem;
-    padding: 0.75rem 1.5rem;
+    padding: 0.65rem 1.25rem;
   }
 
   .cs-stat-number {

@@ -1,191 +1,99 @@
 /* ============================================================
-   INNER — shared editorial skin for all non-home pages.
-   Loaded after each page's own stylesheet; re-themes existing
-   markup to match the homepage's editorial language.
+   INNER — Light editorial skin for all non-home pages.
    ============================================================ */
-:root {
-  --ink: #ededed;
-  --ink-dim: #8d8f96;
-  --ink-faint: #54565c;
-  --paper: #08090c;
-  --hairline: rgba(255, 255, 255, 0.09);
-  --font-accent: "Bricolage Grotesque", "Host Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
 
-body {
-  background-color: var(--paper);
-}
+body { background-color: var(--surface); }
 
-/* Kill the old radial-glow hero backdrops — flat editorial dark */
+/* Kill the old radial-glow hero backdrops */
 .about-hero::before,
 .exp-hero::before,
 .cs::before,
 .gal-hero::before,
-.resume-section::before {
-  display: none;
-}
+.resume-section::before { display: none; }
 
 /* ============================================================
-   Eyebrow kicker (added in markup above each page h1)
+   Eyebrow kicker
    ============================================================ */
 .in-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--ink-dim);
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.04em; color: var(--muted);
   margin-bottom: 1.5rem;
 }
-
 .in-eyebrow::before {
-  content: '';
-  width: 2.5rem;
-  height: 1px;
-  background: var(--ink-faint);
-  flex-shrink: 0;
+  content: ''; width: 2rem; height: 1px;
+  background: var(--border-strong); flex-shrink: 0;
 }
-
-/* centered-hero pages keep the kicker centered too */
-.exp-hero .in-eyebrow,
-.gal-hero .in-eyebrow {
-  justify-content: center;
-}
+.exp-hero .in-eyebrow, .gal-hero .in-eyebrow { justify-content: center; }
 
 /* ============================================================
-   Page titles — big editorial display
+   Page titles
    ============================================================ */
-.about-title,
-.exp-hero-title,
-.resume-heading,
-.cs-title,
-.gal-hero-title {
+.about-title, .exp-hero-title, .resume-heading, .cs-title, .gal-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5.5vw, 4.25rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  color: var(--ink);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -0.025em; color: var(--ink);
 }
 
-.about-title em,
-.exp-hero-title em,
-.resume-heading em,
-.cs-title em,
-.gal-hero-title em,
-.about-section-title em,
-.cs-section-title em,
-.gal-section-title em,
-.education-title em {
-  font-family: var(--font-accent);
-  font-style: normal;
-  font-weight: 300;
-  letter-spacing: -0.01em;
-  font-size: 1.04em;
+.about-title em, .exp-hero-title em, .resume-heading em, .cs-title em, .gal-hero-title em,
+.about-section-title em, .cs-section-title em, .gal-section-title em, .education-title em {
+  font-family: var(--font-display);
+  font-style: normal; font-weight: 400;
 }
 
-/* hero subtitles under the big titles */
-.exp-hero-sub,
-.gal-hero-sub,
-.cs-subtitle {
-  font-family: var(--font-accent);
-  font-style: normal;
-  font-weight: 300;
-  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-  color: var(--ink-dim);
-  letter-spacing: 0.01em;
+.exp-hero-sub, .gal-hero-sub, .cs-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--body);
 }
 
 /* ============================================================
-   Section titles — left-aligned, confident
+   Section titles
    ============================================================ */
-.about-section-title,
-.cs-section-title,
-.cs-tldr-section__title,
-.cs-takeaways-title,
-.gal-section-title,
-.education-title {
+.about-section-title, .cs-section-title, .cs-tldr-section__title,
+.cs-takeaways-title, .gal-section-title, .education-title {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  text-align: left;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  color: var(--ink); text-align: left;
 }
 
-/* keep Quiet Verse's gold-tinted section titles */
-.cs-section-title--cream {
-  color: #c4a265;
-}
+.cs-section-title--cream { color: var(--ink); }
 
 /* ============================================================
-   Page entrance — gentle rise on the hero block
+   Page entrance
    ============================================================ */
 @keyframes inRise {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-.about-hero .container,
-.exp-hero .container,
-.gal-hero .container,
-.resume-section .container,
-.cs-header,
-.cs-back {
-  animation: inRise 0.9s var(--ease-out) both;
+.about-hero .container, .exp-hero .container, .gal-hero .container,
+.resume-section .container, .cs-header, .cs-back {
+  animation: inRise 0.6s cubic-bezier(0.16,1,0.3,1) both;
 }
-
 .cs-header { animation-delay: 0.08s; }
 
 /* ============================================================
-   Footer — match homepage bar
+   Footer
    ============================================================ */
 .footer {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  padding: 1.75rem 0;
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.02em; color: var(--muted);
+  padding: var(--sp-3) 0;
 }
 
 /* ============================================================
-   Premium polish (UI/UX Pro Max pass) — same depth, hover and
-   press language as the homepage cards
+   Hover — restrained. No transforms, no glow.
    ============================================================ */
-.exp-company-card,
-.hobby-card,
-.gal-item {
-  transition: border-color 0.5s var(--ease-out),
-              box-shadow 0.5s var(--ease-out),
-              transform 0.5s var(--ease-out);
+.exp-company-card, .hobby-card, .gal-item {
+  transition: border-color 0.22s ease;
 }
+.exp-company-card:hover, .hobby-card:hover { border-color: var(--border-strong); }
+.gal-item:hover { border-color: var(--border-strong); }
 
-.exp-company-card:hover,
-.hobby-card:hover {
-  border-color: rgba(46, 125, 255, 0.45);
-  box-shadow: 0 24px 60px -30px rgba(46, 125, 255, 0.35);
-}
-
-.gal-item:hover {
-  box-shadow: 0 24px 60px -26px rgba(46, 125, 255, 0.4);
-}
-
-.hobby-card:hover { transform: translateY(-3px); }
-.exp-company-card:hover { transform: translateY(-2px); }
-
-/* press feedback on interactive cards */
-.gal-item:active { transform: translateY(-1px) scale(0.99); }
-.hobby-card--link:active { transform: translateY(-1px) scale(0.98); }
-.exp-accordion:active { opacity: 0.85; }
-
-@media (prefers-reduced-motion: reduce) {
-  .exp-company-card:hover,
-  .hobby-card:hover,
-  .gal-item:hover,
-  .gal-item:active,
-  .hobby-card--link:active { transform: none; }
+.hobby-card:hover, .exp-company-card:hover, .gal-item:hover,
+.gal-item:active, .hobby-card--link:active, .exp-accordion:active {
+  transform: none; box-shadow: none;
 }

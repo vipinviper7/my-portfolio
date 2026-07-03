@@ -1,54 +1,54 @@
 /* ===========================
-   Quiet Verse Case Study — Project-Specific Styles
+   Quiet Verse Case Study — Light Editorial
    =========================== */
 
-/* Cream image block background */
+/* Image block backgrounds */
 .cs-image-block--cream {
-  background-color: #fdf6ec;
+  background-color: var(--raised);
 }
 
 .cs-screen-image--cream {
-  background-color: #fdf6ec;
+  background-color: var(--raised);
 }
 
-/* Gold-themed section titles */
+/* Section titles */
 .cs-section-title--cream {
-  color: #c4a265;
+  color: var(--ink);
 }
 
-/* Gold accent for annotation dots */
+/* Annotation dots */
 .cs--cream .cs-annotation::before {
-  background-color: #c4a265;
+  background-color: var(--muted);
 }
 
-/* Gold CTA button */
+/* CTA buttons */
 .cs-cta--cream {
-  background-color: rgba(196, 162, 101, 0.2);
-  border: 1px solid rgba(196, 162, 101, 0.35);
-  color: #c4a265;
+  background-color: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--surface);
 }
 
 .cs-cta--cream:hover {
-  background-color: rgba(196, 162, 101, 0.3);
+  opacity: 0.85;
 }
 
 .cs-cta--cream-outline {
   background: transparent;
-  border: 1px solid rgba(196, 162, 101, 0.25);
-  color: #c4a265;
+  border: 1px solid var(--border-strong);
+  color: var(--ink);
 }
 
 .cs-cta--cream-outline:hover {
-  background: rgba(196, 162, 101, 0.1);
+  border-color: var(--ink);
 }
 
-/* Gold stats */
+/* Stats */
 .cs-stat--cream .cs-stat-number {
-  color: #c4a265;
+  color: var(--ink);
 }
 
 /* ===========================
-   Design Philosophy Items
+   Design Philosophy
    =========================== */
 .cs-philosophy {
   display: flex;
@@ -58,23 +58,22 @@
 }
 
 .cs-philosophy-item {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-left: 3px solid #c4a265;
-  border-radius: 8px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: 1.25rem;
 }
 
 .cs-philosophy-decision {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--ink);
   margin-bottom: 0.35rem;
 }
 
 .cs-philosophy-why {
-  font-size: 0.88rem;
-  color: var(--color-text);
+  font-size: 0.85rem;
+  color: var(--body);
   line-height: 1.7;
 }
 
@@ -83,25 +82,25 @@
    =========================== */
 .cs-highlight {
   text-align: center;
-  padding: 2.5rem 2rem;
-  background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-secondary));
-  border: 1px solid rgba(196, 162, 101, 0.2);
-  border-radius: 12px;
+  padding: 2rem;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   margin-bottom: 2rem;
 }
 
 .cs-highlight-number {
-  font-size: 3rem;
-  font-weight: 800;
-  color: #c4a265;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--ink);
   line-height: 1;
   margin-bottom: 0.5rem;
 }
 
 .cs-highlight-label {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--body);
+  font-weight: 400;
 }
 
 /* ===========================
@@ -117,16 +116,13 @@
   position: relative;
   width: 375px;
   height: 780px;
-  background: #1a1a2e;
-  border-radius: 48px;
+  background: var(--ink);
+  border-radius: 40px;
   padding: 14px;
-  box-shadow:
-    0 0 0 2px rgba(196, 162, 101, 0.25),
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 80px rgba(196, 162, 101, 0.06);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 20px 60px rgba(16, 16, 20, 0.12);
 }
 
-/* Dynamic Island */
 .qv-phone-notch {
   position: absolute;
   top: 20px;
@@ -154,7 +150,7 @@
   width: 100%;
   height: 100%;
   border: none;
-  border-radius: 34px;
+  border-radius: 28px;
   background: #fdf6ec;
   overflow: hidden;
 }
@@ -166,8 +162,8 @@
   .qv-phone {
     width: calc(100vw - 80px);
     height: calc((100vw - 80px) * 2.08);
-    border-radius: 40px;
     padding: 10px;
+    border-radius: 30px;
   }
 
   .qv-phone-notch {
@@ -178,17 +174,17 @@
   }
 
   .qv-phone-screen {
-    border-radius: 30px;
+    border-radius: 22px;
   }
 }
 
 @media (max-width: 480px) {
   .cs-highlight {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
   }
 
   .cs-highlight-number {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
   .cs-philosophy-item {
@@ -198,8 +194,8 @@
   .qv-phone {
     width: 300px;
     height: 624px;
-    border-radius: 40px;
     padding: 10px;
+    border-radius: 30px;
   }
 
   .qv-phone-notch {
@@ -217,6 +213,6 @@
   }
 
   .qv-phone-screen {
-    border-radius: 30px;
+    border-radius: 22px;
   }
 }

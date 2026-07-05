@@ -414,17 +414,19 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.75rem 1.5rem;
-  background-color: var(--ink);
-  border: 1px solid var(--ink);
-  color: var(--surface);
+  background: linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
+  background-size: 200% 200%;
+  border: none;
+  color: #fff;
   font-size: 0.85rem;
   font-weight: 600;
   border-radius: var(--radius);
-  transition: opacity 0.3s ease;
+  transition: background-position 0.4s ease, opacity 0.3s ease;
 }
 
 .cs-cta:hover {
-  opacity: 0.85;
+  background-position: 100% 100%;
+  opacity: 0.9;
 }
 
 .cs-figma-link {
@@ -432,17 +434,20 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.75rem 1.5rem;
-  background-color: transparent;
-  border: 1px solid var(--border-strong);
+  background: transparent;
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--surface), var(--surface)), linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
   border-radius: var(--radius);
   color: var(--ink);
   font-size: 0.85rem;
   font-weight: 500;
-  transition: border-color 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .cs-figma-link:hover {
-  border-color: var(--ink);
+  opacity: 0.85;
 }
 
 /* End-of-study CTA */
@@ -708,23 +713,28 @@
 }
 
 .cs-cta--cream {
-  background-color: var(--ink);
-  border: 1px solid var(--ink);
-  color: var(--surface);
+  background: linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
+  background-size: 200% 200%;
+  border: none;
+  color: #fff;
 }
 
 .cs-cta--cream:hover {
-  opacity: 0.85;
+  background-position: 100% 100%;
+  opacity: 0.9;
 }
 
 .cs-cta--cream-outline {
   background: transparent;
-  border: 1px solid var(--border-strong);
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--surface), var(--surface)), linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
   color: var(--ink);
 }
 
 .cs-cta--cream-outline:hover {
-  border-color: var(--ink);
+  opacity: 0.85;
 }
 
 /* ===========================

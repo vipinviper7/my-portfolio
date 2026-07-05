@@ -79,8 +79,9 @@ body { background-color: var(--surface); }
    Footer
    ============================================================ */
 .footer {
+  background: var(--ink);
   font-size: 0.68rem; font-weight: 500;
-  letter-spacing: 0.02em; color: var(--muted);
+  letter-spacing: 0.02em; color: rgba(255, 255, 255, 0.4);
   padding: var(--sp-3) 0;
 }
 

@@ -1,365 +1,56 @@
 /* ============================================================
-   HOME — Recruiter-ready editorial layout
+   HOME — work feed inside the shared folio shell (folio.css)
    ============================================================ */
 
-.page-home { background-color: var(--surface); color: var(--body); }
-.mono { font-family: var(--font-mono); font-size: 0.85em; }
-
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero {
-  min-height: 100svh;
+.folio-main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-top: 6rem;
-  padding-bottom: 0;
-  position: relative;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-/* --- Hero load stagger (runs once) --- */
-.hero-eyebrow,
-.hero-headline,
-.hero-proof,
-.hero-cta {
-  opacity: 0;
-  transform: translateY(16px);
-}
+.folio-card { display: block; }
 
-.hero-eyebrow  { animation: heroIn 0.45s cubic-bezier(0.16,1,0.3,1) 0.1s forwards; }
-.hero-headline { animation: heroIn 0.45s cubic-bezier(0.16,1,0.3,1) 0.2s forwards; }
-.hero-proof    { animation: heroIn 0.45s cubic-bezier(0.16,1,0.3,1) 0.32s forwards; }
-.hero-cta      { animation: heroIn 0.45s cubic-bezier(0.16,1,0.3,1) 0.44s forwards; }
-
-@keyframes heroIn {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.hero-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  margin-bottom: var(--sp-3);
-}
-
-.hero-headline {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-  margin-bottom: var(--sp-3);
-  max-width: 48rem;
-  text-wrap: balance;
-}
-
-.hero-accent { color: var(--accent); }
-
-.hero-proof {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--body);
-  margin-bottom: var(--sp-4);
-  max-width: 38rem;
-}
-
-.hero-cta {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: 0.02em;
-  padding: 0.65rem 1.4rem;
-  background: linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
-  background-size: 200% 200%;
-  border-radius: var(--radius);
-  transition: background-position 0.4s ease, opacity 0.3s ease;
-}
-.hero-cta:hover { background-position: 100% 100%; opacity: 0.9; }
-
-/* --- Company logos --- */
-.hero-logos {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-  margin-top: var(--sp-5);
-  padding-top: var(--sp-4);
-  border-top: 1px solid var(--border);
-  opacity: 0;
-  animation: heroIn 0.45s cubic-bezier(0.16,1,0.3,1) 0.56s forwards;
-}
-
-.hero-logo {
-  height: 28px;
-  width: auto;
-  object-fit: contain;
-  opacity: 0.45;
-  filter: grayscale(1);
-  transition: opacity 0.3s ease, filter 0.3s ease;
-}
-
-.hero-logo:hover {
-  opacity: 1;
-  filter: grayscale(0);
-}
-
-/* ============================================================
-   SECTION LABEL — eyebrow for each section
-   ============================================================ */
-.section-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  margin-bottom: var(--sp-4);
-  padding-top: var(--sp-6);
-}
-
-/* ============================================================
-   WORK CARDS — alternating image/text grid
-   ============================================================ */
-.work-section { padding-bottom: var(--sp-5); }
-
-.work-card {
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--sp-4);
-  align-items: center;
-  padding: var(--sp-4) 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.work-card:first-of-type { border-top: 1px solid var(--border); }
-
-.work-card:nth-child(odd) {
-  grid-template-columns: 5fr 7fr;
-}
-
-.work-card:nth-child(odd) .work-card-img {
-  order: 2;
-}
-
-.work-card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-}
-
-.work-card:hover .work-card-img img {
-  transform: scale(1.02);
-}
-
-.work-card-img {
-  aspect-ratio: 16 / 11;
+.folio-card-tile {
+  background: var(--tile, var(--raised));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  margin-bottom: 1rem;
 }
 
-.work-card-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+.folio-card-tile img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
 }
 
-.work-card-title {
+.folio-card:hover .folio-card-tile img { transform: scale(1.025); }
+
+.folio-card-title {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: 1rem;               /* 17px headline */
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
-.work-card-outcome {
-  font-size: 0.88rem;
-  color: var(--body);
-  line-height: 1.55;
-}
-
-.work-card-meta {
-  font-size: 0.72rem;
-  color: var(--muted);
-  letter-spacing: 0.02em;
-}
-
-/* Hover: underline appears on title */
-.work-card:hover .work-card-title {
+.folio-card:hover .folio-card-title {
   text-decoration: underline;
-  text-decoration-color: var(--accent);
   text-underline-offset: 4px;
   text-decoration-thickness: 1.5px;
 }
 
-/* ============================================================
-   ABOUT — short, human
-   ============================================================ */
-.about-home {
-  padding-bottom: var(--sp-5);
-  border-top: 1px solid var(--border);
-}
-
-.about-home-content {
-  max-width: 38rem;
-}
-
-.about-home-content p {
-  font-size: 0.95rem;
-  line-height: 1.7;
+.folio-card-sub {
+  font-size: 0.88rem;            /* 15px subheadline */
+  line-height: 1.45;
   color: var(--body);
-  margin-bottom: 1rem;
+  margin-top: 0.3rem;
 }
 
-.about-home-content p:last-child { margin-bottom: 0; }
-
-/* ============================================================
-   FOOTER — email, links, bar
-   ============================================================ */
-.home-footer {
-  background: var(--ink);
-  padding: var(--sp-5) 0 var(--sp-3);
-}
-
-.footer-main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-4);
-}
-
-.footer-email {
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 3vw, 2rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #fff;
-  background: linear-gradient(90deg, #fff 0%, #fff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 100% 100%;
-  transition: background-size 0.4s ease;
-}
-.footer-email:hover {
-  background: linear-gradient(90deg, #f5c842, #e63946, #2454ff, #f58a42, #f5c842);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 1.5s linear infinite;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-
-.footer-links {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.45);
-  transition: color var(--transition);
-  position: relative;
-}
-
-.footer-links a:hover {
-  color: #fff;
-}
-
-/* Hover underline slides in */
-.footer-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: #fff;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.18s ease;
-}
-.footer-links a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.footer-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-top: var(--sp-3);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.02em;
-}
-
-/* ============================================================
-   SCROLL REVEALS — [data-reveal]
-   ============================================================ */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1),
-              transform 0.5s cubic-bezier(0.16,1,0.3,1);
-}
-[data-reveal].is-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================================
-   NO-JS FALLBACK
-   ============================================================ */
-.no-js .hero-eyebrow,
-.no-js .hero-headline,
-.no-js .hero-proof,
-.no-js .hero-cta,
-.no-js .hero-logos { opacity: 1; transform: none; }
-.no-js [data-reveal] { opacity: 1; transform: none; }
-
-/* ============================================================
-   prefers-reduced-motion
-   ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-  .hero-eyebrow, .hero-headline, .hero-proof, .hero-cta, .hero-logos {
-    opacity: 1; transform: none; animation: none;
-  }
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media (max-width: 900px) {
-  .work-card {
-    grid-template-columns: 1fr;
-    gap: var(--sp-3);
-  }
-  .work-card:nth-child(odd) { grid-template-columns: 1fr; }
-  .work-card:nth-child(odd) .work-card-img { order: 0; }
-  .work-card-img { order: -1; }
+  .folio-main { gap: 2.25rem; }
 }
 
 @media (max-width: 540px) {
-  .hero-headline { font-size: clamp(2rem, 8vw, 2.75rem); }
-  .hero-logos { gap: 1.5rem; }
-  .hero-logo { height: 22px; }
-  .footer-email { font-size: clamp(1.1rem, 5vw, 1.5rem); }
-  .footer-links { gap: 1rem; }
+  .folio-card-title { font-size: 0.95rem; }
 }

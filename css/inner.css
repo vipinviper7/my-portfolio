@@ -2,7 +2,7 @@
    INNER — Light editorial skin for all non-home pages.
    ============================================================ */
 
-body { background-color: var(--surface); }
+body { background-color: var(--page); }
 
 /* Kill the old radial-glow hero backdrops */
 .about-hero::before,
@@ -79,9 +79,10 @@ body { background-color: var(--surface); }
    Footer
    ============================================================ */
 .footer {
-  background: var(--ink);
+  background: transparent;
+  border-top: none;
   font-size: 0.68rem; font-weight: 500;
-  letter-spacing: 0.02em; color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.02em; color: var(--muted);
   padding: var(--sp-3) 0;
 }
 

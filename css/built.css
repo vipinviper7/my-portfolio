@@ -1,0 +1,97 @@
+/* ============================================================
+   BUILT PRODUCTS — terminal-style listing
+   ============================================================ */
+
+.built-hero { padding-bottom: 2.5rem; }
+
+.built-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.built-title em { font-style: normal; font-weight: 400; }
+
+.built-sub {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--body);
+  max-width: 40rem;
+  margin-top: 1rem;
+}
+
+/* --- Rows --- */
+.built-list { border-top: 1px solid var(--border); }
+
+.built-row {
+  display: block;
+  position: relative;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.built-row-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.built-row-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.built-status {
+  font-family: var(--font-body);
+  font-size: 0.65rem;            /* 11px caption */
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: rgba(48, 209, 88, 0.15);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+}
+
+.built-row-desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--body);
+  max-width: 42rem;
+  margin-top: 0.5rem;
+}
+
+.built-row-meta {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin-top: 0.6rem;
+}
+
+/* --- Linked rows --- */
+.built-row-link {
+  position: absolute;
+  top: 1.9rem;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  transition: color var(--transition);
+}
+
+a.built-row:hover .built-row-link { color: var(--accent); }
+a.built-row:hover .built-row-name { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+
+.built-more {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  .built-row-link { position: static; display: inline-block; margin-top: 0.6rem; }
+}

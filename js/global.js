@@ -7,6 +7,11 @@
 
   document.documentElement.classList.remove('no-js');
 
+  // Apply the theme chosen on the homepage toggle
+  try {
+    if (localStorage.getItem('vipin-theme') === 'light') document.body.classList.add('light');
+  } catch (e) {}
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ----------------------------------------------------------

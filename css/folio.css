@@ -1,0 +1,293 @@
+/* ============================================================
+   FOLIO SHELL — shared across every page.
+   White canvas on warm page bg, sticky sidebar left,
+   scrollable content right.
+   ============================================================ */
+
+.mono { font-family: var(--font-mono); font-size: 0.85em; }
+
+/* ============================================================
+   CANVAS
+   ============================================================ */
+.folio {
+  --folio-pad: clamp(2rem, 4vw, 4rem);
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+/* Right panel — slightly lighter grey than the sidebar side */
+.folio-main {
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  padding: var(--folio-pad) clamp(2rem, 5vw, 5rem);
+  min-height: 100dvh;
+}
+
+/* Keep long-form content readable on wide screens */
+.folio-main > * { max-width: 66rem; }
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.folio-side {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100dvh;
+  min-height: 480px;
+  padding: var(--folio-pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* --- Entrance stagger --- */
+.folio-side-top, .folio-side-bottom {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.folio-side-top    { animation: folioIn 0.5s cubic-bezier(0.16,1,0.3,1) 0.08s forwards; }
+.folio-side-bottom { animation: folioIn 0.5s cubic-bezier(0.16,1,0.3,1) 0.2s forwards; }
+
+@keyframes folioIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Prompt line + blinking cursor --- */
+.folio-prompt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+.folio-prompt .folio-user { color: var(--accent); }
+
+.folio-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 3px;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  animation: cursorBlink 1.1s steps(1) infinite;
+}
+@keyframes cursorBlink { 50% { opacity: 0; } }
+
+.folio-name {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.folio-role {
+  font-size: 0.95rem;
+  color: var(--body);
+  margin-top: 0.35rem;
+}
+
+.folio-range {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin-top: 0.85rem;
+}
+
+.folio-blurb {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--body);
+  max-width: 24rem;
+  margin-top: 2rem;
+}
+
+/* --- Contact links --- */
+.folio-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  margin-bottom: 1.75rem;
+}
+
+.folio-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color var(--transition);
+}
+.folio-links a:hover { color: var(--ink); }
+
+/* --- Pill nav --- */
+.folio-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Apple-style capsule buttons: gray fill, tinted when active */
+.folio-pill {
+  padding: 7px 16px;
+  font-size: 0.88rem;              /* 15px subheadline */
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--raised);
+  border: none;
+  border-radius: 980px;
+  transition: background-color var(--transition), color var(--transition);
+}
+.folio-pill:hover { background: #2C2C2E; }
+.folio-pill.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.folio-copy {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  margin-top: 1.5rem;
+}
+
+/* ============================================================
+   SCROLL REVEALS — [data-reveal]
+   ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1),
+              transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+[data-reveal].is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   INNER-PAGE CONTENT — normalize legacy heroes/sections
+   so they sit flush inside the scrollable column
+   ============================================================ */
+.folio-main { min-width: 0; }
+
+.folio-main .container { max-width: none; padding-inline: 0; }
+
+.folio-main .about-hero { padding: 0 0 2rem; }
+
+.folio-main .exp-hero {
+  min-height: 0;
+  padding: 0 0 2rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.folio-main .gal-hero { padding: 0 0 2rem; text-align: left; }
+
+.folio-main .exp-hero .in-eyebrow,
+.folio-main .gal-hero .in-eyebrow { justify-content: flex-start; }
+
+.folio-main .exp-hero-sub,
+.folio-main .gal-hero-sub { margin-inline: 0; }
+
+.folio-main .resume-section { min-height: 0; padding: 0 0 2rem; }
+
+.folio-main.cs { padding: 0 0 2rem; }
+
+/* Nested max-width cap shouldn't squeeze inner wrappers */
+.folio-main .container { max-width: 66rem; }
+
+/* HIG type scale — Large Title for pages, Title 2 for sections */
+.about-title, .exp-hero-title, .resume-heading, .cs-title, .gal-hero-title {
+  font-size: clamp(1.65rem, 3vw, 2rem);   /* ≤ 34px large title */
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.about-section-title, .cs-section-title, .gal-section-title,
+.education-title, .cs-tldr-section__title, .cs-takeaways-title {
+  font-size: clamp(1.15rem, 1.8vw, 1.3rem);  /* ≈ 22px title 2 */
+  letter-spacing: -0.01em;
+}
+.folio-name { letter-spacing: -0.01em; }
+
+/* ============================================================
+   NO-JS FALLBACK
+   ============================================================ */
+.no-js .folio-side-top,
+.no-js .folio-side-bottom { opacity: 1; transform: none; animation: none; }
+.no-js [data-reveal] { opacity: 1; transform: none; }
+
+/* ============================================================
+   prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .folio-side-top, .folio-side-bottom {
+    opacity: 1; transform: none; animation: none;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — sidebar stacks on top, pill nav floats bottom
+   ============================================================ */
+@media (max-width: 900px) {
+  .folio {
+    --folio-pad: clamp(1.25rem, 5vw, 2.5rem);
+    display: block;
+    min-height: 100dvh;
+  }
+
+  .folio-side {
+    position: static;
+    height: auto;
+    min-height: 0;
+    padding: var(--folio-pad);
+    padding-bottom: 2rem;
+  }
+
+  .folio-main {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    min-height: 0;
+    padding: var(--folio-pad);
+    padding-bottom: 6rem; /* room for the floating pill nav */
+  }
+
+  .folio-side-bottom { margin-top: 2rem; }
+  .folio-links { margin-bottom: 0; }
+  .folio-copy { margin-top: 1.25rem; }
+
+  /* Floating pill nav, docked bottom-center */
+  .folio-nav {
+    position: fixed;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    flex-wrap: nowrap;
+    width: max-content;
+    max-width: calc(100vw - 20px);
+    overflow-x: auto;
+    gap: 0.25rem;
+    padding: 6px;
+    background: rgba(28, 28, 30, 0.8);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border: 1px solid var(--border);
+    border-radius: 980px;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+  }
+
+  .folio-pill { background: transparent; white-space: nowrap; }
+  .folio-pill.active { background: var(--accent); color: #fff; }
+}
+
+@media (max-width: 540px) {
+  .folio-pill { padding: 6px 11px; font-size: 0.76rem; }
+}

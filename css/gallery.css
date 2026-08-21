@@ -36,7 +36,7 @@
   position: sticky;
   top: 80px;
   z-index: 50;
-  background-color: rgba(252, 252, 253, 0.92);
+  background-color: rgba(16, 16, 19, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   margin-bottom: 1rem;
@@ -284,6 +284,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Dark theme: icons are dark strokes — invert them to read on dark bg */
+.icon-wall-img img {
+  filter: invert(1) hue-rotate(180deg);
+  opacity: 0.9;
 }
 
 .icon-wall-img img {

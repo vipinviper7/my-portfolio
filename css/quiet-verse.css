@@ -116,7 +116,7 @@
   position: relative;
   width: 375px;
   height: 780px;
-  background: var(--ink);
+  background: #0B0B0E;
   border-radius: 40px;
   padding: 14px;
   border: 1px solid var(--border-strong);

@@ -2,24 +2,28 @@
    Custom Properties — Recruiter-Ready Light System
    =========================== */
 :root {
-  /* Color tokens */
-  --ink: #101014;
-  --body: #3C3C46;
-  --muted: #8A8A96;
-  --surface: #FCFCFD;
-  --raised: #F2F2F5;
-  --accent: #2454FF;
-  --border: rgba(16, 16, 20, 0.06);
-  --border-strong: rgba(16, 16, 20, 0.12);
+  /* Color tokens — Vipin dark system */
+  --ink: #F4F5F7;
+  --body: rgba(235, 238, 245, 0.72);
+  --muted: rgba(235, 238, 245, 0.45);
+  --page: #141519;
+  --surface: #191A1F;
+  --raised: #1E2025;
+  --accent: #34D399;                       /* signature emerald */
+  --amber: #F0B44C;                        /* secondary highlight */
+  --green: #34D399;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
 
-  /* Type */
-  --font-display: "Host Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-body: "Host Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: "Space Mono", "SF Mono", "Fira Code", monospace;
+  /* Type — SF Pro via the Apple system stack; SF Mono for code accents */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", system-ui, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", system-ui, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Menlo", "Monaco", monospace;
 
   /* Layout */
   --max-width: 1100px;
-  --radius: 0;
+  --radius: 12px;
+  --radius-lg: 18px;
   --transition: 0.22s ease;
 
   /* Spacing scale */
@@ -31,6 +35,21 @@
   --sp-6: 120px;
 }
 
+/* Light theme — applied by the sidebar toggle, persisted in localStorage */
+body.light {
+  --ink: #1E1F24;
+  --body: rgba(30, 31, 36, 0.75);
+  --muted: rgba(30, 31, 36, 0.48);
+  --page: #FAFAF9;
+  --surface: #FFFFFF;
+  --raised: #EDEDEF;
+  --accent: #0BA06A;
+  --amber: #B97F14;
+  --green: #0BA06A;
+  --border: rgba(0, 0, 0, 0.09);
+  --border-strong: rgba(0, 0, 0, 0.16);
+}
+
 /* ===========================
    Reset
    =========================== */
@@ -40,10 +59,10 @@ html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; text-size-adjust: 
 
 body {
   font-family: var(--font-body);
-  background-color: var(--surface);
+  background-color: var(--page);
   color: var(--body);
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 17px;            /* HIG body */
+  line-height: 1.47059;       /* HIG body leading */
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -52,7 +71,7 @@ body {
 }
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-track { background: var(--page); }
 ::-webkit-scrollbar-thumb { background: var(--raised); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
@@ -68,7 +87,7 @@ ul { list-style: none; }
 .skip-link:focus { top: 0.5rem; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-::selection { background: var(--accent); color: #fff; }
+::selection { background: var(--accent); color: #06130D; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -80,14 +99,6 @@ ul { list-style: none; }
 }
 
 body.nav-open { overflow: hidden; }
-
-/* ===========================
-   Dotted background — FigJam style
-   =========================== */
-body {
-  background-image: radial-gradient(circle, rgba(16, 16, 20, 0.06) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
 
 /* Scroll progress */
 .scroll-progress {
@@ -128,7 +139,7 @@ body {
 }
 
 .nav.scrolled {
-  background-color: rgba(252, 252, 253, 0.92);
+  background-color: rgba(237, 235, 231, 0.92);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--border);
 }

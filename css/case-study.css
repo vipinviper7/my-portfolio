@@ -414,20 +414,17 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
-  background-size: 200% 200%;
+  background: var(--accent);
   border: none;
-  color: #fff;
+  color: #06130D;
   font-size: 0.85rem;
   font-weight: 600;
   border-radius: var(--radius);
-  transition: background-position 0.4s ease, opacity 0.3s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease-out;
 }
 
-.cs-cta:hover {
-  background-position: 100% 100%;
-  opacity: 0.9;
-}
+.cs-cta:hover { background: var(--amber); }
+.cs-cta:active { transform: scale(0.97); }
 
 .cs-figma-link {
   display: inline-flex;
@@ -435,20 +432,16 @@
   gap: 0.4rem;
   padding: 0.75rem 1.5rem;
   background: transparent;
-  border: 2px solid transparent;
-  background-image: linear-gradient(var(--surface), var(--surface)), linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius);
   color: var(--ink);
   font-size: 0.85rem;
   font-weight: 500;
-  transition: opacity 0.3s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.1s ease-out;
 }
 
-.cs-figma-link:hover {
-  opacity: 0.85;
-}
+.cs-figma-link:hover { border-color: var(--accent); background: var(--raised); }
+.cs-figma-link:active { transform: scale(0.97); }
 
 /* End-of-study CTA */
 .cs-end-cta {
@@ -713,29 +706,22 @@
 }
 
 .cs-cta--cream {
-  background: linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
-  background-size: 200% 200%;
+  background: var(--accent);
   border: none;
-  color: #fff;
+  color: #06130D;
 }
 
-.cs-cta--cream:hover {
-  background-position: 100% 100%;
-  opacity: 0.9;
-}
+.cs-cta--cream:hover { background: var(--amber); }
+.cs-cta--cream:active { transform: scale(0.97); }
 
 .cs-cta--cream-outline {
   background: transparent;
-  border: 2px solid transparent;
-  background-image: linear-gradient(var(--surface), var(--surface)), linear-gradient(135deg, #f5c842, #e63946, #2454ff, #f58a42);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  border: 1px solid var(--border-strong);
   color: var(--ink);
 }
 
-.cs-cta--cream-outline:hover {
-  opacity: 0.85;
-}
+.cs-cta--cream-outline:hover { border-color: var(--accent); background: var(--raised); }
+.cs-cta--cream-outline:active { transform: scale(0.97); }
 
 /* ===========================
    Responsive

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Vipin Ebenezer — Product Designer</title>
-  <meta name="description" content="Product Designer at Zoho. 6+ years in design, 50K+ users, 15+ side products shipped solo.">
+  <meta name="description" content="Product Designer at Zoho. 6+ years in design, 50K+ users, [N+] side products shipped solo.">
   <meta property="og:title" content="Vipin Ebenezer — Product Designer">
   <meta property="og:description" content="I design products at Zoho — and ship my own with code.">
   <meta property="og:type" content="website">
@@ -13,332 +13,229 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/onepage.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/rail.css">
+  <link rel="stylesheet" href="css/cs-doc.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
-<body class="one">
+<body>
 
-  <a class="skip-link" href="#work-recent-updates">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ============================
-       MOBILE BAR — sticky wayfinding below 880px
-       ============================ -->
-  <div class="one-mobile-bar">
-    <svg class="one-mobile-mark" viewBox="0 0 100 100" fill="currentColor" role="img" aria-label="V"><path d="M18 4h26l6 66 6-66h26L60 96H40L18 4Z"/></svg>
-    <span class="one-mobile-label" data-mobile-label>Recent Updates</span>
-    <button class="theme-btn" type="button" aria-label="Toggle light and dark theme">
-      <svg class="ico-moon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 8.6A5 5 0 0 1 5.4 2.5a5 5 0 1 0 6.1 6.1Z"/></svg>
-      <svg class="ico-sun" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="2.6"/><path d="M7 .9v1.6M7 11.5v1.6M.9 7h1.6M11.5 7h1.6M2.7 2.7l1.1 1.1M10.2 10.2l1.1 1.1M11.3 2.7l-1.1 1.1M3.8 10.2l-1.1 1.1"/></svg>
-    </button>
-    <button class="one-mobile-menu" type="button" aria-expanded="false" aria-controls="one-side">
-      <svg class="ico-burger" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg>
-      <svg class="ico-close" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg>
-    </button>
+  <!-- Mobile top bar -->
+  <div class="rail-bar">
+    <span class="rail-bar-name">Vipin Ebenezer</span>
+    <button class="rail-bar-toggle" type="button" aria-expanded="false" aria-controls="rail-panel">Menu</button>
   </div>
-  <div class="one-scrim"></div>
+  <div class="rail-panel" id="rail-panel" hidden>
+    <nav class="rail-nav" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#craft">Craft</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="rail-foot">
+      <a href="mailto:vipvipernezer7@gmail.com">Email</a>
+      <a href="assets/docs/vipin_s_resume.pdf" download>Resume</a>
+    </div>
+  </div>
 
-  <div class="one-wrap">
+  <div class="doc">
 
-    <!-- ============================
-         SIDEBAR
-         ============================ -->
-    <aside class="one-side" id="one-side">
-      <div class="one-top">
-        <svg class="one-mark" viewBox="0 0 100 100" fill="currentColor" role="img" aria-label="V — Vipin Ebenezer"><path d="M18 4h26l6 66 6-66h26L60 96H40L18 4Z"/></svg>
-        <button class="theme-btn" type="button" aria-label="Toggle light and dark theme">
-          <svg class="ico-moon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 8.6A5 5 0 0 1 5.4 2.5a5 5 0 1 0 6.1 6.1Z"/></svg>
-          <svg class="ico-sun" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="2.6"/><path d="M7 .9v1.6M7 11.5v1.6M.9 7h1.6M11.5 7h1.6M2.7 2.7l1.1 1.1M10.2 10.2l1.1 1.1M11.3 2.7l-1.1 1.1M3.8 10.2l-1.1 1.1"/></svg>
-        </button>
-      </div>
-      <h1 class="one-name">Vipin Ebenezer</h1>
-      <p class="one-bio">Product Designer at Zoho &mdash; I design products all day and ship my own with code. 6+ years in design &middot; 15+ side products shipped solo.</p>
-
-      <hr class="one-sep">
-
-      <p class="one-nav-label">Sections</p>
-      <nav class="one-nav" aria-label="Sections">
-
-        <div class="nav-group">
-          <button class="nav-row nav-parent" type="button" aria-expanded="true">
-            <svg class="nav-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 4.5 6 7.5l2.5-3"/></svg>
-            <svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M4 1.5v9M8 1.5v9M1.5 4h9M1.5 8h9"/></svg>
-            Work
-          </button>
-          <div class="nav-branch">
-            <div class="nav-children">
-              <a class="nav-row nav-child active" href="#work-recent-updates"><svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.5" y="2" width="9" height="8" rx="1.5"/><path d="M2.5 8.6l2.4-2.4 1.7 1.7 1.9-1.9 1.5 1.5"/></svg>Recent Updates</a>
-              <a class="nav-row nav-child" href="#work-product-tour"><svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.5" y="2" width="9" height="8" rx="1.5"/><path d="M2.5 8.6l2.4-2.4 1.7 1.7 1.9-1.9 1.5 1.5"/></svg>Product Tour</a>
-              <a class="nav-row nav-child" href="#work-settings"><svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.5" y="2" width="9" height="8" rx="1.5"/><path d="M2.5 8.6l2.4-2.4 1.7 1.7 1.9-1.9 1.5 1.5"/></svg>Settings Redesign</a>
-              <a class="nav-row nav-child" href="#work-visual"><svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.5" y="2" width="9" height="8" rx="1.5"/><path d="M2.5 8.6l2.4-2.4 1.7 1.7 1.9-1.9 1.5 1.5"/></svg>Visual Design</a>
-            </div>
-          </div>
-        </div>
-
-        <a class="nav-row" href="#built"><span class="nav-spacer" aria-hidden="true"></span><svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true"><path d="M6 1.5 10.5 6 6 10.5 1.5 6Z"/></svg>Built Products</a>
-        <a class="nav-row" href="#experience"><span class="nav-spacer" aria-hidden="true"></span><svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 1.5l4.5 2.4L6 6.3 1.5 3.9Z"/><path d="M1.5 6.4 6 8.8l4.5-2.4"/><path d="M1.5 8.9 6 11.3l4.5-2.4" opacity=".45"/></svg>Experience</a>
-        <a class="nav-row" href="#about"><span class="nav-spacer" aria-hidden="true"></span><svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><path d="M2.5 2.5h7M6 2.5v7"/></svg>About</a>
-        <a class="nav-row" href="#contact"><span class="nav-spacer" aria-hidden="true"></span><svg class="nav-ico" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.5" y="2.5" width="9" height="7" rx="1.2"/><path d="M1.5 3.5 6 7l4.5-3.5"/></svg>Contact</a>
-
+    <!-- Rail -->
+    <aside class="rail">
+      <h1 class="rail-name"><a href="index.html">Vipin Ebenezer</a></h1>
+      <p class="rail-role">Product Designer, Zoho</p>
+      <nav class="rail-nav" aria-label="Sections" id="main-nav">
+        <a href="#work">Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#craft">Craft</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </nav>
-
-      <div class="one-side-foot">
-        <div class="one-foot-row">
-          <a class="one-btn" href="mailto:vipvipernezer7@gmail.com">Email me <span aria-hidden="true">&rarr;</span></a>
-          <a class="one-btn" href="assets/docs/vipin_s_resume.pdf" download>Resume <span aria-hidden="true">&darr;</span></a>
-        </div>
+      <div class="rail-foot">
+        <a href="mailto:vipvipernezer7@gmail.com">Email</a>
+        <a href="assets/docs/vipin_s_resume.pdf" download>Resume</a>
       </div>
     </aside>
 
-    <!-- ============================
-         FEED
-         ============================ -->
-    <main class="one-feed">
+    <!-- Main -->
+    <main class="doc-main" id="main">
+      <div class="doc-col">
 
-      <!-- 01 Recent Updates -->
-      <section class="one-section" id="work-recent-updates">
-        <div class="one-head">
-          <h2 class="one-title">Sprints &mdash; Recent Updates</h2>
-          <span class="one-desc">3 weeks of sprint changes, readable in 30 seconds. Shipped to 50K+ teams.</span>
-          <a class="one-cs-link" href="case-study-1.html">Read full case study &rarr;</a>
+        <div class="hp-intro">
+          <p>I design products at Zoho &mdash; and ship my own with code. 6+ years in design &middot; <em class="ph">[N+]</em> side products shipped solo.</p>
         </div>
-        <div class="one-stage one-stage--flush has-segs" style="--tint:#16211B">
-          <img class="seg-panel active" src="assets/images/project-recent-updates.png" alt="Recent Updates overview" loading="eager" decoding="async">
-          <img class="seg-panel" src="assets/images/cs1-problem.png" alt="The problem" loading="lazy" decoding="async">
-          <img class="seg-panel" src="assets/images/cs1-final.png" alt="Final design" loading="lazy" decoding="async">
-          <img class="seg-panel" src="assets/images/cs1-impact.png" alt="Impact" loading="lazy" decoding="async">
-          <div class="seg-captions" aria-live="polite">
-            <p class="seg-cap active">The announcement feed, docked right inside Sprints&rsquo; global view.</p>
-            <p class="seg-cap">The problem &mdash; notifications existed, but announcements drowned in one flat list.</p>
-            <p class="seg-cap">Shipped layout &mdash; action items visually separated from FYI updates.</p>
-            <p class="seg-cap">The result &mdash; 50K+ teams, 4 update types in one feed, zero changes after handoff.</p>
-          </div>
-          <div class="one-segs" role="tablist" aria-label="Recent Updates views">
-            <button class="one-seg active" type="button">Overview</button>
-            <button class="one-seg" type="button">Problem</button>
-            <button class="one-seg" type="button">Final</button>
-            <button class="one-seg" type="button">Impact</button>
-          </div>
-        </div>
-      </section>
 
-      <!-- 02 Product Tour -->
-      <section class="one-section" id="work-product-tour">
-        <div class="one-head">
-          <h2 class="one-title">Sprints &mdash; Product Tour</h2>
-          <span class="one-desc">Self-serve onboarding that cut support tickets for first-time users.</span>
-          <a class="one-cs-link" href="case-study-3.html">Read full case study &rarr;</a>
-        </div>
-        <div class="one-stage one-stage--flush has-segs" style="--tint:#1B1A24">
-          <img class="seg-panel active" src="assets/images/project-product-tour.png" alt="Product Tour overview" loading="lazy" decoding="async">
-          <img class="seg-panel" src="assets/images/cs3-final.png" alt="Final design" loading="lazy" decoding="async">
-          <img class="seg-panel" src="assets/images/cs3-live-1.png" alt="Live in product" loading="lazy" decoding="async">
-          <div class="seg-captions" aria-live="polite">
-            <p class="seg-cap active">The guided tour that welcomes first-time users into Sprints.</p>
-            <p class="seg-cap">Final flow &mdash; a short step-by-step tour mapping the core workspace.</p>
-            <p class="seg-cap">Live in production &mdash; walking new teams through All Projects.</p>
-          </div>
-          <div class="one-segs" role="tablist" aria-label="Product Tour views">
-            <button class="one-seg active" type="button">Overview</button>
-            <button class="one-seg" type="button">Final</button>
-            <button class="one-seg" type="button">In product</button>
-          </div>
-        </div>
-      </section>
+        <!-- ============ WORK ============ -->
+        <section class="cs2-section" id="work">
+          <h2 class="cs2-section-title">Work</h2>
 
-      <!-- 03 Settings -->
-      <section class="one-section" id="work-settings">
-        <div class="one-head">
-          <h2 class="one-title">Sprints &mdash; Settings Redesign</h2>
-          <span class="one-desc">40+ settings given a hierarchy users can scan. Shipped in Sprints 2.0.</span>
-          <a class="one-cs-link" href="case-study-2.html">Read full case study &rarr;</a>
-        </div>
-        <div class="one-stage one-stage--flush has-segs" style="--tint:#181C23">
-          <img class="seg-panel active" src="assets/images/project-settings.png" alt="Settings overview" loading="lazy" decoding="async">
-          <img class="seg-panel" src="assets/images/cs2-existing.png" alt="Before" loading="lazy" decoding="async">
-          <img class="seg-panel" src="assets/images/cs2-final.png" alt="Final design" loading="lazy" decoding="async">
-          <img class="seg-panel" src="assets/images/cs2-impact.png" alt="Impact" loading="lazy" decoding="async">
-          <div class="seg-captions" aria-live="polite">
-            <p class="seg-cap active">The redesigned settings hub, shipped in Sprints 2.0.</p>
-            <p class="seg-cap">Before &mdash; 40+ settings stacked in one undifferentiated list.</p>
-            <p class="seg-cap">After &mdash; grouped sections and a hierarchy users can actually scan.</p>
-            <p class="seg-cap">Rolled out across every Sprints workspace in the 2.0 release.</p>
-          </div>
-          <div class="one-segs" role="tablist" aria-label="Settings views">
-            <button class="one-seg active" type="button">Overview</button>
-            <button class="one-seg" type="button">Before</button>
-            <button class="one-seg" type="button">Final</button>
-            <button class="one-seg" type="button">Impact</button>
-          </div>
-        </div>
-      </section>
+          <a class="hp-item" href="case-study-1.html">
+            <div class="hp-item-media">
+              <img src="assets/images/cs1-hero.png" alt="Recent Updates feature overview" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div class="hp-item-body">
+              <h3 class="hp-item-title">Sprints &mdash; Recent Updates</h3>
+              <p class="hp-item-desc">Making 3 weeks of sprint changes readable in 30 seconds.</p>
+              <div class="hp-item-stat">
+                <span class="hp-item-numeral">50K+</span>
+                <span class="hp-item-numeral-caption">users</span>
+              </div>
+              <span class="hp-item-link">Read the case study</span>
+            </div>
+          </a>
 
-      <!-- 06 Visual Design -->
-      <section class="one-section" id="work-visual">
-        <div class="one-head">
-          <h2 class="one-title">Visual Design</h2>
-          <span class="one-desc">Illustration system, icon library &amp; marketing design at Zoho.</span>
-          <a class="one-cs-link" href="visual-design.html">Full gallery &rarr;</a>
-        </div>
-        <div class="one-stage has-segs" style="--tint:#1B1C20">
-          <img class="seg-panel seg-gif active" src="assets/images/vd-icons.gif" alt="Icon systems" loading="lazy" decoding="async">
-          <img class="seg-panel seg-gif" src="assets/images/vd-illustrations.gif" alt="Illustrations" loading="lazy" decoding="async">
-          <img class="seg-panel seg-gif" src="assets/images/vd-marketing.gif" alt="Marketing design" loading="lazy" decoding="async">
-          <img class="seg-panel seg-gif" src="assets/images/vd-art.gif" alt="Digital art" loading="lazy" decoding="async">
-          <div class="seg-captions" aria-live="polite">
-            <p class="seg-cap active">Icon sets designed for Zoho Sprints&rsquo; product interface.</p>
-            <p class="seg-cap">Illustration system for empty states and onboarding moments.</p>
-            <p class="seg-cap">Marketing banners for Catalyst, Marketplace, and Zoho campaigns.</p>
-            <p class="seg-cap">Personal digital art &mdash; practice that feeds the product work.</p>
-          </div>
-          <div class="one-segs" role="tablist" aria-label="Visual design categories">
-            <button class="one-seg active" type="button">Icons</button>
-            <button class="one-seg" type="button">Illustrations</button>
-            <button class="one-seg" type="button">Marketing</button>
-            <button class="one-seg" type="button">Art</button>
-          </div>
-        </div>
-      </section>
+          <a class="hp-item" href="case-study-2.html">
+            <div class="hp-item-media">
+              <img src="assets/images/cs2-hero.png" alt="Settings screen redesign overview" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div class="hp-item-body">
+              <h3 class="hp-item-title">Sprints &mdash; Settings Redesign</h3>
+              <p class="hp-item-desc">Giving 40+ settings a hierarchy users could actually scan.</p>
+              <div class="hp-item-stat">
+                <span class="hp-item-numeral">50K+</span>
+                <span class="hp-item-numeral-caption">users</span>
+              </div>
+              <span class="hp-item-link">Read the case study</span>
+            </div>
+          </a>
+        </section>
 
-      <!-- 07 Built Products -->
-      <section class="one-section" id="built">
-        <div class="one-head">
-          <h2 class="one-title">Built Products</h2>
-          <span class="one-desc">Apps designed and built end-to-end &mdash; React, Next.js, React Native, AI-assisted.</span>
-        </div>
-        <div class="one-stage">
-          <div class="one-rows one-rows--grid">
-            <a class="one-row" href="caterease.html">
-              <div class="one-row-body">
-                <p class="one-row-name">CaterEase <span class="one-chip">Shipped</span></p>
-                <p class="one-row-sub">Find and book caterers &mdash; discovery, menus, reviews, booking.</p>
+        <!-- ============ PROJECTS ============ -->
+        <section class="cs2-section" id="projects">
+          <h2 class="cs2-section-title">Projects</h2>
+
+          <div class="hp-rebuild">
+            <div class="hp-rebuild-tape" aria-hidden="true">
+              <div class="hp-rebuild-tape-track">
+                <span>UNDER REBUILD</span><span>UNDER REBUILD</span><span>UNDER REBUILD</span><span>UNDER REBUILD</span><span>UNDER REBUILD</span><span>UNDER REBUILD</span>
               </div>
-              <span class="one-row-meta">React Native &middot; Supabase</span>
-            </a>
-            <a class="one-row" href="quiet-verse.html">
-              <div class="one-row-body">
-                <p class="one-row-name">Quiet Verse <span class="one-chip">Shipped</span></p>
-                <p class="one-row-sub">Offline-first Bible companion &mdash; no streaks, no ads, no noise.</p>
-              </div>
-              <span class="one-row-meta">React Native &middot; Cursor</span>
-            </a>
-            <div class="one-row">
-              <div class="one-row-body">
-                <p class="one-row-name">NearCater <span class="one-chip">Shipped</span></p>
-                <p class="one-row-sub">GPS caterer discovery &mdash; geolocation, radius filter, map view.</p>
-              </div>
-              <span class="one-row-meta">React Native &middot; Maps</span>
             </div>
-            <div class="one-row">
-              <div class="one-row-body">
-                <p class="one-row-name">NegOAT <span class="one-chip">Shipped</span></p>
-                <p class="one-row-sub">AI price checker &amp; negotiation coach with fair-price verdicts.</p>
+            <div class="hp-rebuild-body">
+              <p class="hp-rebuild-title">Projects &mdash; under rebuild</p>
+              <p class="hp-rebuild-sub">New work launches <time datetime="2026-10-02">October 2, 2026</time>.</p>
+              <div class="hp-rebuild-timer" id="rebuild-timer" aria-hidden="true">
+                <div class="hp-rebuild-unit"><span class="hp-rebuild-num" data-unit="d">00</span><span class="hp-rebuild-label">days</span></div>
+                <div class="hp-rebuild-unit"><span class="hp-rebuild-num" data-unit="h">00</span><span class="hp-rebuild-label">hrs</span></div>
+                <div class="hp-rebuild-unit"><span class="hp-rebuild-num" data-unit="m">00</span><span class="hp-rebuild-label">min</span></div>
+                <div class="hp-rebuild-unit"><span class="hp-rebuild-num" data-unit="s">00</span><span class="hp-rebuild-label">sec</span></div>
               </div>
-              <span class="one-row-meta">React Native &middot; Claude API</span>
             </div>
-            <div class="one-row">
-              <div class="one-row-body">
-                <p class="one-row-name">ScoreZone <span class="one-chip">Shipped</span></p>
-                <p class="one-row-sub">Live scoring &amp; tournaments for 7 sports, cricket to carrom.</p>
+            <div class="hp-rebuild-tape" aria-hidden="true">
+              <div class="hp-rebuild-tape-track">
+                <span>UNDER REBUILD</span><span>UNDER REBUILD</span><span>UNDER REBUILD</span><span>UNDER REBUILD</span><span>UNDER REBUILD</span><span>UNDER REBUILD</span>
               </div>
-              <span class="one-row-meta">Next.js &middot; Prisma</span>
-            </div>
-            <div class="one-row">
-              <div class="one-row-body">
-                <p class="one-row-name">SaveOrSkip <span class="one-chip">Shipped</span></p>
-                <p class="one-row-sub">Tinder for unknown callers &mdash; swipe to save or skip. Offline.</p>
-              </div>
-              <span class="one-row-meta">React Native &middot; Reanimated</span>
-            </div>
-            <div class="one-row">
-              <div class="one-row-body">
-                <p class="one-row-name">TNAP Travel Planner <span class="one-chip">Shipped</span></p>
-                <p class="one-row-sub">TN &rarr; AP trip comparison with AI cost estimates.</p>
-              </div>
-              <span class="one-row-meta">React Native &middot; Claude API</span>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- 08 Experience -->
-      <section class="one-section" id="experience">
-        <div class="one-head">
-          <h2 class="one-title">Experience</h2>
-          <span class="one-desc">2018 to today &mdash; graphic design to visual design to product.</span>
-          <a class="one-cs-link" href="assets/docs/vipin_s_resume.pdf" download>Resume PDF &darr;</a>
-        </div>
-        <div class="one-stage">
-          <div class="one-rows">
-            <div class="one-row">
-              <img class="one-row-logo" src="assets/images/logo-zoho.png" alt="Zoho">
-              <div class="one-row-body">
-                <p class="one-row-name">Zoho <span class="one-chip one-chip--blue">Current</span></p>
-                <p class="one-row-sub">Product Designer &mdash; end-to-end design for Zoho Sprints; illustration system &amp; icon library; marketing design for Catalyst &amp; Marketplace.</p>
-              </div>
-              <span class="one-row-meta">Jun 2022 &mdash; now</span>
+        <!-- ============ CRAFT ============ -->
+        <section class="cs2-section" id="craft">
+          <h2 class="cs2-section-title">Craft</h2>
+          <div class="hp-craft-grid">
+            <figure class="hp-craft-item">
+              <img src="assets/images/illus-404-page.png" alt="404 page illustration for Zoho Sprints" loading="lazy">
+              <figcaption class="hp-craft-caption">Illustration &mdash; 404 page</figcaption>
+            </figure>
+            <figure class="hp-craft-item">
+              <img src="assets/images/illus-welcome-back.jpg" alt="Welcome back illustration for Zoho Sprints" loading="lazy">
+              <figcaption class="hp-craft-caption">Illustration &mdash; onboarding</figcaption>
+            </figure>
+            <figure class="hp-craft-item">
+              <img src="assets/images/mkt-meet-slate.png" alt="Marketing artwork for Zoho Meet Slate" loading="lazy">
+              <figcaption class="hp-craft-caption">Marketing &mdash; Zoho Meet</figcaption>
+            </figure>
+            <figure class="hp-craft-item">
+              <img src="assets/images/mkt-new-year-2026.png" alt="New Year 2026 marketing artwork" loading="lazy">
+              <figcaption class="hp-craft-caption">Marketing &mdash; campaign</figcaption>
+            </figure>
+            <figure class="hp-craft-item">
+              <img src="assets/images/vd-icons.gif" alt="Icon system designed for Zoho Sprints" loading="lazy">
+              <figcaption class="hp-craft-caption">Icon system</figcaption>
+            </figure>
+            <figure class="hp-craft-item">
+              <img src="assets/images/art-tiger.jpg" alt="Digital painting of a tiger" loading="lazy">
+              <figcaption class="hp-craft-caption">Digital art</figcaption>
+            </figure>
+            <figure class="hp-craft-item">
+              <img src="assets/images/art-deadpool-max.jpg" alt="Digital painting, Deadpool" loading="lazy">
+              <figcaption class="hp-craft-caption">Digital art</figcaption>
+            </figure>
+            <figure class="hp-craft-item">
+              <img src="assets/images/illus-bug-tracker.svg" alt="Bug tracker illustration for Zoho Sprints" loading="lazy">
+              <figcaption class="hp-craft-caption">Illustration &mdash; empty state</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- ============ EXPERIENCE ============ -->
+        <section class="cs2-section" id="experience">
+          <h2 class="cs2-section-title">Experience</h2>
+
+          <div class="hp-exp-item">
+            <div class="hp-exp-head">
+              <span class="hp-exp-company">Zoho</span>
+              <span class="hp-exp-dates">Jun 2022 &mdash; now</span>
             </div>
-            <div class="one-row">
-              <img class="one-row-logo" src="assets/images/logo-imc.png" alt="IMC Group">
-              <div class="one-row-body">
-                <p class="one-row-name">IMC Group</p>
-                <p class="one-row-sub">Visual Designer &mdash; brand and marketing visuals for corporate communication.</p>
-              </div>
-              <span class="one-row-meta">Feb &mdash; Jun 2022</span>
+            <p class="hp-exp-role">Product Designer</p>
+            <p class="hp-exp-desc">End-to-end design for Zoho Sprints; illustration system &amp; icon library; marketing design for Catalyst &amp; Marketplace.</p>
+          </div>
+
+          <div class="hp-exp-item">
+            <div class="hp-exp-head">
+              <span class="hp-exp-company">IMC Group</span>
+              <span class="hp-exp-dates">Feb &mdash; Jun 2022</span>
             </div>
-            <div class="one-row">
-              <img class="one-row-logo" src="assets/images/logo-evespark.png" alt="Eve Spark">
-              <div class="one-row-body">
-                <p class="one-row-name">Eve Spark Integrated Solutions</p>
-                <p class="one-row-sub">2D Graphic Designer &mdash; event branding, print, and social creatives.</p>
-              </div>
-              <span class="one-row-meta">2018 &mdash; 2021</span>
+            <p class="hp-exp-role">Visual Designer</p>
+          </div>
+
+          <div class="hp-exp-item">
+            <div class="hp-exp-head">
+              <span class="hp-exp-company">Eve Spark Integrated Solutions</span>
+              <span class="hp-exp-dates">2018 &mdash; 2021</span>
+            </div>
+            <p class="hp-exp-role">2D Graphic Designer</p>
+          </div>
+        </section>
+
+        <!-- ============ ABOUT ============ -->
+        <section class="cs2-section" id="about">
+          <h2 class="cs2-section-title">About</h2>
+          <div class="hp-about">
+            <img class="hp-about-photo" src="assets/images/about-me.jpg" alt="Vipin Ebenezer" onerror="this.style.display='none'">
+            <div class="hp-about-text">
+              <p>I&rsquo;m Vipin &mdash; a Product Designer with 4 years of hands-on product design experience and 6 years in the design industry. Currently at Zoho, leading end-to-end design for Zoho Sprints, used by 50K+ teams.</p>
+              <p>Outside work, I build things &mdash; <em class="ph">[N+]</em> apps shipped solo with React, Next.js, and React Native using AI-assisted coding. Coding makes me a better designer: I understand what I&rsquo;m asking engineers to build.</p>
+              <p>10k Designers C11 graduate (Designer in Residence). UX Mint certified. When I&rsquo;m not designing, I&rsquo;m watching United lose or playing RDR2.</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- 09 About -->
-      <section class="one-section" id="about">
-        <div class="one-head">
-          <h2 class="one-title">About</h2>
-          <span class="one-desc">The person behind the pixels.</span>
-        </div>
-        <div class="one-stage">
-          <div class="one-about">
-            <img class="one-about-photo" src="assets/images/about-me.jpg" alt="Vipin Ebenezer">
-            <div class="one-about-text">
-              <p>I'm Vipin &mdash; a Product Designer with <strong>4 years of hands-on product design experience</strong> and <strong>6 years in the design industry</strong>. Currently at <strong>Zoho</strong>, leading end-to-end design for Zoho Sprints, used by 50K+ teams.</p>
-              <p>Outside work, I build things &mdash; <strong>15+ apps shipped solo</strong> with React, Next.js, and React Native using AI-assisted coding. Coding makes me a better designer: I understand what I'm asking engineers to build.</p>
-              <p><strong>10k Designers C11</strong> graduate (Designer in Residence). <strong>UX Mint</strong> certified. When I'm not designing, I'm watching United lose or playing RDR2.</p>
-            </div>
+        <!-- ============ CONTACT ============ -->
+        <section class="cs2-section" id="contact">
+          <h2 class="cs2-section-title">Contact</h2>
+          <a class="hp-contact-email" href="mailto:vipvipernezer7@gmail.com">vipvipernezer7@gmail.com</a>
+          <div class="hp-contact-links">
+            <a href="https://www.linkedin.com/in/vipin-ebenezer-678677158/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.behance.net/vipvipernef58a" target="_blank" rel="noopener noreferrer">Behance</a>
+            <a href="https://dribbble.com/vipinkick7" target="_blank" rel="noopener noreferrer">Dribbble</a>
+            <a href="assets/docs/vipin_s_resume.pdf" download>Resume PDF</a>
           </div>
-        </div>
-      </section>
+          <p class="hp-copy">&copy; 2026 Vipin Ebenezer &middot; Chennai, India</p>
+        </section>
 
-      <!-- 10 Contact -->
-      <section class="one-section" id="contact">
-        <div class="one-head">
-          <h2 class="one-title">Contact</h2>
-          <span class="one-desc">Open to product design roles &mdash; Chennai, relocate, or remote.</span>
-        </div>
-        <div class="one-stage">
-          <div class="one-contact">
-            <a class="one-email" href="mailto:vipvipernezer7@gmail.com">vipvipernezer7@gmail.com</a>
-            <div class="one-contact-row">
-              <a class="one-btn" href="https://www.linkedin.com/in/vipin-ebenezer-678677158/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a class="one-btn" href="https://www.behance.net/vipvipernef58a" target="_blank" rel="noopener noreferrer">Behance</a>
-              <a class="one-btn" href="https://dribbble.com/vipinkick7" target="_blank" rel="noopener noreferrer">Dribbble</a>
-              <a class="one-btn" href="assets/docs/vipin_s_resume.pdf" download>Resume PDF</a>
-            </div>
-            <p class="one-copy">&copy; 2026 Vipin Ebenezer &middot; Chennai, India</p>
-          </div>
-        </div>
-      </section>
-
+      </div>
     </main>
 
   </div>
 
-  <script src="js/onepage.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>

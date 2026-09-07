@@ -6,190 +6,224 @@
   <title>Giving 40+ settings a scannable hierarchy — Zoho Sprints | Vipin</title>
   <meta name="description" content="Settings was marked low priority for Sprints 2.0. I pushed to include it — same options, better hierarchy. Shipped with the launch to 50K+ users.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/case-study.css">
-  <link rel="stylesheet" href="css/inner.css">
-  <link rel="stylesheet" href="css/detail.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/rail.css">
+  <link rel="stylesheet" href="css/cs-doc.css">
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Navigation -->
-  <header class="dt-bar">
-    <a class="dt-back" href="index.html">&larr; Back</a>
-    <span class="dt-path"><span class="u">vipin@folio</span>: ~/work/settings-redesign</span>
-    <a class="dt-btn" href="mailto:vipvipernezer7@gmail.com">Email me &rarr;</a>
-  </header>
-
-  <div class="dt-wrap">
-
-  <main id="main" class="dt-main cs">
-
-    <div class="container">
-
-      <a href="index.html" class="cs-back">&larr; Back</a>
-
-      <header class="cs-header">
-        <h1 class="cs-title">Giving 40+ settings a hierarchy users could <em>actually scan</em></h1>
-        <p class="cs-subtitle">Sprints 2.0 was redoing everything except settings. I didn&rsquo;t think &ldquo;it works fine&rdquo; was good enough for a page people hit constantly.</p>
-      </header>
-
-      <section class="cs-tldr-section" aria-labelledby="cs-tldr-heading">
-        <h2 class="cs-tldr-section__title" id="cs-tldr-heading">TL;DR</h2>
-        <p class="cs-tldr-section__text">Visual redesign only &mdash; no settings moved, no behavior changed. Profile got real visual weight, related options grouped under clear headers, everything matched 2.0 tokens. I advocated to include it in the launch instead of deferring it. Shipped with Sprints 2.0 to 50K+ users; eng implemented in under a week using existing components.</p>
-      </section>
-
-      <!-- Team -->
-      <div class="cs-team">
-        <span class="cs-team-member">Vipin <span class="cs-team-member__role">&mdash; Product Designer</span></span>
-        <span class="cs-team-member">Design Lead <span class="cs-team-member__role">&mdash; Review &amp; Direction</span></span>
-        <span class="cs-team-member">Sprints 2.0 Team <span class="cs-team-member__role">&mdash; Engineering</span></span>
-      </div>
-
-      <!-- Impact -->
-      <div class="cs-impact-banner">
-        <span class="cs-impact-label">Impact</span>
-        <ul class="cs-impact-stats">
-          <li>Shipped with Sprints 2.0 launch</li>
-          <li>50K+ users</li>
-          <li>Under 1 week eng implementation</li>
-        </ul>
-      </div>
-
-      <!-- Key Takeaways -->
-      <div class="cs-takeaways">
-        <h2 class="cs-takeaways-title">Key Takeaways</h2>
-        <ul class="cs-takeaways-list">
-          <li>Nothing added or removed. Same settings, same places &mdash; just organized so you don&rsquo;t have to read every label.</li>
-          <li>Profile is where people go first. It finally looked like the most important thing on the page.</li>
-          <li>The layout later became the template for settings in other Sprints modules.</li>
-        </ul>
-      </div>
-
-      <!-- Hero Image -->
-      <div class="cs-image-block cs-image-block--blue">
-        <img src="assets/images/cs2-hero.png" alt="Settings screen redesign overview" loading="lazy" onerror="this.style.display='none'">
-      </div>
-
-      <!-- The Problem -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">The Problem</h2>
-        <div class="cs-body">
-          <p>Sprints 2.0 was getting a full visual overhaul. Settings was on the cut list &mdash; &ldquo;it works fine.&rdquo; I pushed back. It&rsquo;s one of the most visited screens in the product, and every row had the same visual weight. You had to read every label to find anything.</p>
-        </div>
-      </section>
-
-      <!-- What Was Wrong -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">What Was Wrong</h2>
-        <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-existing.png" alt="Old UI of Settings screen — flat layout with no visual hierarchy" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-
-
-        <div class="cs-body">
-          <p>Nothing was broken. The layout was just flat. Profile &mdash; the thing people open first &mdash; looked identical to everything else. No grouping, no landmarks. You read the whole page or you gave up.</p>
-          <p>I looked at settings in other Zoho products. The ones that worked gave the most-used block the most weight. Ours didn&rsquo;t.</p>
-        </div>
-      </section>
-
-      <!-- Constraints -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">Constraints</h2>
-        <div class="cs-body">
-          <p>Pure visual lift. No settings moved, no behavior changed. Had to match 2.0 tokens and ship in two weeks alongside the rest of the launch.</p>
-          <p>50K+ users already know where things live. Moving rows around would&rsquo;ve meant support tickets, not better UX. The win was hierarchy, not re-architecture.</p>
-        </div>
-      </section>
-
-      <!-- How It Evolved -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">How It Evolved</h2>
-        <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-iterations-1.png" alt="Early iterations" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-iterations-2.png" alt="Later iterations" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="cs-body">
-          <p>Started with profile &mdash; card treatment, avatar, name, email up front. Then grouped related settings under headers with consistent spacing. Same radius and type as dashboard and board so it felt like one product, not a leftover screen.</p>
-        </div>
-      </section>
-
-      <!-- Final Design -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">Final Design</h2>
-        <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-final.png" alt="Final redesigned settings screen" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-
-
-        <div class="cs-body">
-          <ul>
-            <li><strong>Profile up front.</strong> Card with avatar, name, email &mdash; what people actually open settings for.</li>
-            <li><strong>Grouped sections.</strong> Related options under headers. Each block reads as its own thing.</li>
-            <li><strong>Landmarks, not labels.</strong> Scan by section title instead of reading every row.</li>
-            <li><strong>Room to grow.</strong> New settings slot into existing groups. Eng said that made implementation faster.</li>
-          </ul>
-        </div>
-
-        <!-- Before / After Comparison -->
-        <h3 class="cs-screen-title">Before &amp; After</h3>
-        <div class="cs-compare">
-          <div class="cs-compare__side">
-            <span class="cs-compare__label cs-compare__label--before">Before</span>
-            <div class="cs-compare__img">
-              <img src="assets/images/cs2-existing.png" alt="Old settings UI — flat, no hierarchy" loading="lazy" onerror="this.style.display='none'">
-            </div>
-          </div>
-          <div class="cs-compare__side">
-            <span class="cs-compare__label cs-compare__label--after">After</span>
-            <div class="cs-compare__img">
-              <img src="assets/images/cs2-final.png" alt="Redesigned settings — grouped, scannable" loading="lazy" onerror="this.style.display='none'">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- After Shipping -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">After Shipping</h2>
-        <div class="cs-image-block cs-image-block--blue">
-          <img src="assets/images/cs2-impact.png" alt="Settings screen live in production" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-
-
-        <div class="cs-body">
-          <p>Shipped with 2.0. Eng had it live in under a week &mdash; existing components, no custom builds.</p>
-          <p>The grouped layout later became the default for settings in other Sprints modules.</p>
-        </div>
-      </section>
-
-      <!-- What I Took Away -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">What I Took Away</h2>
-        <div class="cs-body">
-          <p><strong>Push for the boring screens.</strong> Settings rarely gets portfolio love, but people hit it when something actually matters. Worth fighting to include in a launch.</p>
-          <p><strong>Hierarchy beats novelty.</strong> Same rows, different order of importance. That was the whole redesign.</p>
-          <p><strong>Design for the person implementing it.</strong> Existing components meant fast ship and a pattern others could reuse.</p>
-        </div>
-      </section>
-
+  <!-- Mobile top bar -->
+  <div class="rail-bar">
+    <span class="rail-bar-name">Vipin Ebenezer</span>
+    <button class="rail-bar-toggle" type="button" aria-expanded="false" aria-controls="rail-panel">Menu</button>
+  </div>
+  <div class="rail-panel" id="rail-panel" hidden>
+    <nav class="rail-nav" aria-label="Sections">
+      <a href="index.html#work" aria-current="true">Work</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#craft">Craft</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="rail-foot">
+      <a href="mailto:vipvipernezer7@gmail.com">Email</a>
+      <a href="assets/docs/vipin_s_resume.pdf" download>Resume</a>
     </div>
+  </div>
 
-  </main>
+  <div class="doc">
+
+    <!-- Rail -->
+    <aside class="rail">
+      <p class="rail-name"><a href="index.html">Vipin Ebenezer</a></p>
+      <p class="rail-role">Product Designer, Zoho</p>
+      <nav class="rail-nav" aria-label="Sections">
+        <a href="index.html#work" aria-current="true">Work</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#craft">Craft</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="rail-foot">
+        <a href="mailto:vipvipernezer7@gmail.com">Email</a>
+        <a href="assets/docs/vipin_s_resume.pdf" download>Resume</a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="doc-main" id="main">
+      <div class="doc-col">
+
+        <a class="doc-back" href="index.html#work">&larr; Work</a>
+
+        <header>
+          <p class="cs2-kicker">Zoho Sprints &middot; Work</p>
+          <h1 class="cs2-title">Giving 40+ settings a hierarchy users could <em>actually scan</em></h1>
+          <p class="cs2-subtitle">Sprints 2.0 was redoing everything except settings. I didn&rsquo;t think &ldquo;it works fine&rdquo; was good enough for a page people hit constantly.</p>
+        </header>
+
+        <div class="cs2-spec">
+          <dl class="cs2-spec-field">
+            <dt>Team</dt>
+            <dd>
+              <span>Vipin &mdash; Product Designer</span>
+              <span>Design Lead &mdash; Review &amp; Direction</span>
+              <span>Sprints 2.0 Team &mdash; Engineering</span>
+            </dd>
+          </dl>
+          <dl class="cs2-spec-field">
+            <dt>Impact</dt>
+            <dd>
+              <div class="cs2-numeral-wrap">
+                <span class="cs2-numeral">50K+</span>
+                <p class="cs2-numeral-caption">users</p>
+              </div>
+              <span>Shipped with Sprints 2.0 launch</span>
+              <span>Under 1 week eng implementation</span>
+            </dd>
+          </dl>
+        </div>
+
+        <section class="cs2-section" aria-labelledby="cs-tldr-heading">
+          <h2 class="cs2-section-title" id="cs-tldr-heading">TL;DR</h2>
+          <div class="cs2-body">
+            <p>Visual redesign only &mdash; no settings moved, no behavior changed. Profile got real visual weight, related options grouped under clear headers, everything matched 2.0 tokens. I advocated to include it in the launch instead of deferring it. Shipped with Sprints 2.0 to 50K+ users; eng implemented in under a week using existing components.</p>
+          </div>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">Key Takeaways</h2>
+          <div class="cs2-body">
+            <ul>
+              <li>Nothing added or removed. Same settings, same places &mdash; just organized so you don&rsquo;t have to read every label.</li>
+              <li>Profile is where people go first. It finally looked like the most important thing on the page.</li>
+              <li>The layout later became the template for settings in other Sprints modules.</li>
+            </ul>
+          </div>
+        </section>
+
+        <figure class="cs2-hero">
+          <img src="assets/images/cs2-hero.png" alt="Settings screen redesign overview" loading="lazy" onerror="this.style.display='none'">
+        </figure>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">The Problem</h2>
+          <div class="cs2-body">
+            <p>Sprints 2.0 was getting a full visual overhaul. Settings was on the cut list &mdash; &ldquo;it works fine.&rdquo; I pushed back. It&rsquo;s one of the most visited screens in the product, and every row had the same visual weight. You had to read every label to find anything.</p>
+          </div>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">What Was Wrong</h2>
+          <figure class="cs2-image">
+            <img src="assets/images/cs2-existing.png" alt="Old UI of Settings screen — flat layout with no visual hierarchy" loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Old UI of Settings screen — flat layout with no visual hierarchy</figcaption>
+          </figure>
+          <div class="cs2-body">
+            <p>Nothing was broken. The layout was just flat. Profile &mdash; the thing people open first &mdash; looked identical to everything else. No grouping, no landmarks. You read the whole page or you gave up.</p>
+            <p>I looked at settings in other Zoho products. The ones that worked gave the most-used block the most weight. Ours didn&rsquo;t.</p>
+          </div>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">Constraints</h2>
+          <div class="cs2-body">
+            <p>Pure visual lift. No settings moved, no behavior changed. Had to match 2.0 tokens and ship in two weeks alongside the rest of the launch.</p>
+            <p>50K+ users already know where things live. Moving rows around would&rsquo;ve meant support tickets, not better UX. The win was hierarchy, not re-architecture.</p>
+          </div>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">How It Evolved</h2>
+          <figure class="cs2-image">
+            <img src="assets/images/cs2-iterations-1.png" alt="Early iterations" loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Early iterations</figcaption>
+          </figure>
+          <figure class="cs2-image">
+            <img src="assets/images/cs2-iterations-2.png" alt="Later iterations" loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Later iterations</figcaption>
+          </figure>
+          <div class="cs2-body">
+            <p>Started with profile &mdash; card treatment, avatar, name, email up front. Then grouped related settings under headers with consistent spacing. Same radius and type as dashboard and board so it felt like one product, not a leftover screen.</p>
+          </div>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">Final Design</h2>
+          <figure class="cs2-image">
+            <img src="assets/images/cs2-final.png" alt="Final redesigned settings screen" loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Final redesigned settings screen</figcaption>
+          </figure>
+          <div class="cs2-body">
+            <ul>
+              <li><strong>Profile up front.</strong> Card with avatar, name, email &mdash; what people actually open settings for.</li>
+              <li><strong>Grouped sections.</strong> Related options under headers. Each block reads as its own thing.</li>
+              <li><strong>Landmarks, not labels.</strong> Scan by section title instead of reading every row.</li>
+              <li><strong>Room to grow.</strong> New settings slot into existing groups. Eng said that made implementation faster.</li>
+            </ul>
+          </div>
+
+          <h3 class="cs2-subheading">Before &amp; After</h3>
+          <div class="cs2-compare">
+            <div class="cs2-compare-side">
+              <span class="cs2-compare-label">Before</span>
+              <div class="cs2-compare-img">
+                <img src="assets/images/cs2-existing.png" alt="Old settings UI — flat, no hierarchy" loading="lazy" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="cs2-compare-side">
+              <span class="cs2-compare-label">After</span>
+              <div class="cs2-compare-img">
+                <img src="assets/images/cs2-final.png" alt="Redesigned settings — grouped, scannable" loading="lazy" onerror="this.style.display='none'">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">After Shipping</h2>
+          <figure class="cs2-image">
+            <img src="assets/images/cs2-impact.png" alt="Settings screen live in production" loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Settings screen live in production</figcaption>
+          </figure>
+          <div class="cs2-body">
+            <p>Shipped with 2.0. Eng had it live in under a week &mdash; existing components, no custom builds.</p>
+            <p>The grouped layout later became the default for settings in other Sprints modules.</p>
+          </div>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">What I Took Away</h2>
+          <div class="cs2-body">
+            <p><strong>Push for the boring screens.</strong> Settings rarely gets portfolio love, but people hit it when something actually matters. Worth fighting to include in a launch.</p>
+            <p><strong>Hierarchy beats novelty.</strong> Same rows, different order of importance. That was the whole redesign.</p>
+            <p><strong>Design for the person implementing it.</strong> Existing components meant fast ship and a pattern others could reuse.</p>
+          </div>
+        </section>
+
+      </div>
+    </main>
 
   </div>
 
-  <!-- Footer -->
-
-
-  <script src="js/main.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="js/global.js"></script>
+  <script>
+    (function () {
+      var btn = document.querySelector('.rail-bar-toggle');
+      var panel = document.getElementById('rail-panel');
+      if (!btn || !panel) return;
+      btn.addEventListener('click', function () {
+        var open = !panel.hidden;
+        panel.hidden = open;
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+    })();
+  </script>
 </body>
 </html>

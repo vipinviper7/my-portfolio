@@ -6,143 +6,190 @@
   <title>Making sprint changes readable in 30 seconds — Zoho Sprints | Vipin</title>
   <meta name="description" content="Sprints had personal notifications but no announcement channel. I built an in-app feed for team broadcasts. Shipped in 2 weeks, 50K+ users.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/case-study.css">
-  <link rel="stylesheet" href="css/inner.css">
-  <link rel="stylesheet" href="css/detail.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/rail.css">
+  <link rel="stylesheet" href="css/cs-doc.css">
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Navigation -->
-  <header class="dt-bar">
-    <a class="dt-back" href="index.html">&larr; Back</a>
-    <span class="dt-path"><span class="u">vipin@folio</span>: ~/work/recent-updates</span>
-    <a class="dt-btn" href="mailto:vipvipernezer7@gmail.com">Email me &rarr;</a>
-  </header>
-
-  <div class="dt-wrap">
-
-  <main id="main" class="dt-main cs">
-
-    <div class="container">
-
-      <a href="index.html" class="cs-back">&larr; Back</a>
-
-      <header class="cs-header">
-        <h1 class="cs-title">Making 3 weeks of sprint changes readable in <em>30 seconds</em></h1>
-        <p class="cs-subtitle">Sprints had notifications, but no way to actually announce things &mdash; new features, what changed, what&rsquo;s coming. I built the channel for that.</p>
-      </header>
-
-      <section class="cs-tldr-section" aria-labelledby="cs-tldr-heading">
-        <h2 class="cs-tldr-section__title" id="cs-tldr-heading">TL;DR</h2>
-        <p class="cs-tldr-section__text">Sprints could notify you about your own stuff (tasks, mentions) but the team had no way to announce things to everyone &mdash; features, updates, news. The PM wanted a real announcement channel. I built one feed for it. Fought the &ldquo;one flat list&rdquo; brief so the stuff you need to act on doesn&rsquo;t look like the stuff you can ignore. Shipped in 2 weeks, 50K+ users, nothing changed after handoff.</p>
-      </section>
-
-      <!-- Team -->
-      <div class="cs-team">
-        <span class="cs-team-member">Vipin <span class="cs-team-member__role">&mdash; Product Designer</span></span>
-        <span class="cs-team-member">Manager <span class="cs-team-member__role">&mdash; Design Lead</span></span>
-        <span class="cs-team-member">2 Engineers <span class="cs-team-member__role">&mdash; Frontend</span></span>
-        <span class="cs-team-member">PM <span class="cs-team-member__role">&mdash; Product</span></span>
-      </div>
-
-      <!-- Impact -->
-      <div class="cs-impact-banner">
-        <span class="cs-impact-label">Impact</span>
-        <ul class="cs-impact-stats">
-          <li>50K+ users</li>
-          <li>4 update types in one feed</li>
-          <li>0 layout changes after handoff</li>
-        </ul>
-      </div>
-
-      <!-- Key Takeaways -->
-      <div class="cs-takeaways">
-        <h2 class="cs-takeaways-title">Key Takeaways</h2>
-        <ul class="cs-takeaways-list">
-          <li>Sprints had personal notifications already. This was the team&rsquo;s channel to broadcast to everyone &mdash; features, updates, news.</li>
-          <li>The brief wanted one flat list. I got action items to look different from the FYI stuff you can ignore.</li>
-          <li>Shipped as designed. Icons swapped in eng review, nothing else moved.</li>
-        </ul>
-      </div>
-
-      <!-- Hero Image -->
-      <div class="cs-image-block cs-image-block--mint">
-        <img src="assets/images/cs1-hero.png" alt="Recent Updates feature overview" loading="lazy" onerror="this.style.display='none'">
-      </div>
-
-      <!-- The Problem -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">The Problem</h2>
-        <div class="cs-body">
-          <p>Sprints already had notifications &mdash; task assigned to you, someone mentioned you, the usual. What it didn&rsquo;t have was a way for the team to say &ldquo;hey, here&rsquo;s a new feature&rdquo; to everyone at once. That&rsquo;s what the PM wanted. An announcement channel, inside the product.</p>
-          <p>The catch was the content. Four different things would live in this one feed &mdash; feature announcements, product updates, subscription reminders, community posts. A renewal reminder needs you to do something. A feature announcement is just FYI. Treat them the same and people tune the whole thing out.</p>
-          <p>The brief said one flat list. I didn&rsquo;t think that worked, and I said so early.</p>
-        </div>
-        <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-problem.png" alt="Four content types sharing one feed — announcements, updates, reminders, and community posts" loading="lazy" onerror="this.style.display='none'">
-        </div>
-      </section>
-
-      <!-- How I Got There -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">How I Got There</h2>
-        <div class="cs-body">
-          <p>I sketched it on paper first &mdash; what&rsquo;s urgent, what&rsquo;s not, what actually needs the user to click something. Made the problem obvious: a reminder and an announcement don&rsquo;t belong in the same visual bucket.</p>
-          <p>My first cuts were too heavy. Big cards, lots of hierarchy. Looked sharp in Figma, exhausting in a feed you check daily. My manager told me it didn&rsquo;t feel like Sprints &mdash; felt like a portfolio piece. Fair. I stripped it back.</p>
-          <p>The thing I didn&rsquo;t budge on: action items and passive ones can&rsquo;t look identical. Reminders get a CTA and a colour cue. Announcements don&rsquo;t. Showed both side by side and the PM was sold.</p>
-        </div>
-        <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-iterations-1.png" alt="First go — too heavy." loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-iterations-2.png" alt="Where it landed." loading="lazy" onerror="this.style.display='none'">
-        </div>
-      </section>
-
-      <!-- What Shipped -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">What Shipped</h2>
-        <div class="cs-body">
-          <p>One feed, sorted by time, no tabs. Tabs would&rsquo;ve split attention &mdash; you should see what&rsquo;s new in one glance.</p>
-          <ul>
-            <li><strong>Colour does the sorting</strong> &mdash; action vs. info, no reading required.</li>
-            <li><strong>Short by default</strong> &mdash; title and a line, tap for the rest.</li>
-            <li><strong>CTAs only where they belong</strong> &mdash; which also gave eng a clean hook for the buttons.</li>
-          </ul>
-        </div>
-        <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-final.png" alt="Final design — unified update feed" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="cs-body">
-          <p>Shipped the way I designed it. The only thing that changed was the icons &mdash; I&rsquo;d left placeholders in, we swapped them in eng review. Marketing and product both run their updates through it now.</p>
-        </div>
-        <div class="cs-image-block cs-image-block--mint">
-          <img src="assets/images/cs1-impact.png" alt="Live UI with Recent Updates feature" loading="lazy" onerror="this.style.display='none'">
-        </div>
-      </section>
-
-      <!-- What I Learned -->
-      <section class="cs-section">
-        <h2 class="cs-section-title">What I Learned</h2>
-        <div class="cs-body">
-          <p>The flat-list fight was worth having because I could point at a real cost, not just a feeling. That&rsquo;s the part I think about &mdash; pushing back only lands when you can name what breaks if you don&rsquo;t.</p>
-        </div>
-      </section>
-
+  <!-- Mobile top bar -->
+  <div class="rail-bar">
+    <span class="rail-bar-name">Vipin Ebenezer</span>
+    <button class="rail-bar-toggle" type="button" aria-expanded="false" aria-controls="rail-panel">Menu</button>
+  </div>
+  <div class="rail-panel" id="rail-panel" hidden>
+    <nav class="rail-nav" aria-label="Sections">
+      <a href="index.html#work" aria-current="true">Work</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#craft">Craft</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="rail-foot">
+      <a href="mailto:vipvipernezer7@gmail.com">Email</a>
+      <a href="assets/docs/vipin_s_resume.pdf" download>Resume</a>
     </div>
+  </div>
 
-  </main>
+  <div class="doc">
+
+    <!-- Rail -->
+    <aside class="rail">
+      <p class="rail-name"><a href="index.html">Vipin Ebenezer</a></p>
+      <p class="rail-role">Product Designer, Zoho</p>
+      <nav class="rail-nav" aria-label="Sections">
+        <a href="index.html#work" aria-current="true">Work</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#craft">Craft</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="rail-foot">
+        <a href="mailto:vipvipernezer7@gmail.com">Email</a>
+        <a href="assets/docs/vipin_s_resume.pdf" download>Resume</a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="doc-main" id="main">
+      <div class="doc-col">
+
+        <a class="doc-back" href="index.html#work">&larr; Work</a>
+
+        <header>
+          <p class="cs2-kicker">Zoho Sprints &middot; Work</p>
+          <h1 class="cs2-title">Making 3 weeks of sprint changes readable in <em>30 seconds</em></h1>
+          <p class="cs2-subtitle">Sprints had notifications, but no way to actually announce things &mdash; new features, what changed, what&rsquo;s coming. I built the channel for that.</p>
+        </header>
+
+        <div class="cs2-spec">
+          <dl class="cs2-spec-field">
+            <dt>Team</dt>
+            <dd>
+              <span>Vipin &mdash; Product Designer</span>
+              <span>Manager &mdash; Design Lead</span>
+              <span>2 Engineers &mdash; Frontend</span>
+              <span>PM &mdash; Product</span>
+            </dd>
+          </dl>
+          <dl class="cs2-spec-field">
+            <dt>Impact</dt>
+            <dd>
+              <div class="cs2-numeral-wrap">
+                <span class="cs2-numeral">50K+</span>
+                <p class="cs2-numeral-caption">users</p>
+              </div>
+              <span>4 update types in one feed</span>
+              <span>0 layout changes after handoff</span>
+            </dd>
+          </dl>
+        </div>
+
+        <section class="cs2-section" aria-labelledby="cs-tldr-heading">
+          <h2 class="cs2-section-title" id="cs-tldr-heading">TL;DR</h2>
+          <div class="cs2-body">
+            <p>Sprints could notify you about your own stuff (tasks, mentions) but the team had no way to announce things to everyone &mdash; features, updates, news. The PM wanted a real announcement channel. I built one feed for it. Fought the &ldquo;one flat list&rdquo; brief so the stuff you need to act on doesn&rsquo;t look like the stuff you can ignore. Shipped in 2 weeks, 50K+ users, nothing changed after handoff.</p>
+          </div>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">Key Takeaways</h2>
+          <div class="cs2-body">
+            <ul>
+              <li>Sprints had personal notifications already. This was the team&rsquo;s channel to broadcast to everyone &mdash; features, updates, news.</li>
+              <li>The brief wanted one flat list. I got action items to look different from the FYI stuff you can ignore.</li>
+              <li>Shipped as designed. Icons swapped in eng review, nothing else moved.</li>
+            </ul>
+          </div>
+        </section>
+
+        <figure class="cs2-hero">
+          <img src="assets/images/cs1-hero.png" alt="Recent Updates feature overview" loading="lazy" onerror="this.style.display='none'">
+        </figure>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">The Problem</h2>
+          <div class="cs2-body">
+            <p>Sprints already had notifications &mdash; task assigned to you, someone mentioned you, the usual. What it didn&rsquo;t have was a way for the team to say &ldquo;hey, here&rsquo;s a new feature&rdquo; to everyone at once. That&rsquo;s what the PM wanted. An announcement channel, inside the product.</p>
+            <p>The catch was the content. Four different things would live in this one feed &mdash; feature announcements, product updates, subscription reminders, community posts. A renewal reminder needs you to do something. A feature announcement is just FYI. Treat them the same and people tune the whole thing out.</p>
+            <p>The brief said one flat list. I didn&rsquo;t think that worked, and I said so early.</p>
+          </div>
+          <figure class="cs2-image">
+            <img src="assets/images/cs1-problem.png" alt="Four content types sharing one feed — announcements, updates, reminders, and community posts" loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Four content types sharing one feed — announcements, updates, reminders, and community posts</figcaption>
+          </figure>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">How I Got There</h2>
+          <div class="cs2-body">
+            <p>I sketched it on paper first &mdash; what&rsquo;s urgent, what&rsquo;s not, what actually needs the user to click something. Made the problem obvious: a reminder and an announcement don&rsquo;t belong in the same visual bucket.</p>
+            <p>My first cuts were too heavy. Big cards, lots of hierarchy. Looked sharp in Figma, exhausting in a feed you check daily. My manager told me it didn&rsquo;t feel like Sprints &mdash; felt like a portfolio piece. Fair. I stripped it back.</p>
+            <p>The thing I didn&rsquo;t budge on: action items and passive ones can&rsquo;t look identical. Reminders get a CTA and a colour cue. Announcements don&rsquo;t. Showed both side by side and the PM was sold.</p>
+          </div>
+          <figure class="cs2-image">
+            <img src="assets/images/cs1-iterations-1.png" alt="First go — too heavy." loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">First go — too heavy.</figcaption>
+          </figure>
+          <figure class="cs2-image">
+            <img src="assets/images/cs1-iterations-2.png" alt="Where it landed." loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Where it landed.</figcaption>
+          </figure>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">What Shipped</h2>
+          <div class="cs2-body">
+            <p>One feed, sorted by time, no tabs. Tabs would&rsquo;ve split attention &mdash; you should see what&rsquo;s new in one glance.</p>
+            <ul>
+              <li><strong>Colour does the sorting</strong> &mdash; action vs. info, no reading required.</li>
+              <li><strong>Short by default</strong> &mdash; title and a line, tap for the rest.</li>
+              <li><strong>CTAs only where they belong</strong> &mdash; which also gave eng a clean hook for the buttons.</li>
+            </ul>
+          </div>
+          <figure class="cs2-image">
+            <img src="assets/images/cs1-final.png" alt="Final design — unified update feed" loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Final design — unified update feed</figcaption>
+          </figure>
+          <div class="cs2-body">
+            <p>Shipped the way I designed it. The only thing that changed was the icons &mdash; I&rsquo;d left placeholders in, we swapped them in eng review. Marketing and product both run their updates through it now.</p>
+          </div>
+          <figure class="cs2-image">
+            <img src="assets/images/cs1-impact.png" alt="Live UI with Recent Updates feature" loading="lazy" onerror="this.style.display='none'">
+            <figcaption class="cs2-image-caption">Live UI with Recent Updates feature</figcaption>
+          </figure>
+        </section>
+
+        <section class="cs2-section">
+          <h2 class="cs2-section-title">What I Learned</h2>
+          <div class="cs2-body">
+            <p>The flat-list fight was worth having because I could point at a real cost, not just a feeling. That&rsquo;s the part I think about &mdash; pushing back only lands when you can name what breaks if you don&rsquo;t.</p>
+          </div>
+        </section>
+
+      </div>
+    </main>
 
   </div>
 
-  <!-- Footer -->
-
-
-  <script src="js/main.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="js/global.js"></script>
+  <script>
+    (function () {
+      var btn = document.querySelector('.rail-bar-toggle');
+      var panel = document.getElementById('rail-panel');
+      if (!btn || !panel) return;
+      btn.addEventListener('click', function () {
+        var open = !panel.hidden;
+        panel.hidden = open;
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+    })();
+  </script>
 </body>
 </html>

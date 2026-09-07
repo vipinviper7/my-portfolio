@@ -1,0 +1,138 @@
+/* ============================================================
+   RAIL — persistent left-hand identity + navigation.
+   Same on every page: home and every case study. Shows who you
+   are, where you can go, and which part of the site you're in.
+   ============================================================ */
+
+.rail {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100dvh;
+  width: var(--rail-width);
+  flex-shrink: 0;
+  padding: var(--space-7) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-right: 1px solid var(--line);
+}
+
+.rail-name {
+  font-family: var(--font-sans);
+  font-size: var(--text-sub);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.rail-name a { color: inherit; }
+.rail-name a:hover { color: var(--accent); }
+
+.rail-role {
+  font-size: var(--text-meta);
+  color: var(--ink-muted);
+  margin-top: var(--space-1);
+}
+
+.rail-nav {
+  margin-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.rail-nav a {
+  position: relative;
+  font-size: var(--text-body);
+  color: var(--ink-muted);
+  padding-left: var(--space-4);
+}
+.rail-nav a:hover { color: var(--ink); }
+
+.rail-nav a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Current section: a tick mark, not a filled highlight */
+.rail-nav a[aria-current="true"] {
+  color: var(--ink);
+  font-weight: 500;
+}
+.rail-nav a[aria-current="true"]::before {
+  background: var(--accent);
+  width: 10px;
+}
+
+.rail-foot {
+  margin-top: auto;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.rail-foot a {
+  font-size: var(--text-meta);
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+}
+.rail-foot a:hover { color: var(--accent); }
+
+/* ============================================================
+   MOBILE — the rail collapses to a plain top bar. No blur,
+   no scrim, no materialize transition: an instant disclosure,
+   the simplest honest response to the tap that opened it.
+   ============================================================ */
+.rail-bar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.rail-bar-name {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.rail-bar-toggle {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  color: var(--ink-muted);
+  background: none;
+  border: 1px solid var(--line);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+}
+.rail-bar-toggle:hover { border-color: var(--ink-muted); color: var(--ink); }
+.rail-bar-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 768px) {
+  .rail { display: none; }
+  .rail-bar { display: flex; }
+
+  .rail-panel {
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .rail-panel[hidden] { display: none; }
+  .rail-panel .rail-nav { margin-top: 0; }
+  .rail-panel .rail-foot { border-top: 1px solid var(--line); margin-top: var(--space-6); }
+}

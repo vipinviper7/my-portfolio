@@ -1,0 +1,48 @@
+/* ============================================================
+   DESIGN TOKENS — 2026 revamp
+   Color, type, spacing, radius. Nothing here is decorative;
+   every value is referenced by name, not repeated as a literal
+   anywhere else in the codebase.
+   ============================================================ */
+
+:root {
+  /* ---- Color: 6 named values, one accent ---- */
+  --paper:      #F5F5F3;  /* page background */
+  --surface:    #FFFFFF;  /* elevated content: images, spec block */
+  --ink:        #14171C;  /* body text, headings */
+  --ink-muted:  #5B6069;  /* secondary text: captions, dates, unread nav */
+  --line:       #DBDDE0;  /* every hairline rule and border, one grey */
+  --accent:     #2451D6;  /* links, focus rings, the one outcome numeral */
+  --accent-tint: rgba(36, 81, 214, 0.08); /* accent background, used sparingly (hover) */
+
+  /* ---- Type: IBM Plex Sans (reading) + IBM Plex Mono (data only) ---- */
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Major-third scale (×1.25), base 17px */
+  --text-meta:    13px;   /* mono field labels, captions */
+  --text-body:    17px;   /* body copy */
+  --text-sub:     21px;   /* subheads */
+  --text-h3:      27px;   /* section headings: PROBLEM / PROCESS / ... */
+  --text-h2:      34px;   /* case study title */
+  --text-h1:      42px;   /* page-level heading */
+  --text-numeral: 68px;   /* the one reserved exception — outcome numeral only */
+
+  /* ---- Spacing: one 4px-based scale, no arbitrary values ---- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+
+  /* ---- Structure ---- */
+  --radius:      2px;   /* the only radius on the site — images, buttons */
+  --rail-width:  240px;
+  --measure:     640px; /* body text max-width, ≈80ch */
+  --col-width:   720px; /* main column max-width (images/spec block may use full width) */
+}

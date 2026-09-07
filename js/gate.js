@@ -21,15 +21,18 @@
 
   document.body.classList.add('is-gated');
 
-  var tapeHTML = '<div class="site-gate-tape-track">' +
-    new Array(8).fill('<span>UNDER REBUILD</span>').join('') +
-    '</div>';
+  // One tiling unit (diagonal segment + text chip), repeated
+  // enough to cover a wide viewport, then the whole sequence
+  // duplicated once more so the scroll loop is seamless.
+  var UNIT = '<span class="rebuild-tape-seg"></span><span class="rebuild-tape-chip">UNDER REBUILD</span>';
+  var half = new Array(14).fill(UNIT).join('');
+  var tapeHTML = '<div class="rebuild-tape-track">' + half + half + '</div>';
 
   var gate = document.createElement('div');
   gate.className = 'site-gate';
   gate.setAttribute('role', 'alert');
   gate.innerHTML =
-    '<div class="site-gate-tape" aria-hidden="true">' + tapeHTML + '</div>' +
+    '<div class="rebuild-tape" aria-hidden="true">' + tapeHTML + '</div>' +
     '<div class="site-gate-body">' +
       '<p class="site-gate-name">Vipin Ebenezer</p>' +
       '<h1 class="site-gate-title">Portfolio under rebuild</h1>' +
@@ -42,7 +45,7 @@
       '</div>' +
       '<a class="site-gate-email" href="mailto:vipvipernezer7@gmail.com">vipvipernezer7@gmail.com</a>' +
     '</div>' +
-    '<div class="site-gate-tape" aria-hidden="true">' + tapeHTML + '</div>';
+    '<div class="rebuild-tape" aria-hidden="true">' + tapeHTML + '</div>';
   document.body.appendChild(gate);
 
   var els = {};

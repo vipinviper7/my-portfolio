@@ -85,35 +85,6 @@
   overflow: hidden;
 }
 
-.hp-rebuild-tape {
-  background: repeating-linear-gradient(
-    -45deg,
-    #F0B429,
-    #F0B429 16px,
-    #14171C 16px,
-    #14171C 32px
-  );
-  padding: 7px 0;
-  overflow: hidden;
-}
-.hp-rebuild-tape-track {
-  display: flex;
-  gap: var(--space-5);
-  white-space: nowrap;
-  width: max-content;
-}
-.hp-rebuild-tape-track span {
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: #14171C;
-  background: #F0B429;
-  padding: 3px 10px;
-  border-radius: 2px;
-}
-
 .hp-rebuild-body {
   text-align: center;
   padding: var(--space-8) var(--space-5);

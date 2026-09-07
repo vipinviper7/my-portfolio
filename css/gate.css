@@ -41,33 +41,62 @@ body.is-gated > :not(.site-gate) {
   background: rgba(245, 245, 243, 0.78);
 }
 
-.site-gate-tape {
+/* ============================================================
+   REBUILD TAPE — one tiling unit (diagonal segment + text chip),
+   repeated. Shared by the full-site gate and the Projects-section
+   notice, so both use the exact same, exactly-aligned component.
+
+   Each unit is a fixed-width flex item — segment then chip — so
+   nothing "floats" independently and the diagonal pattern can't
+   fall out of phase with the text the way a background-image
+   layered under separately-spaced chips would. The track holds
+   the sequence twice back-to-back and animates translateX from
+   -50% to 0, which is an exact one-cycle loop: the moment it
+   snaps back to -50% it's pixel-identical to where it started.
+   ============================================================ */
+.rebuild-tape {
+  overflow: hidden;
+  background: #14171C;
+}
+.rebuild-tape-track {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  animation: rebuild-tape-scroll 24s linear infinite;
+  will-change: transform;
+}
+.rebuild-tape-seg {
+  width: 34px;
+  flex-shrink: 0;
   background: repeating-linear-gradient(
     -45deg,
     #F0B429,
-    #F0B429 16px,
-    #14171C 16px,
-    #14171C 32px
+    #F0B429 9px,
+    #14171C 9px,
+    #14171C 18px
   );
-  padding: 8px 0;
-  overflow: hidden;
 }
-.site-gate-tape-track {
-  display: flex;
-  gap: 24px;
-  white-space: nowrap;
-  width: max-content;
-}
-.site-gate-tape-track span {
+.rebuild-tape-chip {
   flex-shrink: 0;
-  font-family: var(--g-mono);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #14171C;
+  color: #F0B429;
+  font-family: var(--g-mono, ui-monospace, monospace);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: #14171C;
-  background: #F0B429;
-  padding: 4px 12px;
-  border-radius: 2px;
+  white-space: nowrap;
+}
+
+@keyframes rebuild-tape-scroll {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rebuild-tape-track { animation: none; }
 }
 
 .site-gate-body {

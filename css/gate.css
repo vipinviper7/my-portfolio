@@ -1,0 +1,144 @@
+/* ============================================================
+   SITE GATE — cordons off the whole portfolio until launch.
+   Blurs and locks the real page underneath; a matching inline
+   head-script hides body pre-paint so there's no flash of the
+   real content before the gate mounts.
+
+   Every value below is scoped locally to .site-gate (not the
+   shared --ink/--paper/etc tokens) on purpose: some pages this
+   gate mounts on carry an older, unrelated token set that
+   redefines those same names for a different theme. Scoping
+   locally means the gate renders identically everywhere,
+   regardless of what the host page's own CSS does.
+   ============================================================ */
+
+html.pre-gate body { visibility: hidden; }
+
+body.is-gated {
+  overflow: hidden;
+  height: 100vh;
+}
+body.is-gated > :not(.site-gate) {
+  filter: blur(10px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.site-gate {
+  --g-paper: #F5F5F3;
+  --g-ink: #14171C;
+  --g-muted: #5B6069;
+  --g-accent: #2451D6;
+  --g-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, monospace;
+  --g-sans: -apple-system, BlinkMacSystemFont, "IBM Plex Sans", "Segoe UI", sans-serif;
+
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(245, 245, 243, 0.78);
+}
+
+.site-gate-tape {
+  background: repeating-linear-gradient(
+    -45deg,
+    #F0B429,
+    #F0B429 16px,
+    #14171C 16px,
+    #14171C 32px
+  );
+  padding: 8px 0;
+  overflow: hidden;
+}
+.site-gate-tape-track {
+  display: flex;
+  gap: 24px;
+  white-space: nowrap;
+  width: max-content;
+}
+.site-gate-tape-track span {
+  flex-shrink: 0;
+  font-family: var(--g-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #14171C;
+  background: #F0B429;
+  padding: 4px 12px;
+  border-radius: 2px;
+}
+
+.site-gate-body {
+  text-align: center;
+  padding: 64px 24px;
+  background: var(--g-paper);
+}
+
+.site-gate-name {
+  font-family: var(--g-sans);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--g-ink);
+}
+
+.site-gate-title {
+  font-family: var(--g-sans);
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--g-ink);
+  margin-top: 12px;
+}
+
+.site-gate-sub {
+  font-family: var(--g-sans);
+  font-size: 17px;
+  color: var(--g-muted);
+  margin-top: 8px;
+}
+.site-gate-sub time { color: var(--g-ink); font-weight: 500; }
+
+.site-gate-timer {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 48px;
+}
+.site-gate-unit { display: flex; flex-direction: column; align-items: center; min-width: 3.2ch; }
+.site-gate-num {
+  font-family: var(--g-mono);
+  font-size: 42px;
+  font-weight: 500;
+  color: var(--g-ink);
+  font-variant-numeric: tabular-nums;
+}
+.site-gate-label {
+  font-family: var(--g-mono);
+  font-size: 13px;
+  color: var(--g-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.site-gate-email {
+  display: inline-block;
+  margin-top: 48px;
+  font-family: var(--g-mono);
+  font-size: 13px;
+  color: var(--g-muted);
+}
+.site-gate-email:hover { color: var(--g-accent); }
+
+@media (max-width: 480px) {
+  .site-gate-timer { gap: 16px; }
+  .site-gate-num { font-size: 30px; }
+  .site-gate-title { font-size: 22px; }
+  .site-gate-body { padding: 32px 16px; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-gate { background: var(--g-paper); }
+}

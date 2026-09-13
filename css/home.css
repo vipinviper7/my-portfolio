@@ -77,64 +77,41 @@
 .hp-item:hover .hp-item-link { color: var(--accent); }
 .hp-item:hover .hp-item-title { color: var(--accent); }
 
-/* ---- Projects — under-rebuild notice (tape + countdown) ---- */
-.hp-rebuild {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-.hp-rebuild-body {
-  text-align: center;
-  padding: var(--space-8) var(--space-5);
-}
-.hp-rebuild-title {
-  font-family: var(--font-sans);
-  font-size: var(--text-h3);
-  font-weight: 600;
-  color: var(--ink);
-}
-.hp-rebuild-sub {
+/* ---- Projects — live apps, phone thumbs so they don't compete
+   with the landscape Work case-study stills. ---- */
+.hp-proj-lead {
   font-size: var(--text-body);
+  line-height: 1.5;
   color: var(--ink-muted);
-  margin-top: var(--space-2);
+  margin: 0 0 var(--space-6);
+  max-width: var(--measure);
 }
-.hp-rebuild-sub time { color: var(--ink); font-weight: 500; }
 
-.hp-rebuild-timer {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-6);
-  margin-top: var(--space-7);
-}
-.hp-rebuild-unit {
-  display: flex;
-  flex-direction: column;
+.hp-item--app {
+  grid-template-columns: 132px minmax(0, 1fr);
   align-items: center;
-  min-width: 3.2ch;
 }
-.hp-rebuild-num {
-  font-family: var(--font-mono);
-  font-size: 34px;
-  font-weight: 500;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
+
+.hp-item--app .hp-item-media {
+  max-width: 132px;
+  background: var(--ink);
 }
-.hp-rebuild-label {
+
+.hp-item--app .hp-item-media img {
+  aspect-ratio: 390 / 720;
+  object-fit: cover;
+  object-position: top;
+}
+
+.hp-proj-also {
+  margin-top: var(--space-6);
   font-family: var(--font-mono);
   font-size: var(--text-meta);
   color: var(--ink-muted);
-  margin-top: var(--space-1);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
-@media (max-width: 480px) {
-  .hp-rebuild-timer { gap: var(--space-4); }
-  .hp-rebuild-num { font-size: 26px; }
-  .hp-rebuild-body { padding: var(--space-7) var(--space-4); }
-}
+.hp-proj-also a { color: var(--ink-muted); }
+.hp-proj-also a:hover { color: var(--accent); }
 
 /* ---- Craft — quiet image grid, no case-study affordance ---- */
 .hp-craft-grid {
@@ -256,6 +233,8 @@
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .hp-item { grid-template-columns: 1fr; gap: var(--space-4); }
+  .hp-item--app { grid-template-columns: 96px minmax(0, 1fr); }
+  .hp-item--app .hp-item-media { max-width: 96px; }
   .hp-craft-grid { grid-template-columns: repeat(2, 1fr); }
   .hp-about { flex-direction: column; }
   .hp-contact-email { font-size: 26px; }

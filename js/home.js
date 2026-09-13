@@ -57,29 +57,4 @@
       }
     });
   });
-
-  // ---- Projects rebuild countdown — targets Oct 2, 2026, IST ----
-  var numEls = document.querySelectorAll('#rebuild-timer .hp-rebuild-num');
-  if (numEls.length) {
-    var target = new Date('2026-10-02T00:00:00+05:30').getTime();
-    var els = {};
-    numEls.forEach(function (el) { els[el.getAttribute('data-unit')] = el; });
-    var pad = function (n) { return n < 10 ? '0' + n : String(n); };
-    var rebuildTimer;
-    var tick = function () {
-      var diff = target - Date.now();
-      if (diff <= 0) {
-        ['d', 'h', 'm', 's'].forEach(function (u) { if (els[u]) els[u].textContent = '00'; });
-        clearInterval(rebuildTimer);
-        return;
-      }
-      var totalSec = Math.floor(diff / 1000);
-      if (els.d) els.d.textContent = pad(Math.floor(totalSec / 86400));
-      if (els.h) els.h.textContent = pad(Math.floor((totalSec % 86400) / 3600));
-      if (els.m) els.m.textContent = pad(Math.floor((totalSec % 3600) / 60));
-      if (els.s) els.s.textContent = pad(totalSec % 60);
-    };
-    tick();
-    rebuildTimer = setInterval(tick, 1000);
-  }
 })();
